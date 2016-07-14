@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_activity_gray"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/frag_home_new_fl_title_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_title_bar" >
+    </FrameLayout>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/frag_home_new_ptrsv_all"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none"
+        ptr:ptrHeaderSubTextColor="@color/gray"
+        ptr:ptrHeaderTextColor="@color/gray" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="10dp" >
+
+            <FrameLayout
+                android:id="@+id/frag_home_new_fl_advs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frag_home_new_fl_index"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frag_home_new_fl_forenotice_youhui"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frag_home_new_fl_zt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frag_home_new_fl_recommend_supplier"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frag_home_new_fl_recommend_event"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frag_home_new_fl_recommend_deals"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frag_home_new_fl_recommend_goods"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frag_home_new_fl_recommend_coupon"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+        </LinearLayout>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+
+</LinearLayout>

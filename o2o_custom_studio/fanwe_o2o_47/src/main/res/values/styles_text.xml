@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="text_base">
+        <item name="android:text">@string/loading</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/text_size_base</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="edit_base">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textSize">@dimen/text_size_base</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:textColorHint">#D9D9D9</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:background">@null</item>
+        <item name="android:imeOptions">actionNext</item>
+    </style>
+
+    <style name="text_title" parent="text_base">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
+    </style>
+
+    <style name="text_content" parent="text_base">
+        <item name="android:textSize">@dimen/text_size_content</item>
+    </style>
+
+    <style name="text_item_title" parent="text_base">
+        <item name="android:textColor">@color/text_item_title</item>
+        <item name="android:textSize">@dimen/text_size_item_title</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="text_item_content" parent="text_base">
+        <item name="android:textColor">@color/text_item_content</item>
+        <item name="android:textSize">@dimen/text_size_item_content</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+</resources>

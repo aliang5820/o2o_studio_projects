@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="序号:"
+            android:textColor="@color/black" />
+
+        <com.fanwe.library.customview.ClearEditText
+            android:id="@+id/dialog_input_coupons_et_coupons_sn"
+            style="@style/edit_base"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/layer_white_stroke_corner_item_single_deep" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="密码:"
+            android:textColor="@color/black" />
+
+        <com.fanwe.library.customview.ClearEditText
+            android:id="@+id/dialog_input_coupons_et_coupons_pwd"
+            style="@style/edit_base"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/layer_white_stroke_corner_item_single"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_activity_gray"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#f6f6f6"
+        android:gravity="center_vertical"
+        android:padding="10dp" >
+
+        <ImageView
+            android:id="@+id/act_merchant_list_order_iv_search"
+            android:layout_width="30dip"
+            android:layout_height="30dip"
+            android:src="@drawable/search_2" />
+
+        <com.fanwe.library.customview.ClearEditText
+            android:id="@+id/act_merchant_list_order_et_search"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="@string/please_input_supplier_name"
+            android:textColor="@color/text_item_content" />
+
+        <TextView
+            android:id="@+id/act_merchant_list_order_tv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layer_white_stroke_all"
+            android:padding="10dp"
+            android:text="搜索"
+            android:textColor="@color/gray" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/stroke" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+            xmlns:ptr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/act_merchant_list_order_prlv_stores"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:cacheColorHint="#00000000"
+            android:divider="@color/stroke"
+            android:dividerHeight="1dp"
+            android:listSelector="#00000000"
+            ptr:ptrHeaderSubTextColor="@android:color/black"
+            ptr:ptrHeaderTextColor="@android:color/black" />
+
+        <LinearLayout
+            android:id="@+id/act_merchant_list_order_ll_empty"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside"
+                android:src="@drawable/bg_empty" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

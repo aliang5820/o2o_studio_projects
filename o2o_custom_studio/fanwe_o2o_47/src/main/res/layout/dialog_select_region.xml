@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/dialog_select_region_ll_country"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/submit_order_line" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10.0dip" >
+
+            <TextView
+                android:id="@+id/dialog_select_region_tv_country_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="left"
+                android:text="国家： "
+                android:textColor="#ffffff"
+                android:textSize="16.0sp" />
+
+            <Spinner
+                android:id="@+id/dialog_select_region_spn_country"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/dialog_select_region_tv_country_label"
+                android:gravity="left"
+                android:maxWidth="100.0dip"
+                android:spinnerMode="dropdown"
+                android:textColor="#ff4b4b4b"
+                android:textSize="16.0sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_select_region_ll_province"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/submit_order_line" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10.0dip" >
+
+            <TextView
+                android:id="@+id/dialog_select_region_tv_province_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="left"
+                android:text="省份： "
+                android:textColor="#ffffff"
+                android:textSize="16.0sp" />
+
+            <Spinner
+                android:id="@+id/dialog_select_region_spn_province"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/dialog_select_region_tv_province_label"
+                android:gravity="left"
+                android:maxWidth="100.0dip"
+                android:spinnerMode="dropdown"
+                android:textColor="#ff4b4b4b"
+                android:textSize="16.0sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_select_region_ll_city"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/submit_order_line" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10.0dip" >
+
+            <TextView
+                android:id="@+id/dialog_select_region_tv_city_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="left"
+                android:text="城市： "
+                android:textColor="#ffffff"
+                android:textSize="16.0sp" />
+
+            <Spinner
+                android:id="@+id/dialog_select_region_spn_city"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/dialog_select_region_tv_city_label"
+                android:gravity="left"
+                android:maxWidth="100.0dip"
+                android:spinnerMode="dropdown"
+                android:textColor="#ff4b4b4b"
+                android:textSize="16.0sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_select_region_ll_area"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/submit_order_line" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10.0dip" >
+
+            <TextView
+                android:id="@+id/dialog_select_region_tv_region_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="left"
+                android:text="区县： "
+                android:textColor="#ffffff"
+                android:textSize="16.0sp" />
+
+            <Spinner
+                android:id="@+id/dialog_select_region_spn_area"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/dialog_select_region_tv_region_label"
+                android:gravity="left"
+                android:maxWidth="100.0dip"
+                android:spinnerMode="dropdown"
+                android:textColor="#ff4b4b4b"
+                android:textSize="16.0sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

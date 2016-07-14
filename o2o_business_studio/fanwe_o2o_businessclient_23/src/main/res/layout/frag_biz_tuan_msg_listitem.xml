@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/frag_biztuanmsglistitem_tv_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="会员：小小酥"
+            android:textColor="@color/black0" />
+
+        <RatingBar
+            android:id="@+id/frag_biztuanmsglistitem_rb_star"
+            style="@style/articlelist_item_ratingbar_style"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:isIndicator="true"
+            android:numStars="5" />
+
+        <TextView
+            android:id="@+id/frag_biztuanmsglistitem_create_time_format"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/frag_biztuanmsglistitem_tv_user_name"
+            android:layout_alignBottom="@+id/frag_biztuanmsglistitem_tv_user_name"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@+id/frag_biztuanmsglistitem_tv_user_name"
+            android:text="2014-07-09"
+            android:textColor="@color/gray0" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="10dp" >
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/frag_biztuanmsglistitem_tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户评论内容"
+            android:textColor="@color/black0" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <com.fanwe.library.customview.FlowLayout
+            xmlns:f="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/fl_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            f:horizontalSpacing="10dp"
+            f:orientation="horizontal"
+            f:verticalSpacing="10dp" >
+        </com.fanwe.library.customview.FlowLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/frag_biztuanmsglistitem_ll_reply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frag_biz_tuan_msg_listitem_bg0"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="商家回复:"
+                android:textColor="@color/main_color" />
+
+            <TextView
+                android:id="@+id/frag_biztuanmsglistitem_tv_update_time_format"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="2014-08-05 16:02"
+                android:textColor="@color/gray0" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/frag_biztuanmsglistitem_tv_admin_reply"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="商家回复内容商家回复内容商家回复内容商家回复内容商家回复内容商家回复内容商家回复内容"
+            android:textColor="@color/black0" />
+
+        <TextView
+            android:id="@+id/frag_biztuanmsglistitem_tv_modify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/frag_biz_tuan_msg_btn_answer"
+            android:gravity="center"
+            android:text="修改"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/frag_biztuanmsglistitem_tv_answer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/frag_biz_tuan_msg_btn_answer"
+            android:gravity="center"
+            android:text="回复"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:src="@drawable/frag_biz_tuan_msg_listitem_division_line" />
+
+</LinearLayout>

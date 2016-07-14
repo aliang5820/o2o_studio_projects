@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="280dip"
+        android:layout_height="82dp" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="60dip"
+            android:layout_height="60dip"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/dlg_untitled" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="280dip"
+        android:layout_height="150dip"
+        android:background="#ffffff" >
+
+        <!-- 对话框顶部背景 -->
+
+
+        <!-- 对话框标题旁边icon -->
+        <!-- 对话框标题 -->
+        <!-- 对话框消息 -->
+        <!-- 分隔线 -->
+        <!-- 退出按钮 -->
+        <!-- 返回按钮 -->
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:layout_above="@+id/submit_button"
+            android:background="#fc9a9d" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="29dp"
+            android:text="我要点评"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/dlg_input_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/submit_button"
+            android:layout_below="@+id/textView1"
+            android:capitalize="none"
+            android:textCursorDrawable="@null"
+            android:background="@null"
+            android:gravity="fill_horizontal"
+            android:inputType="textMultiLine"
+            android:lines="5"
+            android:scrollHorizontally="true" >
+        </EditText>
+
+        <ImageView
+            android:id="@+id/dlg_top"
+            android:layout_width="fill_parent"
+            android:layout_height="50dip"
+            android:layout_alignBottom="@+id/textView1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/dlg_top_background" />
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="70dip"
+            android:layout_height="32dip"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/textView1"
+            android:background="@drawable/dlg_button_style"
+            android:text="发表"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/return_button"
+            android:layout_width="70dip"
+            android:layout_height="32dip"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="40dp"
+            android:layout_toRightOf="@+id/submit_button"
+            android:background="@drawable/dlg_button_style"
+            android:text="返回"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+</LinearLayout>

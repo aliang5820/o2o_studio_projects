@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_activity_gray"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/act_mine_information_rl_top"
+            android:layout_width="fill_parent"
+            android:layout_height="46dip"
+            android:background="@color/main_color" >
+
+            <ImageView
+                android:id="@+id/act_mine_information_btn_takephotos"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/selector_main_color"
+                android:minWidth="50dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_write" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <RadioButton
+                    android:id="@+id/act_mine_information_rb_radio_button1"
+                    android:layout_width="100dip"
+                    android:layout_height="35dip"
+                    android:background="@drawable/ico_btn_left_select"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="关注的人"
+                    android:textColor="#ff7a03"
+                    android:textSize="14dip" />
+
+                <RadioButton
+                    android:id="@+id/act_mine_information_rb_radio_button3"
+                    android:layout_width="100dip"
+                    android:layout_height="35dip"
+                    android:background="@drawable/ico_btn_right"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="我发表的"
+                    android:textColor="#ffffff"
+                    android:textSize="14dip" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/act_mine_information_tv_information_more"
+                style="@style/text_base"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/selector_main_color"
+                android:gravity="center"
+                android:minWidth="50dp"
+                android:text="更多"
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/act_mine_information_fl_top"
+            android:layout_width="fill_parent"
+            android:layout_height="46dip"
+            android:background="@drawable/home_head_bg"
+            android:visibility="gone" >
+
+            <RelativeLayout
+                android:id="@+id/act_mine_information_rl_commentmys_back"
+                android:layout_width="50dip"
+                android:layout_height="fill_parent"
+                android:background="@drawable/selector_main_color"
+                android:gravity="center_vertical" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dip"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="15dip"
+                    android:src="@drawable/ic_arrow_left_white" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/act_mine_information_tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text=""
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+        </FrameLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/act_mine_information_fl_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </FrameLayout>
+
+</LinearLayout>

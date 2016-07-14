@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.fanwe.library.customview.SDScaleImageView
+        android:id="@+id/iv_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <com.fanwe.library.customview.FlowLayout
+            xmlns:f="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/flow_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            f:horizontalSpacing="12dp"
+            f:orientation="horizontal"
+            f:verticalSpacing="6dp" >
+        </com.fanwe.library.customview.FlowLayout>
+    </LinearLayout>
+
+</RelativeLayout>

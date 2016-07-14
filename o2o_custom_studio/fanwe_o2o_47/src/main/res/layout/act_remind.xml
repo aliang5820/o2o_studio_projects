@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_activity_gray"
+    android:orientation="vertical" >
+
+<!--     <RelativeLayout -->
+<!--         android:id="@+id/act_remind_rl_top" -->
+<!--         android:layout_width="fill_parent" -->
+<!--         android:layout_height="46dip" -->
+<!--         android:background="@color/main_color_orange" > -->
+
+<!--         <RelativeLayout -->
+<!--             android:id="@+id/act_remind_rl_back_new" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="fill_parent" -->
+<!--             android:layout_alignParentLeft="true" -->
+<!--             android:background="@drawable/selector_orange_btn" -->
+<!--             android:gravity="center_vertical" -->
+<!--             android:paddingLeft="10dip" -->
+<!--             android:paddingRight="10dip" > -->
+
+<!--             <ImageView -->
+<!--                 android:id="@+id/act_remind_iv_arrow_left" -->
+<!--                 android:layout_width="wrap_content" -->
+<!--                 android:layout_height="26dip" -->
+<!--                 android:layout_marginTop="10dip" -->
+<!--                 android:src="@drawable/arrow_left" /> -->
+
+<!--             <TextView -->
+<!--                 android:id="@+id/act_remind_tv_area" -->
+<!--                 android:layout_width="wrap_content" -->
+<!--                 android:layout_height="46dip" -->
+<!--                 android:layout_toRightOf="@+id/act_remind_iv_arrow_left" -->
+<!--                 android:gravity="center" -->
+<!--                 android:textColor="@color/textColorWhite2" -->
+<!--                 android:textSize="@dimen/textsize_16" /> -->
+<!--         </RelativeLayout> -->
+
+<!--         <TextView -->
+<!--             android:id="@+id/act_remind_tv_all_sort" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="fill_parent" -->
+<!--             android:layout_alignParentTop="true" -->
+<!--             android:layout_centerHorizontal="true" -->
+<!--             android:gravity="center_vertical" -->
+<!--             android:text="打折提醒" -->
+<!--             android:textColor="@color/textColorWhite2" -->
+<!--             android:textSize="@dimen/title_text_size" /> -->
+
+<!--         <Button -->
+<!--             android:id="@+id/act_remind_btn_set_remind" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="fill_parent" -->
+<!--             android:layout_alignParentRight="true" -->
+<!--             android:background="@drawable/selector_orange_btn" -->
+<!--             android:paddingLeft="8dip" -->
+<!--             android:paddingRight="8dip" -->
+<!--             android:text="提醒设置" -->
+<!--             android:textColor="@color/textColorWhite2" -->
+<!--             android:textSize="@dimen/textsize_16" /> -->
+<!--     </RelativeLayout> -->
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/act_remind_ptrlv_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="50dip"
+        android:cacheColorHint="#00000000"
+        android:divider="#f0f0f0"
+        android:dividerHeight="0dp"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:smoothScrollbar="true"
+        ptr:ptrHeaderSubTextColor="#000000"
+        ptr:ptrHeaderTextColor="#000000" />
+
+    <ImageView
+        android:id="@+id/act_remind_iv_empty_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/bg_empty"
+        android:visibility="gone" />
+
+</RelativeLayout>

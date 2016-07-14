@@ -1,0 +1,8 @@
+<resources>
+
+    <!-- 边框宽度 -->
+    <dimen name="width_stroke">1px</dimen>
+    <!-- 圆角半径 -->
+    <dimen name="corner">5dp</dimen>
+
+</resources>

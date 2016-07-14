@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/selector_gray" >
+
+    <ImageView
+        android:id="@+id/view_simple_set_item_img_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:scaleType="centerInside" />
+
+    <TextView
+        android:id="@+id/view_simple_set_item_txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5.0dip"
+        android:layout_toRightOf="@+id/view_simple_set_item_img_title"
+        android:gravity="center"
+        android:textColor="@color/black0"
+        android:textSize="17.0sp" />
+
+    <TextView
+        android:id="@+id/view_simple_set_item_txt_title_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10.0dip"
+        android:layout_toRightOf="@+id/view_simple_set_item_txt_title"
+        android:gravity="center_vertical"
+        android:textColor="@color/gray0"
+        android:textSize="15.0sp" />
+
+    <TextView
+        android:id="@+id/view_simple_set_item_txt_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"
+        android:layout_toLeftOf="@+id/view_simple_set_item_img_arrow_right"
+        android:gravity="center_vertical"
+        android:textColor="@color/gray0"
+        android:textSize="15.0sp" />
+
+    <ImageView
+        android:id="@+id/view_simple_set_item_img_arrow_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/ic_arrow_right_more" />
+
+</RelativeLayout>

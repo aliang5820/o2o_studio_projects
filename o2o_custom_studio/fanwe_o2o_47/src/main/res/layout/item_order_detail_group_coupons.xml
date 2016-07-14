@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <View
+        android:id="@+id/item_order_detail_group_coupons_view_div"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/stroke" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码:"
+            android:textColor="@color/text_item_content"
+            android:textSize="@dimen/text_size_item_content" />
+
+        <TextView
+            android:id="@+id/item_order_detail_group_coupons_tv_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="654898753214"
+            android:textColor="@color/text_item_content"
+            android:textSize="@dimen/text_size_item_content" />
+
+        <TextView
+            android:id="@+id/item_order_detail_group_coupons_tv_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="未消费"
+            android:textColor="#6BB2CE"
+            android:textSize="@dimen/text_size_item_content" />
+    </LinearLayout>
+
+</LinearLayout>

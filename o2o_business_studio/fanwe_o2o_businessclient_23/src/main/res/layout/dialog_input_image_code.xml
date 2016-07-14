@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <com.fanwe.library.customview.SDScaleImageView
+            android:id="@+id/iv_image_code"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/nopic" />
+
+        <EditText
+            android:id="@+id/et_code"
+            android:textSize="14sp"
+            android:padding="5dp"
+            android:textColor="@color/black0"
+            android:gravity="center_vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/layer_white_stroke_corner_item_single_deep"
+            android:hint="请输入图形验证码"
+            android:inputType="number"
+            android:minHeight="45dp" />
+    </LinearLayout>
+
+</LinearLayout>

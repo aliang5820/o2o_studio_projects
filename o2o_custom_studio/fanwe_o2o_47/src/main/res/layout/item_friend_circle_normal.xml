@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.android.percent.support.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/layer_white_stroke_bot"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+
+    <com.fanwe.library.customview.SDScaleImageView
+        android:id="@+id/iv_user"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_heightPercent="13%w"
+        app:layout_widthPercent="13%w" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_dynamic_comment"
+                android:text=""
+                android:textColor="#5787C7"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_type_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text=""
+                android:textColor="@color/gray_d"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <com.fanwe.span.SDNetImageTextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_share_action"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_dynamic_share_deal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:visibility="gone" >
+
+            <com.fanwe.library.customview.SDScaleImageView
+                android:id="@+id/iv_goods_image"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_goods_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text=""
+                android:textColor="@color/gray"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- 图片 -->
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/iv_0"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_heightPercent="30%w"
+                    app:layout_marginRightPercent="2%w"
+                    app:layout_marginTopPercent="2%w"
+                    app:layout_widthPercent="30%w"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/iv_1"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_heightPercent="30%w"
+                    app:layout_marginRightPercent="2%w"
+                    app:layout_marginTopPercent="2%w"
+                    app:layout_widthPercent="30%w"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/iv_2"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_heightPercent="30%w"
+                    app:layout_marginRightPercent="2%w"
+                    app:layout_marginTopPercent="2%w"
+                    app:layout_widthPercent="30%w"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/iv_3"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_heightPercent="30%w"
+                    app:layout_marginRightPercent="2%w"
+                    app:layout_marginTopPercent="2%w"
+                    app:layout_widthPercent="30%w"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/iv_4"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_heightPercent="30%w"
+                    app:layout_marginRightPercent="2%w"
+                    app:layout_marginTopPercent="2%w"
+                    app:layout_widthPercent="30%w"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/iv_5"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_heightPercent="30%w"
+                    app:layout_marginRightPercent="2%w"
+                    app:layout_marginTopPercent="2%w"
+                    app:layout_widthPercent="30%w"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+            </com.zhy.android.percent.support.PercentLinearLayout>
+
+            <com.zhy.android.percent.support.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:id="@+id/iv_6"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_heightPercent="30%w"
+                    app:layout_marginRightPercent="2%w"
+                    app:layout_marginTopPercent="2%w"
+                    app:layout_widthPercent="30%w"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/iv_7"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_heightPercent="30%w"
+                    app:layout_marginRightPercent="2%w"
+                    app:layout_marginTopPercent="2%w"
+                    app:layout_widthPercent="30%w"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/iv_8"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_heightPercent="30%w"
+                    app:layout_marginRightPercent="2%w"
+                    app:layout_marginTopPercent="2%w"
+                    app:layout_widthPercent="30%w"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+            </com.zhy.android.percent.support.PercentLinearLayout>
+        </com.zhy.android.percent.support.PercentLinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textColor="@color/gray_d"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/iv_comment_action"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="centerInside"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:src="@drawable/ic_dynamic_comment_action" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F2F2F2"
+            android:gravity="right"
+            android:orientation="vertical" >
+
+            <com.fanwe.library.customview.SDGridLinearLayout
+                android:id="@+id/ll_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </com.fanwe.library.customview.SDGridLinearLayout>
+
+            <TextView
+                android:id="@+id/tv_more_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="5dp"
+                android:text="更多"
+                android:textColor="#5787C7"
+                android:textSize="13sp"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+</com.zhy.android.percent.support.PercentLinearLayout>

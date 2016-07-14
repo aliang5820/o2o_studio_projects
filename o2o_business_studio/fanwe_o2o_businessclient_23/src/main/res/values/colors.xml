@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- l-m-h-xh-xxh 从浅到深 -->
+    <color name="green">#34DA8E</color>
+    <color name="orange">#FFA202</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray0">#959595</color>
+    <color name="gray1">#EFEFEF</color>
+    <color name="gray2">#FFFBF2</color>
+    <color name="black0">#666666</color>
+    <color name="black1">#404040</color>
+    <color name="transparent">#00ffffff</color>
+    <color name="blue_l">#0088CC</color>
+    <color name="blue_m">#2372F1</color>
+    <color name="blue_h">#3259D2</color>
+    <!-- Frag_Tab0 -->
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="frag_tab0_btn_bg">#94867D</color>
+    <color name="frag_tab0_btn_num">#5F5F5F</color>
+    <!-- Act_biz_tuan_msg -->
+    <color name="act_biz_tuan_msg_bg0">#F5F5F5</color>
+    <color name="separator_submenu">#ea8010</color>
+
+    <!-- 点击效果 -->
+    <color name="red">#DF3939</color>
+    <color name="red_press">#AB2531</color>
+
+    <!-- 标题栏颜色 -->
+    <color name="bg_title_bar">@color/main_color</color>
+    <color name="bg_title_bar_pressed">@color/main_color</color>
+
+</resources>

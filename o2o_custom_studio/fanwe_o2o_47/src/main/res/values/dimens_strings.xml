@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- item的左边宽度 -->
+    <string name="layout_widthPercent_item_left">25%w</string>
+
+</resources>

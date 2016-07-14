@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_activity_gray"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/act_personcenter_ll_user_box"
+        android:layout_width="fill_parent"
+        android:layout_height="80dip"
+        android:background="@drawable/search_cell_bg_0"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/act_personcenter_iv_user_avatar"
+            android:layout_width="70dip"
+            android:layout_height="70dip"
+            android:layout_marginLeft="5dip"
+            android:layout_marginTop="5dip" />
+
+        <LinearLayout
+            android:layout_width="240dip"
+            android:layout_height="90dip"
+            android:layout_marginLeft="5dip"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/act_personcenter_tv_user_name"
+                android:layout_width="fill_parent"
+                android:layout_height="23dip"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="4dip"
+                android:textColor="#FF69B4"
+                android:textSize="19dp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="45dip"
+                android:layout_marginTop="10dip"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/act_personcenter_ll_fansLinear"
+                    android:layout_width="55dip"
+                    android:layout_height="40dip"
+                    android:background="@drawable/ico_u"
+                    android:clickable="true"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:id="@+id/act_personcenter_btn_fans_count"
+                        android:layout_width="55dip"
+                        android:layout_height="25dip"
+                        android:background="#00000000"
+                        android:gravity="center"
+                        android:textColor="#FF69B4" />
+
+                    <Button
+                        android:id="@+id/act_personcenter_btn_fans"
+                        android:layout_width="55dip"
+                        android:layout_height="20dip"
+                        android:layout_marginTop="-5dip"
+                        android:background="#00000000"
+                        android:gravity="center"
+                        android:text="粉丝"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="55dip"
+                    android:layout_height="40dip"
+                    android:layout_marginLeft="5dip"
+                    android:background="@drawable/ico_u"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:id="@+id/act_personcenter_btn_photos_count"
+                        android:layout_width="55dip"
+                        android:layout_height="25dip"
+                        android:background="#00000000"
+                        android:gravity="center"
+                        android:textColor="#FF69B4" />
+
+                    <Button
+                        android:id="@+id/act_personcenter_btn_photos"
+                        android:layout_width="55dip"
+                        android:layout_height="20dip"
+                        android:layout_marginTop="-5dip"
+                        android:background="#00000000"
+                        android:gravity="center"
+                        android:text="相册"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="55dip"
+                    android:layout_height="40dip"
+                    android:layout_marginLeft="5dip"
+                    android:background="@drawable/ico_u"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:id="@+id/act_personcenter_btn_goods_count"
+                        android:layout_width="55dip"
+                        android:layout_height="25dip"
+                        android:background="#00000000"
+                        android:gravity="center"
+                        android:textColor="#FF69B4" />
+
+                    <Button
+                        android:id="@+id/act_personcenter_btn_goods"
+                        android:layout_width="55dip"
+                        android:layout_height="20dip"
+                        android:layout_marginTop="-5dip"
+                        android:background="#00000000"
+                        android:gravity="center"
+                        android:text="喜欢"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="55dip"
+                    android:layout_height="40dip"
+                    android:layout_marginLeft="5dip"
+                    android:background="@drawable/ico_u"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:id="@+id/act_personcenter_btn_liked_count"
+                        android:layout_width="55dip"
+                        android:layout_height="25dip"
+                        android:background="#00000000"
+                        android:gravity="center"
+                        android:textColor="#FF69B4" />
+
+                    <Button
+                        android:layout_width="55dip"
+                        android:layout_height="20dip"
+                        android:layout_marginTop="-5dip"
+                        android:background="#00000000"
+                        android:gravity="center"
+                        android:text="关注"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- <com.handmark.pulltorefresh.library.PullToRefreshScrollView -->
+    <!-- xmlns:ptr="http://schemas.android.com/apk/res-auto" -->
+    <!-- android:id="@+id/frag_personcenter_lv_list" -->
+    <!-- android:layout_width="fill_parent" -->
+    <!-- android:layout_height="fill_parent" -->
+    <!-- android:layout_marginTop="5dip" -->
+    <!-- ptr:ptrHeaderSubTextColor="#000000" -->
+    <!-- ptr:ptrHeaderTextColor="#000000" > -->
+
+
+    <!-- <LinearLayout -->
+    <!-- android:id="@+id/frag_personcenter_ll_content" -->
+    <!-- android:layout_width="fill_parent" -->
+    <!-- android:layout_height="wrap_content" -->
+    <!-- android:orientation="vertical" > -->
+    <!-- </LinearLayout> -->
+    <!-- </com.handmark.pulltorefresh.library.PullToRefreshScrollView> -->
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/frag_personcenter_lv_list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="#00000000"
+        android:divider="@null"
+        android:listSelector="#00000000"
+        ptr:ptrHeaderSubTextColor="@color/gray"
+        ptr:ptrHeaderTextColor="@color/gray" />
+
+</LinearLayout>

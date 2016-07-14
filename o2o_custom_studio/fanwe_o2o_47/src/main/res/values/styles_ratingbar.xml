@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="ratingbar_base" parent="@android:style/Widget.RatingBar">
+        <item name="android:numStars">5</item>
+    </style>
+
+<!--     <style name="ratingbar_style_comment" parent="ratingbar_base"> -->
+<!--         <item name="android:progressDrawable">@drawable/layer_rating_bar_add_comment</item> -->
+<!--     </style> -->
+
+</resources>

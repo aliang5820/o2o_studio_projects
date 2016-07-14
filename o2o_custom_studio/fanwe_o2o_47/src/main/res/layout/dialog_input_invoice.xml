@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <EditText
+        android:id="@+id/dialog_input_invoice_et_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layer_white_stroke_corner_item_single"
+        android:gravity="left|top"
+        android:minHeight="100dp"
+        android:padding="2dp"
+        android:textColor="@color/black"
+        android:textCursorDrawable="@null" >
+    </EditText>
+
+</LinearLayout>

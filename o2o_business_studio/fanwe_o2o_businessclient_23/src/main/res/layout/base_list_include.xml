@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="#00000000"
+        android:divider="@color/stroke"
+        android:dividerHeight="@dimen/base_stroke_1px"
+        android:listSelector="@drawable/selector_gray"
+        ptr:ptrHeaderSubTextColor="@color/gray0"
+        ptr:ptrHeaderTextColor="@color/gray0" />
+
+    <TextView
+        android:id="@+id/tv_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="未找到数据,下拉刷新重试!"
+        android:visibility="gone" />
+
+</RelativeLayout>

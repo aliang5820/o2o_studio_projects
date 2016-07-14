@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_activity_gray"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/act_distribution_manage_fl_content"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/act_main_ll_bottom_menu"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <com.fanwe.library.customview.SDTabItemBottom
+            android:id="@+id/tab_0"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_white_gray_stroke_top" />
+
+        <com.fanwe.library.customview.SDTabItemBottom
+            android:id="@+id/tab_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_white_gray_stroke_top" />
+
+        <com.fanwe.library.customview.SDTabItemBottom
+            android:id="@+id/tab_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_white_gray_stroke_top" />
+
+        <com.fanwe.library.customview.SDTabItemBottom
+            android:id="@+id/tab_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/selector_white_gray_stroke_top" />
+    </LinearLayout>
+
+</LinearLayout>

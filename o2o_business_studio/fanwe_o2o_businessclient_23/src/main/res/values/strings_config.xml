@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- session_id -->
+    <string name="config_session_id">config_session_id</string>
+
+    <!-- 保存登录用户名 -->
+    <string name="config_user_name">config_user_name</string>
+
+    <!-- 图形验证码 -->
+    <string name="config_image_code">config_image_code</string>
+
+</resources>

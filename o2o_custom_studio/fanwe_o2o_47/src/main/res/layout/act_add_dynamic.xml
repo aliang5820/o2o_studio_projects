@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_activity_gray"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <com.fanwe.library.span.view.SDSpanEdittext
+                android:id="@+id/et_content"
+                style="@style/edit_base"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/layer_white_stroke_all"
+                android:gravity="top|left"
+                android:hint="这一刻的想法..."
+                android:minHeight="150dp"
+                android:padding="10dp" />
+
+            <FrameLayout
+                android:id="@+id/act_add_dynamic_fl_images"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" >
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/stroke_deep" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white" >
+
+        <LinearLayout
+            android:id="@+id/ll_select_image"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_white_gray"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_add_dynamic_image_normal" />
+        </LinearLayout>
+
+        <!-- <LinearLayout -->
+        <!-- android:id="@+id/ll_select_at" -->
+        <!-- android:layout_width="0dp" -->
+        <!-- android:layout_height="match_parent" -->
+        <!-- android:layout_weight="1" -->
+        <!-- android:background="@drawable/selector_white_gray" -->
+        <!-- android:gravity="center" > -->
+
+
+        <!-- <ImageView -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="match_parent" -->
+        <!-- android:scaleType="centerInside" -->
+        <!-- android:src="@drawable/ic_add_dynamic_at_normal" /> -->
+        <!-- </LinearLayout> -->
+
+
+        <!-- <LinearLayout -->
+        <!-- android:id="@+id/ll_select_jing" -->
+        <!-- android:layout_width="0dp" -->
+        <!-- android:layout_height="match_parent" -->
+        <!-- android:layout_weight="1" -->
+        <!-- android:background="@drawable/selector_white_gray" -->
+        <!-- android:gravity="center" > -->
+
+
+        <!-- <ImageView -->
+        <!-- android:layout_width="wrap_content" -->
+        <!-- android:layout_height="match_parent" -->
+        <!-- android:scaleType="centerInside" -->
+        <!-- android:src="@drawable/ic_add_dynamic_jing_normal" /> -->
+        <!-- </LinearLayout> -->
+
+        <LinearLayout
+            android:id="@+id/ll_select_expression"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_white_gray"
+            android:gravity="center" >
+
+            <ImageView
+                android:id="@+id/iv_select_expression"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_add_dynamic_expression_normal" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/stroke_deep" />
+
+    <FrameLayout
+        android:id="@+id/act_add_dynamic_fl_expression"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
+    </FrameLayout>
+
+</LinearLayout>

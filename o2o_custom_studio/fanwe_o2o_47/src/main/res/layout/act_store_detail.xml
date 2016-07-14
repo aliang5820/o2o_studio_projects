@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_activity_gray"
+    android:orientation="vertical" >
+
+    <com.fanwe.customview.SDStickyScrollView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ssv_scroll"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none"
+        ptr:ptrHeaderSubTextColor="@color/gray"
+        ptr:ptrHeaderTextColor="@color/gray" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <!-- 门店信息 -->
+
+            <FrameLayout
+                android:id="@+id/act_store_detail_fl_info"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+
+            <!-- 其他门店 -->
+
+            <FrameLayout
+                android:id="@+id/act_store_detail_fl_other_merchant"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+
+            <!-- 门店介绍 -->
+
+            <FrameLayout
+                android:id="@+id/act_store_detail_fl_brief"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+
+            <!-- 商家的团购 -->
+
+            <FrameLayout
+                android:id="@+id/act_store_detail_fl_tuan"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+
+            <!-- 商家的商品 -->
+
+            <FrameLayout
+                android:id="@+id/act_store_detail_fl_goods"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+
+            <!-- 商家的优惠券 -->
+
+            <FrameLayout
+                android:id="@+id/act_store_detail_fl_youhui"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+
+            <!-- 评价 -->
+
+            <FrameLayout
+                android:id="@+id/act_store_detail_fl_comment"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+        </LinearLayout>
+    </com.fanwe.customview.SDStickyScrollView>
+
+</LinearLayout>

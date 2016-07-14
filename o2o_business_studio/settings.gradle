@@ -1,0 +1,6 @@
+include ':library_AndroidPullToRefresh'
+include ':library_fanwe'
+include ':library_push_umeng'
+include ':library_qrcode_zxing'
+include ':library_xml_drawable_o2o'
+include ':fanwe_o2o_businessclient_23'

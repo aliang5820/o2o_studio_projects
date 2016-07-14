@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">方维商家端</string>
+    <string name="umeng_appkey">558a890a67e58e559e001601</string>
+    <string name="umeng_message_secret">d5d3dd7a994e2ff56dbc63cfb508dd72</string>
+
+</resources><!--
+服务端版本: 3.03 对应的各app端版本
+IOS
+用户端 3.01
+商家端 3.01
+安卓
+用户端 4.4.0
+商家端 2.0.0
+
+最新版服务端 3.04 对应各端版本
+IOS
+用户端 3.02
+商家端 3.02
+安卓
+用户端 4.5.0
+商家端 2.1.0
+
+最新版服务端 3.05 对应各端版本
+商家端 2.2.1
+
+最新版服务端  3.07 对应各端版本
+商家端 2.3
+-->

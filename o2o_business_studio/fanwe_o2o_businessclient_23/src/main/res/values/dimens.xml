@@ -1,0 +1,34 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="title_height">50dp</dimen>
+
+    <!-- 常用圆角弧度 -->
+    <dimen name="base_radius_5">5dp</dimen>
+    <dimen name="base_radius_10">10dp</dimen>
+    <!-- 常用分割线dp -->
+    <dimen name="base_stroke_1px">1px</dimen>
+    <dimen name="base_stroke_1dp">1dp</dimen>
+    <dimen name="base_stroke_10dp">10dp</dimen>
+    <!-- 常用字体大小 -->
+    <dimen name="base_textsize_12">12sp</dimen>
+    <dimen name="base_textsize_14">14sp</dimen>
+    <dimen name="base_textsize_16">16sp</dimen>
+    <dimen name="base_textsize_18">18sp</dimen>
+    <!-- 常用Padding 5dp 10dp 15dp -->
+    <dimen name="base_padding_5">5dp</dimen>
+    <dimen name="base_padding_10">10dp</dimen>
+    <dimen name="base_padding_15">15dp</dimen>
+    <dimen name="base_padding_20">20dp</dimen>
+    <!-- 常用Magin 5dp 10dp 15dp -->
+    <dimen name="base_margin_5">5dp</dimen>
+    <dimen name="base_margin_10">10dp</dimen>
+    <dimen name="base_margin_15">15dp</dimen>
+    <dimen name="base_margin_20">20dp</dimen>
+    
+    
+    <dimen name="height_title_bar">46dp</dimen>
+
+</resources>

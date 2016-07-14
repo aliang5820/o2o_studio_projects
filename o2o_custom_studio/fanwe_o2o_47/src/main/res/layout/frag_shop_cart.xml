@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_activity_gray"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <RelativeLayout
+            android:id="@+id/rl_empty"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:visibility="gone" >
+
+            <ImageView
+                android:id="@+id/iv_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/buy_car" />
+
+            <TextView
+                android:id="@+id/tv_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_empty"
+                android:layout_centerHorizontal="true"
+                android:text="您的购物车中没有商品"
+                android:textColor="#ff666666"
+                android:textSize="14.0sp" />
+        </RelativeLayout>
+
+        <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+            xmlns:ptr="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ptrsv_all"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbars="none"
+            ptr:ptrHeaderSubTextColor="@color/gray"
+            ptr:ptrHeaderTextColor="@color/gray" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <com.fanwe.customview.SDListViewInScroll
+                    android:id="@+id/lv_cart_goods"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:cacheColorHint="#00000000"
+                    android:listSelector="#00000000" />
+
+                <!-- 免登陆直接购买 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_phone_login"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:visibility="gone" >
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dip"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal" >
+
+                            <com.fanwe.library.customview.ClearEditText
+                                android:id="@+id/et_mobile"
+                                style="@style/edit_base"
+                                android:layout_width="0dp"
+                                android:layout_height="50dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/layer_white_stroke_all"
+                                android:hint="请输入手机号"
+                                android:inputType="number"
+                                android:singleLine="true" />
+
+                            <com.fanwe.library.customview.SDSendValidateButton
+                                android:id="@+id/btn_send_code"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:background="@drawable/layer_transparent_stroke_main_color_corner"
+                                android:minHeight="35dp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <com.fanwe.library.customview.ClearEditText
+                        android:id="@+id/et_code"
+                        style="@style/edit_base"
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/layer_white_stroke_all"
+                        android:hint="请输入验证码"
+                        android:inputType="number"
+                        android:singleLine="true" />
+
+                    <com.fanwe.library.customview.ClearEditText
+                        android:id="@+id/et_reference"
+                        style="@style/edit_base"
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/layer_white_stroke_all"
+                        android:hint="请输入邀请人手机号"
+                        android:inputType="number"
+                        android:singleLine="true" />
+
+                    <TextView
+                        android:id="@+id/tv_unlogin_buy"
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/selector_main_color_corner"
+                        android:gravity="center"
+                        android:text="手机登录并结算"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/frag_shop_cart_fl_recommend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </FrameLayout>
+
+</LinearLayout>

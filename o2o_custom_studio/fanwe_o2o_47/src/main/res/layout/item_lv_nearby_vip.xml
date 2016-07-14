@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="horizontal" >
+
+    <ImageView
+        android:id="@+id/item_nearby_vip_iv_avater"
+        android:layout_width="60dip"
+        android:layout_height="60dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="5dip"
+        android:src="@drawable/nopic" />
+
+    <LinearLayout
+        android:layout_width="170dip"
+        android:layout_height="60dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginTop="5dip"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/item_nearby_vip_tv_username"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="#################"
+            android:textColor="#FF69B4"
+            android:textSize="15dip" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dip" >
+
+            <TextView
+                android:id="@+id/item_nearby_vip_tv_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="距离" />
+
+            <TextView
+                android:id="@+id/item_nearby_vip_tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dip"
+                android:text="时间" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/item_nearby_vip_tv_fans_follow"
+        android:layout_width="65dip"
+        android:layout_height="30dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="15dip"
+        android:background="#008B8B"
+        android:gravity="center" />
+
+</LinearLayout>

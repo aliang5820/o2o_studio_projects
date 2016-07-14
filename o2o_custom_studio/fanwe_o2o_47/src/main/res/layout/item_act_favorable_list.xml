@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="94dip"
+        android:layout_marginBottom="5dip"
+        android:layout_marginLeft="5dip"
+        android:layout_marginRight="5dip"
+        android:background="@drawable/selector_white_gray_stroke_all"
+        android:gravity="center_vertical"
+        android:padding="2dip" >
+
+        <ImageView
+            android:id="@+id/act_favorable_list_item_iv_image"
+            android:layout_width="110dip"
+            android:layout_height="90dip"
+            android:layout_alignParentLeft="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/tuan_list_item" />
+
+        <ImageView
+            android:id="@+id/act_favorable_list_item_iv__without_reservation"
+            android:layout_width="40dip"
+            android:layout_height="20dip"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="5dip"
+            android:layout_marginLeft="75dip"
+            android:layout_marginTop="15dip"
+            android:scaleType="fitXY"
+            android:src="@drawable/tuan_without_reservation"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/act_favorable_list_item_iv__new_product"
+            android:layout_width="50dip"
+            android:layout_height="50dip"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="-1dip"
+            android:layout_marginTop="-3dip"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_new_products"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="90dip"
+            android:layout_marginLeft="10dip"
+            android:layout_toRightOf="@+id/act_favorable_list_item_iv_image"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/act_favorable_list_item_tv_title"
+                android:layout_width="fill_parent"
+                android:layout_height="25dip"
+                android:ellipsize="end"
+                android:gravity="center_vertical|left"
+                android:singleLine="true"
+                android:textColor="@color/main_color"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/act_favorable_list_item_tv_content"
+                android:layout_width="fill_parent"
+                android:layout_height="30dip"
+                android:layout_marginTop="2dip"
+                android:ellipsize="end"
+                android:gravity="center_vertical|left"
+                android:maxLines="2"
+                android:textColor="@color/text_item_content"
+                android:textSize="12sp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="15dip"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/act_favorable_list_item_tv_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="center_vertical"
+                    android:lines="1"
+                    android:text="2014-2-14"
+                    android:textColor="@color/text_item_content"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/act_favorable_list_item_tv_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dip"
+                    android:gravity="center_vertical"
+                    android:text="200米"
+                    android:textColor="@color/text_item_content"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/act_favorable_list_item_tv_addr"
+                android:layout_width="fill_parent"
+                android:layout_height="15dip"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textColor="@color/text_item_content"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

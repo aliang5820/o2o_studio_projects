@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_all"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray1"
+        android:paddingBottom="@dimen/base_padding_10"
+        android:paddingLeft="@dimen/base_padding_10"
+        android:paddingTop="@dimen/base_padding_20"
+        android:text="请绑定持卡人本人的银行卡"
+        android:textColor="@color/black0"
+        android:textSize="@dimen/base_textsize_16" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base_stroke_1px"
+            android:background="@color/stroke" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/base_padding_10"
+            android:paddingRight="@dimen/base_padding_10" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="开户行"
+                android:textColor="@color/black1"
+                android:textSize="@dimen/base_textsize_16" />
+
+            <com.fanwe.library.customview.ClearEditText
+                android:id="@+id/cet_bank_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/base_margin_10"
+                android:layout_weight="4"
+                android:background="@null"
+                android:hint=""
+                android:imeOptions="actionNext"
+                android:textSize="@dimen/base_textsize_16" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base_stroke_1px"
+            android:layout_marginLeft="@dimen/base_margin_10"
+            android:background="@color/stroke" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/base_padding_10"
+            android:paddingRight="@dimen/base_padding_10" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="卡号"
+                android:textColor="@color/black1"
+                android:textSize="@dimen/base_textsize_16" />
+
+            <com.fanwe.library.customview.ClearEditText
+                android:id="@+id/cet_bank_num"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/base_margin_10"
+                android:layout_weight="4"
+                android:background="@null"
+                android:hint=""
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:textSize="@dimen/base_textsize_18" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base_stroke_1px"
+            android:layout_marginLeft="@dimen/base_margin_10"
+            android:background="@color/stroke" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/base_padding_10"
+            android:paddingRight="@dimen/base_padding_10" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="持卡人"
+                android:textColor="@color/black1"
+                android:textSize="@dimen/base_textsize_16" />
+
+            <com.fanwe.library.customview.ClearEditText
+                android:id="@+id/cet_bank_user"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/base_margin_10"
+                android:layout_weight="4"
+                android:background="@null"
+                android:hint=""
+                android:imeOptions="actionNext"
+                android:textSize="@dimen/base_textsize_16" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base_stroke_1px"
+                android:layout_marginLeft="@dimen/base_margin_10"
+                android:background="@color/stroke" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/base_padding_10"
+                android:paddingRight="@dimen/base_padding_10" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="手机号"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/base_textsize_16" />
+
+                <com.fanwe.library.customview.ClearEditText
+                    android:id="@+id/cet_mobile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/base_margin_10"
+                    android:layout_weight="4"
+                    android:background="@null"
+                    android:enabled="false"
+                    android:hint=""
+                    android:imeOptions="actionNext"
+                    android:textSize="@dimen/base_textsize_16" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_sms_verify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base_stroke_1px"
+                android:layout_marginLeft="@dimen/base_margin_10"
+                android:background="@color/stroke" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/base_padding_10"
+                android:paddingRight="@dimen/base_padding_10" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="验证码"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/base_textsize_16" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/base_margin_10"
+                    android:layout_weight="4"
+                    android:orientation="horizontal" >
+
+                    <com.fanwe.library.customview.ClearEditText
+                        android:id="@+id/cet_sms_verify"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint=""
+                        android:imeOptions="actionNext"
+                        android:inputType="number"
+                        android:textSize="@dimen/base_textsize_16" />
+
+                    <com.fanwe.library.customview.SDSendValidateButton
+                        android:id="@+id/btn_sendcode"
+                        android:layout_width="105dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="@dimen/base_margin_10"
+                        android:background="@drawable/verfication_send_biankuang"
+                        android:gravity="center"
+                        android:text="发送验证码"
+                        android:textColor="@color/black1" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_pwd_verify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/base_stroke_1px"
+                android:background="@color/stroke" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/base_padding_10"
+                android:paddingRight="@dimen/base_padding_10" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="登录密码"
+                    android:textColor="@color/black1"
+                    android:textSize="@dimen/base_textsize_16" />
+
+                <com.fanwe.library.customview.ClearEditText
+                    android:id="@+id/cet_pwd_verify"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/base_margin_10"
+                    android:layout_weight="4"
+                    android:background="@null"
+                    android:hint=""
+                    android:imeOptions="actionNext"
+                    android:inputType="textPassword"
+                    android:textSize="@dimen/base_textsize_16" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/base_stroke_1px"
+            android:layout_marginLeft="@dimen/base_margin_10"
+            android:background="@color/stroke" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_bindbank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/base_margin_15"
+        android:background="@drawable/selector_theme_color_corner"
+        android:padding="@dimen/base_padding_10"
+        android:text="确定绑定银行卡"
+        android:textColor="@color/white"
+        android:textSize="@dimen/base_textsize_16" />
+
+</LinearLayout>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="loading">加载中</string>
+    <string name="has_sold">已售</string>
+    <string name="comment">评论</string>
+    <string name="evaluation">评价</string>
+    <string name="i_want_comment">我要点评</string>
+    <string name="detail">详情</string>
+    <string name="see_all_comment">查看全部评论</string>
+    <string name="search">搜索</string>
+    <string name="user">用户</string>
+    <string name="shopcart">购物车</string>
+    <string name="dc_collection">订餐收藏</string>
+
+    <!-- 活动相关 -->
+    <string name="event">活动</string>
+    <string name="event_list">活动列表</string>
+    <string name="event_detail">活动详情</string>
+    <string name="my_event">我的活动</string>
+
+    <!-- 优惠相关 -->
+    <string name="youhui">优惠</string>
+    <string name="youhui_coupon">优惠券</string>
+    <string name="youhui_coupon_list">优惠券列表</string>
+    <string name="youhui_detail">优惠详情</string>
+    <string name="my_youhui_coupon">我的优惠券</string>
+
+    <!-- 团购相关 -->
+    <string name="tuan_gou">团购</string>
+    <string name="tuan_gou_detail">团购详情</string>
+    <string name="goods_detail">商品详情</string>
+    <string name="goods">商品</string>
+    <string name="mall">商城</string>
+    <string name="buy_right_now">立即购买</string>
+    <string name="support_store">支持门店</string>
+    <string name="goods_attribute">商品属性</string>
+    <string name="my_tuan_gou_coupon">我的团购券</string>
+    <string name="tuan_gou_coupon">团购券</string>
+    <string name="tuan_gou_coupon_detail">团购券详情</string>
+    <string name="tuan_gou_coupon_code">团购券二维码</string>
+    <string name="nearby_tuan_gou">附近团购</string>
+    <string name="tuan_gou_and_goods">团购和商品</string>
+    <string name="please_select_refund_tuan_gou_coupon">请选择要退款的团购券</string>
+
+    <!-- 门店相关 -->
+    <string name="store">门店</string>
+    <string name="store_detail">门店详情</string>
+    <string name="other_store">其他门店</string>
+    <string name="store_brief">门店简介</string>
+    <string name="the_suppliers_tuan">该商家的团购</string>
+    <string name="the_suppliers_goods">该商家的商品</string>
+    <string name="the_suppliers_youhui">该商家的优惠券</string>
+    <string name="suppliers_name_colon">商家名称：</string>
+    <string name="suppliers_phone_colon">商家电话：</string>
+    <string name="suppliers_address_colon">商家地址：</string>
+    <string name="suppliers_introduction">商家介绍</string>
+    <string name="please_input_supplier_name">请输入商家名称</string>
+    <string name="nearby_store">附近门店</string>
+    <string name="store_location">门店位置</string>
+
+    <!-- 首页>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <string name="recommend_supplier">推荐商家</string>
+    <string name="all_supplier">全部商家</string>
+    <string name="recommend_event">推荐活动</string>
+    <string name="see_all_event">查看全部活动</string>
+    <string name="recommend_tuan">推荐团购</string>
+    <string name="see_all_tuan">查看全部团购</string>
+    <string name="recommend_goods">推荐商品</string>
+    <string name="see_all_goods">查看全部商品</string>
+    <string name="recommend_youhui">推荐优惠</string>
+    <string name="see_all_youhui">查看全部优惠</string>
+
+    <!-- 主界面底部菜单 -->
+    <string name="home">首页</string>
+    <string name="supplier">商家</string>
+    <string name="share">分享</string>
+    <string name="mine">我的</string>
+    <string name="more">更多</string>
+
+    <!-- 评论星级描述 -->
+    <string name="text_one_star">差</string>
+    <string name="text_two_star">一般</string>
+    <string name="text_three_star">好</string>
+    <string name="text_four_star">很好</string>
+    <string name="text_five_star">非常好</string>
+
+    <!-- 点击查看更多和收回 -->
+    <string name="click_expand">查看更多</string>
+    <string name="click_close">点击收回</string>
+
+</resources>

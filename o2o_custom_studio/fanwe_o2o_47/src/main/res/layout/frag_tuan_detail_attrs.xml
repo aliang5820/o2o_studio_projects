@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_activity_gray"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/layer_white_stroke_top_bot_deep"
+        android:orientation="vertical" >
+
+        <!-- 商品属性 -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp" >
+
+                <ImageView
+                    android:layout_width="@dimen/ic_size_home_recommend"
+                    android:layout_height="@dimen/ic_size_home_recommend"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_goods_attr" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/goods_attribute"
+                    android:textColor="@color/text_home_recommend"
+                    android:textSize="@dimen/text_size_home_recommend_title" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1px"
+                android:background="@color/stroke" />
+
+            <com.fanwe.library.customview.SDGridLinearLayout
+                android:id="@+id/ll_attrs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </com.fanwe.library.customview.SDGridLinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

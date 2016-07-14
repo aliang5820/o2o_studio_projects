@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <View
+        android:id="@+id/view_div"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/stroke" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="用户名"
+                android:textColor="#41598a"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="时间"
+                android:textColor="@color/gray"
+                android:textSize="14sp" />
+
+            <com.fanwe.library.customview.SDRatingBar
+                android:id="@+id/rb_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:progressDrawable="@drawable/layer_ratingbar_store_list_item" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="3dip"
+            android:textColor="@color/text_item_content"
+            android:textSize="16sp" />
+
+        <!-- 评论图片 -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <com.fanwe.library.customview.FlowLayout
+                xmlns:f="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/flow_images"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                f:horizontalSpacing="8dp"
+                f:orientation="horizontal"
+                f:verticalSpacing="8dp" >
+            </com.fanwe.library.customview.FlowLayout>
+        </LinearLayout>
+
+        <!-- 回复 -->
+
+        <LinearLayout
+            android:id="@+id/ll_replay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#F5F5F5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="[掌柜回复]"
+                android:textColor="#B48807" />
+
+            <TextView
+                android:id="@+id/tv_reply_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="#B48807" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

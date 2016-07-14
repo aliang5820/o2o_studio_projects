@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/frag_order_detail_params_ll_all"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_activity_gray"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <!-- 配送地址 -->
+
+        <LinearLayout
+            android:id="@+id/frag_order_detail_params_ll_has_delivery_address"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_white_gray_stroke_top_left_right"
+            android:gravity="center_vertical"
+            android:minHeight="50dp"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="配送地址"
+                android:textColor="@color/text_home_recommend"
+                android:textSize="@dimen/text_size_home_recommend_title" />
+
+            <TextView
+                android:id="@+id/frag_order_detail_params_tv_delivery_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dip"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:hint="设置配送地址"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_size_order_info" />
+
+            <ImageView
+                android:layout_width="15dip"
+                android:layout_height="21dip"
+                android:src="@drawable/arrow_right" />
+        </LinearLayout>
+
+        <!-- 配送方式 -->
+
+        <LinearLayout
+            android:id="@+id/frag_order_detail_params_ll_has_delivery_mode"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_white_gray_stroke_top_left_right"
+            android:gravity="center_vertical"
+            android:minHeight="50dp"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:text="配送方式"
+                android:textColor="@color/text_home_recommend"
+                android:textSize="@dimen/text_size_home_recommend_title" />
+
+            <TextView
+                android:id="@+id/frag_order_detail_params_tv_delivery_mode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:hint="设置配送方式"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_size_order_info" />
+
+            <ImageView
+                android:layout_width="15dip"
+                android:layout_height="21dip"
+                android:src="@drawable/arrow_right" />
+        </LinearLayout>
+
+        <!-- 代金券支付 -->
+
+        <LinearLayout
+            android:id="@+id/frag_order_detail_params_ll_has_daijin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_white_gray_stroke_top_left_right"
+            android:gravity="center_vertical"
+            android:minHeight="50dp"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:text="红包"
+                android:textColor="@color/text_home_recommend"
+                android:textSize="@dimen/text_size_home_recommend_title" />
+
+            <TextView
+                android:id="@+id/frag_order_detail_params_tv_daijin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_size_order_info" />
+
+            <ImageView
+                android:layout_width="15dip"
+                android:layout_height="21dip"
+                android:src="@drawable/arrow_right" />
+        </LinearLayout>
+
+        <!-- 留言信息 -->
+
+        <LinearLayout
+            android:id="@+id/frag_order_detail_params_ll_has_leave_message"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_white_gray_stroke_all"
+            android:gravity="center_vertical"
+            android:minHeight="50dp"
+            android:padding="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:text="留言信息"
+                android:textColor="@color/text_home_recommend"
+                android:textSize="@dimen/text_size_home_recommend_title" />
+
+            <TextView
+                android:id="@+id/frag_order_detail_params_tv_leave_message"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:hint="请留言"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/text_size_order_info" />
+
+            <ImageView
+                android:layout_width="15dip"
+                android:layout_height="21dip"
+                android:src="@drawable/arrow_right" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

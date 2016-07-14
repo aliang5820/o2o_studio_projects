@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 分割线颜色 -->
+    <color name="stroke">#e5e5e5</color>
+    <!-- 分割线颜色 深 -->
+    <color name="stroke_deep">#d8d8d8</color>
+    <!-- 灰色按下颜色 -->
+    <color name="gray_press">#e5e5e5</color>
+    <!-- 主题颜色 -->
+    <color name="main_color">#FB6F08</color>
+    <!-- 主题颜色按下颜色 -->
+    <color name="main_color_press">#ffcc66</color>
+
+</resources>

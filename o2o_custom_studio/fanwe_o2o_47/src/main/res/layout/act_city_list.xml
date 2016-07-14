@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <com.fanwe.library.customview.ClearEditText
+        android:id="@+id/act_city_list_et_search"
+        style="@style/edit_base"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/layer_white_stroke_corner_item_single"
+        android:drawableLeft="@drawable/ic_search_normal"
+        android:hint="请输入关键字"
+        android:singleLine="true" />
+
+    <LinearLayout
+        android:id="@+id/ll_location_city"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/selector_white_gray_stroke_all"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:src="@drawable/eare_location" />
+
+        <TextView
+            style="@style/text_base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="定位位置：" />
+
+        <TextView
+            android:id="@+id/tv_location"
+            style="@style/text_base"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="定位中" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/ll_hot_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/text_base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="热门城市：" />
+
+                <com.fanwe.library.customview.FlowLayout
+                    xmlns:f="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/flow_hot_city"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="10dp"
+                    f:horizontalSpacing="8dp"
+                    f:orientation="horizontal"
+                    f:verticalSpacing="8dp" >
+                </com.fanwe.library.customview.FlowLayout>
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/act_city_list_lv_citys"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:cacheColorHint="#00000000"
+                android:divider="@color/stroke"
+                android:dividerHeight="1px"
+                android:listSelector="#00000000" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/act_city_list_tv_touched_letter"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:background="@drawable/layer_main_color_normal"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:visibility="invisible" />
+
+        <com.fanwe.customview.SideBar
+            android:id="@+id/act_city_list_sb_letters"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+</LinearLayout>

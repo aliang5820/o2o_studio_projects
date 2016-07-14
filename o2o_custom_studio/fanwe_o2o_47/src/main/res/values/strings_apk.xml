@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 打包需要修改 start -->
+    <string name="app_name">方维O2O</string>
+    <string name="baidu_key">FBMvwEV53Si2UinpTaYd4Y3M</string>
+    <string name="umeng_key">5203658256240b113901cd69</string>
+    <string name="umeng_message_secret">3ebf822b1b94ddd318fbd0dec10aaff2</string>
+    <!-- 打包需要修改 end -->
+
+</resources>

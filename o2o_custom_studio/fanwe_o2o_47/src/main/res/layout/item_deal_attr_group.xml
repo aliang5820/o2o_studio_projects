@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tv_attr_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:textColor="@color/gray"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal" >
+
+            <com.fanwe.library.customview.FlowLayout
+                xmlns:f="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/flow_attr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                f:horizontalSpacing="12dip"
+                f:orientation="horizontal"
+                f:verticalSpacing="6dip" >
+            </com.fanwe.library.customview.FlowLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

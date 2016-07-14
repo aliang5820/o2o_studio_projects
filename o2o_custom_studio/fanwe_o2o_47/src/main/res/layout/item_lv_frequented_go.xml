@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="14.0dip" >
+
+        <TextView
+            android:id="@+id/item_lv_frequented_go_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:id="@+id/item_lv_frequented_go_tv_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10.0dip"
+            android:layout_weight="5.0"
+            android:gravity="center_vertical"
+            android:text="商圈选择"
+            android:textColor="@color/gray"
+            android:textSize="16.0sp" />
+
+        <TextView
+            android:id="@+id/item_lv_frequented_go_tv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_white_gray_stroke_all"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="#ff666666" />
+    </LinearLayout>
+
+</LinearLayout>

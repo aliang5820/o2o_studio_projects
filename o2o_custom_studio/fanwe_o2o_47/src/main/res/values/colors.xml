@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 分类控件项被选中颜色 -->
+    <color name="bg_gray_categoryview_item_select">#f4f4f4</color>
+
+    <!-- 标题栏颜色 -->
+    <color name="bg_title_bar">@color/main_color</color>
+    <color name="bg_title_bar_pressed">@color/main_color_press</color>
+    <!-- activity灰色背景 -->
+    <color name="bg_activity_gray">#f4f4f4</color>
+
+    <!-- 首页推荐XXX字体颜色 -->
+    <color name="text_home_recommend">#2e2e2e</color>
+    <!-- 首页item项内容颜色 -->
+    <color name="text_item_title">#4C4C4C</color>
+    <color name="text_item_content">#9B9B9B</color>
+    <color name="text_item_content_deep">#82817c</color>
+    <!-- 首页item项现价颜色 -->
+    <color name="text_item_price_current">@color/main_color</color>
+    <!-- 首页分类字体颜色 -->
+    <color name="text_home_index">#5e5e5e</color>
+    <color name="text_price_red">#c21513</color>
+
+    <!-- 主页下面菜单按钮颜色 -->
+    <color name="text_home_menu_normal">@color/gray</color>
+    <color name="text_home_menu_selected">@color/main_color</color>
+
+</resources>
