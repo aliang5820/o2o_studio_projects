@@ -30,4 +30,8 @@
     <color name="bg_title_bar">@color/main_color</color>
     <color name="bg_title_bar_pressed">@color/main_color</color>
 
+    <!-- 城市选择背景 -->
+    <color name="city_bg_color">@color/transparent</color>
+    <color name="city_bg_color_selected">@color/blue_l</color>
+    <color name="city_text_color_selected">#FF767676</color>
 </resources>
