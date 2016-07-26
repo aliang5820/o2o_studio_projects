@@ -8,8 +8,8 @@
     <!-- 灰色按下颜色 -->
     <color name="gray_press">#e5e5e5</color>
     <!-- 主题颜色 -->
-    <color name="main_color">#FB6F08</color>
+    <color name="main_color">#FF5144</color>
     <!-- 主题颜色按下颜色 -->
-    <color name="main_color_press">#ffcc66</color>
+    <color name="main_color_press">#995144</color>
 
 </resources>
