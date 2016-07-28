@@ -17,6 +17,7 @@ import com.fanwe.fragment.Tab_1_Fragment;
 import com.fanwe.fragment.Tab_2_Fragment;
 import com.fanwe.fragment.Tab_3_Fragment;
 import com.fanwe.fragment.Tab_4_Fragment;
+import com.fanwe.fragment.Tab_Mine_Fragment;
 import com.fanwe.service.AppUpgradeService;
 import com.fanwe.utils.SDToast;
 
@@ -112,7 +113,8 @@ public class MainActivity extends BaseActivity {
             }
 
             private void click3() {
-                getSDFragmentManager().toggle(R.id.act_main_fl_fragment_content, null, Tab_3_Fragment.class);
+                //getSDFragmentManager().toggle(R.id.act_main_fl_fragment_content, null, Tab_3_Fragment.class);
+                getSDFragmentManager().toggle(R.id.act_main_fl_fragment_content, null, Tab_Mine_Fragment.class);
             }
 
             private void click4() {

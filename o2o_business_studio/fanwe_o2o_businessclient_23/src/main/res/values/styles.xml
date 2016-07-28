@@ -48,4 +48,14 @@
         <item name="android:button">@drawable/g_checkbox_click</item>
     </style>
 
+    <style name="MineMenuItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawableRight">@drawable/ic_arrow_right_more</item>
+        <item name="android:textSize">@dimen/text_size_button</item>
+        <item name="android:padding">@dimen/base_padding_10</item>
+    </style>
+
 </resources>

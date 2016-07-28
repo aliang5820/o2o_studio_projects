@@ -39,5 +39,6 @@ public class ApplyPayActivity extends TitleBaseActivity {
     public void onConfirm(View view) {
         //申请合伙人
         startActivity(new Intent(mActivity, MainActivity.class));
+        finish();
     }
 }
