@@ -179,15 +179,17 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
 
             builder.create().show();
         } else {
-            int appType = getIntent().getIntExtra(Constant.ExtraConstant.EXTRA_ID, -1);
+            int appType = getIntent().getIntExtra(Constant.ExtraConstant.EXTRA_TYPE, -1);
             Intent intent;
             if(appType == Constant.Apply.HHR) {
                 //选择合伙人
                 intent = new Intent(mActivity, ApplyHHRActivity.class);
+                intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HHR);
                 intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, selectedCity);
             } else {
                 //选择会员店
                 intent = new Intent(mActivity, ApplyHYDActivity.class);
+                intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HYD);
                 intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, selectedCity);
             }
             startActivity(intent);

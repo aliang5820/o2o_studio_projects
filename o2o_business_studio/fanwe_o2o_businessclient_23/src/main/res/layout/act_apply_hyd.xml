@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -17,9 +18,11 @@
             android:padding="@dimen/base_padding_10">
 
             <LinearLayout
+                android:id="@+id/selected_city_layout"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
                 <TextView
@@ -39,7 +42,6 @@
                     android:paddingLeft="@dimen/base_padding_15"
                     android:paddingRight="@dimen/base_padding_15"
                     android:paddingTop="@dimen/base_padding_10"
-                    android:text="已选定城市/地区"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_button"
                     tools:text="成都" />
@@ -191,6 +193,7 @@
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="76dp"
                     android:layout_marginTop="@dimen/base_margin_10"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -266,28 +269,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginBottom="@dimen/base_margin_5"
+        android:gravity="center"
         android:orientation="horizontal">
+
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@drawable/g_checkbox_click"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black0"
             android:text="我已经看过并同意省点网"
-            android:textSize="12sp"/>
+            android:textColor="@color/black0"
+            android:textSize="12sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/blue_l"
             android:text="《城市合作伙伴合作协议》"
-            android:textSize="12sp"/>
+            android:textColor="@color/blue_l"
+            android:textSize="12sp" />
     </LinearLayout>
 </LinearLayout>
 

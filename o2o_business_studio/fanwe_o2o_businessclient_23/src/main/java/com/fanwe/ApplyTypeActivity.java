@@ -38,7 +38,7 @@ public class ApplyTypeActivity extends TitleBaseActivity {
     //传入对应的参数，启动城市选择页面
     private void startCitySelect(int type) {
         Intent intent = new Intent(mActivity, ApplyCityActivity.class);
-        intent.putExtra(Constant.ExtraConstant.EXTRA_ID, type);
+        intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, type);
         startActivity(intent);
     }
 }

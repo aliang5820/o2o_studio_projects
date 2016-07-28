@@ -15,6 +15,7 @@ public class Constant {
     public static final class ExtraConstant {
         public static final String EXTRA_ID = "extra_id";
         public static final String EXTRA_MODEL = "extra_model";
+        public static final String EXTRA_TYPE = "extra_type";
     }
 
     public static final class RequestCodeActicity {

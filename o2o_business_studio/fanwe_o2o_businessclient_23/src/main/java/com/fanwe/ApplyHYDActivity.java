@@ -1,5 +1,6 @@
 package com.fanwe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -20,13 +21,14 @@ public class ApplyHYDActivity extends TitleBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apply_hyd);
-        initTitle();
+        initView();
         initData();
     }
 
-    private void initTitle() {
+    private void initView() {
         mTitle.setText("申请会员店");
         cityView = (TextView) findViewById(R.id.city);
+        findViewById(R.id.selected_city_layout).setVisibility(View.VISIBLE);
     }
 
     private void initData() {
@@ -36,6 +38,6 @@ public class ApplyHYDActivity extends TitleBaseActivity {
 
     public void onConfirm(View view) {
         //申请合伙人
-        Toast.makeText(mActivity, "确定", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(mActivity, ApplyPayActivity.class));
     }
 }

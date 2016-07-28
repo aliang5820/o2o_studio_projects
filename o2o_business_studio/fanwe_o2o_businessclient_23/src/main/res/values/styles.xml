@@ -1,10 +1,15 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <style name="GlobeTheme" parent="@android:style/Theme">
+
+    <style name="GlobeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="colorPrimaryDark">@color/main_color</item>
+        <item name="colorAccent">@color/main_color</item>
+        <item name="colorControlActivated">@color/main_color</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:fitsSystemWindows">true</item>
     </style>
 
-    <style name="selectorDialog" parent="@android:style/Theme.Dialog">
+    <style name="selectorDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowFrame">@null</item>
         <!-- 边框 -->
         <item name="android:windowIsFloating">true</item>
