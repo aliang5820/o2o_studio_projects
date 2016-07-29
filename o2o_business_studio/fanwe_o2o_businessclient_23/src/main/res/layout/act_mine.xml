@@ -37,7 +37,8 @@
                 android:layout_marginBottom="@dimen/base_margin_10"
                 android:layout_marginTop="@dimen/base_margin_10"
                 android:orientation="horizontal"
-                android:padding="@dimen/base_padding_10">
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
 
                 <ImageView
                     android:id="@+id/user_icon"
@@ -68,17 +69,14 @@
                     android:textSize="@dimen/text_size_content" />
             </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base_stroke_1px"
-                android:background="@color/stroke_deep" />
+            <View style="@style/H_LineStyle" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/base_padding_10">
+                android:padding="@dimen/activity_horizontal_margin">
 
                 <EditText
                     android:id="@+id/user_input"
@@ -98,20 +96,18 @@
                     android:padding="@dimen/base_padding_10"
                     android:text="验证"
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/text_size_content" />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base_stroke_1px"
-                android:background="@color/stroke_deep" />
+            <View style="@style/H_LineStyle" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/activity_custom_item_height"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:padding="@dimen/base_padding_10">
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin">
 
                 <TextView
                     android:layout_width="0dp"
@@ -131,10 +127,7 @@
                     android:textSize="@dimen/text_size_button" />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base_stroke_1px"
-                android:background="@color/stroke_deep" />
+            <View style="@style/H_LineStyle" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -142,15 +135,8 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/selector_apply_item"
-                    android:gravity="center"
-                    android:paddingBottom="@dimen/base_padding_10"
-                    android:paddingTop="@dimen/base_padding_10"
-                    android:text="待付款(1)"
-                    android:textSize="12sp" />
+                    style="@style/MediaTableItemStyle"
+                    android:text="待付款" />
 
                 <View
                     android:layout_width="@dimen/base_stroke_1px"
@@ -158,15 +144,8 @@
                     android:background="@color/stroke_deep" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/selector_apply_item"
-                    android:gravity="center"
-                    android:paddingBottom="@dimen/base_padding_10"
-                    android:paddingTop="@dimen/base_padding_10"
-                    android:text="待使用(1)"
-                    android:textSize="12sp" />
+                    style="@style/MediaTableItemStyle"
+                    android:text="待使用" />
 
                 <View
                     android:layout_width="@dimen/base_stroke_1px"
@@ -174,15 +153,8 @@
                     android:background="@color/stroke_deep" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/selector_apply_item"
-                    android:gravity="center"
-                    android:paddingBottom="@dimen/base_padding_10"
-                    android:paddingTop="@dimen/base_padding_10"
-                    android:text="待评价(1)"
-                    android:textSize="12sp" />
+                    style="@style/MediaTableItemStyle"
+                    android:text="待评价" />
 
                 <View
                     android:layout_width="@dimen/base_stroke_1px"
@@ -190,84 +162,54 @@
                     android:background="@color/stroke_deep" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/selector_apply_item"
-                    android:gravity="center"
-                    android:paddingBottom="@dimen/base_padding_10"
-                    android:paddingTop="@dimen/base_padding_10"
-                    android:text="售后/退款(1)"
-                    android:textSize="12sp" />
+                    style="@style/MediaTableItemStyle"
+                    android:text="售后/退款" />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base_stroke_1px"
-                android:background="@color/stroke_deep" />
+            <View style="@style/H_LineStyle" />
 
             <TextView
                 style="@style/MineMenuItemStyle"
                 android:text="商城订单管理" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base_stroke_1px"
-                android:background="@color/stroke_deep" />
+            <View style="@style/H_LineStyle" />
 
             <TextView
                 style="@style/MineMenuItemStyle"
                 android:text="点评管理" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base_stroke_1px"
-                android:background="@color/stroke_deep" />
+            <View style="@style/H_LineStyle" />
 
             <TextView
                 style="@style/MineMenuItemStyle"
                 android:text="项目管理" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base_stroke_1px"
-                android:background="@color/stroke_deep" />
+            <View style="@style/H_LineStyle" />
 
             <TextView
                 style="@style/MineMenuItemStyle"
                 android:text="财务管理" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base_stroke_1px"
-                android:background="@color/stroke_deep" />
+            <View style="@style/H_LineStyle" />
 
             <TextView
                 style="@style/MineMenuItemStyle"
                 android:text="银行卡账户管理" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base_stroke_1px"
-                android:background="@color/stroke_deep" />
+            <View style="@style/H_LineStyle" />
 
             <TextView
                 style="@style/MineMenuItemStyle"
                 android:text="物流管理" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base_stroke_1px"
-                android:background="@color/stroke_deep" />
+            <View style="@style/H_LineStyle" />
 
             <TextView
+                android:id="@+id/mine_media"
                 style="@style/MineMenuItemStyle"
                 android:text="自媒体" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/base_stroke_1px"
-                android:background="@color/stroke_deep" />
+            <View style="@style/H_LineStyle" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

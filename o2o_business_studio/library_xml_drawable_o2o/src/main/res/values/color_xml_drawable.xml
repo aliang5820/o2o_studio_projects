@@ -4,7 +4,8 @@
     <!-- 分割线颜色 -->
     <color name="stroke">#e5e5e5</color>
     <!-- 分割线颜色 深 -->
-    <color name="stroke_deep">#d8d8d8</color>
+    <!--<color name="stroke_deep">#d8d8d8</color>-->
+    <color name="stroke_deep">#000000</color>
     <!-- 灰色按下颜色 -->
     <color name="gray_press">#e5e5e5</color>
     <!-- 主题颜色 -->

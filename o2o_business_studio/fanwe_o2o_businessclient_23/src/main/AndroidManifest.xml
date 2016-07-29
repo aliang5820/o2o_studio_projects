@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.fanwe.businessclient"
     android:versionCode="2016030901"
-    android:versionName="2.3.2" >
+    android:versionName="2.3.2">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -52,10 +52,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
-        android:theme="@style/GlobeTheme" >
+        android:theme="@style/GlobeTheme">
         <activity
             android:name="com.fanwe.InitActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -70,8 +70,7 @@
             android:name="com.fanwe.LoginActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
 
         <!-- 申请合伙人begin -->
         <!-- 1.申请合伙人类别 -->
@@ -106,136 +105,126 @@
             android:windowSoftInputMode="adjustPan" />
         <!-- 申请合伙人end -->
 
+        <!-- 自媒体begin -->
+        <!-- 自媒体首页 -->
+        <activity
+            android:name="com.fanwe.MediaHomeActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <!-- 自媒体end -->
+
         <!-- 主界面 -->
         <activity
             android:name="com.fanwe.MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 二维码 -->
         <activity
             android:name="com.fanwe.MyCaptureActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 评论详情 -->
         <activity
             android:name="com.fanwe.Biz_tuan_msg_Activity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 活动列表 -->
         <activity
             android:name="com.fanwe.EventoCtlActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- webview -->
         <activity
             android:name="com.fanwe.DetailWebviewActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 经营管理中的优惠价下载查看 -->
         <activity
             android:name="com.fanwe.Jygl_couponActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 经营管理中的优惠门店列表 -->
         <activity
             android:name="com.fanwe.Jygl_couponActActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 优惠门店列表中的单个列表信息 -->
         <activity
             android:name="com.fanwe.Jygl_couponYouhuisActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 消费统计中的门店销量列表 -->
         <activity
             android:name="com.fanwe.Jygl_couponStoreActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 消费统计中的团购劵列表 -->
         <activity
             android:name="com.fanwe.Jygl_couponConsumptionActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 活动报名列表 -->
         <activity
             android:name="com.fanwe.BizEventoCtlEventsActActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 消费统计 -->
         <activity
             android:name="com.fanwe.ConsumeStatisticsActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 商家订单列表 -->
         <activity
             android:name="com.fanwe.OrderListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 商家订单详情 -->
         <activity
             android:name="com.fanwe.BizGoodsoCtlGoodssActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 我的提现 -->
         <activity
             android:name="com.fanwe.MyWithdrawalsActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 商品发货 -->
         <activity
             android:name="com.fanwe.DeliverGoodsActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <!-- 绑定银行卡 -->
         <activity
             android:name="com.fanwe.BindBankActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
 
         <!-- 友盟start -->
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="@string/umeng_appkey" >
-        </meta-data>
+            android:value="@string/umeng_appkey"></meta-data>
         <meta-data
             android:name="UMENG_MESSAGE_SECRET"
-            android:value="@string/umeng_message_secret" >
-        </meta-data>
+            android:value="@string/umeng_message_secret"></meta-data>
         <!-- 友盟end -->
     </application>
 

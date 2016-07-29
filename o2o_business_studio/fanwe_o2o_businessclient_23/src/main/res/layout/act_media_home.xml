@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_all">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                android:padding="@dimen/activity_horizontal_margin">
+
+                <ImageView
+                    android:id="@+id/user_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/base_margin_10"
+                    android:src="@drawable/icon" />
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/user_qr_code"
+                    android:layout_toRightOf="@+id/user_icon"
+                    android:textColor="@color/black"
+                    android:text="维森么. 我帅德.布耀布耀德"
+                    android:textSize="@dimen/text_size_button" />
+
+                <TextView
+                    android:id="@+id/user_level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_name"
+                    android:layout_marginTop="@dimen/base_margin_5"
+                    android:layout_toLeftOf="@+id/user_qr_code"
+                    android:layout_toRightOf="@+id/user_icon"
+                    android:gravity="center_vertical"
+                    android:text="推广员"
+                    android:textSize="@dimen/text_size_content" />
+
+                <Button
+                    android:id="@+id/user_posters"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_level"
+                    android:layout_marginTop="@dimen/base_margin_5"
+                    android:layout_toLeftOf="@+id/user_qr_code"
+                    android:layout_toRightOf="@+id/user_icon"
+                    android:background="@drawable/selector_main_color_corner"
+                    android:gravity="center"
+                    android:text="推广海报"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_content" />
+
+                <ImageView
+                    android:id="@+id/user_qr_code"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/base_margin_10"
+                    android:src="@drawable/qr_code" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@color/stroke"
+                android:gravity="center"
+                android:padding="@dimen/base_padding_10"
+                android:text="由【齐达内】推荐"
+                android:textColor="@color/black" />
+
+            <TextView
+                style="@style/MineMenuItemStyle"
+                android:text="我的下级" />
+
+            <View style="@style/H_LineStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="人数" />
+
+                <View
+                    android:layout_width="@dimen/base_stroke_1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stroke_deep" />
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="20" />
+
+                <View
+                    android:layout_width="@dimen/base_stroke_1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stroke_deep" />
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="奖励佣金" />
+
+                <View
+                    android:layout_width="@dimen/base_stroke_1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stroke_deep" />
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="￥3100" />
+            </LinearLayout>
+
+            <View style="@style/H_LineStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="等级" />
+
+                <View
+                    android:layout_width="@dimen/base_stroke_1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stroke_deep" />
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="数量" />
+
+            </LinearLayout>
+
+
+            <View style="@style/H_LineStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="一级" />
+
+                <View
+                    android:layout_width="@dimen/base_stroke_1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stroke_deep" />
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="1" />
+
+            </LinearLayout>
+
+
+            <View style="@style/H_LineStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="二级" />
+
+                <View
+                    android:layout_width="@dimen/base_stroke_1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stroke_deep" />
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="2" />
+
+            </LinearLayout>
+
+            <View style="@style/H_LineStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="三级" />
+
+                <View
+                    android:layout_width="@dimen/base_stroke_1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stroke_deep" />
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="3" />
+
+            </LinearLayout>
+
+            <View style="@style/H_LineStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/MineMenuItemStyle"
+                    android:layout_weight="1"
+                    android:drawableRight="@null"
+                    android:text="本月订单奖励" />
+
+                <TextView
+                    style="@style/MineMenuItemStyle"
+                    android:layout_width="wrap_content"
+                    android:text="￥854.00" />
+            </LinearLayout>
+
+            <View style="@style/H_LineStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/MineMenuItemStyle"
+                    android:layout_weight="1"
+                    android:drawableRight="@null"
+                    android:text="本月会员店招募奖励" />
+
+                <TextView
+                    style="@style/MineMenuItemStyle"
+                    android:layout_width="wrap_content"
+                    android:text="￥154.00" />
+            </LinearLayout>
+
+            <View style="@style/H_LineStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/MineMenuItemStyle"
+                    android:layout_weight="1"
+                    android:drawableRight="@null"
+                    android:text="本月合伙人招募奖励" />
+
+                <TextView
+                    style="@style/MineMenuItemStyle"
+                    android:layout_width="wrap_content"
+                    android:text="￥24.00" />
+            </LinearLayout>
+
+            <View style="@style/H_LineStyle" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/stroke" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/MineMenuItemStyle"
+                    android:layout_weight="1"
+                    android:drawableRight="@null"
+                    android:text="已提现佣金" />
+
+                <TextView
+                    style="@style/MineMenuItemStyle"
+                    android:layout_width="wrap_content"
+                    android:drawableRight="@null"
+                    android:text="￥24.00" />
+            </LinearLayout>
+
+            <View style="@style/H_LineStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/MineMenuItemStyle"
+                    android:layout_weight="1"
+                    android:drawableRight="@null"
+                    android:text="未提现佣金" />
+
+                <TextView
+                    style="@style/MineMenuItemStyle"
+                    android:layout_width="wrap_content"
+                    android:drawableRight="@null"
+                    android:text="￥24.00" />
+            </LinearLayout>
+
+            <View style="@style/H_LineStyle" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
