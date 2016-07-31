@@ -1,6 +1,8 @@
 package com.fanwe;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.fanwe.businessclient.R;
 
@@ -21,4 +23,7 @@ public class MediaHomeActivity extends TitleBaseActivity {
         mTitle.setText("自媒体");
     }
 
+    public void onNextLevel(View view) {
+        startActivity(new Intent(mActivity, MediaNextLevelActivity.class));
+    }
 }

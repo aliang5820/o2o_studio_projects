@@ -1,45 +1,40 @@
 package com.fanwe.fragment;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.fanwe.Biz_tuan_msg_Activity;
-import com.fanwe.adapter.BizDealrCtlAdapter;
+import com.fanwe.adapter.MediaNextLevelAdapter;
 import com.fanwe.businessclient.R;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.listener.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
-import com.fanwe.model.BizDealrCtlItemModel;
-import com.fanwe.model.Biz_tuanType0ActModel;
+import com.fanwe.model.MediaNextLevelCtlItemModel;
+import com.fanwe.model.MediaNextLevelPageModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.utils.SDCollectionUtil;
 import com.fanwe.utils.SDInterfaceUtil;
 import com.fanwe.utils.SDToast;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
-import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 消费评分
+ * Created by Edison on 2016/7/31.
  */
-public class BizDealrCtlFragment extends BaseFragment {
+public class MediaNextLevelFragment extends BaseFragment {
     private PullToRefreshListView mList;
     private TextView mTvError;
 
     private int mCurrentPage = 1;
     private int mTotalPage = 0;
 
-    private List<BizDealrCtlItemModel> mListModel;
-    private BizDealrCtlAdapter mAdapter;
+    private List<MediaNextLevelCtlItemModel> mListModel;
+    private MediaNextLevelAdapter mAdapter;
 
     @Override
     protected int onCreateContentView() {
@@ -59,24 +54,21 @@ public class BizDealrCtlFragment extends BaseFragment {
     }
 
     private void bindDefaultData() {
-        mListModel = new ArrayList<BizDealrCtlItemModel>();
-        mAdapter = new BizDealrCtlAdapter(mListModel, getActivity());
+        mListModel = new ArrayList<>();
+        mAdapter = new MediaNextLevelAdapter(mListModel, getActivity());
         mList.setAdapter(mAdapter);
-        mList.setOnItemClickListener(new OnItemClickListener() {
+        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), Biz_tuan_msg_Activity.class);
-                intent.putExtra(Biz_tuan_msg_Activity.EXTRA_ID, mListModel.get((int) id).getId());
-                intent.putExtra(Biz_tuan_msg_Activity.EXTRA_TYPE, 0);
-                startActivity(intent);
+                SDToast.showToast("position:" + position);
             }
         });
     }
 
     private void initPullView() {
-        mList.setMode(Mode.BOTH);
-        mList.setOnRefreshListener(new OnRefreshListener2<ListView>() {
+        mList.setMode(PullToRefreshBase.Mode.BOTH);
+        mList.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 refreshData();
@@ -93,7 +85,7 @@ public class BizDealrCtlFragment extends BaseFragment {
     @Override
     protected void onRefreshData() {
         mCurrentPage = 1;
-        requestCtlBiz_dealrActIndex(false);
+        requestNextLevelActIndex(false);
     }
 
     private void loadMoreDataType0() {
@@ -103,18 +95,19 @@ public class BizDealrCtlFragment extends BaseFragment {
                 SDToast.showToast("没有更多数据了!");
                 mList.onRefreshComplete();
             } else {
-                requestCtlBiz_dealrActIndex(true);
+                requestNextLevelActIndex(true);
             }
         } else {
             refreshData();
         }
     }
 
-    protected void requestCtlBiz_dealrActIndex(final boolean isLoadMore) {
-        RequestModel model = new RequestModel();
+    //获取下线数据
+    protected void requestNextLevelActIndex(final boolean isLoadMore) {
+        final RequestModel model = new RequestModel();
         model.putCtlAct("biz_dealr", "index");
         model.put("page", mCurrentPage);
-        SDRequestCallBack<Biz_tuanType0ActModel> handler = new SDRequestCallBack<Biz_tuanType0ActModel>() {
+        SDRequestCallBack<MediaNextLevelPageModel> handler = new SDRequestCallBack<MediaNextLevelPageModel>() {
             private Dialog nDialog;
 
             @Override
@@ -127,7 +120,7 @@ public class BizDealrCtlFragment extends BaseFragment {
             }
 
             @Override
-            public void onSuccess(Biz_tuanType0ActModel actModel) {
+            public void onSuccess(MediaNextLevelPageModel actModel) {
                 if (!SDInterfaceUtil.dealactModel(actModel, getActivity())) {
                     switch (actModel.getStatus()) {
                         case 0:
@@ -145,7 +138,17 @@ public class BizDealrCtlFragment extends BaseFragment {
                                 mListModel.addAll(actModel.getItem());
                                 mAdapter.updateData(mListModel);
                             } else {
-                                SDToast.showToast("未找到数据!");
+                                //SDToast.showToast("未找到数据!");
+                                //TODO 测试数据
+                                List<MediaNextLevelCtlItemModel> list = new ArrayList<>();
+                                MediaNextLevelCtlItemModel itemModel = new MediaNextLevelCtlItemModel();
+                                MediaNextLevelCtlItemModel itemModel1 = new MediaNextLevelCtlItemModel();
+                                MediaNextLevelCtlItemModel itemModel2 = new MediaNextLevelCtlItemModel();
+                                list.add(itemModel);
+                                list.add(itemModel1);
+                                list.add(itemModel2);
+                                mListModel.addAll(list);
+                                mAdapter.updateData(mListModel);
                             }
                     }
                 }

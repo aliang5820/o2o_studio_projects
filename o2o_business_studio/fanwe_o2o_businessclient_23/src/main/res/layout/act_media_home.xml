@@ -25,7 +25,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/base_margin_10"
+                    android:layout_marginRight="@dimen/base_margin_15"
                     android:src="@drawable/icon" />
 
                 <TextView
@@ -70,7 +70,7 @@
                     android:layout_height="70dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/base_margin_10"
+                    android:layout_marginLeft="@dimen/base_margin_15"
                     android:src="@drawable/qr_code" />
             </RelativeLayout>
 
@@ -85,6 +85,7 @@
 
             <TextView
                 style="@style/MineMenuItemStyle"
+                android:onClick="onNextLevel"
                 android:text="我的下级" />
 
             <View style="@style/H_LineStyle" />

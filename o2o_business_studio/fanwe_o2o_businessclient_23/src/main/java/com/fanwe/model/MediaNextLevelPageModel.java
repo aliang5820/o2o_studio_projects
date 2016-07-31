@@ -2,11 +2,14 @@ package com.fanwe.model;
 
 import java.util.List;
 
-public class Biz_tuanType0ActModel extends BaseCtlActModel {
+/**
+ * Created by Edison on 2016/7/31.
+ */
+public class MediaNextLevelPageModel extends BaseCtlActModel {
 
     private PageModel page = null;
 
-    private List<BizDealrCtlItemModel> item = null;
+    private List<MediaNextLevelCtlItemModel> item = null;
 
     public PageModel getPage() {
         return page;
@@ -16,12 +19,11 @@ public class Biz_tuanType0ActModel extends BaseCtlActModel {
         this.page = page;
     }
 
-    public List<BizDealrCtlItemModel> getItem() {
+    public List<MediaNextLevelCtlItemModel> getItem() {
         return item;
     }
 
-    public void setItem(List<BizDealrCtlItemModel> item) {
+    public void setItem(List<MediaNextLevelCtlItemModel> item) {
         this.item = item;
     }
-
 }
