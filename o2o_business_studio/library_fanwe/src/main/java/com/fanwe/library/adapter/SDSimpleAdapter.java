@@ -1,33 +1,29 @@
 package com.fanwe.library.adapter;
 
-import java.util.List;
-
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 
-public abstract class SDSimpleAdapter<T> extends SDAdapter<T>
-{
+import java.util.List;
 
-	public SDSimpleAdapter(List<T> listModel, Activity activity)
-	{
-		super(listModel, activity);
-	}
+public abstract class SDSimpleAdapter<T> extends SDAdapter<T> {
 
-	@Override
-	protected View onGetView(int position, View convertView, ViewGroup parent)
-	{
-		if (convertView == null)
-		{
-			int layoutId = getLayoutId(position, convertView, parent);
-			convertView = mInflater.inflate(layoutId, null);
-		}
-		bindData(position, convertView, parent, getItem(position));
-		return convertView;
-	}
+    public SDSimpleAdapter(List<T> listModel, Activity activity) {
+        super(listModel, activity);
+    }
 
-	public abstract int getLayoutId(int position, View convertView, ViewGroup parent);
+    @Override
+    protected View onGetView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            int layoutId = getLayoutId(position, convertView, parent);
+            convertView = mInflater.inflate(layoutId, null);
+        }
+        bindData(position, convertView, parent, getItem(position));
+        return convertView;
+    }
 
-	public abstract void bindData(int position, View convertView, ViewGroup parent, T model);
+    public abstract int getLayoutId(int position, View convertView, ViewGroup parent);
+
+    public abstract void bindData(int position, View convertView, ViewGroup parent, T model);
 
 }

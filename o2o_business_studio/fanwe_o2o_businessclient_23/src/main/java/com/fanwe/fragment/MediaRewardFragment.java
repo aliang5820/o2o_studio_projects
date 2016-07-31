@@ -1,18 +1,23 @@
 package com.fanwe.fragment;
 
 import android.app.Dialog;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fanwe.adapter.MediaNextLevelAdapter;
+import com.fanwe.adapter.MediaRewardAdapter;
 import com.fanwe.businessclient.R;
+import com.fanwe.constant.Constant;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.listener.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
 import com.fanwe.model.MediaNextLevelCtlItemModel;
 import com.fanwe.model.MediaNextLevelPageModel;
+import com.fanwe.model.MediaRewardCtlItemModel;
+import com.fanwe.model.MediaRewardPageModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.utils.SDCollectionUtil;
 import com.fanwe.utils.SDInterfaceUtil;
@@ -25,26 +30,41 @@ import java.util.List;
 
 /**
  * Created by Edison on 2016/7/31.
- * 下线详情
+ * 奖励详情
  */
-public class MediaNextLevelFragment extends BaseFragment {
+public class MediaRewardFragment extends BaseFragment {
     private PullToRefreshListView mList;
-    private TextView mTvError;
-
+    private TextView mTvError, reward_total_money;
     private int mCurrentPage = 1;
     private int mTotalPage = 0;
 
-    private List<MediaNextLevelCtlItemModel> mListModel;
-    private MediaNextLevelAdapter mAdapter;
+    private List<MediaRewardCtlItemModel> mListModel;
+    private MediaRewardAdapter mAdapter;
+    /*private List<MediaNextLevelCtlItemModel> mListModel;
+    private MediaNextLevelAdapter mAdapter;*/
+    private int type;
+    private View reward_layout, reward_order_layout;
+
+    public static MediaRewardFragment getInstance(int type) {
+        MediaRewardFragment fragment = new MediaRewardFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constant.ExtraConstant.EXTRA_TYPE, type);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     protected int onCreateContentView() {
-        return R.layout.base_list_include;
+        return R.layout.frag_media_reward;
     }
 
     private void register(View view) {
         mList = (PullToRefreshListView) view.findViewById(R.id.list);
         mTvError = (TextView) view.findViewById(R.id.tv_error);
+        reward_total_money = (TextView) view.findViewById(R.id.reward_total_money);
+
+        reward_layout = findViewById(R.id.reward_layout);
+        reward_order_layout = findViewById(R.id.reward_order_layout);
     }
 
     @Override
@@ -55,8 +75,27 @@ public class MediaNextLevelFragment extends BaseFragment {
     }
 
     private void bindDefaultData() {
+        type = getArguments().getInt(Constant.ExtraConstant.EXTRA_TYPE);
+        switch (type) {
+            case Constant.Reward.ORDER:
+                reward_total_money.setText("订单奖励总额：￥688");
+                reward_layout.setVisibility(View.GONE);
+                break;
+            case Constant.Reward.HHR:
+                reward_total_money.setText("合伙人招募奖励总额：￥788");
+                reward_order_layout.setVisibility(View.GONE);
+                ((TextView) reward_layout.findViewById(R.id.label1)).setText("合伙人昵称");
+                break;
+            case Constant.Reward.HYD:
+                reward_total_money.setText("会员店招募奖励总额：￥888");
+                reward_order_layout.setVisibility(View.GONE);
+                ((TextView) reward_layout.findViewById(R.id.label1)).setText("会员店");
+                break;
+        }
+
         mListModel = new ArrayList<>();
-        mAdapter = new MediaNextLevelAdapter(mListModel, getActivity());
+        mAdapter = new MediaRewardAdapter(mListModel, getActivity(), type);
+        //mAdapter = new MediaNextLevelAdapter(mListModel, getActivity());
         mList.setAdapter(mAdapter);
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -108,7 +147,7 @@ public class MediaNextLevelFragment extends BaseFragment {
         final RequestModel model = new RequestModel();
         model.putCtlAct("biz_dealr", "index");
         model.put("page", mCurrentPage);
-        SDRequestCallBack<MediaNextLevelPageModel> handler = new SDRequestCallBack<MediaNextLevelPageModel>() {
+        SDRequestCallBack<MediaRewardPageModel<MediaRewardCtlItemModel>> handler = new SDRequestCallBack<MediaRewardPageModel<MediaRewardCtlItemModel>>() {
             private Dialog nDialog;
 
             @Override
@@ -121,7 +160,7 @@ public class MediaNextLevelFragment extends BaseFragment {
             }
 
             @Override
-            public void onSuccess(MediaNextLevelPageModel actModel) {
+            public void onSuccess(MediaRewardPageModel actModel) {
                 if (!SDInterfaceUtil.dealactModel(actModel, getActivity())) {
                     switch (actModel.getStatus()) {
                         case 0:
@@ -140,11 +179,11 @@ public class MediaNextLevelFragment extends BaseFragment {
                                 mAdapter.updateData(mListModel);
                             } else {
                                 //SDToast.showToast("未找到数据!");
-                                //TODO 测试数据
-                                List<MediaNextLevelCtlItemModel> list = new ArrayList<>();
-                                MediaNextLevelCtlItemModel itemModel = new MediaNextLevelCtlItemModel();
-                                MediaNextLevelCtlItemModel itemModel1 = new MediaNextLevelCtlItemModel();
-                                MediaNextLevelCtlItemModel itemModel2 = new MediaNextLevelCtlItemModel();
+                                //TODO 测试奖励数据
+                                List<MediaRewardCtlItemModel> list = new ArrayList<>();
+                                MediaRewardCtlItemModel itemModel = new MediaRewardCtlItemModel();
+                                MediaRewardCtlItemModel itemModel1 = new MediaRewardCtlItemModel();
+                                MediaRewardCtlItemModel itemModel2 = new MediaRewardCtlItemModel();
                                 list.add(itemModel);
                                 list.add(itemModel1);
                                 list.add(itemModel2);

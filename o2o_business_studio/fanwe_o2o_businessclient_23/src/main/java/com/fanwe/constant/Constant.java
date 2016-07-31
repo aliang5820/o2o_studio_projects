@@ -26,4 +26,10 @@ public class Constant {
         public static final int HHR = 0;//合伙人
         public static final int HYD = 1;//会员店
     }
+
+    public static final class Reward {
+        public static final int ORDER = 1;//订单奖励
+        public static final int HHR = 2;//合伙人招募奖励
+        public static final int HYD = 3;//会员店招募奖励
+    }
 }

@@ -17,8 +17,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="visible"
-                android:padding="@dimen/activity_horizontal_margin">
+                android:padding="@dimen/activity_horizontal_margin"
+                android:visibility="visible">
 
                 <ImageView
                     android:id="@+id/user_icon"
@@ -34,8 +34,8 @@
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/user_qr_code"
                     android:layout_toRightOf="@+id/user_icon"
-                    android:textColor="@color/black"
                     android:text="维森么. 我帅德.布耀布耀德"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/text_size_button" />
 
                 <TextView
@@ -62,7 +62,7 @@
                     android:gravity="center"
                     android:text="推广海报"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_content" />
+                    android:textSize="@dimen/text_size_button" />
 
                 <ImageView
                     android:id="@+id/user_qr_code"
@@ -222,7 +222,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onRewardOrder"
                 android:orientation="horizontal">
+
                 <TextView
                     style="@style/MineMenuItemStyle"
                     android:layout_weight="1"
@@ -240,7 +242,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onRewardHYD"
                 android:orientation="horizontal">
+
                 <TextView
                     style="@style/MineMenuItemStyle"
                     android:layout_weight="1"
@@ -258,7 +262,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onRewardHHR"
                 android:orientation="horizontal">
+
                 <TextView
                     style="@style/MineMenuItemStyle"
                     android:layout_weight="1"
@@ -282,6 +288,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     style="@style/MineMenuItemStyle"
                     android:layout_weight="1"
@@ -301,6 +308,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     style="@style/MineMenuItemStyle"
                     android:layout_weight="1"
