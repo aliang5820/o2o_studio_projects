@@ -124,6 +124,12 @@
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
+        <!-- 自媒体推广海报页 -->
+        <activity
+            android:name="com.fanwe.MediaPosterActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <!-- 自媒体end -->
 
         <!-- 主界面 -->

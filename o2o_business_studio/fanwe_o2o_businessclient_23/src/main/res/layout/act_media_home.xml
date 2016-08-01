@@ -61,6 +61,7 @@
                     android:background="@drawable/selector_main_color_corner"
                     android:gravity="center"
                     android:text="推广海报"
+                    android:onClick="onPoster"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_button" />
 

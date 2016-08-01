@@ -28,6 +28,10 @@ public class MediaHomeActivity extends TitleBaseActivity {
         startActivity(new Intent(mActivity, MediaNextLevelActivity.class));
     }
 
+    public void onPoster(View view) {
+        startActivity(new Intent(mActivity, MediaPosterActivity.class));
+    }
+
     public void onRewardOrder(View view) {
         Intent intent = new Intent(mActivity, MediaRewardActivity.class);
         intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Reward.ORDER);
