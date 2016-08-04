@@ -26,4 +26,5 @@ dependencies {
     compile project(':library_xml_drawable_o2o')
     compile project(':library_fanwe')
     compile project(':library_push_umeng')
+    provided 'org.projectlombok:lombok:1.16.6'//get/set自动工具
 }

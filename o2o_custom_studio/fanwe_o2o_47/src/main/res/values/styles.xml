@@ -19,4 +19,59 @@
         <item name="android:windowExitAnimation">@anim/anim_hide_pop_dynamic_comment_action</item>
     </style>
 
+    <style name="MineMenuItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/activity_custom_item_height</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:drawableRight">@drawable/ic_arrow_right_more</item>
+        <item name="android:textSize">@dimen/text_size_button</item>
+    </style>
+
+    <style name="MediaTableItemStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/selector_apply_item</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingBottom">@dimen/base_padding_10</item>
+        <item name="android:paddingTop">@dimen/base_padding_10</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="MediaNextLevelItemStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:textSize">@dimen/text_size_button</item>
+    </style>
+
+    <style name="RewardItemStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_content</item>
+    </style>
+
+    <style name="H_LineStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/base_stroke_1px</item>
+        <item name="android:background">@color/stroke_deep</item>
+    </style>
+
+    <style name="V_LineStyle">
+        <item name="android:layout_width">@dimen/base_stroke_1px</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/stroke_deep</item>
+    </style>
+
 </resources>

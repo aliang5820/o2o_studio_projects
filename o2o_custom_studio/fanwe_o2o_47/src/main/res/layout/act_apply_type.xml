@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@drawable/bg_all"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_main_color_corner"
+        android:onClick="onHHR"
+        android:padding="@dimen/base_padding_10"
+        android:text="申请合伙人"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_main_color_corner"
+        android:layout_marginTop="@dimen/base_margin_10"
+        android:onClick="onHYD"
+        android:padding="@dimen/base_padding_10"
+        android:text="申请会员店"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+</LinearLayout>

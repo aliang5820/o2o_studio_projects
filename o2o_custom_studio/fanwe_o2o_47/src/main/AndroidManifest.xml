@@ -54,6 +54,66 @@
             </intent-filter>
         </activity>
 
+        <!-- 申请合伙人begin -->
+        <!-- 1.申请合伙人类别 -->
+        <activity
+            android:name="com.fanwe.ApplyTypeActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <!-- 2.选择地区 -->
+        <activity
+            android:name="com.fanwe.ApplyCityActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <!-- 3.会员店填写信息-->
+        <activity
+            android:name="com.fanwe.ApplyHYDActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <!-- 3.合伙人填写信息-->
+        <activity
+            android:name="com.fanwe.ApplyHHRActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <!-- 4.申请支付信息-->
+        <activity
+            android:name="com.fanwe.ApplyPayActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <!-- 申请合伙人end -->
+
+        <!-- 自媒体begin -->
+        <!-- 自媒体首页 -->
+        <activity
+            android:name="com.fanwe.MediaHomeActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <!-- 自媒体下线详情页 -->
+        <activity
+            android:name="com.fanwe.MediaNextLevelActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <!-- 自媒体奖励页 -->
+        <activity
+            android:name="com.fanwe.MediaRewardActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <!-- 自媒体推广海报页 -->
+        <activity
+            android:name="com.fanwe.MediaPosterActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <!-- 自媒体end -->
+
         <!-- 主界面 -->
         <activity
             android:name="com.fanwe.MainActivity"

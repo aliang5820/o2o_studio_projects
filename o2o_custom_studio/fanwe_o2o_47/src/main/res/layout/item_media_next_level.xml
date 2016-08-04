@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <ImageView
+            android:id="@+id/user_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icon" />
+
+        <LinearLayout
+            android:id="@+id/user_name_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/user_icon"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/MediaNextLevelItemStyle"
+                android:minWidth="80dp"
+                android:text="昵称：" />
+
+            <TextView
+                android:id="@+id/user_name"
+                style="@style/MediaNextLevelItemStyle"
+                android:layout_weight="1"
+                android:text="维森么. 我帅德.布耀布耀德" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/user_level_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_name_layout"
+            android:layout_marginTop="@dimen/base_margin_5"
+            android:layout_toRightOf="@+id/user_icon"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/MediaNextLevelItemStyle"
+                android:minWidth="80dp"
+                android:text="角色属性：" />
+
+            <TextView
+                android:id="@+id/user_level"
+                style="@style/MediaNextLevelItemStyle"
+                android:layout_weight="1"
+                android:text="合伙人" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_level_layout"
+            android:layout_marginTop="@dimen/base_margin_5"
+            android:layout_toLeftOf="@+id/user_qr_code"
+            android:layout_toRightOf="@+id/user_icon"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/MediaNextLevelItemStyle"
+                android:minWidth="80dp"
+                android:text="关注时间：" />
+
+            <TextView
+                android:id="@+id/focus_time"
+                style="@style/MediaNextLevelItemStyle"
+                android:layout_weight="1"
+                android:text="2015/7/8 14:12" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
