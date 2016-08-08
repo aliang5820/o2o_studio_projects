@@ -43,7 +43,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
-        android:theme="@style/FanweTheme" >
+        android:theme="@style/GlobeTheme" >
         <activity
             android:name="com.fanwe.InitAdvsMultiActivity"
             android:label="@string/app_name" >

@@ -2,6 +2,7 @@ package com.fanwe;
 
 import android.os.Bundle;
 
+import com.fanwe.constant.Constant;
 import com.fanwe.o2o.newo2o.R;
 /**
  * Created by Edison on 2016/8/1.
@@ -12,6 +13,7 @@ public class MediaPosterActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setmTitleType(Constant.TitleType.TITLE);
         setContentView(R.layout.act_media_poster);
         initTitle();
     }

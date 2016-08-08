@@ -62,7 +62,7 @@
                     android:layout_below="@+id/user_name"
                     android:layout_marginTop="@dimen/base_margin_10"
                     android:layout_toRightOf="@+id/user_icon"
-                    android:drawableLeft="@drawable/icon_warning"
+                    android:drawableLeft="@drawable/ic_my_account_order_not_pay"
                     android:drawablePadding="4dp"
                     android:gravity="center_vertical"
                     android:text="修改密码"

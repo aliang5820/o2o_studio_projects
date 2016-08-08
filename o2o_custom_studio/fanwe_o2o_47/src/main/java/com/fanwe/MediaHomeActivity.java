@@ -16,6 +16,7 @@ public class MediaHomeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setmTitleType(Constant.TitleType.TITLE);
         setContentView(R.layout.act_media_home);
         initTitle();
     }

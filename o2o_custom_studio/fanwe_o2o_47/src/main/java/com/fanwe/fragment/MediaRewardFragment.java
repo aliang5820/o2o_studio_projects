@@ -142,7 +142,8 @@ public class MediaRewardFragment extends BaseFragment {
     //获取下线数据
     protected void requestNextLevelActIndex(final boolean isLoadMore) {
         final RequestModel model = new RequestModel();
-        model.putCtlAct("biz_dealr", "index");
+        model.putCtl("biz_dealr");
+        model.putAct("index");
         model.put("page", mCurrentPage);
         SDRequestCallBack<MediaRewardPageModel<MediaRewardCtlItemModel>> handler = new SDRequestCallBack<MediaRewardPageModel<MediaRewardCtlItemModel>>() {
             private Dialog nDialog;
@@ -158,7 +159,7 @@ public class MediaRewardFragment extends BaseFragment {
 
             @Override
             public void onSuccess(MediaRewardPageModel actModel) {
-                if (!SDInterfaceUtil.dealactModel(actModel, getActivity())) {
+                if (!SDInterfaceUtil.isActModelNull(actModel)) {
                     switch (actModel.getStatus()) {
                         case 0:
                             SDToast.showToast(actModel.getInfo());

@@ -7,16 +7,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fanwe.adapter.MediaNextLevelAdapter;
-import com.fanwe.businessclient.R;
 import com.fanwe.http.InterfaceServer;
-import com.fanwe.http.listener.SDRequestCallBack;
+import com.fanwe.http.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
+import com.fanwe.library.utils.SDCollectionUtil;
+import com.fanwe.library.utils.SDToast;
 import com.fanwe.model.MediaNextLevelCtlItemModel;
 import com.fanwe.model.MediaNextLevelPageModel;
 import com.fanwe.model.RequestModel;
-import com.fanwe.utils.SDCollectionUtil;
+import com.fanwe.o2o.newo2o.R;
 import com.fanwe.utils.SDInterfaceUtil;
-import com.fanwe.utils.SDToast;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -106,7 +106,8 @@ public class MediaNextLevelFragment extends BaseFragment {
     //获取下线数据
     protected void requestNextLevelActIndex(final boolean isLoadMore) {
         final RequestModel model = new RequestModel();
-        model.putCtlAct("biz_dealr", "index");
+        model.putCtl("biz_dealr");
+        model.putAct("index");
         model.put("page", mCurrentPage);
         SDRequestCallBack<MediaNextLevelPageModel> handler = new SDRequestCallBack<MediaNextLevelPageModel>() {
             private Dialog nDialog;
@@ -122,7 +123,7 @@ public class MediaNextLevelFragment extends BaseFragment {
 
             @Override
             public void onSuccess(MediaNextLevelPageModel actModel) {
-                if (!SDInterfaceUtil.dealactModel(actModel, getActivity())) {
+                if (!SDInterfaceUtil.isActModelNull(actModel)) {
                     switch (actModel.getStatus()) {
                         case 0:
                             SDToast.showToast(actModel.getInfo());
@@ -165,7 +166,7 @@ public class MediaNextLevelFragment extends BaseFragment {
     }
 
     protected void toggleEmptyMsg() {
-        if (SDCollectionUtil.isListHasData(mListModel)) {
+        if (!SDCollectionUtil.isEmpty(mListModel)) {
             if (mTvError.getVisibility() == View.VISIBLE) {
                 mTvError.setVisibility(View.GONE);
             }

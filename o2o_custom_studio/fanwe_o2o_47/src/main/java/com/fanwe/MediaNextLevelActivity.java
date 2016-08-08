@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.fanwe.constant.Constant;
 import com.fanwe.fragment.MediaNextLevelFragment;
 import com.fanwe.o2o.newo2o.R;
 
@@ -29,6 +30,7 @@ public class MediaNextLevelActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setmTitleType(Constant.TitleType.TITLE);
         setContentView(R.layout.act_media_next_level);
         initView();
     }

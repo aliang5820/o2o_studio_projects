@@ -10,10 +10,20 @@ android {
         minSdkVersion 14
     }
 
+    signingConfigs {
+        myConfig {
+            storeFile file('E:/github/o2o_studio_projects/o2o.jks')
+            storePassword "111111"
+            keyAlias "shengdianwang"
+            keyPassword "111111"//将这里的“**”替换成自己的信息
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.myConfig
+            minifyEnabled false //是否混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
@@ -33,4 +43,6 @@ dependencies {
     compile project(':library_social_umeng')
     compile project(':library_fanwe')
     compile project(':library_pay_unionpay')
+    compile 'com.android.support:design:24.0.0'
+    compile 'com.android.support:appcompat-v7:24.0.0'
 }

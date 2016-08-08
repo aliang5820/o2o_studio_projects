@@ -1,10 +1,12 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="FanweTheme" parent="android:Theme.Holo">
+    <style name="GlobeTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="colorPrimaryDark">@color/main_color</item>
+        <item name="colorAccent">@color/main_color</item>
+        <item name="colorControlActivated">@color/main_color</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:colorBackgroundCacheHint">@null</item>
-        <item name="android:windowAnimationStyle">@style/AppAnimation</item>
-        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:fitsSystemWindows">true</item>
     </style>
 
     <style name="AppAnimation" parent="@android:style/Animation.Activity">

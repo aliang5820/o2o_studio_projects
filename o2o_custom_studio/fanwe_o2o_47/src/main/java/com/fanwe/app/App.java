@@ -1,10 +1,5 @@
 package com.fanwe.app;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.xutils.x;
-
 import android.app.Application;
 import android.content.Intent;
 
@@ -35,167 +30,149 @@ import com.ta.util.netstate.TANetChangeObserver;
 import com.ta.util.netstate.TANetWorkUtil.netType;
 import com.ta.util.netstate.TANetworkStateReceiver;
 
-public class App extends Application implements SDEventObserver, TANetChangeObserver
-{
+import org.xutils.x;
 
-	private static App mApp = null;
+import java.util.ArrayList;
+import java.util.List;
 
-	public List<Class<? extends BaseActivity>> mListClassNotFinishWhenLoginState0 = new ArrayList<Class<? extends BaseActivity>>();
-	public RuntimeConfigModel mRuntimeConfig = new RuntimeConfigModel();
-	public Intent mPushIntent;
+public class App extends Application implements SDEventObserver, TANetChangeObserver {
 
-	@Override
-	public void onCreate()
-	{
-		super.onCreate();
-		init();
-	}
+    private static App mApp = null;
 
-	private void init()
-	{
-		mApp = this;
-		x.Ext.init(this);
-		ImageLoaderManager.initImageLoader();
-		initSDLibrary();
-		initAppCrashHandler();
-		initBaiduMap();
-		SDEventManager.register(this);
-		TANetworkStateReceiver.registerNetworkStateReceiver(this);
-		TANetworkStateReceiver.registerObserver(this);
-		initSettingModel();
-		initUmengPush();
-		addClassesNotFinishWhenLoginState0();
-		SDCommandManager.getInstance().initialize();
-		LogUtil.isDebug = ApkConstant.DEBUG;
-	}
+    public List<Class<? extends BaseActivity>> mListClassNotFinishWhenLoginState0 = new ArrayList<Class<? extends BaseActivity>>();
+    public RuntimeConfigModel mRuntimeConfig = new RuntimeConfigModel();
+    public Intent mPushIntent;
 
-	private void initUmengPush()
-	{
-		UmengPushManager.init(this);
-	}
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        init();
+    }
 
-	private void initSDLibrary()
-	{
-		SDLibrary.getInstance().init(getApplication());
+    private void init() {
+        mApp = this;
+        x.Ext.init(this);
+        ImageLoaderManager.initImageLoader();
+        initSDLibrary();
+        initAppCrashHandler();
+        initBaiduMap();
+        SDEventManager.register(this);
+        TANetworkStateReceiver.registerNetworkStateReceiver(this);
+        TANetworkStateReceiver.registerObserver(this);
+        initSettingModel();
+        initUmengPush();
+        addClassesNotFinishWhenLoginState0();
+        SDCommandManager.getInstance().initialize();
+        LogUtil.isDebug = ApkConstant.DEBUG;
+    }
 
-		SDLibraryConfig config = new SDLibraryConfig();
+    private void initUmengPush() {
+        UmengPushManager.init(this);
+    }
 
-		config.setmMainColor(getResources().getColor(R.color.main_color));
-		config.setmMainColorPress(getResources().getColor(R.color.main_color_press));
+    private void initSDLibrary() {
+        SDLibrary.getInstance().init(getApplication());
 
-		config.setmTitleColor(getResources().getColor(R.color.bg_title_bar));
-		config.setmTitleColorPressed(getResources().getColor(R.color.bg_title_bar_pressed));
-		config.setmTitleHeight(getResources().getDimensionPixelOffset(R.dimen.height_title_bar));
+        SDLibraryConfig config = new SDLibraryConfig();
 
-		config.setmStrokeColor(getResources().getColor(R.color.stroke));
-		config.setmStrokeWidth(SDViewUtil.dp2px(1));
+        config.setmMainColor(getResources().getColor(R.color.main_color));
+        config.setmMainColorPress(getResources().getColor(R.color.main_color_press));
 
-		config.setmCornerRadius(getResources().getDimensionPixelOffset(R.dimen.corner));
-		config.setmGrayPressColor(getResources().getColor(R.color.gray_press));
+        config.setmTitleColor(getResources().getColor(R.color.bg_title_bar));
+        config.setmTitleColorPressed(getResources().getColor(R.color.bg_title_bar_pressed));
+        config.setmTitleHeight(getResources().getDimensionPixelOffset(R.dimen.height_title_bar));
 
-		SDLibrary.getInstance().setConfig(config);
-	}
+        config.setmStrokeColor(getResources().getColor(R.color.stroke));
+        config.setmStrokeWidth(SDViewUtil.dp2px(1));
 
-	private void addClassesNotFinishWhenLoginState0()
-	{
-		mListClassNotFinishWhenLoginState0.add(MainActivity.class);
-	}
+        config.setmCornerRadius(getResources().getDimensionPixelOffset(R.dimen.corner));
+        config.setmGrayPressColor(getResources().getColor(R.color.gray_press));
 
-	private void initAppCrashHandler()
-	{
-		if (!ApkConstant.DEBUG)
-		{
-			CrashHandler crashHandler = CrashHandler.getInstance();
-			crashHandler.init(getApplicationContext());
-		}
-	}
+        SDLibrary.getInstance().setConfig(config);
+    }
 
-	private void initSettingModel()
-	{
-		// 插入成功或者数据库已经存在记录
-		SettingModelDao.insertOrCreate(new SettingModel());
-		mRuntimeConfig.updateIsCanLoadImage();
-		mRuntimeConfig.updateIsCanPushMessage();
-	}
+    private void addClassesNotFinishWhenLoginState0() {
+        mListClassNotFinishWhenLoginState0.add(MainActivity.class);
+    }
 
-	private void initBaiduMap()
-	{
-		BaiduMapManager.getInstance().init(this);
-	}
+    private void initAppCrashHandler() {
+        if (!ApkConstant.DEBUG) {
+            CrashHandler crashHandler = CrashHandler.getInstance();
+            crashHandler.init(getApplicationContext());
+        }
+    }
 
-	public static App getApplication()
-	{
-		return mApp;
-	}
+    private void initSettingModel() {
+        // 插入成功或者数据库已经存在记录
+        SettingModelDao.insertOrCreate(new SettingModel());
+        mRuntimeConfig.updateIsCanLoadImage();
+        mRuntimeConfig.updateIsCanPushMessage();
+    }
 
-	public void exitApp(boolean isBackground)
-	{
-		AppConfig.setRefId("");
-		SDActivityManager.getInstance().finishAllActivity();
-		SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
-		if (isBackground)
-		{
+    private void initBaiduMap() {
+        BaiduMapManager.getInstance().init(this);
+    }
 
-		} else
-		{
-			System.exit(0);
-		}
-	}
+    public static App getApplication() {
+        return mApp;
+    }
 
-	public void clearAppsLocalUserModel()
-	{
-		LocalUserModelDao.deleteAllModel();
-		AppConfig.setSessionId("");
-	}
+    public void exitApp(boolean isBackground) {
+        AppConfig.setRefId("");
+        SDActivityManager.getInstance().finishAllActivity();
+        SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
+        if (isBackground) {
 
-	public static String getStringById(int resId)
-	{
-		return getApplication().getString(resId);
-	}
+        } else {
+            System.exit(0);
+        }
+    }
 
-	@Override
-	public void onConnect(netType type)
-	{
-		mRuntimeConfig.updateIsCanLoadImage();
-	}
+    public void clearAppsLocalUserModel() {
+        LocalUserModelDao.deleteAllModel();
+        AppConfig.setSessionId("");
+    }
 
-	@Override
-	public void onDisConnect()
-	{
+    public static String getStringById(int resId) {
+        return getApplication().getString(resId);
+    }
 
-	}
+    @Override
+    public void onConnect(netType type) {
+        mRuntimeConfig.updateIsCanLoadImage();
+    }
 
-	@Override
-	public void onTerminate()
-	{
-		SDEventManager.unregister(this);
-		TANetworkStateReceiver.unRegisterNetworkStateReceiver(this);
-		TANetworkStateReceiver.removeRegisterObserver(this);
-		super.onTerminate();
-	}
+    @Override
+    public void onDisConnect() {
 
-	@Override
-	public void onEvent(SDBaseEvent event)
-	{
+    }
 
-	}
+    @Override
+    public void onTerminate() {
+        SDEventManager.unregister(this);
+        TANetworkStateReceiver.unRegisterNetworkStateReceiver(this);
+        TANetworkStateReceiver.removeRegisterObserver(this);
+        super.onTerminate();
+    }
 
-	@Override
-	public void onEventBackgroundThread(SDBaseEvent event)
-	{
+    @Override
+    public void onEvent(SDBaseEvent event) {
 
-	}
+    }
 
-	@Override
-	public void onEventAsync(SDBaseEvent event)
-	{
+    @Override
+    public void onEventBackgroundThread(SDBaseEvent event) {
 
-	}
+    }
 
-	@Override
-	public void onEventMainThread(SDBaseEvent event)
-	{
+    @Override
+    public void onEventAsync(SDBaseEvent event) {
 
-	}
+    }
+
+    @Override
+    public void onEventMainThread(SDBaseEvent event) {
+
+    }
 
 }

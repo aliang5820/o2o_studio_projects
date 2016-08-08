@@ -62,6 +62,7 @@ public class ApplyCityActivity extends BaseActivity implements AbsListView.OnScr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setmTitleType(Constant.TitleType.TITLE);
         setContentView(R.layout.act_apply_city);
         initTitle();
         personList = (ListView) findViewById(R.id.list_view);
