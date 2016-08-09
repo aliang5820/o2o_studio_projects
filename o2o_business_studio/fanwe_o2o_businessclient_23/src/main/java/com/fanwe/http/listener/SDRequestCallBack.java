@@ -3,7 +3,7 @@ package com.fanwe.http.listener;
 import com.alibaba.fastjson.JSON;
 import com.fanwe.library.utils.SDOtherUtil;
 import com.fanwe.library.utils.SDToast;
-import com.fanwe.model.BaseActModel;
+import com.fanwe.model.BaseCtlActModel;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 
@@ -51,8 +51,8 @@ public abstract class SDRequestCallBack<E> extends RequestCallBack<String> {
 
     public void showToast() {
         if (showToast) {
-            if (actModel instanceof BaseActModel) {
-                BaseActModel baseActModel = (BaseActModel) actModel;
+            if (actModel instanceof BaseCtlActModel) {
+                BaseCtlActModel baseActModel = (BaseCtlActModel) actModel;
                 SDToast.showToast(baseActModel.getInfo());
             }
         }

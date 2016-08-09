@@ -15,6 +15,7 @@ import com.fanwe.library.customview.SDSendValidateButton;
 import com.fanwe.library.dialog.SDDialogManager;
 import com.fanwe.library.title.SDTitleItem;
 import com.fanwe.library.utils.SDToast;
+import com.fanwe.model.BaseCtlActModel;
 import com.fanwe.model.BizUserCtlDoLoginActModel;
 import com.fanwe.model.LocalUserModel;
 import com.fanwe.model.RequestModel;
@@ -93,18 +94,12 @@ public class RegisterActivity extends TitleBaseActivity implements View.OnClickL
 
     public void onRegister(View view) {
         if (validateParams()) {
-            /*requestRegister();*/
-            // TODO 注册成功进入主页之前，需要判断是否已经申请加盟
-            if (true) {
-                //申请类别选择
-                startActivity(new Intent(mActivity, ApplyTypeActivity.class));
-            } else {
-                startActivity(new Intent(mActivity, MainActivity.class));
-            }
+            requestRegister();
         }
     }
 
     private boolean validateParams() {
+        mStrMobile = mEtMobile.getText().toString();
         mStrCode = mEtCode.getText().toString().trim();
         mStrPwd = mEt_pwd.getText().toString().trim();
         mStrPwdConfirm = mEt_pwd_confirm.getText().toString().trim();
@@ -122,11 +117,11 @@ public class RegisterActivity extends TitleBaseActivity implements View.OnClickL
             return false;
         }
 
-        if (mStrPwd.length() <= 6) {
+        if (mStrPwd.length() < 6) {
             SDToast.showToast("密码不可少于6位，请重新设置");
             return false;
         }
-        if (TextUtils.equals(mStrPwd, mStrPwdConfirm)) {
+        if (!TextUtils.equals(mStrPwd, mStrPwdConfirm)) {
             SDToast.showToast("两次密码输入不一致，请重新输入");
             return false;
         }
@@ -145,7 +140,7 @@ public class RegisterActivity extends TitleBaseActivity implements View.OnClickL
         }
 
         RequestModel model = new RequestModel();
-        model.putCtlAct("user", "send_app_sms");
+        model.putCtlAct("biz_user", "send_app_sms");
         model.put("account_mobile", mStrMobile);
 
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<Sms_send_sms_codeActModel>() {
@@ -179,7 +174,7 @@ public class RegisterActivity extends TitleBaseActivity implements View.OnClickL
      */
     private void requestRegister() {
         RequestModel model = new RequestModel();
-        model.putCtlAct("user", "app_register");
+        model.putCtlAct("biz_user", "app_register");
         model.put("account_mobile", mStrMobile);
         model.put("code", mStrCode);
         model.put("account_password", mStrPwd);
@@ -193,6 +188,7 @@ public class RegisterActivity extends TitleBaseActivity implements View.OnClickL
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 if (actModel.getStatus() == 1) {
+                    SDDialogManager.dismissProgressDialog();
                     dealRegisterSuccess(actModel);
                 }
             }
@@ -211,20 +207,16 @@ public class RegisterActivity extends TitleBaseActivity implements View.OnClickL
 
     protected void dealRegisterSuccess(BizUserCtlDoLoginActModel actModel) {
         LocalUserModel user = new LocalUserModel();
-        user.setAccount_name(actModel.getAccount_info().getAccount_name());
-        user.setAccount_password(actModel.getAccount_info().getAccount_password());
         user.setUser_id(actModel.getAccount_info().getAccount_id());
+        user.setAccount_name(actModel.getAccount_info().getAccount_mobile());
+        user.setAccount_password(actModel.getAccount_info().getAccount_password());
         App.getApp().setmLocalUser(user);
 
         // 保存账号
         AppConfig.setUserName(user.getAccount_name());
         // 注册成功进入主页之前，需要判断是否已经申请加盟
-        if (true) {
-            //申请类别选择
-            startActivity(new Intent(mActivity, ApplyTypeActivity.class));
-        } else {
-            startActivity(new Intent(mActivity, MainActivity.class));
-        }
+        //申请类别选择
+        startActivity(new Intent(mActivity, ApplyTypeActivity.class));
         finish();
     }
 

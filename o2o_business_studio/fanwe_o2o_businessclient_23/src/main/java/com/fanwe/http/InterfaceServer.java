@@ -89,7 +89,7 @@ public class InterfaceServer {
 
     private void printRequestUrl(RequestParams param) {
         if (ApkConstant.DEBUG) {
-            LogUtil.i(getRequestUrl(param));
+            LogUtil.e(getRequestUrl(param));
         }
     }
 

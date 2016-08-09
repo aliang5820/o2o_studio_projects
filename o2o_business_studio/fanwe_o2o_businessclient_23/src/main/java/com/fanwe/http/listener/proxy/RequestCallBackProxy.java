@@ -14,7 +14,7 @@ import com.fanwe.library.utils.AESUtil;
 import com.fanwe.library.utils.LogUtil;
 import com.fanwe.library.utils.SDBase64;
 import com.fanwe.library.utils.SDToast;
-import com.fanwe.model.BaseActModel;
+import com.fanwe.model.BaseCtlActModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.model.RequestModel.ResponseDataType;
 import com.fanwe.utils.JsonUtil;
@@ -38,7 +38,7 @@ public class RequestCallBackProxy extends RequestCallBack<String> {
 
     private RequestCallBack<String> mOriginalCallBack;
     private RequestModel mRequestModel;
-    private BaseActModel mBaseActModel;
+    private BaseCtlActModel mBaseActModel;
 
     public RequestCallBackProxy(RequestCallBack<String> originalCallBack, RequestModel model) {
         this.mOriginalCallBack = originalCallBack;
@@ -61,6 +61,10 @@ public class RequestCallBackProxy extends RequestCallBack<String> {
 
     private void beforeOnSuccessBack(ResponseInfo<String> responseInfo) {
         String content = responseInfo.result;
+        if (ApkConstant.DEBUG) {
+            LogUtils.e(getCtl() + "," + getAct() + ":" + content);
+        }
+
         if (!TextUtils.isEmpty(content)) {
             switch (mRequestModel.getmResponseDataType()) {
                 case ResponseDataType.BASE64:
@@ -86,7 +90,7 @@ public class RequestCallBackProxy extends RequestCallBack<String> {
                 content = content.replace(STRING_EMPTY_ARRAY, STRING_NULL);
             }
 
-            mBaseActModel = JsonUtil.json2Object(content, BaseActModel.class);
+            mBaseActModel = JsonUtil.json2Object(content, BaseCtlActModel.class);
             if (mBaseActModel != null) {
                 // 保存session
                 String session = mBaseActModel.getSess_id();
@@ -96,9 +100,6 @@ public class RequestCallBackProxy extends RequestCallBack<String> {
             }
         }
         responseInfo.result = content;
-        if (ApkConstant.DEBUG) {
-            LogUtils.w(getCtl() + "," + getAct() + ":" + content);
-        }
     }
 
     private String getAct() {

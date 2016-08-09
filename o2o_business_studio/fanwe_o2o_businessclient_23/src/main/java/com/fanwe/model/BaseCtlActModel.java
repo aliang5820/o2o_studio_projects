@@ -11,5 +11,6 @@ public class BaseCtlActModel {
     protected String ctl;
     protected int biz_login_status = -1;
     protected String page_title;
+    protected String ref_uid;
     protected int is_auth;
 }

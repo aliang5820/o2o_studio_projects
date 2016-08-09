@@ -2,7 +2,7 @@ package com.fanwe.constant;
 
 public class ApkConstant {
 
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
     //public static String SERVER_API_URL_MID = "o2o.fanwe.net";
     public static String SERVER_API_URL_MID = "120.24.186.128";

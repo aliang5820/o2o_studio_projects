@@ -85,7 +85,7 @@ public class InitActivity extends BaseActivity {
     private void dealLoginSuccess(BizUserCtlDoLoginActModel actModel) {
         if (actModel.getAccount_info() != null) {
             LocalUserModel user = new LocalUserModel();
-            user.setAccount_name(actModel.getAccount_info().getAccount_name());
+            user.setAccount_name(actModel.getAccount_info().getAccount_mobile());
             user.setAccount_password(actModel.getAccount_info().getAccount_password());
             App.getApp().setmLocalUser(user);
             //登录成功进入主页之前，需要判断是否已经申请加盟
