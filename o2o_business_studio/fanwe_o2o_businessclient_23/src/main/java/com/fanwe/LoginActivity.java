@@ -157,4 +157,8 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
         }
         finish();
     }
+
+    public void onRegister(View view) {
+        startActivity(new Intent(mActivity, RegisterActivity.class));
+    }
 }

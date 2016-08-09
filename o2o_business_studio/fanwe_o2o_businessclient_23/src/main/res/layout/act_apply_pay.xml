@@ -13,11 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_content"
+        android:textColor="@color/black"
         android:text="订单号：1234567890123" />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:layout_marginTop="10dp">
 
         <ImageView
@@ -25,28 +28,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/base_margin_10"
-            android:layout_centerVertical="true"
             android:src="@drawable/icon_bank" />
 
         <TextView
-            android:id="@+id/pay_money"
-            android:layout_width="match_parent"
+            android:id="@+id/pay_desc"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/img"
-            android:textSize="@dimen/text_size_content"
-            android:textColor="@color/red"
-            android:text="￥1000.00" />
+            android:layout_weight="1"
+            tools:text="省点网合伙人" />
 
         <TextView
-            android:id="@+id/pay_desc"
-            android:layout_width="match_parent"
+            android:id="@+id/pay_money"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/img"
-            android:layout_below="@+id/pay_money"
-            android:layout_marginTop="2dp"
-            android:textSize="@dimen/text_size_content"
-            tools:text="省点网合伙人" />
-    </RelativeLayout>
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_title"
+            android:text="￥1000.00" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/base_stroke_1px"
+        android:layout_marginTop="10dp"
+        android:background="@color/stroke_deep" />
+
+    <RadioGroup
+        android:id="@+id/payRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/wxPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="微信支付"/>
+
+        <RadioButton
+            android:id="@+id/aliPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="支付宝支付"/>
+    </RadioGroup>
 
     <View
         android:layout_width="match_parent"
@@ -55,15 +79,14 @@
         android:background="@color/stroke_deep" />
 
     <Button
-        android:id="@+id/confirmBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_marginTop="@dimen/base_margin_20"
         android:background="@drawable/selector_main_color_corner"
-        android:onClick="onConfirm"
+        android:onClick="onPay"
         android:padding="@dimen/base_padding_10"
-        android:text="微信支付"
+        android:text="支付"
         android:textColor="@color/white"
         android:textSize="14sp" />
 </LinearLayout>

@@ -1,92 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/bg_all"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:drawablePadding="@dimen/base_padding_10"
+        android:drawableTop="@drawable/login_icon"
+        android:gravity="center"
+        android:text="让赚钱更省事"
+        android:textSize="@dimen/text_size_title" />
 
     <LinearLayout
+        android:id="@+id/top"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_margin="15dp"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_marginTop="@dimen/base_margin_15"
+        android:background="@drawable/act_login_et_bg0"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/base_padding_15"
+        android:paddingRight="@dimen/base_padding_15">
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/act_login_et_bg0"
-            android:orientation="vertical"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <com.fanwe.library.customview.ClearEditText
+                    android:id="@+id/act_login_et_username"
                     android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical" >
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="管理员账号/门店账号"
+                    android:imeOptions="actionNext" />
 
-                    <com.fanwe.library.customview.ClearEditText
-                        android:id="@+id/act_login_et_username"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:hint="管理员账号/门店账号"
-                        android:imeOptions="actionNext" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/line_seperate" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="fill_parent"
-                    android:orientation="vertical" >
-
-                    <com.fanwe.library.customview.ClearEditText
-                        android:id="@+id/act_login_et_password"
-                        android:layout_width="match_parent"
-                        android:layout_height="fill_parent"
-                        android:background="@null"
-                        android:hint="密码"
-                        android:imeOptions="actionDone"
-                        android:inputType="textPassword"
-                        android:nextFocusDown="@+id/act_login_btn_login" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/line_seperate" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/line_seperate" />
             </LinearLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/act_login_btn_login"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/base_margin_10"
-            android:background="@drawable/selector_theme_color_corner"
-            android:padding="@dimen/base_padding_10"
-            android:text="登录"
-            android:textColor="@color/white"
-            android:textSize="@dimen/base_textsize_16" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical">
+
+                <com.fanwe.library.customview.ClearEditText
+                    android:id="@+id/act_login_et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:background="@null"
+                    android:hint="密码"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword"
+                    android:nextFocusDown="@+id/act_login_btn_login" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/line_seperate" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/middle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="忘记密码" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|end"
+            android:onClick="onRegister"
+            android:padding="@dimen/activity_horizontal_margin"
+            android:text="立即申请" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/act_login_btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/middle"
+        android:layout_marginTop="@dimen/base_margin_10"
+        android:background="@drawable/selector_theme_color_corner"
+        android:padding="@dimen/base_padding_10"
+        android:text="登录"
+        android:textColor="@color/white"
+        android:textSize="@dimen/base_textsize_16" />
+</RelativeLayout>

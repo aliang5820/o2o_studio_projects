@@ -3,7 +3,7 @@ package com.fanwe.constant;
 public class Constant {
 
     public enum TitleType {
-        TITLE_NONE, TITLE;
+        TITLE_NONE, TITLE
     }
 
     public static final class UserLoginState {
@@ -31,5 +31,16 @@ public class Constant {
         public static final int ORDER = 1;//订单奖励
         public static final int HHR = 2;//合伙人招募奖励
         public static final int HYD = 3;//会员店招募奖励
+    }
+
+    public static final class Pay {
+        /**
+         * 微信支付渠道
+         */
+        public static final String CHANNEL_WECHAT = "wx";
+        /**
+         * 支付支付渠道
+         */
+        public static final String CHANNEL_ALIPAY = "alipay";
     }
 }
