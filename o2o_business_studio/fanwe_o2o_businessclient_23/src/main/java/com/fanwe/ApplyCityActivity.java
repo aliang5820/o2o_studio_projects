@@ -26,11 +26,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fanwe.apply.City;
+import com.fanwe.apply.CommonModel;
 import com.fanwe.apply.DBHelper;
 import com.fanwe.apply.MyLetterListView;
 import com.fanwe.apply.PingYinUtil;
 import com.fanwe.businessclient.R;
 import com.fanwe.constant.Constant;
+import com.fanwe.http.InterfaceServer;
+import com.fanwe.http.listener.SDRequestCallBack;
+import com.fanwe.library.dialog.SDDialogManager;
+import com.fanwe.model.BizUserCtlDoLoginActModel;
+import com.fanwe.model.RequestModel;
+import com.fanwe.utils.LogUtil;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.ResponseInfo;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,9 +63,9 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
     private HashMap<String, Integer> alphaIndexer;// 存放存在的汉语拼音首字母和与之对应的列表位置
     private Handler handler;
     private OverlayThread overlayThread; // 显示首字母对话框
-    private ArrayList<City> allCity_lists; // 所有城市列表
-    private ArrayList<City> city_lists;// 城市列表
-    private ArrayList<City> city_result;
+    private List<City> allCity_lists; // 所有城市列表
+    private List<City> city_lists;// 城市列表
+    private List<City> city_result;
     private TextView tvNoResult;//没有搜索结果
     private City selectedCity;//已选择的城市
 
@@ -148,7 +157,6 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
         });
         initOverlay();
         cityInit();
-        setAdapter(allCity_lists);
     }
 
     private void initTitle() {
@@ -197,50 +205,15 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
     }
 
     private void cityInit() {
-        city_lists = getCityList();
-        allCity_lists.addAll(city_lists);
-    }
-
-    @SuppressWarnings("unchecked")
-    private ArrayList<City> getCityList() {
-        DBHelper dbHelper = new DBHelper(this);
-        ArrayList<City> list = new ArrayList<>();
-        try {
-            dbHelper.createDataBase();
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-            Cursor cursor = db.rawQuery("select * from city", null);
-            City city;
-            while (cursor.moveToNext()) {
-                city = new City(cursor.getString(1), cursor.getString(2));
-                list.add(city);
-            }
-            cursor.close();
-            db.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Collections.sort(list, comparator);
-        return list;
+        requestCityList();
     }
 
     @SuppressWarnings("unchecked")
     private void getResultCityList(String keyword) {
-        DBHelper dbHelper = new DBHelper(this);
-        try {
-            dbHelper.createDataBase();
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-            Cursor cursor = db.rawQuery(
-                    "select * from city where name like \"%" + keyword + "%\" or pinyin like \"%" + keyword + "%\"", null);
-            City city;
-            Log.e("info", "length = " + cursor.getCount());
-            while (cursor.moveToNext()) {
-                city = new City(cursor.getString(1), cursor.getString(2));
+        for(City city:allCity_lists) {
+            if(city.getShorthand().contains(keyword)) {
                 city_result.add(city);
             }
-            cursor.close();
-            db.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         Collections.sort(city_result, comparator);
     }
@@ -252,8 +225,8 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
     Comparator comparator = new Comparator<City>() {
         @Override
         public int compare(City lhs, City rhs) {
-            String a = lhs.getPinyi().substring(0, 1);
-            String b = rhs.getPinyi().substring(0, 1);
+            String a = lhs.getShorthand().substring(0, 1);
+            String b = rhs.getShorthand().substring(0, 1);
             int flag = a.compareTo(b);
             if (flag == 0) {
                 return a.compareTo(b);
@@ -270,9 +243,9 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
 
     private class ResultListAdapter extends BaseAdapter {
         private LayoutInflater inflater;
-        private ArrayList<City> results = new ArrayList<>();
+        private List<City> results = new ArrayList<>();
 
-        public ResultListAdapter(Context context, ArrayList<City> results) {
+        public ResultListAdapter(Context context, List<City> results) {
             inflater = LayoutInflater.from(context);
             this.results = results;
         }
@@ -333,11 +306,11 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
             String[] sections = new String[list.size()]; // 存放存在的汉语拼音首字母
             for (int i = 0; i < list.size(); i++) {
                 // 当前汉语拼音首字母
-                String currentStr = getAlpha(list.get(i).getPinyi());
+                String currentStr = getAlpha(list.get(i).getShorthand());
                 // 上一个汉语拼音首字母，如果不存在为" "
-                String previewStr = (i - 1) >= 0 ? getAlpha(list.get(i - 1).getPinyi()) : " ";
+                String previewStr = (i - 1) >= 0 ? getAlpha(list.get(i - 1).getShorthand()) : " ";
                 if (!previewStr.equals(currentStr)) {
-                    String name = getAlpha(list.get(i).getPinyi());
+                    String name = getAlpha(list.get(i).getShorthand());
                     alphaIndexer.put(name, i);
                     sections[i] = name;
                 }
@@ -383,8 +356,8 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
             }
 
             holder.name.setText(city.getName());
-            String currentStr = getAlpha(city.getPinyi());
-            String previewStr = (position - 1) >= 0 ? getAlpha(list.get(position - 1).getPinyi()) : " ";
+            String currentStr = getAlpha(city.getShorthand());
+            String previewStr = (position - 1) >= 0 ? getAlpha(list.get(position - 1).getShorthand()) : " ";
             if (!previewStr.equals(currentStr)) {
                 holder.alpha.setVisibility(View.VISIBLE);
                 holder.alpha.setText(currentStr);
@@ -483,7 +456,7 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
 
         if (mReady) {
             String name = allCity_lists.get(firstVisibleItem).getName();
-            String pinyin = allCity_lists.get(firstVisibleItem).getPinyi();
+            String pinyin = allCity_lists.get(firstVisibleItem).getShorthand();
             String text = PingYinUtil.converterToFirstSpell(pinyin).substring(0, 1).toUpperCase();
             overlay.setText(text);
             overlay.setVisibility(View.VISIBLE);
@@ -491,5 +464,41 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
             // 延迟一秒后执行，让overlay为不可见
             handler.postDelayed(overlayThread, 1000);
         }
+    }
+
+    /**
+     * 获取城市列表
+     */
+    private void requestCityList() {
+        RequestModel model = new RequestModel();
+        model.putCtlAct("biz_member", "get_city_list");
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<CommonModel>() {
+
+            @Override
+            public void onStart() {
+                SDDialogManager.showProgressDialog("请稍候...");
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (actModel.getStatus() == 1) {
+                    LogUtil.e("cityListSize：" + actModel.getCitylist().size());
+                    city_lists = actModel.getCitylist();
+                    Collections.sort(city_lists, comparator);
+                    allCity_lists.addAll(city_lists);
+                    setAdapter(allCity_lists);
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                SDDialogManager.dismissProgressDialog();
+            }
+        });
     }
 }
