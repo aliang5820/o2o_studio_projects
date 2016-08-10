@@ -9,25 +9,42 @@ import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.fanwe.application.App;
 import com.fanwe.businessclient.R;
 import com.fanwe.constant.Constant;
+import com.fanwe.event.EnumEventTag;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.listener.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
 import com.fanwe.library.utils.SDToast;
+import com.fanwe.model.ApplyPayModelCtlActModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.model.Sms_send_sms_codeActModel;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.view.annotation.ViewInject;
 import com.pingplusplus.android.Pingpp;
+import com.sunday.eventbus.SDEventManager;
 
 /**
  * Created by Edison on 2016/7/28.
  * 申请支付
  */
 public class ApplyPayActivity extends TitleBaseActivity {
+    @ViewInject(R.id.pay_desc)
     private TextView pay_desc;
+
+    @ViewInject(R.id.orderIdView)
+    private TextView orderIdView;
+
+    @ViewInject(R.id.pay_money)
+    private TextView pay_money;
+
+    @ViewInject(R.id.payRadioGroup)
     private RadioGroup payRadioGroup;
+
+    private long orderId;
+    private double price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +56,15 @@ public class ApplyPayActivity extends TitleBaseActivity {
 
     private void initView() {
         mTitle.setText("订单支付");
-        pay_desc = (TextView) findViewById(R.id.pay_desc);
-        payRadioGroup = (RadioGroup) findViewById(R.id.payRadioGroup);
     }
 
     private void initData() {
+        orderId = getIntent().getLongExtra(Constant.ExtraConstant.EXTRA_ID, -1);
+        orderIdView.setText(getString(R.string.apply_order_id, orderId));
+
+        price = getIntent().getLongExtra(Constant.ExtraConstant.EXTRA_MODEL, -1);
+        pay_money.setText("￥" + price);
+
         int applyType = getIntent().getIntExtra(Constant.ExtraConstant.EXTRA_TYPE, -1);
         if (applyType == Constant.Apply.HHR) {
             pay_desc.setText("省点网合伙人");
@@ -76,7 +97,7 @@ public class ApplyPayActivity extends TitleBaseActivity {
 
     //根据选择支付类型，获取订单
     public void onPay(View view) {
-        switch (payRadioGroup.getCheckedRadioButtonId()) {
+        /*switch (payRadioGroup.getCheckedRadioButtonId()) {
             case R.id.wxPay:
                 //微信支付
                 requestOrder(Constant.Pay.CHANNEL_WECHAT);
@@ -85,7 +106,10 @@ public class ApplyPayActivity extends TitleBaseActivity {
                 //支付宝支付
                 requestOrder(Constant.Pay.CHANNEL_ALIPAY);
                 break;
-        }
+        }*/
+        // TODO 目前默认支付成功，进入首页
+        SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
+        startActivity(new Intent(mActivity, MainActivity.class));
     }
 
     //显示支付信息
@@ -117,16 +141,18 @@ public class ApplyPayActivity extends TitleBaseActivity {
      */
     private void requestOrder(String payType) {
         RequestModel model = new RequestModel();
-        model.putCtlAct("pay", "orderPay");
-        model.put("account_mobile", "");
+        model.putCtlAct("biz_pay", "orderPay");
+        model.put("supplier_id", App.getApp().getmLocalUser().getUser_id());
+        model.put("order_id", orderId);
+        model.put("payType", payType);
 
-        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<Sms_send_sms_codeActModel>() {
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<ApplyPayModelCtlActModel>() {
 
             @Override
-            public void onSuccess(ResponseInfo<String> responseInfo) {
+            public void onSuccess(ApplyPayModelCtlActModel actModel) {
                 if (actModel.getStatus() > 0) {
                     //请求成功，进行 支付
-                    Pingpp.createPayment(mActivity, responseInfo.result);
+                    Pingpp.createPayment(mActivity, actModel.getCharge());
                 }
             }
 

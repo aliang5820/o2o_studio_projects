@@ -98,14 +98,13 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
     }
 
     private void requestLoginInterface() {
-        // TODO Auto-generated method stub
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_user", "dologin");
         model.put("account_name", mBiz_email);
         model.put("account_password", mBiz_pwd);
         model.put("device_token", UmengPushManager.getPushAgent().getRegistrationId());
 
-        SDRequestCallBack<BizUserCtlDoLoginActModel> handler = new SDRequestCallBack<BizUserCtlDoLoginActModel>() {
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<BizUserCtlDoLoginActModel>() {
             private Dialog nDialog;
 
             @Override
@@ -136,8 +135,7 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
             public void onStart() {
                 nDialog = SDDialogUtil.showLoading("登录中...");
             }
-        };
-        InterfaceServer.getInstance().requestInterface(model, handler);
+        });
     }
 
     private void dealLoginSuccess(AccountInfoModel accountInfoModel) {
@@ -150,12 +148,7 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
         // 保存账号
         AppConfig.setUserName(accountInfoModel.getAccount_mobile());
         //登录成功进入主页之前，需要判断是否已经申请加盟
-        if(true) {
-            //申请类别选择
-            startActivity(new Intent(mActivity, ApplyTypeActivity.class));
-        } else {
-            startActivity(new Intent(mActivity, MainActivity.class));
-        }
+        startActivity(new Intent(mActivity, MainActivity.class));
         finish();
     }
 

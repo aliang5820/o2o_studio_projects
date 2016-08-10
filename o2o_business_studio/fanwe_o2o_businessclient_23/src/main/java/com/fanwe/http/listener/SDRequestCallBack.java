@@ -1,5 +1,7 @@
 package com.fanwe.http.listener;
 
+import android.text.TextUtils;
+
 import com.alibaba.fastjson.JSON;
 import com.fanwe.library.utils.SDOtherUtil;
 import com.fanwe.library.utils.SDToast;
@@ -50,9 +52,9 @@ public abstract class SDRequestCallBack<E> extends RequestCallBack<String> {
     }
 
     public void showToast() {
-        if (showToast) {
-            if (actModel instanceof BaseCtlActModel) {
-                BaseCtlActModel baseActModel = (BaseCtlActModel) actModel;
+        if (showToast && actModel instanceof BaseCtlActModel) {
+            BaseCtlActModel baseActModel = (BaseCtlActModel) actModel;
+            if (!TextUtils.isEmpty(baseActModel.getInfo().trim())) {
                 SDToast.showToast(baseActModel.getInfo());
             }
         }

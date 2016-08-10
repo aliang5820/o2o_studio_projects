@@ -80,6 +80,7 @@
                         android:textSize="@dimen/text_size_content" />
 
                     <EditText
+                        android:id="@+id/storeName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_bg"
@@ -106,6 +107,7 @@
                         android:textSize="@dimen/text_size_content" />
 
                     <EditText
+                        android:id="@+id/address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_bg"
@@ -131,7 +133,8 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_content" />
 
-                    <EditText
+                    <Spinner
+                        android:id="@+id/spinner1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_drop_down"
@@ -157,7 +160,8 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_content" />
 
-                    <EditText
+                    <Spinner
+                        android:id="@+id/spinner2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_drop_down"
@@ -184,6 +188,7 @@
                         android:textSize="@dimen/text_size_content" />
 
                     <EditText
+                        android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_bg"
@@ -194,6 +199,7 @@
                 </LinearLayout>
 
                 <RadioGroup
+                    android:id="@+id/radioGroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="76dp"
@@ -202,14 +208,17 @@
                     android:orientation="horizontal">
 
                     <RadioButton
+                        android:id="@+id/radio1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="先生"
+                        android:checked="true"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_content" />
 
                     <RadioButton
+                        android:id="@+id/radio2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -218,6 +227,7 @@
                         android:textSize="@dimen/text_size_content" />
 
                     <RadioButton
+                        android:id="@+id/radio3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -243,11 +253,13 @@
                         android:textSize="@dimen/text_size_content" />
 
                     <EditText
+                        android:id="@+id/phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_bg"
                         android:hint="请输入绑定手机号"
                         android:padding="@dimen/base_padding_10"
+                        android:inputType="phone"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_content" />
                 </LinearLayout>
@@ -278,6 +290,7 @@
         android:orientation="horizontal">
 
         <CheckBox
+            android:id="@+id/isAgree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp" />

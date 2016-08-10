@@ -10,11 +10,12 @@
     android:paddingRight="@dimen/activity_horizontal_margin">
 
     <TextView
+        android:id="@+id/orderIdView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_content"
         android:textColor="@color/black"
-        android:text="订单号：1234567890123" />
+        android:text="订单号：" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,17 +60,18 @@
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
         <RadioButton
-            android:id="@+id/wxPay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="微信支付"/>
-
-        <RadioButton
             android:id="@+id/aliPay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="支付宝支付"/>
+
+        <RadioButton
+            android:id="@+id/wxPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/base_margin_20"
+            android:text="微信支付"/>
     </RadioGroup>
 
     <View
@@ -85,7 +87,6 @@
         android:layout_marginTop="@dimen/base_margin_20"
         android:background="@drawable/selector_main_color_corner"
         android:onClick="onPay"
-        android:padding="@dimen/base_padding_10"
         android:text="支付"
         android:textColor="@color/white"
         android:textSize="14sp" />

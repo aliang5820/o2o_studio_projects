@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="apply_pay_number">订单号：%s</string>
+    <string name="apply_order_id">订单号：%s</string>
 </resources>
