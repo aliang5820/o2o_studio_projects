@@ -2,28 +2,14 @@ package com.fanwe.model;
 
 import java.util.List;
 
+import lombok.Data;
+
 /**
  * Created by Edison on 2016/8/1.
  */
-public class MediaRewardPageModel<T> extends BaseActModel {
-
-    private PageModel page = null;
-
-    private List<T> item = null;
-
-    public PageModel getPage() {
-        return page;
-    }
-
-    public void setPage(PageModel page) {
-        this.page = page;
-    }
-
-    public List<T> getItem() {
-        return item;
-    }
-
-    public void setItem(List<T> item) {
-        this.item = item;
-    }
+@Data
+public class MediaRewardPageModel extends BaseActModel {
+    private PageModel page;
+    private double total_num;
+    private List<MediaRewardItemModel> data_list;
 }

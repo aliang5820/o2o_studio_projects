@@ -86,7 +86,7 @@ public class ApplyHYDActivity extends TitleBaseActivity {
     }
 
     public void onConfirm(View view) {
-        //申请合伙人
+        //申请
         requestRole();
     }
 
@@ -186,7 +186,6 @@ public class ApplyHYDActivity extends TitleBaseActivity {
             @Override
             public void onSuccess(ApplyServiceTypeCtlActModel actModel) {
                 if (!SDInterfaceUtil.dealactModel(actModel, null)) {
-                    SDToast.showToast(actModel.getInfo());
                     switch (actModel.getStatus()) {
                         case 0:
                             break;
@@ -266,13 +265,12 @@ public class ApplyHYDActivity extends TitleBaseActivity {
             @Override
             public void onFinish() {
                 SDDialogManager.dismissProgressDialog();
-
             }
 
             @Override
             public void onSuccess(ApplyOrderCtlActModel actModel) {
+                SDDialogManager.dismissProgressDialog();
                 if (!SDInterfaceUtil.dealactModel(actModel, null)) {
-                    SDToast.showToast(actModel.getInfo());
                     switch (actModel.getStatus()) {
                         case 0:
                             break;

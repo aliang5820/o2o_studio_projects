@@ -89,14 +89,18 @@ public class InterfaceServer {
         return new RequestCallBackProxy(handler, model);
     }
 
-    private void printRequestUrl(RequestParams param) {
+    private void printRequestUrl(String param) {
         if (ApkConstant.DEBUG) {
             String url = getRequestUrl(param);
             LogUtil.e(url);
         }
     }
 
-    private String getRequestUrl(RequestParams param) {
+    private String getRequestUrl(String param) {
+        return ApkConstant.getServerApiUrl() + "?requestData=" + param;
+    }
+
+    /*private String getRequestUrl(RequestParams param) {
         StringBuilder sb = new StringBuilder(ApkConstant.getServerApiUrl() + "?");
         if (param != null) {
             List<NameValuePair> listParam = param.getQueryStringParams();
@@ -114,7 +118,7 @@ public class InterfaceServer {
             }
         }
         return sb.toString();
-    }
+    }*/
 
     private RequestParams getRequestParams(RequestModel model) {
         RequestParams requestParams = new RequestParams();
@@ -124,6 +128,8 @@ public class InterfaceServer {
         if (data != null) {
             String requestData = null;
             String json = JsonUtil.object2Json(data);
+            //打印请求数据
+            printRequestUrl(json);
 
             switch (model.getRequestDataType()) {
                 case RequestDataType.BASE64:
@@ -144,7 +150,6 @@ public class InterfaceServer {
             String act = String.valueOf(data.get("act"));
             requestParams.addQueryStringParameter("ctl", ctl);
             requestParams.addQueryStringParameter("act", act);
-            DebugHelper.getInstance().offerUrl(ctl, act, getRequestUrl(requestParams));
         }
         if (dataFile != null) {
             for (Entry<String, File> itemFile : dataFile.entrySet()) {
@@ -165,8 +170,6 @@ public class InterfaceServer {
                 requestParams.addBodyParameterMulti(key, file, mimeType);
             }
         }
-
-        printRequestUrl(requestParams);
         return requestParams;
     }
 

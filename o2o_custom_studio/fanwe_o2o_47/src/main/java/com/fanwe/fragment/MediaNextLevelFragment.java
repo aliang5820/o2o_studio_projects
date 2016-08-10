@@ -1,18 +1,22 @@
 package com.fanwe.fragment;
 
 import android.app.Dialog;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fanwe.adapter.MediaNextLevelAdapter;
+import com.fanwe.constant.Constant;
+import com.fanwe.dao.LocalUserModelDao;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
 import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.library.utils.SDToast;
-import com.fanwe.model.MediaNextLevelCtlItemModel;
+import com.fanwe.model.LocalUserModel;
+import com.fanwe.model.MediaNextLevelItemModel;
 import com.fanwe.model.MediaNextLevelPageModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.o2o.newo2o.R;
@@ -30,12 +34,20 @@ import java.util.List;
 public class MediaNextLevelFragment extends BaseFragment {
     private PullToRefreshListView mList;
     private TextView mTvError;
-
+    private int level;
     private int mCurrentPage = 1;
     private int mTotalPage = 0;
 
-    private List<MediaNextLevelCtlItemModel> mListModel;
+    private List<MediaNextLevelItemModel> mListModel;
     private MediaNextLevelAdapter mAdapter;
+
+    public static MediaNextLevelFragment getInstance(int type) {
+        MediaNextLevelFragment fragment = new MediaNextLevelFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constant.ExtraConstant.EXTRA_TYPE, type);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
 
     @Override
     protected int onCreateContentView() {
@@ -52,6 +64,7 @@ public class MediaNextLevelFragment extends BaseFragment {
         register(getView());
         bindDefaultData();
         initPullView();
+        level = getArguments().getInt(Constant.ExtraConstant.EXTRA_TYPE);
     }
 
     private void bindDefaultData() {
@@ -85,7 +98,7 @@ public class MediaNextLevelFragment extends BaseFragment {
 
     @Override
     protected void onRefreshData() {
-        mCurrentPage = 1;
+        mCurrentPage = 0;
         requestNextLevelActIndex(false);
     }
 
@@ -105,11 +118,15 @@ public class MediaNextLevelFragment extends BaseFragment {
 
     //获取下线数据
     protected void requestNextLevelActIndex(final boolean isLoadMore) {
+        LocalUserModel localUserModel = LocalUserModelDao.queryModel();
+
         final RequestModel model = new RequestModel();
-        model.putCtl("biz_dealr");
-        model.putAct("index");
+        model.putCtl("media");
+        model.putAct("get_extension_class");
         model.put("page", mCurrentPage);
-        SDRequestCallBack<MediaNextLevelPageModel> handler = new SDRequestCallBack<MediaNextLevelPageModel>() {
+        model.put("level", level);
+        model.put("user_id", localUserModel.getUser_id());
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<MediaNextLevelPageModel>() {
             private Dialog nDialog;
 
             @Override
@@ -124,34 +141,18 @@ public class MediaNextLevelFragment extends BaseFragment {
             @Override
             public void onSuccess(MediaNextLevelPageModel actModel) {
                 if (!SDInterfaceUtil.isActModelNull(actModel)) {
-                    switch (actModel.getStatus()) {
-                        case 0:
-                            SDToast.showToast(actModel.getInfo());
-                            break;
-                        case 1:
-                            if (actModel.getPage() != null) {
-                                mCurrentPage = actModel.getPage().getPage();
-                                mTotalPage = actModel.getPage().getPage_total();
+                    if (actModel.getStatus() == 1) {
+                        if (actModel.getPage() != null) {
+                            mCurrentPage = actModel.getPage().getPage();
+                            mTotalPage = actModel.getPage().getPage_total();
+                        }
+                        if (actModel.getRelationList() != null && actModel.getRelationList().size() > 0) {
+                            if (!isLoadMore) {
+                                mListModel.clear();
                             }
-                            if (actModel.getItem() != null && actModel.getItem().size() > 0) {
-                                if (!isLoadMore) {
-                                    mListModel.clear();
-                                }
-                                mListModel.addAll(actModel.getItem());
-                                mAdapter.updateData(mListModel);
-                            } else {
-                                //SDToast.showToast("未找到数据!");
-                                //TODO 测试数据
-                                List<MediaNextLevelCtlItemModel> list = new ArrayList<>();
-                                MediaNextLevelCtlItemModel itemModel = new MediaNextLevelCtlItemModel();
-                                MediaNextLevelCtlItemModel itemModel1 = new MediaNextLevelCtlItemModel();
-                                MediaNextLevelCtlItemModel itemModel2 = new MediaNextLevelCtlItemModel();
-                                list.add(itemModel);
-                                list.add(itemModel1);
-                                list.add(itemModel2);
-                                mListModel.addAll(list);
-                                mAdapter.updateData(mListModel);
-                            }
+                            mListModel.addAll(actModel.getRelationList());
+                            mAdapter.updateData(mListModel);
+                        }
                     }
                 }
 
@@ -161,8 +162,7 @@ public class MediaNextLevelFragment extends BaseFragment {
             public void onStart() {
                 nDialog = SDDialogManager.showProgressDialog("加载中...");
             }
-        };
-        InterfaceServer.getInstance().requestInterface(model, handler);
+        });
     }
 
     protected void toggleEmptyMsg() {

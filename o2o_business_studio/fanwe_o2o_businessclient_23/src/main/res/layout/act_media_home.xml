@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_all">
 
     <ScrollView
@@ -34,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/user_qr_code"
                     android:layout_toRightOf="@+id/user_icon"
-                    android:text="维森么. 我帅德.布耀布耀德"
+                    android:text="我帅德.布耀布耀德"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_button" />
 
@@ -106,8 +107,9 @@
                     android:background="@color/stroke_deep" />
 
                 <TextView
+                    android:id="@+id/label1"
                     style="@style/MediaTableItemStyle"
-                    android:text="20" />
+                    tools:text="20" />
 
                 <View
                     android:layout_width="@dimen/base_stroke_1px"
@@ -124,8 +126,9 @@
                     android:background="@color/stroke_deep" />
 
                 <TextView
+                    android:id="@+id/label2"
                     style="@style/MediaTableItemStyle"
-                    android:text="￥3100" />
+                    tools:text="￥3100" />
             </LinearLayout>
 
             <View style="@style/H_LineStyle" />
@@ -168,8 +171,9 @@
                     android:background="@color/stroke_deep" />
 
                 <TextView
+                    android:id="@+id/label3"
                     style="@style/MediaTableItemStyle"
-                    android:text="1" />
+                    tools:text="1" />
 
             </LinearLayout>
 
@@ -191,8 +195,9 @@
                     android:background="@color/stroke_deep" />
 
                 <TextView
+                    android:id="@+id/label4"
                     style="@style/MediaTableItemStyle"
-                    android:text="2" />
+                    tools:text="2" />
 
             </LinearLayout>
 
@@ -213,8 +218,9 @@
                     android:background="@color/stroke_deep" />
 
                 <TextView
+                    android:id="@+id/label5"
                     style="@style/MediaTableItemStyle"
-                    android:text="3" />
+                    tools:text="3" />
 
             </LinearLayout>
 
@@ -233,9 +239,10 @@
                     android:text="本月订单奖励" />
 
                 <TextView
+                    android:id="@+id/label6"
                     style="@style/MineMenuItemStyle"
                     android:layout_width="wrap_content"
-                    android:text="￥854.00" />
+                    tools:text="￥854.00" />
             </LinearLayout>
 
             <View style="@style/H_LineStyle" />
@@ -253,9 +260,10 @@
                     android:text="本月会员店招募奖励" />
 
                 <TextView
+                    android:id="@+id/label7"
                     style="@style/MineMenuItemStyle"
                     android:layout_width="wrap_content"
-                    android:text="￥154.00" />
+                    tools:text="￥154.00" />
             </LinearLayout>
 
             <View style="@style/H_LineStyle" />
@@ -273,9 +281,10 @@
                     android:text="本月合伙人招募奖励" />
 
                 <TextView
+                    android:id="@+id/label8"
                     style="@style/MineMenuItemStyle"
                     android:layout_width="wrap_content"
-                    android:text="￥24.00" />
+                    tools:text="￥24.00" />
             </LinearLayout>
 
             <View style="@style/H_LineStyle" />
@@ -297,10 +306,11 @@
                     android:text="已提现佣金" />
 
                 <TextView
+                    android:id="@+id/label9"
                     style="@style/MineMenuItemStyle"
                     android:layout_width="wrap_content"
                     android:drawableRight="@null"
-                    android:text="￥24.00" />
+                    tools:text="￥24.00" />
             </LinearLayout>
 
             <View style="@style/H_LineStyle" />
@@ -317,13 +327,15 @@
                     android:text="未提现佣金" />
 
                 <TextView
+                    android:id="@+id/label10"
                     style="@style/MineMenuItemStyle"
                     android:layout_width="wrap_content"
                     android:drawableRight="@null"
-                    android:text="￥24.00" />
+                    tools:text="￥24.00" />
             </LinearLayout>
 
             <View style="@style/H_LineStyle" />
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+</FrameLayout>

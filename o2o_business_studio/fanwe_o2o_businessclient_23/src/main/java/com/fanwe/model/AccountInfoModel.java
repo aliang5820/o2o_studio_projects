@@ -9,7 +9,8 @@ import lombok.Data;
 @Data
 public class AccountInfoModel {
     private String account_id;
-    private String account_mobile;
+    private String supplier_id;
+    private String account_name;
     private String account_password;
     private String qr_code;//推广二维码内容
 }

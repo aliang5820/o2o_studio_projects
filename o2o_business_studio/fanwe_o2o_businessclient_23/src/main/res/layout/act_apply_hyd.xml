@@ -277,7 +277,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:background="@drawable/selector_main_color_corner"
-        android:onClick="onConfirm"
+        android:onClick="onConfirm1"
         android:padding="@dimen/base_padding_10"
         android:text="提交"
         android:textColor="@color/white"

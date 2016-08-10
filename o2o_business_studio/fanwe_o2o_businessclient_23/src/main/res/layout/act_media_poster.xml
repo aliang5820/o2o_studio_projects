@@ -11,11 +11,11 @@
         android:src="@drawable/media_poster_bg"/>
 
     <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:id="@+id/img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_gravity="left|bottom"
-        android:src="@drawable/qr_code"/>
+        android:layout_gravity="left|bottom"/>
 </FrameLayout>

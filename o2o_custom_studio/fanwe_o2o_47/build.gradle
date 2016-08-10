@@ -45,4 +45,6 @@ dependencies {
     compile project(':library_pay_unionpay')
     compile 'com.android.support:design:24.0.0'
     compile 'com.android.support:appcompat-v7:24.0.0'
+    provided 'org.projectlombok:lombok:1.16.6'
+    //get/set自动工具
 }

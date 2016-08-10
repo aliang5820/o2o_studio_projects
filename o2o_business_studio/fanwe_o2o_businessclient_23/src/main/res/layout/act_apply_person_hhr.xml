@@ -43,6 +43,7 @@
                     android:textSize="@dimen/text_size_content" />
 
                 <EditText
+                    android:id="@+id/personName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_bg"
@@ -53,6 +54,7 @@
             </LinearLayout>
 
             <RadioGroup
+                android:id="@+id/personRadioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/base_margin_10"
@@ -61,14 +63,17 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/personRadio1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="先生"
+                    android:checked="true"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_content" />
 
                 <RadioButton
+                    android:id="@+id/personRadio2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -77,6 +82,7 @@
                     android:textSize="@dimen/text_size_content" />
 
                 <RadioButton
+                    android:id="@+id/personRadio3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -102,6 +108,7 @@
                     android:textSize="@dimen/text_size_content" />
 
                 <EditText
+                    android:id="@+id/personPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_bg"
@@ -121,7 +128,7 @@
         android:layout_marginBottom="@dimen/base_margin_10"
         android:layout_marginTop="@dimen/base_margin_10"
         android:background="@drawable/selector_main_color_corner"
-        android:onClick="onConfirm"
+        android:onClick="onConfirm2"
         android:padding="@dimen/base_padding_10"
         android:text="提交"
         android:textColor="@color/white"
@@ -133,6 +140,7 @@
         android:gravity="center"
         android:orientation="horizontal">
         <CheckBox
+            android:id="@+id/personIsAgree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"/>

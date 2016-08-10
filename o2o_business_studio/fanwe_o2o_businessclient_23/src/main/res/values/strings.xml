@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="apply_order_id">订单号：%s</string>
+    <string name="money">￥%s</string>
+    <string name="number">%s</string>
 </resources>

@@ -1,29 +1,38 @@
 package com.fanwe.fragment;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fanwe.adapter.MediaRewardAdapter;
+
 import com.fanwe.constant.Constant;
+import com.fanwe.dao.LocalUserModelDao;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
 import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.library.utils.SDToast;
-import com.fanwe.model.MediaRewardCtlItemModel;
+import com.fanwe.model.LocalUserModel;
+import com.fanwe.model.MediaRewardItemModel;
 import com.fanwe.model.MediaRewardPageModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.o2o.newo2o.R;
 import com.fanwe.utils.SDInterfaceUtil;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Edison on 2016/7/31.
@@ -31,16 +40,30 @@ import java.util.List;
  */
 public class MediaRewardFragment extends BaseFragment {
     private PullToRefreshListView mList;
-    private TextView mTvError, reward_total_money;
-    private int mCurrentPage = 1;
+    private TextView mTvError;
+
+    private int mCurrentPage = 0;
     private int mTotalPage = 0;
 
-    private List<MediaRewardCtlItemModel> mListModel;
+    private List<MediaRewardItemModel> mListModel;
     private MediaRewardAdapter mAdapter;
-    /*private List<MediaNextLevelCtlItemModel> mListModel;
+    /*private List<MediaNextLevelItemModel> mListModel;
     private MediaNextLevelAdapter mAdapter;*/
     private int type;
     private View reward_layout, reward_order_layout;
+    private int beginY, beginM, beginD, endY, endM, endD;
+
+    @ViewInject(R.id.beginDate)
+    private TextView beginDate;
+
+    @ViewInject(R.id.endDate)
+    private TextView endDate;
+
+    @ViewInject(R.id.reward_total_money_tip)
+    private TextView reward_total_money_tip;
+
+    @ViewInject(R.id.reward_total_money)
+    private TextView reward_total_money;
 
     public static MediaRewardFragment getInstance(int type) {
         MediaRewardFragment fragment = new MediaRewardFragment();
@@ -58,10 +81,12 @@ public class MediaRewardFragment extends BaseFragment {
     private void register(View view) {
         mList = (PullToRefreshListView) view.findViewById(R.id.list);
         mTvError = (TextView) view.findViewById(R.id.tv_error);
-        reward_total_money = (TextView) view.findViewById(R.id.reward_total_money);
 
         reward_layout = findViewById(R.id.reward_layout);
         reward_order_layout = findViewById(R.id.reward_order_layout);
+
+        beginDate.setOnClickListener(this);
+        endDate.setOnClickListener(this);
     }
 
     @Override
@@ -69,30 +94,77 @@ public class MediaRewardFragment extends BaseFragment {
         register(getView());
         bindDefaultData();
         initPullView();
+        initDate();
+    }
+
+    private void initDate() {
+        //初始化Calendar日历对象
+        Calendar calendar = Calendar.getInstance(Locale.CHINA);
+        Date date = new Date(); //获取当前日期Date对象
+        calendar.setTime(date);////为Calendar对象设置时间为当前日期
+
+        beginY = calendar.get(Calendar.YEAR); //获取Calendar对象中的年
+        beginM = calendar.get(Calendar.MONTH);//获取Calendar对象中的月
+        beginD = calendar.get(Calendar.DAY_OF_MONTH);//获取这个月的第几天
+
+        endY = calendar.get(Calendar.YEAR); //获取Calendar对象中的年
+        endM = calendar.get(Calendar.MONTH);//获取Calendar对象中的月
+        endD = calendar.get(Calendar.DAY_OF_MONTH);//获取这个月的第几天
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.beginDate:
+                /**
+                 * 构造函数原型：
+                 * public DatePickerDialog (Context context, DatePickerDialog.OnDateSetListener callBack,
+                 * int year, int monthOfYear, int dayOfMonth)
+                 * content组件运行Activity，
+                 * DatePickerDialog.OnDateSetListener：选择日期事件
+                 * year：当前组件上显示的年，monthOfYear：当前组件上显示的月，dayOfMonth：当前组件上显示的第几天
+                 *
+                 */
+                DatePickerDialog beginPicker = new DatePickerDialog(getContext(), beginDateListener, beginY, beginM, beginD);
+                beginPicker.show();
+                break;
+            case R.id.endDate:
+                /**
+                 * 构造函数原型：
+                 * public DatePickerDialog (Context context, DatePickerDialog.OnDateSetListener callBack,
+                 * int year, int monthOfYear, int dayOfMonth)
+                 * content组件运行Activity，
+                 * DatePickerDialog.OnDateSetListener：选择日期事件
+                 * year：当前组件上显示的年，monthOfYear：当前组件上显示的月，dayOfMonth：当前组件上显示的第几天
+                 *
+                 */
+                DatePickerDialog endPicker = new DatePickerDialog(getContext(), endDateListener, endY, endM, endD);
+                endPicker.show();
+                break;
+        }
     }
 
     private void bindDefaultData() {
         type = getArguments().getInt(Constant.ExtraConstant.EXTRA_TYPE);
         switch (type) {
             case Constant.Reward.ORDER:
-                reward_total_money.setText("订单奖励总额：￥688");
+                reward_total_money_tip.setText("订单奖励总额：");
                 reward_layout.setVisibility(View.GONE);
                 break;
             case Constant.Reward.HHR:
-                reward_total_money.setText("合伙人招募奖励总额：￥788");
+                reward_total_money_tip.setText("合伙人招募奖励总额：");
                 reward_order_layout.setVisibility(View.GONE);
-                ((TextView) reward_layout.findViewById(R.id.label1)).setText("合伙人昵称");
+                ((TextView) reward_layout.findViewById(R.id.labelTitle)).setText("合伙人昵称");
                 break;
             case Constant.Reward.HYD:
-                reward_total_money.setText("会员店招募奖励总额：￥888");
+                reward_total_money_tip.setText("会员店招募奖励总额：");
                 reward_order_layout.setVisibility(View.GONE);
-                ((TextView) reward_layout.findViewById(R.id.label1)).setText("会员店");
+                ((TextView) reward_layout.findViewById(R.id.labelTitle)).setText("会员店");
                 break;
         }
 
         mListModel = new ArrayList<>();
         mAdapter = new MediaRewardAdapter(mListModel, getActivity(), type);
-        //mAdapter = new MediaNextLevelAdapter(mListModel, getActivity());
         mList.setAdapter(mAdapter);
         mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -121,7 +193,7 @@ public class MediaRewardFragment extends BaseFragment {
 
     @Override
     protected void onRefreshData() {
-        mCurrentPage = 1;
+        mCurrentPage = 0;
         requestNextLevelActIndex(false);
     }
 
@@ -141,11 +213,27 @@ public class MediaRewardFragment extends BaseFragment {
 
     //获取下线数据
     protected void requestNextLevelActIndex(final boolean isLoadMore) {
+        LocalUserModel localUserModel = LocalUserModelDao.queryModel();
+
         final RequestModel model = new RequestModel();
-        model.putCtl("biz_dealr");
-        model.putAct("index");
-        model.put("page", mCurrentPage);
-        SDRequestCallBack<MediaRewardPageModel<MediaRewardCtlItemModel>> handler = new SDRequestCallBack<MediaRewardPageModel<MediaRewardCtlItemModel>>() {
+        switch (type) {
+            case Constant.Reward.ORDER:
+                model.putCtl("media");
+                model.putAct("get_order_data");
+                break;
+            case Constant.Reward.HHR:
+                model.putCtl("media");
+                model.putAct("get_partner_data");
+                break;
+            case Constant.Reward.HYD:
+                model.putCtl("media");
+                model.putAct("get_memberStore_data");
+                break;
+        }
+        model.put("user_id", localUserModel.getUser_id());
+        model.put("page", mCurrentPage);//请求页码
+        model.put("limit", 20);//显示条数
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<MediaRewardPageModel>() {
             private Dialog nDialog;
 
             @Override
@@ -160,45 +248,29 @@ public class MediaRewardFragment extends BaseFragment {
             @Override
             public void onSuccess(MediaRewardPageModel actModel) {
                 if (!SDInterfaceUtil.isActModelNull(actModel)) {
-                    switch (actModel.getStatus()) {
-                        case 0:
-                            SDToast.showToast(actModel.getInfo());
-                            break;
-                        case 1:
-                            if (actModel.getPage() != null) {
-                                mCurrentPage = actModel.getPage().getPage();
-                                mTotalPage = actModel.getPage().getPage_total();
+                    if (actModel.getStatus() == 1) {
+                        if (actModel.getPage() != null) {
+                            mCurrentPage = actModel.getPage().getPage();
+                            mTotalPage = actModel.getPage().getPage_total();
+                        }
+
+                        if (actModel.getData_list() != null && actModel.getData_list().size() > 0) {
+                            if (!isLoadMore) {
+                                mListModel.clear();
                             }
-                            if (actModel.getItem() != null && actModel.getItem().size() > 0) {
-                                if (!isLoadMore) {
-                                    mListModel.clear();
-                                }
-                                mListModel.addAll(actModel.getItem());
-                                mAdapter.updateData(mListModel);
-                            } else {
-                                //SDToast.showToast("未找到数据!");
-                                //TODO 测试奖励数据
-                                List<MediaRewardCtlItemModel> list = new ArrayList<>();
-                                MediaRewardCtlItemModel itemModel = new MediaRewardCtlItemModel();
-                                MediaRewardCtlItemModel itemModel1 = new MediaRewardCtlItemModel();
-                                MediaRewardCtlItemModel itemModel2 = new MediaRewardCtlItemModel();
-                                list.add(itemModel);
-                                list.add(itemModel1);
-                                list.add(itemModel2);
-                                mListModel.addAll(list);
-                                mAdapter.updateData(mListModel);
-                            }
+                            mListModel.addAll(actModel.getData_list());
+                            mAdapter.updateData(mListModel);
+                        }
+                        reward_total_money.setText(getContext().getString(R.string.money, actModel.getTotal_num()));
                     }
                 }
-
             }
 
             @Override
             public void onStart() {
                 nDialog = SDDialogManager.showProgressDialog("加载中...");
             }
-        };
-        InterfaceServer.getInstance().requestInterface(model, handler);
+        });
     }
 
     protected void toggleEmptyMsg() {
@@ -213,4 +285,39 @@ public class MediaRewardFragment extends BaseFragment {
         }
     }
 
+
+    private DatePickerDialog.OnDateSetListener beginDateListener = new DatePickerDialog.OnDateSetListener() {
+        /**params：view：该事件关联的组件
+         * params：myyear：当前选择的年
+         * params：monthOfYear：当前选择的月
+         * params：dayOfMonth：当前选择的日
+         */
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            //修改year、month、day的变量值，以便以后单击按钮时，DatePickerDialog上显示上一次修改后的值
+            beginY = year;
+            beginM = monthOfYear;
+            beginD = dayOfMonth;
+            //更新日期
+            beginDate.setText(beginY + "-" + (beginM + 1) + "-" + beginD);
+        }
+
+    };
+
+    private DatePickerDialog.OnDateSetListener endDateListener = new DatePickerDialog.OnDateSetListener() {
+        /**params：view：该事件关联的组件
+         * params：myyear：当前选择的年
+         * params：monthOfYear：当前选择的月
+         * params：dayOfMonth：当前选择的日
+         */
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            //修改year、month、day的变量值，以便以后单击按钮时，DatePickerDialog上显示上一次修改后的值
+            endY = year;
+            endM = monthOfYear;
+            endD = dayOfMonth;
+            //更新日期
+            endDate.setText(endY + "-" + (endM + 1) + "-" + endD);
+        }
+    };
 }

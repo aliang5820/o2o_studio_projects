@@ -32,7 +32,7 @@
                 android:id="@+id/user_name"
                 style="@style/MediaNextLevelItemStyle"
                 android:layout_weight="1"
-                android:text="维森么. 我帅德.布耀布耀德" />
+                android:text="nickName" />
         </LinearLayout>
 
         <LinearLayout

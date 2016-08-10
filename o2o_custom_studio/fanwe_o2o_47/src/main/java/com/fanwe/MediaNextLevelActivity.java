@@ -9,10 +9,14 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.fanwe.constant.Constant;
+import com.fanwe.dao.LocalUserModelDao;
 import com.fanwe.fragment.MediaNextLevelFragment;
+import com.fanwe.model.LocalUserModel;
 import com.fanwe.o2o.newo2o.R;
+import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +26,9 @@ import java.util.List;
  * 我的下级
  */
 public class MediaNextLevelActivity extends BaseActivity {
+
+    @ViewInject(R.id.user_name)
+    private TextView user_name;
 
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
     //private List<View> mViewList = new ArrayList<>();//页卡视图集合
@@ -46,9 +53,9 @@ public class MediaNextLevelActivity extends BaseActivity {
         mViewList.add(mInflater.inflate(R.layout.act_apply_hyd, mTabLayout, false));//页卡视图1
         mViewList.add(mInflater.inflate(R.layout.act_apply_person_hhr, mTabLayout, false));//页卡视图2
         mViewList.add(mInflater.inflate(R.layout.act_apply_person_hhr, mTabLayout, false));//页卡视图2*/
-        mFragmentList.add(new MediaNextLevelFragment());
-        mFragmentList.add(new MediaNextLevelFragment());
-        mFragmentList.add(new MediaNextLevelFragment());
+        mFragmentList.add(MediaNextLevelFragment.getInstance(1));
+        mFragmentList.add(MediaNextLevelFragment.getInstance(2));
+        mFragmentList.add(MediaNextLevelFragment.getInstance(3));
 
         //添加页卡标题
         mTitleList.add("一级");
@@ -64,42 +71,9 @@ public class MediaNextLevelActivity extends BaseActivity {
         mViewPager.setAdapter(mAdapter);//给ViewPager设置适配器
         mViewPager.setOffscreenPageLimit(3);
         mTabLayout.setupWithViewPager(mViewPager);//将TabLayout和ViewPager关联起来。
-    }
 
-    //ViewPager适配器
-    class MyPagerAdapter extends PagerAdapter {
-        private List<View> mViewList;
-
-        public MyPagerAdapter(List<View> mViewList) {
-            this.mViewList = mViewList;
-        }
-
-        @Override
-        public int getCount() {
-            return mViewList.size();//页卡数
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;//官方推荐写法
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            container.addView(mViewList.get(position));//添加页卡
-            return mViewList.get(position);
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView(mViewList.get(position));//删除页卡
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mTitleList.get(position);//页卡标题
-        }
-
+        LocalUserModel localUserModel = LocalUserModelDao.queryModel();
+        user_name.setText(localUserModel.getUser_name());
     }
 
     class FragmentAdapter extends FragmentPagerAdapter {

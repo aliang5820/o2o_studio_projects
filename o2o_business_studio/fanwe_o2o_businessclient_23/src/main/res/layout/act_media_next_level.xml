@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/user_qr_code"
             android:layout_toRightOf="@+id/user_icon"
-            android:text="维森么. 我帅德.布耀布耀德"
+            android:text="我帅德.布耀布耀德"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_button" />
 

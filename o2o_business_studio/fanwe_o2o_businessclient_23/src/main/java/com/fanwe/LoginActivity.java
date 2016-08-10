@@ -117,7 +117,6 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
             @Override
             public void onSuccess(BizUserCtlDoLoginActModel actModel) {
                 if (!SDInterfaceUtil.dealactModel(actModel, null)) {
-                    SDToast.showToast(actModel.getInfo());
                     switch (actModel.getStatus()) {
                         case 0:
                             break;
@@ -141,12 +140,14 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
     private void dealLoginSuccess(AccountInfoModel accountInfoModel) {
         LocalUserModel user = new LocalUserModel();
         user.setUser_id(accountInfoModel.getAccount_id());
-        user.setAccount_name(accountInfoModel.getAccount_mobile());
+        user.setSupplier_id(accountInfoModel.getSupplier_id());
+        user.setAccount_name(accountInfoModel.getAccount_name());
         user.setAccount_password(accountInfoModel.getAccount_password());
+        user.setQr_code(accountInfoModel.getQr_code());
         App.getApp().setmLocalUser(user);
 
         // 保存账号
-        AppConfig.setUserName(accountInfoModel.getAccount_mobile());
+        AppConfig.setUserName(accountInfoModel.getAccount_name());
         //登录成功进入主页之前，需要判断是否已经申请加盟
         startActivity(new Intent(mActivity, MainActivity.class));
         finish();
