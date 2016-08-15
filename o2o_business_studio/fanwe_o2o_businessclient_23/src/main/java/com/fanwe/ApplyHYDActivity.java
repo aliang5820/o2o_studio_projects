@@ -85,7 +85,7 @@ public class ApplyHYDActivity extends TitleBaseActivity {
         requestTypeList(true, -1);
     }
 
-    public void onConfirm(View view) {
+    public void onConfirm1(View view) {
         //申请
         requestRole();
     }
