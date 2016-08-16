@@ -1,6 +1,6 @@
 package com.fanwe.apply;
 
-import com.fanwe.model.BaseCtlActModel;
+import com.fanwe.model.BaseActModel;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class CommonModel extends BaseCtlActModel {
+public class CityListActModel extends BaseActModel {
 
     private List<City> citylist;
 }

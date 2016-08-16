@@ -74,7 +74,7 @@ public class MediaNextLevelFragment extends BaseFragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SDToast.showToast("position:" + position);
+                //SDToast.showToast("position:" + position);
             }
         });
     }

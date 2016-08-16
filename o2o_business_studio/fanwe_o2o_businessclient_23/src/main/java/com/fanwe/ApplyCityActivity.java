@@ -4,15 +4,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +20,9 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fanwe.apply.City;
-import com.fanwe.apply.CommonModel;
-import com.fanwe.apply.DBHelper;
+import com.fanwe.apply.CityListActModel;
 import com.fanwe.apply.MyLetterListView;
 import com.fanwe.apply.PingYinUtil;
 import com.fanwe.businessclient.R;
@@ -35,13 +30,11 @@ import com.fanwe.constant.Constant;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.listener.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
-import com.fanwe.model.BizUserCtlDoLoginActModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.utils.LogUtil;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -211,7 +204,7 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
     @SuppressWarnings("unchecked")
     private void getResultCityList(String keyword) {
         for(City city:allCity_lists) {
-            if(city.getShorthand().contains(keyword)) {
+            if(city.getUname().contains(keyword)) {
                 city_result.add(city);
             }
         }
@@ -225,8 +218,8 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
     Comparator comparator = new Comparator<City>() {
         @Override
         public int compare(City lhs, City rhs) {
-            String a = lhs.getShorthand().substring(0, 1);
-            String b = rhs.getShorthand().substring(0, 1);
+            String a = lhs.getUname().substring(0, 1);
+            String b = rhs.getUname().substring(0, 1);
             int flag = a.compareTo(b);
             if (flag == 0) {
                 return a.compareTo(b);
@@ -306,11 +299,11 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
             String[] sections = new String[list.size()]; // 存放存在的汉语拼音首字母
             for (int i = 0; i < list.size(); i++) {
                 // 当前汉语拼音首字母
-                String currentStr = getAlpha(list.get(i).getShorthand());
+                String currentStr = getAlpha(list.get(i).getUname());
                 // 上一个汉语拼音首字母，如果不存在为" "
-                String previewStr = (i - 1) >= 0 ? getAlpha(list.get(i - 1).getShorthand()) : " ";
+                String previewStr = (i - 1) >= 0 ? getAlpha(list.get(i - 1).getUname()) : " ";
                 if (!previewStr.equals(currentStr)) {
-                    String name = getAlpha(list.get(i).getShorthand());
+                    String name = getAlpha(list.get(i).getUname());
                     alphaIndexer.put(name, i);
                     sections[i] = name;
                 }
@@ -356,8 +349,8 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
             }
 
             holder.name.setText(city.getName());
-            String currentStr = getAlpha(city.getShorthand());
-            String previewStr = (position - 1) >= 0 ? getAlpha(list.get(position - 1).getShorthand()) : " ";
+            String currentStr = getAlpha(city.getUname());
+            String previewStr = (position - 1) >= 0 ? getAlpha(list.get(position - 1).getUname()) : " ";
             if (!previewStr.equals(currentStr)) {
                 holder.alpha.setVisibility(View.VISIBLE);
                 holder.alpha.setText(currentStr);
@@ -456,7 +449,7 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
 
         if (mReady) {
             String name = allCity_lists.get(firstVisibleItem).getName();
-            String pinyin = allCity_lists.get(firstVisibleItem).getShorthand();
+            String pinyin = allCity_lists.get(firstVisibleItem).getUname();
             String text = PingYinUtil.converterToFirstSpell(pinyin).substring(0, 1).toUpperCase();
             overlay.setText(text);
             overlay.setVisibility(View.VISIBLE);
@@ -472,7 +465,7 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
     private void requestCityList() {
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_member", "get_city_list");
-        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<CommonModel>() {
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<CityListActModel>() {
 
             @Override
             public void onStart() {

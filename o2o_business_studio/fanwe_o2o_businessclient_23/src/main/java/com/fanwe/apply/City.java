@@ -7,7 +7,9 @@ import lombok.Data;
 @Data
 public class City implements Serializable {
     public int id;
+    public int pid;
     public String name;
-    public String shorthand;
+    public String uname;
+    public int region_level;
     public boolean isSelected;
 }

@@ -213,7 +213,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="先生"
-                        android:checked="true"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_content" />
 
@@ -232,6 +231,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="保密"
+                        android:checked="true"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_content" />
                 </RadioGroup>
@@ -293,6 +293,7 @@
             android:id="@+id/isAgree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:textSize="12sp" />
 
         <TextView

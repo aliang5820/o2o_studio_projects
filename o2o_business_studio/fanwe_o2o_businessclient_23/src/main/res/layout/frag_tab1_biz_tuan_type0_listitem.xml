@@ -103,7 +103,6 @@
                     android:textColor="@color/main_color" />
 
                 <TextView
-                    android:id="@+id/fragtab1_listitem_tv_buy_dp_no_read_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
