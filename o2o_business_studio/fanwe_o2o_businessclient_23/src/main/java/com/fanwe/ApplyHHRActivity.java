@@ -20,6 +20,7 @@ import com.fanwe.application.App;
 import com.fanwe.apply.City;
 import com.fanwe.businessclient.R;
 import com.fanwe.constant.Constant;
+import com.fanwe.event.EnumEventTag;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.listener.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
@@ -30,6 +31,7 @@ import com.fanwe.model.RequestModel;
 import com.fanwe.utils.SDInterfaceUtil;
 import com.fanwe.utils.SDToast;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.sunday.eventbus.SDEventManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -342,12 +344,14 @@ public class ApplyHHRActivity extends TitleBaseActivity {
                         case 0:
                             break;
                         case 1:
-                            Intent intent = new Intent(mActivity, ApplyPayActivity.class);
+                            /*Intent intent = new Intent(mActivity, ApplyPayActivity.class);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HYD);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
                             intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
                             startActivity(intent);
-                            finish();
+                            finish();*/
+                            SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
+                            startActivity(new Intent(mActivity, MainActivity.class));
                             break;
                     }
                 }
@@ -410,12 +414,14 @@ public class ApplyHHRActivity extends TitleBaseActivity {
                         case 0:
                             break;
                         case 1:
-                            Intent intent = new Intent(mActivity, ApplyPayActivity.class);
+                            /*Intent intent = new Intent(mActivity, ApplyPayActivity.class);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HYD);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
                             intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
                             startActivity(intent);
-                            finish();
+                            finish();*/
+                            SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
+                            startActivity(new Intent(mActivity, MainActivity.class));
                             break;
                     }
                 }

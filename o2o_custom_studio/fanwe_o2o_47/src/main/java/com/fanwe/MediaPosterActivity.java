@@ -50,16 +50,26 @@ public class MediaPosterActivity extends BaseActivity {
     }
 
     private void initQRCode() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                LocalUserModel localUserModel = LocalUserModelDao.queryModel();
-
-                String filePath = Environment.getExternalStorageDirectory() + File.separator + "qr_code.jpg";
-                QRCodeUtil.createQRImage(localUserModel.getQr_code(), 200, 200, null, filePath);
-                //图片创建成功后，进行显示
-                Message.obtain(handler, 0, filePath).sendToTarget();
-            }
-        }).start();
+        //判断推广二维码是否存在
+        final LocalUserModel localUserModel = LocalUserModelDao.queryModel();
+        final String dir = Environment.getExternalStorageDirectory() + File.separator + Constant.FILE_DIR;
+        File file = new File(dir);
+        if(!file.exists()) {
+            file.mkdirs();
+        }
+        final String filePath = dir + localUserModel.getUser_id() + "_" + Constant.QR_CODE_FILE_NAME;
+        File qrFile = new File(filePath);
+        if (qrFile.exists()) {
+            Message.obtain(handler, 0, filePath).sendToTarget();
+        } else {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    QRCodeUtil.createQRImage(localUserModel.getQr_code(), 200, 200, null, filePath);
+                    //图片创建成功后，进行显示
+                    Message.obtain(handler, 0, filePath).sendToTarget();
+                }
+            }).start();
+        }
     }
 }

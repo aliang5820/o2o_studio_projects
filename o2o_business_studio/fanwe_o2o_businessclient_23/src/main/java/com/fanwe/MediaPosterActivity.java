@@ -11,6 +11,8 @@ import android.widget.ImageView;
 
 import com.fanwe.application.App;
 import com.fanwe.businessclient.R;
+import com.fanwe.constant.Constant;
+import com.fanwe.model.LocalUserModel;
 import com.fanwe.utils.QRCodeUtil;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -47,14 +49,27 @@ public class MediaPosterActivity extends TitleBaseActivity {
     }
 
     private void initQRCode() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String filePath = Environment.getExternalStorageDirectory() + File.separator + "qr_code.jpg";
-                QRCodeUtil.createQRImage(App.getApp().getmLocalUser().getQr_code(), 200, 200, null, filePath);
-                //图片创建成功后，进行显示
-                Message.obtain(handler, 0, filePath).sendToTarget();
-            }
-        }).start();
+        //判断推广二维码是否存在
+        //判断推广二维码是否存在
+        final LocalUserModel localUserModel = App.getApp().getmLocalUser();
+        final String dir = Environment.getExternalStorageDirectory() + File.separator + Constant.FILE_DIR;
+        File file = new File(dir);
+        if(!file.exists()) {
+            file.mkdirs();
+        }
+        final String filePath = dir + localUserModel.getSupplier_id() + "_" + Constant.QR_CODE_FILE_NAME;
+        File qrFile = new File(filePath);
+        if (qrFile.exists()) {
+            Message.obtain(handler, 0, filePath).sendToTarget();
+        } else {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    QRCodeUtil.createQRImage(localUserModel.getQr_code(), 200, 200, null, filePath);
+                    //图片创建成功后，进行显示
+                    Message.obtain(handler, 0, filePath).sendToTarget();
+                }
+            }).start();
+        }
     }
 }

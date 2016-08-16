@@ -1,8 +1,10 @@
 package com.fanwe.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class Sms_send_sms_codeActModel extends BaseCtlActModel {
 
     private int time;

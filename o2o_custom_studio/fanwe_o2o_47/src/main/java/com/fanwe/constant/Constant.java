@@ -6,7 +6,8 @@ import com.fanwe.o2o.newo2o.R;
 public class Constant {
 
     public static final String DOWN_LOAD_DIR_NAME = "fanwe";
-
+    public static final String QR_CODE_FILE_NAME = "user_qr_code.jpg";
+    public static final String FILE_DIR = "o2o/custom/";
     public static final String EARN_SUB_CHAR = "市";
 
     public static final class ExtraConstant {

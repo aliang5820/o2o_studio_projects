@@ -13,7 +13,7 @@ android {
 
     signingConfigs {
         myConfig {
-            storeFile file('E:/github/o2o_studio_projects/o2o.jks')
+            storeFile file('D:/develop/o2o/studio_projects/o2o.jks')
             storePassword "111111"
             keyAlias "shengdianwang"
             keyPassword "111111"//将这里的“**”替换成自己的信息

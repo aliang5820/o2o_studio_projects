@@ -86,7 +86,7 @@ public class ApplyCityActivity extends BaseActivity implements AbsListView.OnScr
                     city_result.clear();
                     letterListView.setVisibility(View.GONE);
                     personList.setVisibility(View.GONE);
-                    getResultCityList(s.toString());
+                    getResultCityList(PingYinUtil.getPingYin(s.toString()));
                     if (city_result.size() <= 0) {
                         tvNoResult.setVisibility(View.VISIBLE);
                         resultList.setVisibility(View.GONE);
