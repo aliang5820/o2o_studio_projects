@@ -19,4 +19,5 @@ public class MediaHomeCtlActModel extends BaseCtlActModel {
     private String nowMonthMemMoney;//本月合伙人奖励
     private String withdrawalsMoney;//已提现佣金
     private String depositMoney;//未提现佣金
+    private String extension_person;//推荐人
 }

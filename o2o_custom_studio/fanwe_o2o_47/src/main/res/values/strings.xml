@@ -3,6 +3,7 @@
     <string name="apply_order_id">订单号：%s</string>
     <string name="money">￥%s</string>
     <string name="number">%s</string>
+    <string name="extension_person">由【%s】推荐</string>
 
     <string name="loading">加载中</string>
     <string name="has_sold">已售</string>

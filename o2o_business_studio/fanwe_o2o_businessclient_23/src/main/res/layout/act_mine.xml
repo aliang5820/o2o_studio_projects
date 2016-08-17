@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_all"
     android:orientation="vertical">
 
@@ -52,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/user_icon"
-                    android:text="芭菲盛宴餐饮有限公司"
+                    tools:text="芭菲盛宴餐饮有限公司"
                     android:textSize="@dimen/text_size_button" />
 
                 <TextView

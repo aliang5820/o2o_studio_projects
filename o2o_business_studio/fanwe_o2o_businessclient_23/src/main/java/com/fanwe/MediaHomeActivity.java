@@ -69,6 +69,9 @@ public class MediaHomeActivity extends TitleBaseActivity {
     @ViewInject(R.id.user_qr_code)
     private ImageView qrImageView;
 
+    @ViewInject(R.id.extra_name)
+    private TextView extra_name;
+
     private Handler handler = new Handler(Looper.getMainLooper()) {
 
         @Override
@@ -174,6 +177,8 @@ public class MediaHomeActivity extends TitleBaseActivity {
                     label8.setText(getString(R.string.money, actModel.getNowMonthMemMoney()));//本月合伙人奖励
                     label9.setText(getString(R.string.money, actModel.getWithdrawalsMoney()));//已提现佣金
                     label10.setText(getString(R.string.money, actModel.getDepositMoney()));//未提现佣金
+
+                    extra_name.setText(getString(R.string.extension_person, actModel.getExtension_person()));//推荐人
                 }
             }
 
