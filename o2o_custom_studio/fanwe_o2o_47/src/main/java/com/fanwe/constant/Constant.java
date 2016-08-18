@@ -5,6 +5,8 @@ import com.fanwe.o2o.newo2o.R;
 
 public class Constant {
 
+    /*18503258052 123456*/
+
     public static final String DOWN_LOAD_DIR_NAME = "fanwe";
     public static final String QR_CODE_FILE_NAME = "user_qr_code.jpg";
     public static final String FILE_DIR = "o2o/custom/";

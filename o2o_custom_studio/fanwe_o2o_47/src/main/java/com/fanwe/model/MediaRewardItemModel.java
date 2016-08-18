@@ -15,4 +15,5 @@ public class MediaRewardItemModel {
     private long orderTime;//订单奖励才有的下单时间
     private String consume_money;//消费金额
     private String reward_money;//奖励金额
+    private int belong_id;//消费类型
 }

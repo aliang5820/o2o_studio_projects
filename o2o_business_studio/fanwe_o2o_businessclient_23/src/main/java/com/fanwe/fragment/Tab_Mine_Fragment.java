@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fanwe.MediaHomeActivity;
+import com.fanwe.ModifyPasswordActivity;
 import com.fanwe.application.App;
 import com.fanwe.businessclient.R;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -28,6 +29,7 @@ public class Tab_Mine_Fragment extends BaseFragment {
 
     private void initView(View view) {
         view.findViewById(R.id.mine_media).setOnClickListener(this);
+        view.findViewById(R.id.modify_password).setOnClickListener(this);
         user_name = (TextView) view.findViewById(R.id.user_name);
         user_name.setText(App.getApp().getmLocalUser().getAccount_name());
     }
@@ -37,6 +39,10 @@ public class Tab_Mine_Fragment extends BaseFragment {
         switch (v.getId()) {
             case R.id.mine_media:
                 startActivity(new Intent(getActivity(), MediaHomeActivity.class));
+                break;
+            case R.id.modify_password:
+                //修改密码
+                startActivity(new Intent(getContext(), ModifyPasswordActivity.class));
                 break;
         }
     }

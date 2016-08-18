@@ -34,7 +34,6 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
     private ClearEditText mEt_password;
 
     private Button mBtn_login;
-
     private String mBiz_email;
     private String mBiz_pwd;
 
@@ -78,6 +77,10 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
                 loginclick();
                 break;
         }
+    }
+
+    public void onRegister(View view) {
+        startActivity(new Intent(mActivity, RegisterActivity.class));
     }
 
     private void loginclick() {
@@ -154,7 +157,4 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
         finish();
     }
 
-    public void onRegister(View view) {
-        startActivity(new Intent(mActivity, RegisterActivity.class));
-    }
 }

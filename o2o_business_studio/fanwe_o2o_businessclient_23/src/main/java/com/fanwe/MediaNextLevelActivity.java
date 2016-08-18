@@ -1,5 +1,6 @@
 package com.fanwe;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -86,6 +87,10 @@ public class MediaNextLevelActivity extends TitleBaseActivity {
         user_level.setText(type);
     }
 
+    public void onPoster(View view) {
+        startActivity(new Intent(mActivity, MediaPosterActivity.class));
+    }
+
     private void initView() {
         mTitle.setText("自媒体");
         initQRCode();
@@ -140,7 +145,6 @@ public class MediaNextLevelActivity extends TitleBaseActivity {
     }
 
     private void initQRCode() {
-        //判断推广二维码是否存在
         //判断推广二维码是否存在
         final LocalUserModel localUserModel = App.getApp().getmLocalUser();
         final String dir = Environment.getExternalStorageDirectory() + File.separator + Constant.FILE_DIR;

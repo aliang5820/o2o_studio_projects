@@ -259,14 +259,12 @@ public class Tab_0_Fragment extends BaseFragment implements OnClickListener {
 
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        // TODO Auto-generated method stub
                                         requestUseBizCtlAct(ctl, coupon_pwd);
                                     }
                                 }, new DialogInterface.OnClickListener() {
 
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        // TODO Auto-generated method stub
                                         dialog.dismiss();
                                     }
                                 });

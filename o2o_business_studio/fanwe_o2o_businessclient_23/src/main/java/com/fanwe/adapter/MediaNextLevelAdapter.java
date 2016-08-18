@@ -61,7 +61,10 @@ public class MediaNextLevelAdapter extends SDSimpleAdapter<MediaNextLevelItemMod
         }
         SDViewBinder.setTextView(user_level, type);
 
-        Date date = new Date(itemModel.getTime());
+        Date date = new Date();
+        if(itemModel.getTime() > 0) {
+            date = new Date(itemModel.getTime() * 1000);
+        }
         String time = simpleDateFormat.format(date);
         SDViewBinder.setTextView(focus_time, time);
     }

@@ -1,6 +1,8 @@
 package com.fanwe.constant;
 
 public class Constant {
+    /*18500142331 123456*/
+
     public static final String FILE_DIR = "o2o/biz/";
     public static final String QR_CODE_FILE_NAME = "biz_qr_code.jpg";
 

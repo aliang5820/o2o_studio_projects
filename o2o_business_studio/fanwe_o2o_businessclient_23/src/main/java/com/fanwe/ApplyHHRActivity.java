@@ -1,5 +1,6 @@
 package com.fanwe;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -19,15 +20,21 @@ import android.widget.TextView;
 import com.fanwe.application.App;
 import com.fanwe.apply.City;
 import com.fanwe.businessclient.R;
+import com.fanwe.config.AppConfig;
 import com.fanwe.constant.Constant;
 import com.fanwe.event.EnumEventTag;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.listener.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
+import com.fanwe.model.AccountInfoModel;
 import com.fanwe.model.ApplyOrderCtlActModel;
 import com.fanwe.model.ApplyServiceTypeCtlActModel;
 import com.fanwe.model.ApplyServiceTypeModel;
+import com.fanwe.model.BizUserCtlDoLoginActModel;
+import com.fanwe.model.LocalUserModel;
 import com.fanwe.model.RequestModel;
+import com.fanwe.umeng.UmengPushManager;
+import com.fanwe.utils.SDDialogUtil;
 import com.fanwe.utils.SDInterfaceUtil;
 import com.fanwe.utils.SDToast;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -350,8 +357,7 @@ public class ApplyHHRActivity extends TitleBaseActivity {
                             intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
                             startActivity(intent);
                             finish();*/
-                            SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
-                            startActivity(new Intent(mActivity, MainActivity.class));
+                            requestLoginInterface();
                             break;
                     }
                 }
@@ -420,8 +426,7 @@ public class ApplyHHRActivity extends TitleBaseActivity {
                             intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
                             startActivity(intent);
                             finish();*/
-                            SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
-                            startActivity(new Intent(mActivity, MainActivity.class));
+                            requestLoginInterface();
                             break;
                     }
                 }
@@ -433,5 +438,62 @@ public class ApplyHHRActivity extends TitleBaseActivity {
                 SDDialogManager.showProgressDialog("请稍候...");
             }
         });
+    }
+
+    private void requestLoginInterface() {
+        RequestModel model = new RequestModel();
+        model.putCtlAct("biz_user", "dologin");
+        model.put("account_name", App.getApp().getmLocalUser().getAccount_name());
+        model.put("account_password", App.getApp().getmLocalUser().getAccount_password());
+        model.put("device_token", UmengPushManager.getPushAgent().getRegistrationId());
+
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<BizUserCtlDoLoginActModel>() {
+            private Dialog nDialog;
+
+            @Override
+            public void onFinish() {
+                if (nDialog != null) {
+                    nDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onSuccess(BizUserCtlDoLoginActModel actModel) {
+                if (!SDInterfaceUtil.dealactModel(actModel, null)) {
+                    switch (actModel.getStatus()) {
+                        case 0:
+                            break;
+                        case 1:
+                            if (actModel.getAccount_info() != null) {
+                                dealLoginSuccess(actModel.getAccount_info());
+                            }
+                            break;
+                    }
+                }
+
+            }
+
+            @Override
+            public void onStart() {
+                nDialog = SDDialogUtil.showLoading("登录中...");
+            }
+        });
+    }
+
+    private void dealLoginSuccess(AccountInfoModel accountInfoModel) {
+        LocalUserModel user = new LocalUserModel();
+        user.setUser_id(accountInfoModel.getAccount_id());
+        user.setSupplier_id(accountInfoModel.getSupplier_id());
+        user.setAccount_name(accountInfoModel.getAccount_name());
+        user.setAccount_password(accountInfoModel.getAccount_password());
+        user.setAccount_type(accountInfoModel.getAccount_type());
+        user.setQr_code(accountInfoModel.getQr_code());
+        App.getApp().setmLocalUser(user);
+
+        // 保存账号
+        AppConfig.setUserName(accountInfoModel.getAccount_name());
+        //登录成功进入主页之前，需要判断是否已经申请加盟
+        SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
+        startActivity(new Intent(mActivity, MainActivity.class));
     }
 }

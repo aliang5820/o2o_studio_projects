@@ -12,7 +12,7 @@
         style="@style/RewardItemStyle"
         android:singleLine="true"
         android:ellipsize="end"
-        tools:text="订单号" />
+        tools:text="奖励类型" />
 
     <TextView
         android:id="@+id/label2"

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_all"
     android:orientation="vertical">
 
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/base_margin_10"
@@ -43,165 +43,173 @@
 
                 <ImageView
                     android:id="@+id/user_icon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/base_margin_10"
-                    android:src="@drawable/icon" />
+                    android:src="@drawable/icon"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/user_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/user_icon"
-                    tools:text="芭菲盛宴餐饮有限公司"
-                    android:textSize="@dimen/text_size_button" />
-
-                <TextView
-                    android:id="@+id/user_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/user_name"
-                    android:layout_marginTop="@dimen/base_margin_10"
-                    android:layout_toRightOf="@+id/user_icon"
-                    android:drawableLeft="@drawable/icon_warning"
-                    android:drawablePadding="4dp"
-                    android:gravity="center_vertical"
-                    android:text="修改密码"
-                    android:textSize="@dimen/text_size_content" />
-            </RelativeLayout>
-
-            <View style="@style/H_LineStyle" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="@dimen/activity_horizontal_margin">
-
-                <EditText
-                    android:id="@+id/user_input"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:background="@drawable/edit_bg"
-                    android:inputType="phone"
-                    android:padding="@dimen/base_padding_10" />
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    tools:text="芭菲盛宴餐饮有限公司" />
 
                 <Button
-                    android:id="@+id/confirmBtn"
+                    android:id="@+id/modify_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/base_margin_20"
                     android:background="@drawable/selector_main_color_corner"
                     android:padding="@dimen/base_padding_10"
-                    android:text="验证"
+                    android:text="修改密码"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_content" />
             </LinearLayout>
 
-            <View style="@style/H_LineStyle" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/activity_custom_item_height"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="团购订单管理"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_button" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/ic_arrow_right_more"
-                    android:gravity="center_vertical"
-                    android:text="查看全部订单"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_button" />
-            </LinearLayout>
-
-            <View style="@style/H_LineStyle" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <View style="@style/H_LineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/activity_horizontal_margin">
+
+                    <EditText
+                        android:id="@+id/user_input"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/edit_bg"
+                        android:inputType="phone"
+                        android:padding="@dimen/base_padding_10" />
+
+                    <Button
+                        android:id="@+id/confirmBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/base_margin_20"
+                        android:background="@drawable/selector_main_color_corner"
+                        android:padding="@dimen/base_padding_10"
+                        android:text="验证"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_content" />
+                </LinearLayout>
+
+                <View style="@style/H_LineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/activity_custom_item_height"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="团购订单管理"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_button" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableRight="@drawable/ic_arrow_right_more"
+                        android:gravity="center_vertical"
+                        android:text="查看全部订单"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_button" />
+                </LinearLayout>
+
+                <View style="@style/H_LineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/MediaTableItemStyle"
+                        android:text="待付款" />
+
+                    <View
+                        android:layout_width="@dimen/base_stroke_1px"
+                        android:layout_height="match_parent"
+                        android:background="@color/stroke_deep" />
+
+                    <TextView
+                        style="@style/MediaTableItemStyle"
+                        android:text="待使用" />
+
+                    <View
+                        android:layout_width="@dimen/base_stroke_1px"
+                        android:layout_height="match_parent"
+                        android:background="@color/stroke_deep" />
+
+                    <TextView
+                        style="@style/MediaTableItemStyle"
+                        android:text="待评价" />
+
+                    <View
+                        android:layout_width="@dimen/base_stroke_1px"
+                        android:layout_height="match_parent"
+                        android:background="@color/stroke_deep" />
+
+                    <TextView
+                        style="@style/MediaTableItemStyle"
+                        android:text="售后/退款" />
+                </LinearLayout>
+
+                <View style="@style/H_LineStyle" />
 
                 <TextView
-                    style="@style/MediaTableItemStyle"
-                    android:text="待付款" />
+                    style="@style/MineMenuItemStyle"
+                    android:text="商城订单管理" />
 
-                <View
-                    android:layout_width="@dimen/base_stroke_1px"
-                    android:layout_height="match_parent"
-                    android:background="@color/stroke_deep" />
+                <View style="@style/H_LineStyle" />
 
                 <TextView
-                    style="@style/MediaTableItemStyle"
-                    android:text="待使用" />
+                    style="@style/MineMenuItemStyle"
+                    android:text="点评管理" />
 
-                <View
-                    android:layout_width="@dimen/base_stroke_1px"
-                    android:layout_height="match_parent"
-                    android:background="@color/stroke_deep" />
+                <View style="@style/H_LineStyle" />
 
                 <TextView
-                    style="@style/MediaTableItemStyle"
-                    android:text="待评价" />
+                    style="@style/MineMenuItemStyle"
+                    android:text="项目管理" />
 
-                <View
-                    android:layout_width="@dimen/base_stroke_1px"
-                    android:layout_height="match_parent"
-                    android:background="@color/stroke_deep" />
+                <View style="@style/H_LineStyle" />
 
                 <TextView
-                    style="@style/MediaTableItemStyle"
-                    android:text="售后/退款" />
+                    style="@style/MineMenuItemStyle"
+                    android:text="财务管理" />
+
+                <View style="@style/H_LineStyle" />
+
+                <TextView
+                    style="@style/MineMenuItemStyle"
+                    android:text="银行卡账户管理" />
+
+                <View style="@style/H_LineStyle" />
+
+                <TextView
+                    style="@style/MineMenuItemStyle"
+                    android:text="物流管理" />
             </LinearLayout>
-
-            <View style="@style/H_LineStyle" />
-
-            <TextView
-                style="@style/MineMenuItemStyle"
-                android:text="商城订单管理" />
-
-            <View style="@style/H_LineStyle" />
-
-            <TextView
-                style="@style/MineMenuItemStyle"
-                android:text="点评管理" />
-
-            <View style="@style/H_LineStyle" />
-
-            <TextView
-                style="@style/MineMenuItemStyle"
-                android:text="项目管理" />
-
-            <View style="@style/H_LineStyle" />
-
-            <TextView
-                style="@style/MineMenuItemStyle"
-                android:text="财务管理" />
-
-            <View style="@style/H_LineStyle" />
-
-            <TextView
-                style="@style/MineMenuItemStyle"
-                android:text="银行卡账户管理" />
-
-            <View style="@style/H_LineStyle" />
-
-            <TextView
-                style="@style/MineMenuItemStyle"
-                android:text="物流管理" />
 
             <View style="@style/H_LineStyle" />
 

@@ -48,9 +48,22 @@ public class MediaRewardAdapter extends SDSimpleAdapter<MediaRewardItemModel> {
             TextView label3 = ViewHolder.get(R.id.label3, convertView);
             TextView label4 = ViewHolder.get(R.id.label4, convertView);
             //订单号
-            SDViewBinder.setTextView(label1, mActivity.getString(R.string.number, model.getOrder_sn()));
+            switch (model.getBelong_id()) {
+                case 1:
+                    SDViewBinder.setTextView(label1, "会员店消费");
+                    break;
+                case 2:
+                    SDViewBinder.setTextView(label1, "合伙人消费");
+                    break;
+                case 3:
+                    SDViewBinder.setTextView(label1, "销售");
+                    break;
+            }
             //下单时间
-            Date date = new Date(model.getOrderTime());
+            Date date = new Date();
+            if(model.getOrderTime() > 0) {
+                date = new Date(model.getOrderTime() * 1000);
+            }
             String time = simpleDateFormat.format(date);
             SDViewBinder.setTextView(label2, time);
             //消费
@@ -64,7 +77,10 @@ public class MediaRewardAdapter extends SDSimpleAdapter<MediaRewardItemModel> {
             //名称
             SDViewBinder.setTextView(label1, mActivity.getString(R.string.number, model.getUser_name()));
             //招募时间
-            Date date = new Date(model.getOrderTime());
+            Date date = new Date();
+            if(model.getOrderTime() > 0) {
+                date = new Date(model.getOrderTime() * 1000);
+            }
             String time = simpleDateFormat.format(date);
             SDViewBinder.setTextView(label2, time);
             //奖励

@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -202,7 +203,11 @@ public class MediaHomeActivity extends TitleBaseActivity {
                     label9.setText(getString(R.string.money, actModel.getWithdrawalsMoney()));//已提现佣金
                     label10.setText(getString(R.string.money, actModel.getDepositMoney()));//未提现佣金
 
-                    extra_name.setText(getString(R.string.extension_person, actModel.getExtension_person()));//推荐人
+                    if(TextUtils.isEmpty(actModel.getExtension_person())) {
+                        extra_name.setText("");
+                    } else {
+                        extra_name.setText(getString(R.string.extension_person, actModel.getExtension_person()));//推荐人
+                    }
                 }
             }
 

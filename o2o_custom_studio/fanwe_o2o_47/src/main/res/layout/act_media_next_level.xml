@@ -53,6 +53,7 @@
             android:layout_toRightOf="@+id/user_icon"
             android:background="@drawable/selector_main_color_corner"
             android:gravity="center"
+            android:onClick="onPoster"
             android:text="推广海报"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_content" />

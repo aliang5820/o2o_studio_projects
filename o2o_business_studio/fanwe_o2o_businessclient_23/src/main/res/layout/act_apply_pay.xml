@@ -87,6 +87,7 @@
         android:layout_marginTop="@dimen/base_margin_20"
         android:background="@drawable/selector_main_color_corner"
         android:onClick="onPay"
+        android:clickable="true"
         android:text="支付"
         android:textColor="@color/white"
         android:textSize="14sp" />

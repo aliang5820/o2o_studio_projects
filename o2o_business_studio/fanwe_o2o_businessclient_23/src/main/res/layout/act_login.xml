@@ -110,6 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right|end"
             android:onClick="onRegister"
+            android:clickable="true"
             android:padding="@dimen/activity_horizontal_margin"
             android:text="立即申请" />
     </LinearLayout>

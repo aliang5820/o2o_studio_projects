@@ -11,6 +11,7 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.fanwe.LoginActivity;
+import com.fanwe.ModifyPasswordActivity;
 import com.fanwe.application.App;
 import com.fanwe.businessclient.R;
 import com.fanwe.customview.SDSimpleSetItemView;
@@ -34,208 +35,171 @@ import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.umeng.message.UmengRegistrar;
 
 /**
- * 
  * 更多
  */
-public class Tab_4_Fragment extends BaseFragment implements OnClickListener
-{
-	private SDSimpleSetItemView mExit, mBiz_version, mPhone;
+public class Tab_4_Fragment extends BaseFragment implements OnClickListener {
+    private SDSimpleSetItemView mExit, mBiz_version, mPhone;
 
-	private BizMoreCtlIndexActModel mActModel;
-	private PullToRefreshScrollView mPtr_scrollview;
+    private BizMoreCtlIndexActModel mActModel;
+    private PullToRefreshScrollView mPtr_scrollview;
 
-	@Override
-	protected int onCreateContentView()
-	{
-		return R.layout.m_frag_tab_4;
-	}
+    @Override
+    protected int onCreateContentView() {
+        return R.layout.m_frag_tab_4;
+    }
 
-	private void register(View view)
-	{
-		mPtr_scrollview = (PullToRefreshScrollView) view.findViewById(R.id.ptr_scrollview);
-		mPtr_scrollview.setOnRefreshListener(new OnRefreshListener<ScrollView>()
-		{
-			@Override
-			public void onRefresh(PullToRefreshBase<ScrollView> refreshView)
-			{
-				requestBizMoreCtlIndexAct();
-			}
-		});
-		mExit = (SDSimpleSetItemView) view.findViewById(R.id.frag_tab3_item_exit);
-		mExit.setOnClickListener(this);
+    private void register(View view) {
+        mPtr_scrollview = (PullToRefreshScrollView) view.findViewById(R.id.ptr_scrollview);
+        mPtr_scrollview.setOnRefreshListener(new OnRefreshListener<ScrollView>() {
+            @Override
+            public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
+                requestBizMoreCtlIndexAct();
+            }
+        });
+        mExit = (SDSimpleSetItemView) view.findViewById(R.id.frag_tab3_item_exit);
+        mExit.setOnClickListener(this);
 
-		mBiz_version = (SDSimpleSetItemView) view.findViewById(R.id.frag_tab3_item_biz_version);
-		mBiz_version.setOnClickListener(this);
-		mPhone = (SDSimpleSetItemView) view.findViewById(R.id.frag_tab3_item_phone);
-		mPhone.setOnClickListener(this);
+        mBiz_version = (SDSimpleSetItemView) view.findViewById(R.id.frag_tab3_item_biz_version);
+        mBiz_version.setOnClickListener(this);
+        mPhone = (SDSimpleSetItemView) view.findViewById(R.id.frag_tab3_item_phone);
+        mPhone.setOnClickListener(this);
+    }
 
-	}
+    @Override
+    protected void init() {
+        register(getView());
+        requestBizMoreCtlIndexAct();
+    }
 
-	@Override
-	protected void init()
-	{
-		register(getView());
-		requestBizMoreCtlIndexAct();
-	}
+    private void initItemData(BizMoreCtlIndexActModel actModel) {
+        LocalUserModel localUserModel = App.getApp().getmLocalUser();
+        if (localUserModel != null) {
+            mExit.setTitleSubText("管理员账号:  " + localUserModel.getAccount_name() + "  (退出)");
+            PackageInfo packageInfo = SDPackageUtil.getCurrentAppPackageInfo(getActivity(), getActivity().getPackageName());
+            mBiz_version.setTitleSubText("版本更新" + "  (版本号" + packageInfo.versionName + ")");
+            mPhone.setTitleSubText("商户热线  " + actModel.getShop_tel() + "(点击拨打)");
+        }
+    }
 
-	private void initItemData(BizMoreCtlIndexActModel actModel)
-	{
-		LocalUserModel localUserModel = App.getApp().getmLocalUser();
-		if (localUserModel != null)
-		{
+    private void requestBizMoreCtlIndexAct() {
+        RequestModel model = new RequestModel();
+        model.putCtl("biz_more");
+        SDRequestCallBack<BizMoreCtlIndexActModel> handler = new SDRequestCallBack<BizMoreCtlIndexActModel>() {
+            private Dialog nDialog;
 
-			mExit.setTitleSubText("管理员账号:  " + localUserModel.getAccount_name() + "  (退出)");
-			PackageInfo packageInfo = SDPackageUtil.getCurrentAppPackageInfo(getActivity(), getActivity().getPackageName());
-			mBiz_version.setTitleSubText("版本更新" + "  (版本号" + packageInfo.versionName + ")");
-			mPhone.setTitleSubText("商户热线  " + actModel.getShop_tel() + "(点击拨打)");
-		}
-	}
+            @Override
+            public void onFinish() {
+                if (nDialog != null) {
+                    nDialog.dismiss();
+                    mPtr_scrollview.onRefreshComplete();
+                }
+            }
 
-	private void requestBizMoreCtlIndexAct()
-	{
-		RequestModel model = new RequestModel();
-		model.putCtl("biz_more");
-		SDRequestCallBack<BizMoreCtlIndexActModel> handler = new SDRequestCallBack<BizMoreCtlIndexActModel>()
-		{
-			private Dialog nDialog;
+            @Override
+            public void onSuccess(BizMoreCtlIndexActModel actModel) {
+                mActModel = actModel;
+                if (!SDInterfaceUtil.dealactModel(mActModel, getActivity())) {
+                    switch (mActModel.getStatus()) {
+                        case 0:
+                            SDToast.showToast(mActModel.getInfo());
+                            break;
+                        case 1:
+                            initItemData(mActModel);
+                            break;
+                    }
 
-			@Override
-			public void onFinish()
-			{
-				if (nDialog != null)
-				{
-					nDialog.dismiss();
-					mPtr_scrollview.onRefreshComplete();
-				}
-			}
+                }
 
-			@Override
-			public void onSuccess(BizMoreCtlIndexActModel actModel)
-			{
-				mActModel = actModel;
-				if (!SDInterfaceUtil.dealactModel(mActModel, getActivity()))
-				{
-					switch (mActModel.getStatus())
-					{
-					case 0:
-						SDToast.showToast(mActModel.getInfo());
-						break;
-					case 1:
-						initItemData(mActModel);
-						break;
-					}
+            }
 
-				}
+            @Override
+            public void onStart() {
+                nDialog = SDDialogUtil.showLoading("加载中...");
+            }
+        };
+        InterfaceServer.getInstance().requestInterface(model, handler);
+    }
 
-			}
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.frag_tab3_item_exit:
+                clickExit();
+                break;
+            case R.id.frag_tab3_item_biz_version:
+                clickBiz_version();
+                break;
+            case R.id.frag_tab3_item_phone:
+                clickPhone();
+                break;
+        }
+    }
 
-			@Override
-			public void onStart()
-			{
-				nDialog = SDDialogUtil.showLoading("加载中...");
-			}
-		};
-		InterfaceServer.getInstance().requestInterface(model, handler);
-	}
+    private void clickPhone() {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mActModel.getShop_tel()));
+        startActivity(intent);
+    }
 
-	@Override
-	public void onClick(View v)
-	{
-		// TODO Auto-generated method stub
-		switch (v.getId())
-		{
-		case R.id.frag_tab3_item_exit:
-			clickExit();
-			break;
-		case R.id.frag_tab3_item_biz_version:
-			clickBiz_version();
-			break;
-		case R.id.frag_tab3_item_phone:
-			clickPhone();
-			break;
-		}
-	}
+    private void clickBiz_version() {
+        Intent updateIntent = new Intent(getActivity(), AppUpgradeService.class);
+        updateIntent.putExtra(AppUpgradeService.EXTRA_SERVICE_START_TYPE, 1); // 1代表该service被用户手动启动检测版本
+        getActivity().startService(updateIntent);
+    }
 
-	private void clickPhone()
-	{
-		// TODO Auto-generated method stub
-		Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + mActModel.getShop_tel()));
-		startActivity(intent);
-	}
+    private void clickExit() {
+        if (App.getApp().getmLocalUser() != null) // 已登录
+        {
+            SDDialogConfirm dialogConfirm = new SDDialogConfirm();
+            dialogConfirm.setTextContent("确定要退出账号吗?");
+            dialogConfirm.setmListener(new SDDialogCustomListener() {
+                @Override
+                public void onDismiss(SDDialogCustom dialog) {
+                }
 
-	private void clickBiz_version()
-	{
-		// TODO Auto-generated method stub
-		Intent updateIntent = new Intent(getActivity(), AppUpgradeService.class);
-		updateIntent.putExtra(AppUpgradeService.EXTRA_SERVICE_START_TYPE, 1); // 1代表该service被用户手动启动检测版本
-		getActivity().startService(updateIntent);
-	}
+                @Override
+                public void onClickConfirm(View v, SDDialogCustom dialog) {
+                    requestInterfaceLoginOut();
+                    requestBiz_apns();
+                    dialog.dismiss();
+                    App.getApp().clearAppsLocalUserModel();
+                    SDToast.showToast("成功退出帐号!", Toast.LENGTH_SHORT);
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                    getBaseActivity().finish();
+                }
 
-	private void clickExit()
-	{
-		if (App.getApp().getmLocalUser() != null) // 已登录
-		{
-			SDDialogConfirm dialogConfirm = new SDDialogConfirm();
-			dialogConfirm.setTextContent("确定要退出账号吗?");
-			dialogConfirm.setmListener(new SDDialogCustomListener()
-			{
-				@Override
-				public void onDismiss(SDDialogCustom dialog)
-				{
-				}
+                @Override
+                public void onClickCancel(View v, SDDialogCustom dialog) {
+                }
+            }).show();
 
-				@Override
-				public void onClickConfirm(View v, SDDialogCustom dialog)
-				{
-					requestInterfaceLoginOut();
-					requestBiz_apns();
-					dialog.dismiss();
-					App.getApp().clearAppsLocalUserModel();
-					SDToast.showToast("成功退出帐号!", Toast.LENGTH_SHORT);
-					startActivity(new Intent(getActivity(), LoginActivity.class));
-					getBaseActivity().finish();
-				}
+        } else {
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+        }
+    }
 
-				@Override
-				public void onClickCancel(View v, SDDialogCustom dialog)
-				{
-				}
-			}).show();
+    private void requestInterfaceLoginOut() {
 
-		} else
-		{
-			startActivity(new Intent(getActivity(), LoginActivity.class));
-		}
-	}
+        RequestModel model = new RequestModel();
+        model.putCtlAct("biz_user", "loginout");
 
-	private void requestInterfaceLoginOut()
-	{
+        SDRequestCallBack<BaseCtlActModel> handler = new SDRequestCallBack<BaseCtlActModel>() {
+        };
+        InterfaceServer.getInstance().requestInterface(model, handler);
 
-		RequestModel model = new RequestModel();
-		model.putCtlAct("biz_user", "loginout");
+    }
 
-		SDRequestCallBack<BaseCtlActModel> handler = new SDRequestCallBack<BaseCtlActModel>()
-		{
-		};
-		InterfaceServer.getInstance().requestInterface(model, handler);
+    private void requestBiz_apns() {
+        String device_token = UmengRegistrar.getRegistrationId(getActivity());
+        if (TextUtils.isEmpty(device_token)) {
+            return;
+        }
 
-	}
-
-	private void requestBiz_apns()
-	{
-		String device_token = UmengRegistrar.getRegistrationId(getActivity());
-		if (TextUtils.isEmpty(device_token))
-		{
-			return;
-		}
-
-		RequestModel model = new RequestModel();
-		model.put("act", "biz_apns");
-		model.put("device_token", device_token);
-		SDRequestCallBack<BaseCtlActModel> handler = new SDRequestCallBack<BaseCtlActModel>()
-		{
-		};
-		InterfaceServer.getInstance().requestInterface(model, handler);
-	}
+        RequestModel model = new RequestModel();
+        model.put("act", "biz_apns");
+        model.put("device_token", device_token);
+        SDRequestCallBack<BaseCtlActModel> handler = new SDRequestCallBack<BaseCtlActModel>() {
+        };
+        InterfaceServer.getInstance().requestInterface(model, handler);
+    }
 
 }

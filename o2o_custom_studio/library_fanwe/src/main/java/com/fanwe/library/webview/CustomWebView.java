@@ -1,10 +1,5 @@
 package com.fanwe.library.webview;
 
-import java.io.File;
-import java.util.Map;
-
-import org.apache.http.util.EncodingUtils;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
@@ -14,229 +9,192 @@ import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-public class CustomWebView extends WebView
-{
-	private static final String WEBVIEW_CACHE_DIR = "/webviewcache"; // web缓存目录
+import org.apache.http.util.EncodingUtils;
 
-	private DefaultWebViewClient webViewClient;
-	private DefaultWebChromeClient webChromeClient;
-	private File cacheDir;
+import java.io.File;
+import java.util.Map;
 
-	public CustomWebView(Context context)
-	{
-		super(context);
-		init();
-	}
+public class CustomWebView extends WebView {
+    private static final String WEBVIEW_CACHE_DIR = "/webviewcache"; // web缓存目录
 
-	public CustomWebView(Context context, AttributeSet attrs)
-	{
-		super(context, attrs);
-		init();
-	}
+    private DefaultWebViewClient webViewClient;
+    private DefaultWebChromeClient webChromeClient;
+    private File cacheDir;
 
-	public void setListenerWebViewClient(WebViewClientListener listener)
-	{
-		webViewClient.setListener(listener);
-	}
+    public CustomWebView(Context context) {
+        super(context);
+        init();
+    }
 
-	public void setListenerWebChromeClient(WebChromeClientListener listener)
-	{
-		webChromeClient.setListener(listener);
-	}
+    public CustomWebView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
 
-	public File getCacheDir()
-	{
-		return cacheDir;
-	}
+    public void setListenerWebViewClient(WebViewClientListener listener) {
+        webViewClient.setListener(listener);
+    }
 
-	protected void init()
-	{
-		String cacheDirPath = getContext().getCacheDir().getAbsolutePath() + WEBVIEW_CACHE_DIR;
-		cacheDir = new File(cacheDirPath);
-		if (!cacheDir.exists())
-		{
-			cacheDir.mkdirs();
-		}
+    public void setListenerWebChromeClient(WebChromeClientListener listener) {
+        webChromeClient.setListener(listener);
+    }
 
-		webViewClient = new DefaultWebViewClient();
-		webChromeClient = new DefaultWebChromeClient();
+    public File getCacheDir() {
+        return cacheDir;
+    }
 
-		initSettings(getSettings());
-		setWebViewClient(webViewClient);
-		setWebChromeClient(webChromeClient);
-		requestFocus();
-	}
+    protected void init() {
+        String cacheDirPath = getContext().getCacheDir().getAbsolutePath() + WEBVIEW_CACHE_DIR;
+        cacheDir = new File(cacheDirPath);
+        if (!cacheDir.exists()) {
+            cacheDir.mkdirs();
+        }
 
-	@SuppressWarnings("deprecation")
-	@SuppressLint({ "SetJavaScriptEnabled", "SdCardPath" })
-	protected void initSettings(WebSettings settings)
-	{
-		setScaleToShowAll(true);
-		setSupportZoom(true);
-		setDisplayZoomControls(false);
-		// settings.setUserAgentString(us);
-		settings.setJavaScriptEnabled(true);
-		settings.setAllowFileAccess(true);
-		settings.setDomStorageEnabled(true); // 开启DOM storage API 功能
-		settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-		settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
-		settings.setSavePassword(false);
+        webViewClient = new DefaultWebViewClient();
+        webChromeClient = new DefaultWebChromeClient();
 
-		settings.setGeolocationEnabled(true);
-		settings.setGeolocationDatabasePath(cacheDir.getAbsolutePath());
+        initSettings(getSettings());
+        setWebViewClient(webViewClient);
+        setWebChromeClient(webChromeClient);
+        requestFocus();
+    }
 
-		// Database
-		settings.setDatabaseEnabled(true);
-		settings.setDatabasePath(cacheDir.getAbsolutePath());
+    @SuppressWarnings("deprecation")
+    @SuppressLint({"SetJavaScriptEnabled", "SdCardPath"})
+    protected void initSettings(WebSettings settings) {
+        setScaleToShowAll(true);
+        setSupportZoom(true);
+        setDisplayZoomControls(false);
+        // settings.setUserAgentString(us);
+        settings.setJavaScriptEnabled(true);
+        settings.setAllowFileAccess(true);
+        settings.setDomStorageEnabled(true); // 开启DOM storage API 功能
+        settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        settings.setSavePassword(false);
 
-		// AppCache
-		settings.setAppCacheEnabled(true);
-		settings.setAppCacheMaxSize(1024 * 1024 * 8);
-		settings.setAppCachePath(cacheDir.getAbsolutePath());
-	}
+        settings.setGeolocationEnabled(true);
+        settings.setGeolocationDatabasePath(cacheDir.getAbsolutePath());
 
-	public final void setScaleToShowAll(boolean isScaleToShowAll)
-	{
-		getSettings().setLoadWithOverviewMode(isScaleToShowAll);
-		getSettings().setUseWideViewPort(isScaleToShowAll);
-	}
+        // Database
+        settings.setDatabaseEnabled(true);
+        settings.setDatabasePath(cacheDir.getAbsolutePath());
 
-	public final void setSupportZoom(boolean isSupportZoom)
-	{
-		getSettings().setSupportZoom(isSupportZoom);
-		getSettings().setBuiltInZoomControls(isSupportZoom);
-	}
+        // AppCache
+        settings.setAppCacheEnabled(true);
+        settings.setAppCacheMaxSize(1024 * 1024 * 8);
+        settings.setAppCachePath(cacheDir.getAbsolutePath());
+    }
 
-	public final void setDisplayZoomControls(boolean display)
-	{
-		getSettings().setDisplayZoomControls(display);
-	}
+    public final void setScaleToShowAll(boolean isScaleToShowAll) {
+        getSettings().setLoadWithOverviewMode(isScaleToShowAll);
+        getSettings().setUseWideViewPort(isScaleToShowAll);
+    }
 
-	public void addJavascriptInterface(BaseJsHandler handler)
-	{
-		if (handler != null)
-		{
-			addJavascriptInterface(handler, handler.getName());
-		}
-	}
+    public final void setSupportZoom(boolean isSupportZoom) {
+        getSettings().setSupportZoom(isSupportZoom);
+        getSettings().setBuiltInZoomControls(isSupportZoom);
+    }
 
-	public void loadData(String htmlContent)
-	{
-		if (htmlContent != null)
-		{
-			loadDataWithBaseURL("about:blank", htmlContent, "text/html", "utf-8", null);
-		}
-	}
+    public final void setDisplayZoomControls(boolean display) {
+        getSettings().setDisplayZoomControls(display);
+    }
 
-	// get
-	public void get(String url)
-	{
-		get(url, null, null);
-	}
+    public void addJavascriptInterface(BaseJsHandler handler) {
+        if (handler != null) {
+            addJavascriptInterface(handler, handler.getName());
+        }
+    }
 
-	public void get(String url, RequestParams params)
-	{
-		get(url, params, null);
-	}
+    public void loadData(String htmlContent) {
+        if (htmlContent != null) {
+            loadDataWithBaseURL("about:blank", htmlContent, "text/html", "utf-8", null);
+        }
+    }
 
-	public void get(String url, Map<String, String> mapHeader)
-	{
-		get(url, null, mapHeader);
-	}
+    // get
+    public void get(String url) {
+        get(url, null, null);
+    }
 
-	public void get(String url, RequestParams params, Map<String, String> mapHeader)
-	{
-		if (TextUtils.isEmpty(url))
-		{
-			return;
-		}
-		if (params != null)
-		{
-			url = params.build(url);
-		}
-		if (mapHeader != null && !mapHeader.isEmpty())
-		{
-			loadUrl(url, mapHeader);
-		} else
-		{
-			loadUrl(url);
-		}
-	}
+    public void get(String url, RequestParams params) {
+        get(url, params, null);
+    }
 
-	// post
-	public void post(String url)
-	{
-		post(url, null);
-	}
+    public void get(String url, Map<String, String> mapHeader) {
+        get(url, null, mapHeader);
+    }
 
-	public void post(String url, RequestParams params)
-	{
-		if (TextUtils.isEmpty(url))
-		{
-			return;
-		}
+    public void get(String url, RequestParams params, Map<String, String> mapHeader) {
+        if (TextUtils.isEmpty(url)) {
+            return;
+        }
+        if (params != null) {
+            url = params.build(url);
+        }
+        if (mapHeader != null && !mapHeader.isEmpty()) {
+            loadUrl(url, mapHeader);
+        } else {
+            loadUrl(url);
+        }
+    }
 
-		byte[] postData = null;
-		if (params != null)
-		{
-			String data = params.build();
-			if (!TextUtils.isEmpty(data))
-			{
-				postData = EncodingUtils.getBytes(data, "BASE64");
-			}
-		}
-		postUrl(url, postData);
-	}
+    // post
+    public void post(String url) {
+        post(url, null);
+    }
 
-	public void loadJsFunction(String function, Object... params)
-	{
-		loadJsFunction(buildJsFunctionString(function, params));
-	}
+    public void post(String url, RequestParams params) {
+        if (TextUtils.isEmpty(url)) {
+            return;
+        }
 
-	public String buildJsFunctionString(String function, Object... params)
-	{
-		StringBuilder sb = new StringBuilder();
-		if (!TextUtils.isEmpty(function))
-		{
-			sb.append(function).append("(");
-			if (params != null && params.length > 0)
-			{
-				for (Object param : params)
-				{
-					if (param instanceof String)
-					{
-						sb.append("'").append(String.valueOf(param)).append("'");
-					} else
-					{
-						sb.append(String.valueOf(param));
-					}
-					sb.append(",");
-				}
-				sb.setLength(sb.length() - 1);
-			}
-			sb.append(")");
-		}
-		return sb.toString();
-	}
+        byte[] postData = null;
+        if (params != null) {
+            String data = params.build();
+            if (!TextUtils.isEmpty(data)) {
+                postData = EncodingUtils.getBytes(data, "BASE64");
+            }
+        }
+        postUrl(url, postData);
+    }
 
-	@SuppressLint("NewApi")
-	public void loadJsFunction(String js)
-	{
-		if (!TextUtils.isEmpty(js))
-		{
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-			{
-				evaluateJavascript(js, new ValueCallback<String>()
-				{
-					@Override
-					public void onReceiveValue(String arg0)
-					{
-					}
-				});
-			} else
-			{
-				loadUrl("javascript:" + js);
-			}
-		}
-	}
+    public void loadJsFunction(String function, Object... params) {
+        loadJsFunction(buildJsFunctionString(function, params));
+    }
+
+    public String buildJsFunctionString(String function, Object... params) {
+        StringBuilder sb = new StringBuilder();
+        if (!TextUtils.isEmpty(function)) {
+            sb.append(function).append("(");
+            if (params != null && params.length > 0) {
+                for (Object param : params) {
+                    if (param instanceof String) {
+                        sb.append("'").append(String.valueOf(param)).append("'");
+                    } else {
+                        sb.append(String.valueOf(param));
+                    }
+                    sb.append(",");
+                }
+                sb.setLength(sb.length() - 1);
+            }
+            sb.append(")");
+        }
+        return sb.toString();
+    }
+
+    @SuppressLint("NewApi")
+    public void loadJsFunction(String js) {
+        if (!TextUtils.isEmpty(js)) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                evaluateJavascript(js, new ValueCallback<String>() {
+                    @Override
+                    public void onReceiveValue(String arg0) {
+                    }
+                });
+            } else {
+                loadUrl("javascript:" + js);
+            }
+        }
+    }
 }

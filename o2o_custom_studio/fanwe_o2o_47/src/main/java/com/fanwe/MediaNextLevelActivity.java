@@ -1,5 +1,6 @@
 package com.fanwe;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -61,6 +62,10 @@ public class MediaNextLevelActivity extends BaseActivity {
         setContentView(R.layout.act_media_next_level);
         initView();
         initQRCode();
+    }
+
+    public void onPoster(View view) {
+        startActivity(new Intent(mActivity, MediaPosterActivity.class));
     }
 
     private void initView() {

@@ -1,8 +1,10 @@
 package com.fanwe.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class User_infoModel extends BaseActModel {
     private int id;
     private String user_name;

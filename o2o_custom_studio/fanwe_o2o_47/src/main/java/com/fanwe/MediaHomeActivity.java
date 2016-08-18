@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -67,13 +68,16 @@ public class MediaHomeActivity extends BaseActivity {
     @ViewInject(R.id.label10)
     private TextView label10;
 
-    LocalUserModel localUserModel;
-
     @ViewInject(R.id.user_qr_code)
     private ImageView qrImageView;
 
     @ViewInject(R.id.extra_name)
     private TextView extra_name;
+
+    @ViewInject(R.id.user_level)
+    private TextView user_level;
+
+    private LocalUserModel localUserModel;
 
     private Handler handler = new Handler(Looper.getMainLooper()) {
 
@@ -100,6 +104,7 @@ public class MediaHomeActivity extends BaseActivity {
     private void initData() {
         localUserModel = LocalUserModelDao.queryModel();
         user_name.setText(localUserModel.getUser_name());
+        user_level.setText("消费股东");
         requestUserMediaInfo();
         initQRCode();
     }
@@ -183,7 +188,11 @@ public class MediaHomeActivity extends BaseActivity {
                     label8.setText(getString(R.string.money, actModel.getNowMonthMemMoney()));//本月合伙人奖励
                     label9.setText(getString(R.string.money, actModel.getWithdrawalsMoney()));//已提现佣金
                     label10.setText(getString(R.string.money, actModel.getDepositMoney()));//未提现佣金
-                    extra_name.setText(getString(R.string.extension_person, actModel.getExtension_person()));//推荐人
+                    if(TextUtils.isEmpty(actModel.getExtension_person())) {
+                        extra_name.setText("");
+                    } else {
+                        extra_name.setText(getString(R.string.extension_person, actModel.getExtension_person()));//推荐人
+                    }
                 }
             }
 

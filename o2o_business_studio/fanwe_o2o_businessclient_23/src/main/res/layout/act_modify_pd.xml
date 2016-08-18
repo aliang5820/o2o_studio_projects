@@ -27,60 +27,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/photos" />
-
-            <com.fanwe.library.customview.ClearEditText
-                android:id="@+id/et_mobile"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:hint="请输入手机号"
-                android:inputType="number"
-                android:maxLength="11"
-                android:paddingLeft="10dp"
-                android:textColor="@color/black"
-                android:textCursorDrawable="@null"
-                android:textSize="@dimen/base_textsize_16" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:background="@drawable/layer_white_stroke_top_left_right"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:src="@drawable/ic_password_register" />
 
             <com.fanwe.library.customview.ClearEditText
-                android:id="@+id/et_code"
-                android:layout_width="0dp"
+                android:id="@+id/et_old_password"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:background="@null"
-                android:hint="请输入验证码"
-                android:inputType="number"
+                android:hint="请输入旧密码"
+                android:maxLength="11"
                 android:paddingLeft="10dp"
+                android:inputType="textPassword"
                 android:textColor="@color/black"
                 android:textCursorDrawable="@null"
                 android:textSize="@dimen/base_textsize_16" />
-
-            <com.fanwe.library.customview.SDSendValidateButton
-                android:id="@+id/btn_send_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/layer_transparent_stroke_main_color_corner"
-                android:minHeight="35dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -103,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:hint="请输入密码"
+                android:hint="请输入新密码"
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:textColor="@color/black"
@@ -131,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:hint="再次输入密码"
+                android:hint="再次输入新密码"
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:textColor="@color/black"
@@ -140,15 +100,15 @@
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
+    <Button
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="10dp"
         android:background="@drawable/selector_main_color_corner"
         android:gravity="center"
-        android:text="注册"
+        android:text="确定"
         android:clickable="true"
-        android:onClick="onRegister"
+        android:onClick="onModify"
         android:textColor="@color/white"
         android:textSize="@dimen/base_textsize_16" />
 

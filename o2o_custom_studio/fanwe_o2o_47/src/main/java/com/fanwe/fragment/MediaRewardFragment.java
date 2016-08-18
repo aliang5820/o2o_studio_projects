@@ -10,7 +10,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.fanwe.adapter.MediaRewardAdapter;
-
 import com.fanwe.constant.Constant;
 import com.fanwe.dao.LocalUserModelDao;
 import com.fanwe.http.InterfaceServer;
@@ -42,7 +41,7 @@ public class MediaRewardFragment extends BaseFragment {
     private PullToRefreshListView mList;
     private TextView mTvError;
 
-    private int mCurrentPage = 0;
+    private int mCurrentPage = 1;
     private int mTotalPage = 0;
 
     private List<MediaRewardItemModel> mListModel;
@@ -64,6 +63,10 @@ public class MediaRewardFragment extends BaseFragment {
 
     @ViewInject(R.id.reward_total_money)
     private TextView reward_total_money;
+
+    private long startTime;
+    private long endTime;
+    private boolean isQuery = false;
 
     public static MediaRewardFragment getInstance(int type) {
         MediaRewardFragment fragment = new MediaRewardFragment();
@@ -87,6 +90,7 @@ public class MediaRewardFragment extends BaseFragment {
 
         beginDate.setOnClickListener(this);
         endDate.setOnClickListener(this);
+        view.findViewById(R.id.query).setOnClickListener(this);
     }
 
     @Override
@@ -141,6 +145,11 @@ public class MediaRewardFragment extends BaseFragment {
                 DatePickerDialog endPicker = new DatePickerDialog(getContext(), endDateListener, endY, endM, endD);
                 endPicker.show();
                 break;
+            case R.id.query:
+                mCurrentPage = 1;
+                isQuery = true;
+                requestNextLevelActIndex(false);
+                break;
         }
     }
 
@@ -170,7 +179,7 @@ public class MediaRewardFragment extends BaseFragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                SDToast.showToast("position:" + position);
+                //SDToast.showToast("position:" + position);
             }
         });
     }
@@ -193,7 +202,7 @@ public class MediaRewardFragment extends BaseFragment {
 
     @Override
     protected void onRefreshData() {
-        mCurrentPage = 0;
+        mCurrentPage = 1;
         requestNextLevelActIndex(false);
     }
 
@@ -232,7 +241,10 @@ public class MediaRewardFragment extends BaseFragment {
         }
         model.put("user_id", localUserModel.getUser_id());
         model.put("page", mCurrentPage);//请求页码
-        model.put("limit", 20);//显示条数
+        if (isQuery) {
+            model.put("startTime", startTime / 1000);//查询的开始时间
+            model.put("endTime", endTime / 1000);//查询的结束时间
+        }
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<MediaRewardPageModel>() {
             private Dialog nDialog;
 
@@ -254,11 +266,15 @@ public class MediaRewardFragment extends BaseFragment {
                             mTotalPage = actModel.getPage().getPage_total();
                         }
 
-                        if (actModel.getData_list() != null && actModel.getData_list().size() > 0) {
+                        if (actModel.getData_list() != null) {
                             if (!isLoadMore) {
                                 mListModel.clear();
                             }
                             mListModel.addAll(actModel.getData_list());
+                            mAdapter.updateData(mListModel);
+                        } else if (mCurrentPage == 1) {
+                            //第一页
+                            mListModel.clear();
                             mAdapter.updateData(mListModel);
                         }
                         reward_total_money.setText(getContext().getString(R.string.money, actModel.getTotal_num()));
@@ -300,6 +316,15 @@ public class MediaRewardFragment extends BaseFragment {
             beginD = dayOfMonth;
             //更新日期
             beginDate.setText(beginY + "-" + (beginM + 1) + "-" + beginD);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, monthOfYear);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            startTime = calendar.getTimeInMillis();
         }
 
     };
@@ -318,6 +343,15 @@ public class MediaRewardFragment extends BaseFragment {
             endD = dayOfMonth;
             //更新日期
             endDate.setText(endY + "-" + (endM + 1) + "-" + endD);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, monthOfYear);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            endTime = calendar.getTimeInMillis();
         }
     };
 }

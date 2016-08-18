@@ -137,7 +137,7 @@
             <TextView
                 android:id="@+id/label1"
                 style="@style/RewardItemStyle"
-                android:text="订单号" />
+                android:text="奖励类型" />
 
             <View style="@style/V_LineStyle" />
 
