@@ -142,11 +142,11 @@ public class MediaNextLevelFragment extends BaseFragment {
                             mCurrentPage = actModel.getPage().getPage();
                             mTotalPage = actModel.getPage().getPage_total();
                         }
-                        if (actModel.getRelationList() != null && actModel.getRelationList().size() > 0) {
+                        if (actModel.getItem() != null && actModel.getItem().size() > 0) {
                             if (!isLoadMore) {
                                 mListModel.clear();
                             }
-                            mListModel.addAll(actModel.getRelationList());
+                            mListModel.addAll(actModel.getItem());
                             mAdapter.updateData(mListModel);
                         }
                     }

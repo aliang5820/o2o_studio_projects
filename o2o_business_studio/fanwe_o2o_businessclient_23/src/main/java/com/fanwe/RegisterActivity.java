@@ -211,6 +211,8 @@ public class RegisterActivity extends TitleBaseActivity implements View.OnClickL
         user.setSupplier_id(actModel.getAccount_info().getSupplier_id());
         user.setAccount_name(actModel.getAccount_info().getAccount_name());
         user.setAccount_password(actModel.getAccount_info().getAccount_password());
+        user.setAccount_type(actModel.getAccount_info().getAccount_type());
+        user.setQr_code(actModel.getAccount_info().getQr_code());
         App.getApp().setmLocalUser(user);
 
         // 保存账号

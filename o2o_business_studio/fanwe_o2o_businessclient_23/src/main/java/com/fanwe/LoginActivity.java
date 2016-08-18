@@ -143,6 +143,7 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
         user.setSupplier_id(accountInfoModel.getSupplier_id());
         user.setAccount_name(accountInfoModel.getAccount_name());
         user.setAccount_password(accountInfoModel.getAccount_password());
+        user.setAccount_type(accountInfoModel.getAccount_type());
         user.setQr_code(accountInfoModel.getQr_code());
         App.getApp().setmLocalUser(user);
 

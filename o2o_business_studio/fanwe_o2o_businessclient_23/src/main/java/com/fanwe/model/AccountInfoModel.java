@@ -12,5 +12,6 @@ public class AccountInfoModel {
     private String supplier_id;
     private String account_name;
     private String account_password;
+    private int account_type;
     private String qr_code;//推广二维码内容
 }

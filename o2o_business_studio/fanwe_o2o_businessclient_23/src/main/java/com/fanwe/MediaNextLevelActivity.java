@@ -40,8 +40,10 @@ public class MediaNextLevelActivity extends TitleBaseActivity {
     @ViewInject(R.id.user_name)
     private TextView user_name;
 
+    @ViewInject(R.id.user_level)
+    private TextView user_level;
+
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
-    //private List<View> mViewList = new ArrayList<>();//页卡视图集合
     private List<Fragment> mFragmentList = new ArrayList<>();//页卡视图集合
 
     @ViewInject(R.id.user_qr_code)
@@ -61,6 +63,27 @@ public class MediaNextLevelActivity extends TitleBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_media_next_level);
         initView();
+        showUserLevel();
+    }
+
+    private void showUserLevel() {
+        //0消费股东  1 会员店 ，2 商户合伙人，3个人合伙人
+        String type = "消费股东";
+        switch (App.getApp().getmLocalUser().getAccount_type()) {
+            case 0:
+                type = "消费股东";
+                break;
+            case 1:
+                type = "会员店";
+                break;
+            case 2:
+                type = "商户合伙人";
+                break;
+            case 3:
+                type = "个人合伙人";
+                break;
+        }
+        user_level.setText(type);
     }
 
     private void initView() {
@@ -70,10 +93,6 @@ public class MediaNextLevelActivity extends TitleBaseActivity {
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs);
 
         //添加页卡视图
-        /*LayoutInflater mInflater = LayoutInflater.from(this);
-        mViewList.add(mInflater.inflate(R.layout.act_apply_hyd, mTabLayout, false));//页卡视图1
-        mViewList.add(mInflater.inflate(R.layout.act_apply_person_hhr, mTabLayout, false));//页卡视图2
-        mViewList.add(mInflater.inflate(R.layout.act_apply_person_hhr, mTabLayout, false));//页卡视图2*/
         mFragmentList.add(MediaNextLevelFragment.getInstance(1));
         mFragmentList.add(MediaNextLevelFragment.getInstance(2));
         mFragmentList.add(MediaNextLevelFragment.getInstance(3));
@@ -87,7 +106,6 @@ public class MediaNextLevelActivity extends TitleBaseActivity {
         mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(1)));
         mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(2)));
 
-        //MyPagerAdapter mAdapter = new MyPagerAdapter(mViewList);
         FragmentAdapter mAdapter = new FragmentAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(mAdapter);//给ViewPager设置适配器
         mViewPager.setOffscreenPageLimit(3);

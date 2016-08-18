@@ -66,6 +66,9 @@ public class MediaHomeActivity extends TitleBaseActivity {
     @ViewInject(R.id.label10)
     private TextView label10;
 
+    @ViewInject(R.id.user_level)
+    private TextView user_level;
+
     @ViewInject(R.id.user_qr_code)
     private ImageView qrImageView;
 
@@ -95,8 +98,29 @@ public class MediaHomeActivity extends TitleBaseActivity {
 
     private void initData() {
         user_name.setText(App.getApp().getmLocalUser().getAccount_name());
+        showUserLevel();
         requestUserMediaInfo();
         initQRCode();
+    }
+
+    private void showUserLevel() {
+        //0消费股东  1 会员店 ，2 商户合伙人，3个人合伙人
+        String type = "消费股东";
+        switch (App.getApp().getmLocalUser().getAccount_type()) {
+            case 0:
+                type = "消费股东";
+                break;
+            case 1:
+                type = "会员店";
+                break;
+            case 2:
+                type = "商户合伙人";
+                break;
+            case 3:
+                type = "个人合伙人";
+                break;
+        }
+        user_level.setText(type);
     }
 
     public void onNextLevel(View view) {

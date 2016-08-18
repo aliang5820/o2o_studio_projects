@@ -45,8 +45,6 @@ public class MediaRewardFragment extends BaseFragment {
 
     private List<MediaRewardItemModel> mListModel;
     private MediaRewardAdapter mAdapter;
-    /*private List<MediaNextLevelItemModel> mListModel;
-    private MediaNextLevelAdapter mAdapter;*/
     private int type;
     private View reward_layout, reward_order_layout;
     private int beginY, beginM, beginD, endY, endM, endD;
@@ -62,6 +60,10 @@ public class MediaRewardFragment extends BaseFragment {
 
     @ViewInject(R.id.reward_total_money)
     private TextView reward_total_money;
+
+    private long startTime;
+    private long endTime;
+    private boolean isQuery = false;
 
     public static MediaRewardFragment getInstance(int type) {
         MediaRewardFragment fragment = new MediaRewardFragment();
@@ -85,6 +87,7 @@ public class MediaRewardFragment extends BaseFragment {
 
         beginDate.setOnClickListener(this);
         endDate.setOnClickListener(this);
+        view.findViewById(R.id.query).setOnClickListener(this);
     }
 
     @Override
@@ -138,6 +141,11 @@ public class MediaRewardFragment extends BaseFragment {
                  */
                 DatePickerDialog endPicker = new DatePickerDialog(getContext(), endDateListener, endY, endM, endD);
                 endPicker.show();
+                break;
+            case R.id.query:
+                mCurrentPage = 0;
+                isQuery = true;
+                requestNextLevelActIndex(false);
                 break;
         }
     }
@@ -225,7 +233,10 @@ public class MediaRewardFragment extends BaseFragment {
         }
         model.put("user_id", App.getApp().getmLocalUser().getSupplier_id());
         model.put("page", mCurrentPage);//请求页码
-        model.put("limit", 20);//显示条数
+        if(isQuery) {
+            model.put("startTime", startTime);//查询的开始时间
+            model.put("endTime", endTime);//查询的结束时间
+        }
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<MediaRewardPageModel>() {
             private Dialog nDialog;
 
@@ -247,11 +258,11 @@ public class MediaRewardFragment extends BaseFragment {
                             mTotalPage = actModel.getPage().getPage_total();
                         }
 
-                        if (actModel.getData_list() != null && actModel.getData_list().size() > 0) {
+                        if (actModel.getItem() != null && actModel.getItem().size() > 0) {
                             if (!isLoadMore) {
                                 mListModel.clear();
                             }
-                            mListModel.addAll(actModel.getData_list());
+                            mListModel.addAll(actModel.getItem());
                             mAdapter.updateData(mListModel);
                         }
                         reward_total_money.setText(getContext().getString(R.string.money, actModel.getTotal_num()));
@@ -293,6 +304,12 @@ public class MediaRewardFragment extends BaseFragment {
             beginD = dayOfMonth;
             //更新日期
             beginDate.setText(beginY + "-" + (beginM + 1) + "-" + beginD);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, year);
+            calendar.set(Calendar.DAY_OF_MONTH, year);
+            startTime = calendar.getTimeInMillis();
         }
 
     };
@@ -311,6 +328,12 @@ public class MediaRewardFragment extends BaseFragment {
             endD = dayOfMonth;
             //更新日期
             endDate.setText(endY + "-" + (endM + 1) + "-" + endD);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, year);
+            calendar.set(Calendar.DAY_OF_MONTH, year);
+            endTime = calendar.getTimeInMillis();
         }
     };
 }

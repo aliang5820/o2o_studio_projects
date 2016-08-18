@@ -43,7 +43,7 @@ public class MediaNextLevelAdapter extends SDSimpleAdapter<MediaNextLevelItemMod
 
         MediaNextLevelItemModel itemModel = mListModel.get(position);
         SDViewBinder.setTextView(user_name, itemModel.getUser_name());
-        //0会员  1 会员店 ，2 商户合伙人，3个人合伙人
+        //0消费股东  1 会员店 ，2 商户合伙人，3个人合伙人
         String type = "消费股东";
         switch (itemModel.getType()) {
             case 0:

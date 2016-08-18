@@ -13,5 +13,5 @@ import lombok.EqualsAndHashCode;
 public class MediaRewardPageModel extends BaseCtlActModel {
     private PageModel page;
     private double total_num;
-    private List<MediaRewardItemModel> data_list;
+    private List<MediaRewardItemModel> item;
 }
