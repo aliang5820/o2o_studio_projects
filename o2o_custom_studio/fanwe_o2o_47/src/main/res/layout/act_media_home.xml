@@ -89,6 +89,7 @@
             <TextView
                 style="@style/MineMenuItemStyle"
                 android:onClick="onNextLevel"
+                android:clickable="true"
                 android:text="我的下级" />
 
             <View style="@style/H_LineStyle" />
@@ -231,6 +232,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onRewardOrder"
+                android:clickable="true"
                 android:orientation="horizontal">
 
                 <TextView
@@ -252,6 +254,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onRewardHYD"
+                android:clickable="true"
                 android:orientation="horizontal">
 
                 <TextView
@@ -273,6 +276,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onRewardHHR"
+                android:clickable="true"
                 android:orientation="horizontal">
 
                 <TextView
