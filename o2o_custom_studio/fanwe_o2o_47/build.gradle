@@ -6,7 +6,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "com.fanwe.o2o.newo2o"
+        applicationId "com.shengdianwang.o2o.newo2o"
         minSdkVersion 14
     }
 

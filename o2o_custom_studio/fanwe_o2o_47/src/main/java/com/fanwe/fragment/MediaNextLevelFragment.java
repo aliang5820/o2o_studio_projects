@@ -98,7 +98,7 @@ public class MediaNextLevelFragment extends BaseFragment {
 
     @Override
     protected void onRefreshData() {
-        mCurrentPage = 0;
+        mCurrentPage = 1;
         requestNextLevelActIndex(false);
     }
 

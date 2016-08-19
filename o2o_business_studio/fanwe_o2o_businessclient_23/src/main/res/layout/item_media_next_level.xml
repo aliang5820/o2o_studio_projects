@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -32,7 +33,7 @@
                 android:id="@+id/user_name"
                 style="@style/MediaNextLevelItemStyle"
                 android:layout_weight="1"
-                android:text="nickName" />
+                tools:text="nickName" />
         </LinearLayout>
 
         <LinearLayout
@@ -52,7 +53,7 @@
                 android:id="@+id/user_level"
                 style="@style/MediaNextLevelItemStyle"
                 android:layout_weight="1"
-                android:text="合伙人" />
+                tools:text="合伙人" />
         </LinearLayout>
 
         <LinearLayout
@@ -66,13 +67,13 @@
             <TextView
                 style="@style/MediaNextLevelItemStyle"
                 android:minWidth="80dp"
-                android:text="关注时间：" />
+                android:text="注册时间：" />
 
             <TextView
                 android:id="@+id/focus_time"
                 style="@style/MediaNextLevelItemStyle"
                 android:layout_weight="1"
-                android:text="2015/7/8 14:12" />
+                tools:text="2015/7/8 14:12" />
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

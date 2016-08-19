@@ -97,7 +97,7 @@ public class MediaNextLevelFragment extends BaseFragment {
 
     @Override
     protected void onRefreshData() {
-        mCurrentPage = 0;
+        mCurrentPage = 1;
         requestNextLevelActIndex(false);
     }
 
@@ -121,7 +121,7 @@ public class MediaNextLevelFragment extends BaseFragment {
         model.putCtlAct("biz_media", "get_extension_class");
         model.put("page", mCurrentPage);
         model.put("level", level);
-        model.put("supplier_id", App.getApp().getmLocalUser().getSupplier_id());
+        model.put("user_id", App.getApp().getmLocalUser().getSupplier_id());
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<MediaNextLevelPageModel>() {
             private Dialog nDialog;
 

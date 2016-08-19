@@ -7,7 +7,7 @@ android {
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
-        applicationId "com.fanwe.businessclient"
+        applicationId "com.sdwbusiness.o2o.newo2o"
         minSdkVersion 14
     }
 

@@ -271,7 +271,7 @@ public class MediaRewardFragment extends BaseFragment {
                             mListModel.clear();
                             mAdapter.updateData(mListModel);
                         }
-                        reward_total_money.setText(getContext().getString(R.string.money, actModel.getTotal_num()));
+                        reward_total_money.setText(getContext().getString(R.string.money, actModel.getTotalRewardMoney()));
                     }
                 }
             }
