@@ -267,6 +267,12 @@ public class MyFragment extends BasePullToRefreshScrollViewFragment {
             strWaitComment = "待评价 " + waitComment;
         }
         SDViewBinder.setTextViewsVisibility(mTv_order_not_comment, strWaitComment);
+
+        if(actModel.getIs_extension() == 0) {
+            mLl_my_media.setVisibility(View.GONE);
+        } else {
+            mLl_my_media.setVisibility(View.VISIBLE);
+        }
     }
 
     private void initTitle() {

@@ -152,9 +152,15 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
 
         // 保存账号
         AppConfig.setUserName(accountInfoModel.getAccount_name());
-        //登录成功进入主页之前，需要判断是否已经申请加盟
-        startActivity(new Intent(mActivity, MainActivity.class));
-        finish();
+        if(accountInfoModel.getIs_new() == 0) {
+            //登录成功进入主页之前，需要判断是否已经申请加盟
+            startActivity(new Intent(mActivity, MainActivity.class));
+            finish();
+        } else {
+            //申请类别选择
+            startActivity(new Intent(mActivity, ApplyTypeActivity.class));
+            finish();
+        }
     }
 
 }

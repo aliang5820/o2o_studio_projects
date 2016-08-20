@@ -292,54 +292,57 @@
                     tools:text="￥24.00" />
             </LinearLayout>
 
-            <View style="@style/H_LineStyle" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="4dp"
-                android:background="@color/stroke" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:visibility="gone"
+                android:orientation="vertical">
 
                 <TextView
-                    style="@style/MineMenuItemStyle"
-                    android:layout_weight="1"
-                    android:drawableRight="@null"
-                    android:text="已提现佣金" />
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="@color/stroke" />
 
-                <TextView
-                    android:id="@+id/label9"
-                    style="@style/MineMenuItemStyle"
-                    android:layout_width="wrap_content"
-                    android:drawableRight="@null"
-                    tools:text="￥24.00" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/MineMenuItemStyle"
+                        android:layout_weight="1"
+                        android:drawableRight="@null"
+                        android:text="已提现佣金" />
+
+                    <TextView
+                        android:id="@+id/label9"
+                        style="@style/MineMenuItemStyle"
+                        android:layout_width="wrap_content"
+                        android:drawableRight="@null"
+                        tools:text="￥24.00" />
+                </LinearLayout>
+
+                <View style="@style/H_LineStyle" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/MineMenuItemStyle"
+                        android:layout_weight="1"
+                        android:drawableRight="@null"
+                        android:text="未提现佣金" />
+
+                    <TextView
+                        android:id="@+id/label10"
+                        style="@style/MineMenuItemStyle"
+                        android:layout_width="wrap_content"
+                        android:drawableRight="@null"
+                        tools:text="￥24.00" />
+                </LinearLayout>
             </LinearLayout>
-
-            <View style="@style/H_LineStyle" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    style="@style/MineMenuItemStyle"
-                    android:layout_weight="1"
-                    android:drawableRight="@null"
-                    android:text="未提现佣金" />
-
-                <TextView
-                    android:id="@+id/label10"
-                    style="@style/MineMenuItemStyle"
-                    android:layout_width="wrap_content"
-                    android:drawableRight="@null"
-                    tools:text="￥24.00" />
-            </LinearLayout>
-
-            <View style="@style/H_LineStyle" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

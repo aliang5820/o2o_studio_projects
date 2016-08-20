@@ -79,8 +79,8 @@ public class ModifyPasswordActivity extends TitleBaseActivity implements View.On
             RequestModel model = new RequestModel();
             model.putCtlAct("biz_user", "update_password");
             model.put("account_password", mStrOldPwd);
-            model.put("password ", mStrPwd);
-            model.put("account_id ", App.getApp().getmLocalUser().getUser_id());
+            model.put("password", mStrPwd);
+            model.put("account_id", App.getApp().getmLocalUser().getUser_id());
             InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<BizUserCtlDoLoginActModel>() {
 
                 @Override

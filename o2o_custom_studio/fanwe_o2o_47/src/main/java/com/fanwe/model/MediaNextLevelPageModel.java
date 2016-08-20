@@ -12,5 +12,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class MediaNextLevelPageModel extends BaseActModel {
     private PageModel page;
-    private List<MediaNextLevelItemModel> relationList;
+    private List<MediaNextLevelItemModel> item;
 }

@@ -46,6 +46,9 @@ public class MediaNextLevelActivity extends BaseActivity {
     @ViewInject(R.id.user_qr_code)
     private ImageView qrImageView;
 
+    @ViewInject(R.id.user_level)
+    private TextView user_level;
+
     private Handler handler = new Handler(Looper.getMainLooper()) {
 
         @Override
@@ -70,7 +73,7 @@ public class MediaNextLevelActivity extends BaseActivity {
 
     private void initView() {
         mTitle.setMiddleTextTop("自媒体");
-
+        user_level.setText("消费股东");
         ViewPager mViewPager = (ViewPager) findViewById(R.id.vp_view);
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs);
 

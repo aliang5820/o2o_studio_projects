@@ -357,7 +357,9 @@ public class ApplyHHRActivity extends TitleBaseActivity {
                             intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
                             startActivity(intent);
                             finish();*/
-                            requestLoginInterface();
+                            /*requestLoginInterface();*/
+                            SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
+                            startActivity(new Intent(mActivity, LoginActivity.class));
                             break;
                     }
                 }
@@ -426,7 +428,9 @@ public class ApplyHHRActivity extends TitleBaseActivity {
                             intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
                             startActivity(intent);
                             finish();*/
-                            requestLoginInterface();
+                            //requestLoginInterface();
+                            SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
+                            startActivity(new Intent(mActivity, LoginActivity.class));
                             break;
                     }
                 }
@@ -440,7 +444,7 @@ public class ApplyHHRActivity extends TitleBaseActivity {
         });
     }
 
-    private void requestLoginInterface() {
+    /*private void requestLoginInterface() {
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_user", "dologin");
         model.put("account_name", App.getApp().getmLocalUser().getAccount_name());
@@ -495,5 +499,5 @@ public class ApplyHHRActivity extends TitleBaseActivity {
         //登录成功进入主页之前，需要判断是否已经申请加盟
         SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
         startActivity(new Intent(mActivity, MainActivity.class));
-    }
+    }*/
 }
