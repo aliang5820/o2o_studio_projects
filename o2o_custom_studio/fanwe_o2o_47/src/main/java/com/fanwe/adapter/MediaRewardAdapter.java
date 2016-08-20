@@ -48,7 +48,7 @@ public class MediaRewardAdapter extends SDSimpleAdapter<MediaRewardItemModel> {
             TextView label3 = ViewHolder.get(R.id.label3, convertView);
             TextView label4 = ViewHolder.get(R.id.label4, convertView);
             //订单号
-            switch (model.getBelong_id()) {
+            /*switch (model.getBelong_id()) {
                 case 1:
                     SDViewBinder.setTextView(label1, "会员店消费");
                     break;
@@ -58,7 +58,8 @@ public class MediaRewardAdapter extends SDSimpleAdapter<MediaRewardItemModel> {
                 case 3:
                     SDViewBinder.setTextView(label1, "销售");
                     break;
-            }
+            }*/
+            SDViewBinder.setTextView(label1, model.getBelong_value());
             //下单时间
             Date date = new Date();
             if(model.getOrderTime() > 0) {

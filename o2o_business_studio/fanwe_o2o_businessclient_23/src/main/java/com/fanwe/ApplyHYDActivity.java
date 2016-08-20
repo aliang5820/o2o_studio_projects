@@ -247,7 +247,7 @@ public class ApplyHYDActivity extends TitleBaseActivity {
         }
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_member", "applyMemberShop");
-        model.put("supplier_id", App.getApp().getmLocalUser().getUser_id());//商户的id
+        model.put("supplier_id", App.getApp().getmLocalUser().getSupplier_id());//商户的id
         model.put("area_id", city.getId());//地区的id
         model.put("supplier_name", storeName.getText().toString());//商户名称
         model.put("supplier_add", address.getText().toString());//商户地址

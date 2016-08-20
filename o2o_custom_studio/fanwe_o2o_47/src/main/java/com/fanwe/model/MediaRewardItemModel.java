@@ -16,4 +16,5 @@ public class MediaRewardItemModel {
     private String consume_money;//消费金额
     private String reward_money;//奖励金额
     private int belong_id;//消费类型
+    private String belong_value;//消费类型描述
 }

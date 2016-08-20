@@ -36,6 +36,7 @@ public class InitActivity extends BaseActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                //屏蔽自动登录
                 if (isFinishLogin()) {
                     requestInterface();
                 } else {
@@ -93,8 +94,15 @@ public class InitActivity extends BaseActivity {
             user.setQr_code(actModel.getAccount_info().getQr_code());
             App.getApp().setmLocalUser(user);
             //登录成功进入主页之前，需要判断是否已经申请加盟
-            startActivity(new Intent(mActivity, MainActivity.class));
-            finish();
+            if(actModel.getAccount_info().getIs_new() == 0) {
+                //登录成功进入主页之前，需要判断是否已经申请加盟
+                startActivity(new Intent(mActivity, MainActivity.class));
+                finish();
+            } else {
+                //申请类别选择
+                startActivity(new Intent(mActivity, ApplyTypeActivity.class));
+                finish();
+            }
         }
     }
 

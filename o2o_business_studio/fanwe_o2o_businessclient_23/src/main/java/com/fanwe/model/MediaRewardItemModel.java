@@ -10,6 +10,7 @@ public class MediaRewardItemModel {
     private long user_id;
     private long order_id;
     private int belong_id;//消费类型
+    private String belong_value;//消费类型描述
     private long order_sn;//订单号
     private String user_name;//用户名称
     private String user_type;//0 普通 ，1 会员店 ，2 商户合伙人，3个人合伙人
