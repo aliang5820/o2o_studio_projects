@@ -50,6 +50,7 @@ public class MediaPosterActivity extends BaseActivity {
     }
 
     private void initQRCode() {
+        final String qr_code = getIntent().getStringExtra(Constant.ExtraConstant.EXTRA_MODEL);
         //判断推广二维码是否存在
         final LocalUserModel localUserModel = LocalUserModelDao.queryModel();
         final String dir = Environment.getExternalStorageDirectory() + File.separator + Constant.FILE_DIR;
@@ -65,7 +66,7 @@ public class MediaPosterActivity extends BaseActivity {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    QRCodeUtil.createQRImage(localUserModel.getQr_code(), 200, 200, null, filePath);
+                    QRCodeUtil.createQRImage(qr_code, 200, 200, null, filePath);
                     //图片创建成功后，进行显示
                     Message.obtain(handler, 0, filePath).sendToTarget();
                 }

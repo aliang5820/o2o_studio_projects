@@ -68,25 +68,13 @@ public class MediaHomeActivity extends BaseActivity {
     @ViewInject(R.id.label10)
     private TextView label10;
 
-    @ViewInject(R.id.user_qr_code)
-    private ImageView qrImageView;
-
     @ViewInject(R.id.extra_name)
     private TextView extra_name;
 
     @ViewInject(R.id.user_level)
     private TextView user_level;
-
+    private String qr_code;
     private LocalUserModel localUserModel;
-
-    private Handler handler = new Handler(Looper.getMainLooper()) {
-
-        @Override
-        public void handleMessage(Message message) {
-            Bitmap bitmap = BitmapFactory.decodeFile(message.obj.toString());
-            qrImageView.setImageBitmap(bitmap);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +94,6 @@ public class MediaHomeActivity extends BaseActivity {
         user_name.setText(localUserModel.getUser_name());
         user_level.setText("消费股东");
         requestUserMediaInfo();
-        initQRCode();
     }
 
     public void onNextLevel(View view) {
@@ -114,7 +101,9 @@ public class MediaHomeActivity extends BaseActivity {
     }
 
     public void onPoster(View view) {
-        startActivity(new Intent(mActivity, MediaPosterActivity.class));
+        Intent intent = new Intent(mActivity, MediaPosterActivity.class);
+        intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, qr_code);
+        startActivity(intent);
     }
 
     public void onRewardOrder(View view) {
@@ -133,30 +122,6 @@ public class MediaHomeActivity extends BaseActivity {
         Intent intent = new Intent(mActivity, MediaRewardActivity.class);
         intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Reward.HYD);
         startActivity(intent);
-    }
-
-    private void initQRCode() {
-        //判断推广二维码是否存在
-        final LocalUserModel localUserModel = LocalUserModelDao.queryModel();
-        final String dir = Environment.getExternalStorageDirectory() + File.separator + Constant.FILE_DIR;
-        File file = new File(dir);
-        if(!file.exists()) {
-            file.mkdirs();
-        }
-        final String filePath = dir + localUserModel.getUser_id() + "_" + Constant.QR_CODE_FILE_NAME;
-        File qrFile = new File(filePath);
-        if (qrFile.exists()) {
-            Message.obtain(handler, 0, filePath).sendToTarget();
-        } else {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    QRCodeUtil.createQRImage(localUserModel.getQr_code(), 200, 200, null, filePath);
-                    //图片创建成功后，进行显示
-                    Message.obtain(handler, 0, filePath).sendToTarget();
-                }
-            }).start();
-        }
     }
 
     /**
@@ -193,6 +158,7 @@ public class MediaHomeActivity extends BaseActivity {
                     } else {
                         extra_name.setText(getString(R.string.extension_person, actModel.getExtension_person()));//推荐人
                     }
+                    qr_code = actModel.getQr_code();
                 }
             }
 

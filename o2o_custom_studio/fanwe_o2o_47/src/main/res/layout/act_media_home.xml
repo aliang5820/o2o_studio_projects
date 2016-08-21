@@ -33,7 +33,6 @@
                     android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@+id/user_qr_code"
                     android:layout_toRightOf="@+id/user_icon"
                     android:text="我帅德.布耀布耀德"
                     android:textColor="@color/black"
@@ -45,7 +44,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/user_name"
                     android:layout_marginTop="@dimen/base_margin_5"
-                    android:layout_toLeftOf="@+id/user_qr_code"
                     android:layout_toRightOf="@+id/user_icon"
                     android:gravity="center_vertical"
                     android:text="推广员"
@@ -57,7 +55,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/user_level"
                     android:layout_marginTop="@dimen/base_margin_5"
-                    android:layout_toLeftOf="@+id/user_qr_code"
                     android:layout_toRightOf="@+id/user_icon"
                     android:background="@drawable/selector_main_color_corner"
                     android:gravity="center"
@@ -66,14 +63,6 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_button" />
 
-                <ImageView
-                    android:id="@+id/user_qr_code"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/base_margin_15"
-                    android:src="@drawable/qr_code" />
             </RelativeLayout>
 
             <TextView
