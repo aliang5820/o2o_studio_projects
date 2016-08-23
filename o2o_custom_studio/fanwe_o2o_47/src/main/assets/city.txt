@@ -1,0 +1,193 @@
+{
+    "citylist": [
+        {
+            "id": "27",
+            "name": "北京市",
+            "uname": "beijingshi",
+            "pid": "26",
+            "region_level": "2",
+            "district": [
+                {
+                    "id": "11",
+                    "name": "朝阳区",
+                    "uname": "chaoyangqu",
+                    "pid": "27",
+                    "region_level": "3"
+                },
+                {
+                    "id": "12",
+                    "name": "东城区",
+                    "uname": "chaoyangqu",
+                    "pid": "27",
+                    "region_level": "3"
+                },
+                {
+                    "id": "13",
+                    "name": "通州区",
+                    "uname": "chaoyangqu",
+                    "pid": "27",
+                    "region_level": "3"
+                },
+                {
+                    "id": "14",
+                    "name": "海淀区",
+                    "uname": "chaoyangqu",
+                    "pid": "27",
+                    "region_level": "3"
+                },
+                {
+                    "id": "15",
+                    "name": "房山区",
+                    "uname": "chaoyangqu",
+                    "pid": "27",
+                    "region_level": "3"
+                },
+                {
+                    "id": "16",
+                    "name": "门头沟",
+                    "uname": "chaoyangqu",
+                    "pid": "27",
+                    "region_level": "3"
+                },
+                {
+                    "id": "17",
+                    "name": "石景山",
+                    "uname": "chaoyangqu",
+                    "pid": "27",
+                    "region_level": "3"
+                },
+                {
+                    "id": "18",
+                    "name": "丰台",
+                    "uname": "chaoyangqu",
+                    "pid": "27",
+                    "region_level": "3"
+                }
+            ]
+        },
+        {
+            "id": "22",
+            "name": "成都市",
+            "uname": "chengdushi",
+            "pid": "21",
+            "region_level": "2",
+            "district": [
+                {
+                    "id": "220",
+                    "name": "高新区",
+                    "uname": "gaoxinqu",
+                    "pid": "22",
+                    "region_level": "3"
+                },
+                {
+                    "id": "221",
+                    "name": "金牛区",
+                    "uname": "gaoxinqu",
+                    "pid": "22",
+                    "region_level": "3"
+                },
+                {
+                    "id": "222",
+                    "name": "锦江区",
+                    "uname": "gaoxinqu",
+                    "pid": "22",
+                    "region_level": "3"
+                },
+                {
+                    "id": "223",
+                    "name": "武侯区",
+                    "uname": "gaoxinqu",
+                    "pid": "22",
+                    "region_level": "3"
+                },
+                {
+                    "id": "224",
+                    "name": "龙泉驿区",
+                    "uname": "gaoxinqu",
+                    "pid": "22",
+                    "region_level": "3"
+                },
+                {
+                    "id": "225",
+                    "name": "青白江区",
+                    "uname": "gaoxinqu",
+                    "pid": "22",
+                    "region_level": "3"
+                },
+                {
+                    "id": "226",
+                    "name": "双流县",
+                    "uname": "gaoxinqu",
+                    "pid": "22",
+                    "region_level": "3"
+                }
+            ]
+        },
+		{
+            "id": "25",
+            "name": "上海市",
+            "uname": "shanghaishi",
+            "pid": "21",
+            "region_level": "2",
+            "district": [
+                {
+                    "id": "120",
+                    "name": "黄浦区",
+                    "uname": "gaoxinqu",
+                    "pid": "22",
+                    "region_level": "3"
+                },
+                {
+                    "id": "121",
+                    "name": "卢湾区",
+                    "uname": "gaoxinqu",
+                    "pid": "22",
+                    "region_level": "3"
+                },
+                {
+                    "id": "122",
+                    "name": "徐汇区",
+                    "uname": "gaoxinqu",
+                    "pid": "22",
+                    "region_level": "3"
+                },
+                {
+                    "id": "123",
+                    "name": "长宁区",
+                    "uname": "gaoxinqu",
+                    "pid": "22",
+                    "region_level": "3"
+                },
+                {
+                    "id": "124",
+                    "name": "静安区",
+                    "uname": "gaoxinqu",
+                    "pid": "22",
+                    "region_level": "3"
+                },
+                {
+                    "id": "125",
+                    "name": "普陀区",
+                    "uname": "gaoxinqu",
+                    "pid": "22",
+                    "region_level": "3"
+                },
+                {
+                    "id": "126",
+                    "name": "闸北区",
+                    "uname": "gaoxinqu",
+                    "pid": "22",
+                    "region_level": "3"
+                }
+            ]
+        }
+    ],
+    "ctl": "biz_member",
+    "act": "get_city_list",
+    "status": 1,
+    "info": "",
+    "city_name": "北京",
+    "return": 1,
+    "sess_id": "rfagkvs0mnk7is0em7ssi3ne32",
+    "ref_uid": null
+}

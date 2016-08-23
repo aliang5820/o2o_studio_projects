@@ -8,17 +8,19 @@ import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.fanwe.apply.City;
@@ -31,10 +33,14 @@ import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.listener.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
 import com.fanwe.model.RequestModel;
+import com.fanwe.utils.JsonUtil;
 import com.fanwe.utils.LogUtil;
+import com.fanwe.utils.SDToast;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -49,7 +55,7 @@ import java.util.regex.Pattern;
 public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.OnScrollListener {
     private BaseAdapter adapter;
     private ResultListAdapter resultListAdapter;
-    private ListView personList;
+    private ListView sourceList;
     private ListView resultList;
     private TextView overlay; // 对话框首字母textview
     private MyLetterListView letterListView; // A-Z listview
@@ -61,13 +67,16 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
     private List<City> city_result;
     private TextView tvNoResult;//没有搜索结果
     private City selectedCity;//已选择的城市
+    private boolean mReady;
+    private LayoutInflater inflater;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_apply_city);
         initTitle();
-        personList = (ListView) findViewById(R.id.list_view);
+        inflater = LayoutInflater.from(mActivity);
+        sourceList = (ListView) findViewById(R.id.list_view);
         allCity_lists = new ArrayList<>();
         city_result = new ArrayList<>();
         resultList = (ListView) findViewById(R.id.search_result);
@@ -79,13 +88,13 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if ("".equals(s.toString())) {
                     letterListView.setVisibility(View.VISIBLE);
-                    personList.setVisibility(View.VISIBLE);
+                    sourceList.setVisibility(View.VISIBLE);
                     resultList.setVisibility(View.GONE);
                     tvNoResult.setVisibility(View.GONE);
                 } else {
                     city_result.clear();
                     letterListView.setVisibility(View.GONE);
-                    personList.setVisibility(View.GONE);
+                    sourceList.setVisibility(View.GONE);
                     getResultCityList(PingYinUtil.getPingYin(s.toString()));
                     if (city_result.size() <= 0) {
                         tvNoResult.setVisibility(View.VISIBLE);
@@ -112,7 +121,7 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
         alphaIndexer = new HashMap<>();
         handler = new Handler();
         overlayThread = new OverlayThread();
-        personList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*sourceList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -127,12 +136,12 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
                 }
                 adapter.notifyDataSetChanged();
             }
-        });
-        personList.setAdapter(adapter);
-        personList.setOnScrollListener(this);
-        resultListAdapter = new ResultListAdapter(this, city_result);
+        });*/
+        sourceList.setAdapter(adapter);
+        sourceList.setOnScrollListener(this);
+        resultListAdapter = new ResultListAdapter(city_result);
         resultList.setAdapter(resultListAdapter);
-        resultList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*resultList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -147,7 +156,7 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
                 }
                 resultListAdapter.notifyDataSetChanged();
             }
-        });
+        });*/
         initOverlay();
         cityInit();
     }
@@ -160,25 +169,7 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
     public void onConfirm(View view) {
         //如果没有选中城市，进行提示
         if(selectedCity == null) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
-            builder.setMessage("请选择申请城市");
-            builder.setTitle("提示");
-            builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-
-            builder.create().show();
+            SDToast.showToast("请选择申请地区");
         } else {
             int appType = getIntent().getIntExtra(Constant.ExtraConstant.EXTRA_TYPE, -1);
             Intent intent;
@@ -230,73 +221,26 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
     };
 
     private void setAdapter(List<City> list) {
-        adapter = new ListAdapter(this, list);
-        personList.setAdapter(adapter);
+        adapter = new ListAdapter(list);
+        sourceList.setAdapter(adapter);
     }
 
-    private class ResultListAdapter extends BaseAdapter {
-        private LayoutInflater inflater;
-        private List<City> results = new ArrayList<>();
+    //搜索结果adapter
+    private class ResultListAdapter extends ListAdapter {
 
-        public ResultListAdapter(Context context, List<City> results) {
-            inflater = LayoutInflater.from(context);
-            this.results = results;
-        }
-
-        @Override
-        public int getCount() {
-            return results.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return position;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder viewHolder = null;
-            if (convertView == null) {
-                convertView = inflater.inflate(R.layout.item_apply_list_item, null);
-                viewHolder = new ViewHolder();
-                viewHolder.name = (TextView) convertView.findViewById(R.id.name);
-                convertView.setTag(viewHolder);
-            } else {
-                viewHolder = (ViewHolder) convertView.getTag();
-            }
-            City city = results.get(position);
-            viewHolder.name.setText(city.getName());
-            if (city.isSelected || (selectedCity != null && TextUtils.equals(city.getName(), selectedCity.getName()))) {
-                viewHolder.name.setBackgroundResource(R.color.city_bg_color_selected);
-                viewHolder.name.setTextColor(getResources().getColor(R.color.white));
-            } else {
-                viewHolder.name.setBackgroundResource(R.color.transparent);
-                viewHolder.name.setTextColor(getResources().getColor(R.color.city_text_color_selected));
-            }
-            return convertView;
-        }
-
-        class ViewHolder {
-            TextView name;
+        public ResultListAdapter(List<City> results) {
+            super(results);
         }
     }
 
+    //网络结果adapter
     public class ListAdapter extends BaseAdapter {
-        private Context context;
-        private LayoutInflater inflater;
-        private List<City> list;
+        private List<City> cityList;
+        private ViewHolder holder;
 
-        public ListAdapter(Context context, List<City> list) {
-            this.inflater = LayoutInflater.from(context);
-            this.list = list;
-            this.context = context;
+        public ListAdapter(List<City> list) {
+            this.cityList = list;
             alphaIndexer = new HashMap<>();
-            String[] sections = new String[list.size()]; // 存放存在的汉语拼音首字母
             for (int i = 0; i < list.size(); i++) {
                 // 当前汉语拼音首字母
                 String currentStr = getAlpha(list.get(i).getUname());
@@ -305,19 +249,18 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
                 if (!previewStr.equals(currentStr)) {
                     String name = getAlpha(list.get(i).getUname());
                     alphaIndexer.put(name, i);
-                    sections[i] = name;
                 }
             }
         }
 
         @Override
         public int getCount() {
-            return list.size();
+            return cityList.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return list.get(position);
+            return cityList.get(position);
         }
 
         @Override
@@ -325,35 +268,26 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
             return position;
         }
 
-        ViewHolder holder;
-
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.item_apply_list_item, null);
                 holder = new ViewHolder();
                 holder.alpha = (TextView) convertView.findViewById(R.id.alpha);
-                holder.name = (TextView) convertView.findViewById(R.id.name);
+                holder.districtGridView = (GridView) convertView.findViewById(R.id.districtGridView);
+                holder.districtGridView.setAdapter(new DistrictAdapter());
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-
-            City city = list.get(position);
-            if(city.isSelected || (selectedCity != null && TextUtils.equals(city.getName(), selectedCity.getName()))) {
-                holder.name.setBackgroundResource(R.color.city_bg_color_selected);
-                holder.name.setTextColor(getResources().getColor(R.color.white));
-            } else {
-                holder.name.setBackgroundResource(R.color.transparent);
-                holder.name.setTextColor(getResources().getColor(R.color.city_text_color_selected));
-            }
-
-            holder.name.setText(city.getName());
+            //显示区县数据
+            City city = cityList.get(position);
+            ((DistrictAdapter)holder.districtGridView.getAdapter()).setDataList(city.getDistrict());
             String currentStr = getAlpha(city.getUname());
-            String previewStr = (position - 1) >= 0 ? getAlpha(list.get(position - 1).getUname()) : " ";
+            String previewStr = (position - 1) >= 0 ? getAlpha(cityList.get(position - 1).getUname()) : " ";
             if (!previewStr.equals(currentStr)) {
                 holder.alpha.setVisibility(View.VISIBLE);
-                holder.alpha.setText(currentStr);
+                holder.alpha.setText(city.getName());
             } else {
                 holder.alpha.setVisibility(View.GONE);
             }
@@ -362,7 +296,84 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
 
         private class ViewHolder {
             TextView alpha; // 首字母标题
-            TextView name; // 城市名字
+            GridView districtGridView; // 城市名字
+        }
+    }
+
+    private class DistrictAdapter extends BaseAdapter {
+        private List<City> districtList = new ArrayList<>();
+        private ViewHolder holder;
+
+        public void setDataList(List<City> districtList) {
+            this.districtList.clear();
+            this.districtList.addAll(districtList);
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public int getCount() {
+            return districtList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return districtList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return districtList.get(position).getId();
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup viewGroup) {
+            if (convertView == null) {
+                convertView = inflater.inflate(R.layout.item_apply_district_item, null);
+                holder = new ViewHolder();
+                holder.districtItem = (RadioButton) convertView.findViewById(R.id.districtItem);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            final City district = districtList.get(position);
+            holder.districtItem.setText(district.getName());
+            if(district.isSelected) {
+                selectedCity = district;
+                holder.districtItem.setChecked(true);
+                holder.districtItem.setTextColor(getResources().getColor(R.color.white));
+            } else {
+                holder.districtItem.setChecked(false);
+                holder.districtItem.setTextColor(getResources().getColor(R.color.gray9));
+            }
+
+            holder.districtItem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                    isScroll = false;
+                    if(isChecked) {
+                        //遍历数据，记录选择的区县
+                        for(City city:allCity_lists) {
+                            List<City> temp = city.getDistrict();
+                            for(City j:temp) {
+                                if(j.getId() == district.getId()) {
+                                    j.setSelected(true);
+                                } else {
+                                    j.setSelected(false);
+                                }
+                            }
+                        }
+                    } else {
+                        district.setSelected(false);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            });
+            return convertView;
+        }
+
+        private class ViewHolder {
+            RadioButton districtItem; // 区县名字
         }
     }
 
@@ -370,8 +381,6 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
     protected void onStop() {
         super.onStop();
     }
-
-    private boolean mReady;
 
     // 初始化汉语拼音首字母弹出提示框
     private void initOverlay() {
@@ -398,7 +407,7 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
             isScroll = false;
             if (alphaIndexer.get(s) != null) {
                 int position = alphaIndexer.get(s);
-                personList.setSelection(position);
+                sourceList.setSelection(position);
                 overlay.setText(s);
                 overlay.setVisibility(View.VISIBLE);
                 handler.removeCallbacks(overlayThread);
@@ -474,6 +483,9 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
+                //TODO BEGIN
+                //actModel = getTextData();
+                //TODO END
                 if (actModel.getStatus() == 1) {
                     LogUtil.e("cityListSize：" + actModel.getCitylist().size());
                     city_lists = actModel.getCitylist();
@@ -494,4 +506,28 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
             }
         });
     }
+
+    //todo
+    private CityListActModel getTextData() {
+        String testData = "";
+        try {
+            //Return an AssetManager instance for your application's package
+            InputStream is = getAssets().open("city.txt");
+            int size = is.available();
+
+            // Read the entire asset into a local byte buffer.
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+
+            // Convert the buffer into a string.
+            testData = new String(buffer, "UTF-8");
+        } catch (IOException e) {
+            // Should never happen!
+            e.printStackTrace();
+        }
+        CityListActModel actModel = JsonUtil.json2Object(testData, CityListActModel.class);
+        return actModel;
+    }
+
 }

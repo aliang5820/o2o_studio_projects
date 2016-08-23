@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="gray9">#999999</color>
     <!-- l-m-h-xh-xxh 从浅到深 -->
     <color name="green">#34DA8E</color>
     <color name="orange">#FFA202</color>

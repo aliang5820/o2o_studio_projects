@@ -1,6 +1,7 @@
 package com.fanwe.apply;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.Data;
 
@@ -12,4 +13,5 @@ public class City implements Serializable {
     public String uname;
     public int region_level;
     public boolean isSelected;
+    public List<City> district;
 }

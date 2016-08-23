@@ -40,548 +40,465 @@ import com.umeng.socialize.exception.SocializeException;
 
 /**
  * 我的账户
- * 
+ *
  * @author Administrator
- * 
  */
-public class MyAccountActivity extends BaseActivity
-{
+public class MyAccountActivity extends BaseActivity {
 
-	@ViewInject(R.id.et_username)
-	private EditText mEt_username; // 用户名
-
-	@ViewInject(R.id.et_email)
-	private EditText mEt_email; // 邮箱
-
-	@ViewInject(R.id.ll_pwd)
-	private LinearLayout mLl_pwd;
-
-	@ViewInject(R.id.et_pwd)
-	private EditText mEt_pwd; // 密码
-
-	@ViewInject(R.id.et_pwd_confirm)
-	private EditText mEt_pwd_confirm; // 确认密码
-
-	@ViewInject(R.id.ll_withdraw)
-	private LinearLayout mLl_withdraw; // 提现
-
-	@ViewInject(R.id.ll_charge)
-	private LinearLayout mLl_charge; // 充值
-
-	@ViewInject(R.id.ll_bind_mobile)
-	private LinearLayout mLl_bind_mobile; // 绑定手机
-
-	@ViewInject(R.id.tv_bind_mobile)
-	private TextView mTv_bind_mobile;
-
-	@ViewInject(R.id.tv_mobile)
-	private TextView mTv_mobile;
-
-	@ViewInject(R.id.tv_mobile_tip)
-	private TextView mTv_mobile_tip;
-
-	@ViewInject(R.id.ll_modify_password)
-	private LinearLayout mLl_modify_password; // 修改密码
-
-	@ViewInject(R.id.ll_delivery_address)
-	private LinearLayout mLl_delivery_address; // 配送地址
-
-	@ViewInject(R.id.ll_delivery_address_dc)
-	private LinearLayout mLl_delivery_address_dc; // 外卖收货地址
-
-	@ViewInject(R.id.ll_third_bind)
-	private LinearLayout mLl_third_bind; // 第三方绑定
-
-	@ViewInject(R.id.ll_bind_qq)
-	private LinearLayout mLl_bind_qq; // 绑定qq
-
-	@ViewInject(R.id.ll_bind_sina)
-	private LinearLayout mLl_bind_sina; // 绑定新浪微博
-
-	@ViewInject(R.id.btn_logout)
-	private Button mBtn_logout; // 退出当前帐号
-
-	private String mStrUsername;
-	private String mStrEmail;
-	private String mStrPwd;
-	private String mStrPwdConfirm;
-
-	private LocalUserModel mUser;
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setmTitleType(TitleType.TITLE);
-		setContentView(R.layout.act_my_account);
-		init();
-	}
-
-	private void init()
-	{
-		refreshUser();
-		if (mUser == null)
-		{
-			finish();
-			return;
-		}
-		initViewState();
-		initTitle();
-		registerClick();
-	}
-
-	private void refreshUser()
-	{
-		mUser = LocalUserModelDao.queryModel();
-	}
-
-	private void initViewState()
-	{
-		String username = mUser.getUser_name();
-		String email = mUser.getUser_email();
-
-		mEt_username.setText(username);
-		mEt_email.setText(email);
-
-		int isTemp = mUser.getIs_tmp();
-		if (isTemp == 1)
-		{
-			mEt_email.setEnabled(true);
-			mEt_username.setEnabled(true);
-			SDViewUtil.show(mLl_pwd);
-		} else
-		{
-			mEt_email.setEnabled(false);
-			mEt_username.setEnabled(false);
-			SDViewUtil.hide(mLl_pwd);
-		}
-
-		String mobile = mUser.getUser_mobile();
-		if (isEmpty(mobile))
-		{
-			SDViewUtil.hide(mTv_mobile_tip);
-			mTv_bind_mobile.setText("绑定手机");
-		} else
-		{
-			SDViewUtil.show(mTv_mobile_tip);
-			mTv_bind_mobile.setText("已绑定手机");
-			mTv_mobile.setText(SDOtherUtil.hideMobile(mobile));
-		}
-
-		if (AppRuntimeWorker.getIs_plugin_dc() == 1)
-		{
-			SDViewUtil.show(mLl_delivery_address_dc);
-		} else
-		{
-			SDViewUtil.hide(mLl_delivery_address_dc);
-		}
-
-		Init_indexActModel model = AppRuntimeWorker.getInitActModel();
-		if (model == null)
-		{
-			return;
-		}
-
-		if (model.getMenu_user_withdraw() == 1)
-		{
-			SDViewUtil.show(mLl_withdraw);
-		} else
-		{
-			SDViewUtil.hide(mLl_withdraw);
-		}
-
-		if (model.getMenu_user_charge() == 1)
-		{
-			SDViewUtil.show(mLl_charge);
-		} else
-		{
-			SDViewUtil.hide(mLl_charge);
-		}
-
-		SDViewUtil.hide(mLl_third_bind);
-		String sinaAppKey = model.getSina_app_key();
-		if (TextUtils.isEmpty(sinaAppKey))
-		{
-			SDViewUtil.hide(mLl_bind_sina);
-		} else
-		{
-			SDViewUtil.show(mLl_bind_sina);
-			SDViewUtil.show(mLl_third_bind);
-		}
-
-		String qqAppKey = model.getQq_app_key();
-		if (TextUtils.isEmpty(qqAppKey))
-		{
-			SDViewUtil.hide(mLl_bind_qq);
-		} else
-		{
-			SDViewUtil.show(mLl_bind_qq);
-			SDViewUtil.show(mLl_third_bind);
-		}
-	}
-
-	private void registerClick()
-	{
-		mLl_bind_mobile.setOnClickListener(this);
-		mLl_modify_password.setOnClickListener(this);
-		mLl_delivery_address.setOnClickListener(this);
-		mLl_delivery_address_dc.setOnClickListener(this);
-		mLl_bind_qq.setOnClickListener(this);
-		mLl_bind_sina.setOnClickListener(this);
-		mBtn_logout.setOnClickListener(this);
-		mLl_withdraw.setOnClickListener(this);
-		mLl_charge.setOnClickListener(this);
-	}
-
-	private void initTitle()
-	{
-		mTitle.setMiddleTextTop("我的账户");
-
-		mTitle.initRightItem(0);
-		if (mUser != null)
-		{
-			if (mUser.getIs_tmp() == 1)
-			{
-				mTitle.initRightItem(1);
-				mTitle.getItemRight(0).setTextBot("保存");
-			}
-		}
-	}
-
-	@Override
-	public void onCLickRight_SDTitleSimple(SDTitleItem v, int index)
-	{
-		clickSubmit();
-	}
-
-	@Override
-	public void onClick(View v)
-	{
-		if (v == mLl_bind_mobile)
-		{
-			clickBindMobile(v);
-		} else if (v == mLl_modify_password)
-		{
-			clickModifyPassword(v);
-		} else if (v == mLl_delivery_address)
-		{
-			clickDeliveryAddress(v);
-		} else if (v == mLl_delivery_address_dc)
-		{
-			clickDeliveryAddressDc(v);
-		} else if (v == mLl_bind_qq)
-		{
-			clickBindQQ(v);
-		} else if (v == mLl_bind_sina)
-		{
-			clickBindSina(v);
-		} else if (v == mBtn_logout)
-		{
-			clickLogout(v);
-		} else if (v == mLl_withdraw)
-		{
-			clickWithdraw(v);
-		} else if (v == mLl_charge)
-		{
-			clickCharge(v);
-		}
-	}
-
-	private void clickCharge(View v)
-	{
-		Intent intent = new Intent(this, ChargePayActivity.class);
-		startActivity(intent);
-	}
-
-	private void clickWithdraw(View v)
-	{
-		Intent intent = new Intent(this, AccountMoneyActivity.class);
-		startActivity(intent);
-	}
-
-	private void clickDeliveryAddressDc(View v)
-	{
-		// TODO 跳转到外卖收货地址列表界面
-
-		// Intent intent = new Intent(this, MyAddressActivity_dc.class);
-		// startActivity(intent);
-	}
-
-	private void clickLogout(View v)
-	{
-		App.getApplication().clearAppsLocalUserModel();
-		SDEventManager.post(EnumEventTag.LOGOUT.ordinal());
-		CommonInterface.requestLogout(null);
-	}
-
-	/**
-	 * 绑定新浪微博
-	 * 
-	 * @param v
-	 */
-	private void clickBindSina(View v)
-	{
-		UmengSocialManager.doOauthVerify(this, SHARE_MEDIA.SINA, new UMAuthListener()
-		{
-
-			@Override
-			public void onStart(SHARE_MEDIA arg0)
-			{
-			}
-
-			@Override
-			public void onError(SocializeException arg0, SHARE_MEDIA arg1)
-			{
-			}
-
-			@Override
-			public void onComplete(Bundle bundle, SHARE_MEDIA arg1)
-			{
-				String uid = bundle.getString("uid");
-				String access_token = bundle.getString("access_secret");
-				requestBindSina(uid, access_token);
-			}
-
-			@Override
-			public void onCancel(SHARE_MEDIA arg0)
-			{
-			}
-		});
-	}
-
-	protected void requestBindSina(String uid, String access_token)
-	{
-		RequestModel model = new RequestModel();
-		model.putCtl("syncbind");
-		model.put("login_type", "Sina");
-		model.putUser();
-		model.put("sina_id", uid);
-		model.put("access_token", access_token);
-		SDRequestCallBack<BaseActModel> handler = new SDRequestCallBack<BaseActModel>()
-		{
-
-			@Override
-			public void onStart()
-			{
-				SDDialogManager.showProgressDialog("请稍候...");
-			}
-
-			@Override
-			public void onSuccess(ResponseInfo<String> responseInfo)
-			{
-			}
-
-			@Override
-			public void onFinish()
-			{
-				SDDialogManager.dismissProgressDialog();
-			}
-		};
-		InterfaceServer.getInstance().requestInterface(model, handler);
-	}
-
-	/**
-	 * 绑定qq
-	 * 
-	 * @param v
-	 */
-	private void clickBindQQ(View v)
-	{
-		UmengSocialManager.doOauthVerify(this, SHARE_MEDIA.QQ, new UMAuthListener()
-		{
-
-			@Override
-			public void onStart(SHARE_MEDIA arg0)
-			{
-			}
-
-			@Override
-			public void onError(SocializeException arg0, SHARE_MEDIA arg1)
-			{
-			}
-
-			@Override
-			public void onComplete(Bundle bundle, SHARE_MEDIA arg1)
-			{
-				String openId = bundle.getString("openid");
-				String access_token = bundle.getString("access_token");
-				requestBindQQ(openId, access_token);
-			}
-
-			@Override
-			public void onCancel(SHARE_MEDIA arg0)
-			{
-			}
-		});
-	}
-
-	protected void requestBindQQ(String openid, String access_token)
-	{
-		RequestModel model = new RequestModel();
-		model.putCtl("syncbind");
-		model.put("login_type", "Qq");
-		model.putUser();
-		model.put("qqv2_id", openid);
-		model.put("access_token", access_token);
-		SDRequestCallBack<BaseActModel> handler = new SDRequestCallBack<BaseActModel>()
-		{
-
-			@Override
-			public void onStart()
-			{
-				SDDialogManager.showProgressDialog("请稍候...");
-			}
-
-			@Override
-			public void onSuccess(ResponseInfo<String> responseInfo)
-			{
-			}
-
-			@Override
-			public void onFinish()
-			{
-				SDDialogManager.dismissProgressDialog();
-			}
-		};
-		InterfaceServer.getInstance().requestInterface(model, handler);
-	}
-
-	/**
-	 * 配送地址
-	 * 
-	 * @param v
-	 */
-	private void clickDeliveryAddress(View v)
-	{
-		Intent intent = new Intent(this, DeliveryAddressManageActivty.class);
-		startActivity(intent);
-	}
-
-	/**
-	 * 修改密码
-	 * 
-	 * @param v
-	 */
-	private void clickModifyPassword(View v)
-	{
-		String mobile = LocalUserModelDao.queryModel().getUser_mobile();
-		if (isEmpty(mobile))
-		{
-			startActivity(new Intent(this, BindMobileActivity.class));
-		} else
-		{
-			startActivity(new Intent(this, ModifyPasswordActivity.class));
-		}
-	}
-
-	/**
-	 * 绑定手机
-	 * 
-	 * @param v
-	 */
-	private void clickBindMobile(View v)
-	{
-		Intent intent = new Intent(getApplicationContext(), BindMobileActivity.class);
-		startActivity(intent);
-	}
-
-	private void clickSubmit()
-	{
-		if (!validateParams())
-		{
-			return;
-		}
-
-		RequestModel model = new RequestModel();
-		model.putUser();
-		model.putCtl("uc_account");
-		model.putAct("save");
-		model.put("user_name", mStrUsername);
-		model.put("user_email", mStrEmail);
-		model.put("user_pwd", mStrPwd);
-
-		InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<User_infoModel>()
-		{
-
-			@Override
-			public void onStart()
-			{
-				SDDialogManager.showProgressDialog("请稍候");
-			}
-
-			@Override
-			public void onFinish()
-			{
-				SDDialogManager.dismissProgressDialog();
-			}
-
-			@Override
-			public void onSuccess(ResponseInfo<String> responseInfo)
-			{
-				if (actModel.getStatus() == 1)
-				{
-					AppConfig.setUserName(actModel.getUser_name());
-					LocalUserModel.dealLoginSuccess(actModel, false);
-					refreshUser();
-					initViewState();
-					initTitle();
-				}
-			}
-		});
-	}
-
-	private boolean validateParams()
-	{
-		mStrUsername = mEt_username.getText().toString();
-		if (isEmpty(mStrUsername))
-		{
-			SDToast.showToast("用户名不能为空");
-			return false;
-		}
-
-		mStrEmail = mEt_email.getText().toString();
-		if (isEmpty(mStrEmail))
-		{
-			SDToast.showToast("邮箱不能为空");
-			return false;
-		}
-
-		mStrPwd = mEt_pwd.getText().toString();
-		if (isEmpty(mStrPwd))
-		{
-			SDToast.showToast("登录密码不能为空");
-			return false;
-		}
-
-		mStrPwdConfirm = mEt_pwd_confirm.getText().toString();
-		if (isEmpty(mStrPwdConfirm))
-		{
-			SDToast.showToast("确认登录密码不能为空");
-			return false;
-		}
-
-		if (!mStrPwd.equals(mStrPwdConfirm))
-		{
-			SDToast.showToast("两次密码不一致");
-			return false;
-		}
-
-		return true;
-	}
-
-	@Override
-	public void onEventMainThread(SDBaseEvent event)
-	{
-		super.onEventMainThread(event);
-		switch (EnumEventTag.valueOf(event.getTagInt()))
-		{
-		case BIND_MOBILE_SUCCESS:
-			initViewState();
-			break;
-
-		default:
-			break;
-		}
-	}
+    @ViewInject(R.id.et_username)
+    private EditText mEt_username; // 用户名
+
+    @ViewInject(R.id.et_email)
+    private EditText mEt_email; // 邮箱
+
+    @ViewInject(R.id.ll_pwd)
+    private LinearLayout mLl_pwd;
+
+    @ViewInject(R.id.et_pwd)
+    private EditText mEt_pwd; // 密码
+
+    @ViewInject(R.id.et_pwd_confirm)
+    private EditText mEt_pwd_confirm; // 确认密码
+
+    @ViewInject(R.id.ll_withdraw)
+    private LinearLayout mLl_withdraw; // 提现
+
+    @ViewInject(R.id.ll_charge)
+    private LinearLayout mLl_charge; // 充值
+
+    @ViewInject(R.id.ll_bind_mobile)
+    private LinearLayout mLl_bind_mobile; // 绑定手机
+
+    @ViewInject(R.id.tv_bind_mobile)
+    private TextView mTv_bind_mobile;
+
+    @ViewInject(R.id.tv_mobile)
+    private TextView mTv_mobile;
+
+    @ViewInject(R.id.tv_mobile_tip)
+    private TextView mTv_mobile_tip;
+
+    @ViewInject(R.id.ll_modify_password)
+    private LinearLayout mLl_modify_password; // 修改密码
+
+    @ViewInject(R.id.ll_delivery_address)
+    private LinearLayout mLl_delivery_address; // 配送地址
+
+    @ViewInject(R.id.ll_delivery_address_dc)
+    private LinearLayout mLl_delivery_address_dc; // 外卖收货地址
+
+    @ViewInject(R.id.ll_third_bind)
+    private LinearLayout mLl_third_bind; // 第三方绑定
+
+    @ViewInject(R.id.ll_bind_qq)
+    private LinearLayout mLl_bind_qq; // 绑定qq
+
+    @ViewInject(R.id.ll_bind_sina)
+    private LinearLayout mLl_bind_sina; // 绑定新浪微博
+
+    @ViewInject(R.id.btn_logout)
+    private Button mBtn_logout; // 退出当前帐号
+
+    private String mStrUsername;
+    private String mStrEmail;
+    private String mStrPwd;
+    private String mStrPwdConfirm;
+
+    private LocalUserModel mUser;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setmTitleType(TitleType.TITLE);
+        setContentView(R.layout.act_my_account);
+        init();
+    }
+
+    private void init() {
+        refreshUser();
+        if (mUser == null) {
+            finish();
+            return;
+        }
+        initViewState();
+        initTitle();
+        registerClick();
+    }
+
+    private void refreshUser() {
+        mUser = LocalUserModelDao.queryModel();
+    }
+
+    private void initViewState() {
+        String username = mUser.getUser_name();
+        String email = mUser.getUser_email();
+
+        mEt_username.setText(username);
+        mEt_email.setText(email);
+
+        int isTemp = mUser.getIs_tmp();
+        if (isTemp == 1) {
+            mEt_email.setEnabled(true);
+            mEt_username.setEnabled(true);
+            SDViewUtil.show(mLl_pwd);
+        } else {
+            mEt_email.setEnabled(false);
+            mEt_username.setEnabled(false);
+            SDViewUtil.hide(mLl_pwd);
+        }
+
+        String mobile = mUser.getUser_mobile();
+        if (isEmpty(mobile)) {
+            SDViewUtil.hide(mTv_mobile_tip);
+            mTv_bind_mobile.setText("绑定手机");
+        } else {
+            SDViewUtil.show(mTv_mobile_tip);
+            mTv_bind_mobile.setText("已绑定手机");
+            mTv_mobile.setText(SDOtherUtil.hideMobile(mobile));
+        }
+
+        if (AppRuntimeWorker.getIs_plugin_dc() == 1) {
+            SDViewUtil.show(mLl_delivery_address_dc);
+        } else {
+            SDViewUtil.hide(mLl_delivery_address_dc);
+        }
+
+        Init_indexActModel model = AppRuntimeWorker.getInitActModel();
+        if (model == null) {
+            return;
+        }
+
+        if (model.getMenu_user_withdraw() == 1) {
+            SDViewUtil.show(mLl_withdraw);
+        } else {
+            SDViewUtil.hide(mLl_withdraw);
+        }
+
+        if (model.getMenu_user_charge() == 1) {
+            SDViewUtil.show(mLl_charge);
+        } else {
+            SDViewUtil.hide(mLl_charge);
+        }
+
+        SDViewUtil.hide(mLl_third_bind);
+        String sinaAppKey = model.getSina_app_key();
+        if (TextUtils.isEmpty(sinaAppKey)) {
+            SDViewUtil.hide(mLl_bind_sina);
+        } else {
+            SDViewUtil.show(mLl_bind_sina);
+            SDViewUtil.show(mLl_third_bind);
+        }
+
+        String qqAppKey = model.getQq_app_key();
+        if (TextUtils.isEmpty(qqAppKey)) {
+            SDViewUtil.hide(mLl_bind_qq);
+        } else {
+            SDViewUtil.show(mLl_bind_qq);
+            SDViewUtil.show(mLl_third_bind);
+        }
+    }
+
+    private void registerClick() {
+        mLl_bind_mobile.setOnClickListener(this);
+        mLl_modify_password.setOnClickListener(this);
+        mLl_delivery_address.setOnClickListener(this);
+        mLl_delivery_address_dc.setOnClickListener(this);
+        mLl_bind_qq.setOnClickListener(this);
+        mLl_bind_sina.setOnClickListener(this);
+        mBtn_logout.setOnClickListener(this);
+        mLl_withdraw.setOnClickListener(this);
+        mLl_charge.setOnClickListener(this);
+    }
+
+    private void initTitle() {
+        mTitle.setMiddleTextTop("我的账户");
+
+        mTitle.initRightItem(0);
+        if (mUser != null) {
+            if (mUser.getIs_tmp() == 1) {
+                mTitle.initRightItem(1);
+                mTitle.getItemRight(0).setTextBot("保存");
+            }
+        }
+    }
+
+    @Override
+    public void onCLickRight_SDTitleSimple(SDTitleItem v, int index) {
+        clickSubmit();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == mLl_bind_mobile) {
+            clickBindMobile(v);
+        } else if (v == mLl_modify_password) {
+            clickModifyPassword(v);
+        } else if (v == mLl_delivery_address) {
+            clickDeliveryAddress(v);
+        } else if (v == mLl_delivery_address_dc) {
+            clickDeliveryAddressDc(v);
+        } else if (v == mLl_bind_qq) {
+            clickBindQQ(v);
+        } else if (v == mLl_bind_sina) {
+            clickBindSina(v);
+        } else if (v == mBtn_logout) {
+            clickLogout(v);
+        } else if (v == mLl_withdraw) {
+            clickWithdraw(v);
+        } else if (v == mLl_charge) {
+            clickCharge(v);
+        }
+    }
+
+    private void clickCharge(View v) {
+        Intent intent = new Intent(this, ChargePayActivity.class);
+        startActivity(intent);
+    }
+
+    private void clickWithdraw(View v) {
+        Intent intent = new Intent(this, AccountMoneyActivity.class);
+        startActivity(intent);
+    }
+
+    private void clickDeliveryAddressDc(View v) {
+        // TODO 跳转到外卖收货地址列表界面
+
+        // Intent intent = new Intent(this, MyAddressActivity_dc.class);
+        // startActivity(intent);
+    }
+
+    private void clickLogout(View v) {
+        App.getApplication().clearAppsLocalUserModel();
+        SDEventManager.post(EnumEventTag.LOGOUT.ordinal());
+        CommonInterface.requestLogout(null);
+    }
+
+    /**
+     * 绑定新浪微博
+     *
+     * @param v
+     */
+    private void clickBindSina(View v) {
+        UmengSocialManager.doOauthVerify(this, SHARE_MEDIA.SINA, new UMAuthListener() {
+
+            @Override
+            public void onStart(SHARE_MEDIA arg0) {
+            }
+
+            @Override
+            public void onError(SocializeException arg0, SHARE_MEDIA arg1) {
+            }
+
+            @Override
+            public void onComplete(Bundle bundle, SHARE_MEDIA arg1) {
+                String uid = bundle.getString("uid");
+                String access_token = bundle.getString("access_secret");
+                requestBindSina(uid, access_token);
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA arg0) {
+            }
+        });
+    }
+
+    protected void requestBindSina(String uid, String access_token) {
+        RequestModel model = new RequestModel();
+        model.putCtl("syncbind");
+        model.put("login_type", "Sina");
+        model.putUser();
+        model.put("sina_id", uid);
+        model.put("access_token", access_token);
+        SDRequestCallBack<BaseActModel> handler = new SDRequestCallBack<BaseActModel>() {
+
+            @Override
+            public void onStart() {
+                SDDialogManager.showProgressDialog("请稍候...");
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+            }
+
+            @Override
+            public void onFinish() {
+                SDDialogManager.dismissProgressDialog();
+            }
+        };
+        InterfaceServer.getInstance().requestInterface(model, handler);
+    }
+
+    /**
+     * 绑定qq
+     *
+     * @param v
+     */
+    private void clickBindQQ(View v) {
+        UmengSocialManager.doOauthVerify(this, SHARE_MEDIA.QQ, new UMAuthListener() {
+
+            @Override
+            public void onStart(SHARE_MEDIA arg0) {
+            }
+
+            @Override
+            public void onError(SocializeException arg0, SHARE_MEDIA arg1) {
+            }
+
+            @Override
+            public void onComplete(Bundle bundle, SHARE_MEDIA arg1) {
+                String openId = bundle.getString("openid");
+                String access_token = bundle.getString("access_token");
+                requestBindQQ(openId, access_token);
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA arg0) {
+            }
+        });
+    }
+
+    protected void requestBindQQ(String openid, String access_token) {
+        RequestModel model = new RequestModel();
+        model.putCtl("syncbind");
+        model.put("login_type", "Qq");
+        model.putUser();
+        model.put("qqv2_id", openid);
+        model.put("access_token", access_token);
+        SDRequestCallBack<BaseActModel> handler = new SDRequestCallBack<BaseActModel>() {
+
+            @Override
+            public void onStart() {
+                SDDialogManager.showProgressDialog("请稍候...");
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+            }
+
+            @Override
+            public void onFinish() {
+                SDDialogManager.dismissProgressDialog();
+            }
+        };
+        InterfaceServer.getInstance().requestInterface(model, handler);
+    }
+
+    /**
+     * 配送地址
+     *
+     * @param v
+     */
+    private void clickDeliveryAddress(View v) {
+        Intent intent = new Intent(this, DeliveryAddressManageActivty.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param v
+     */
+    private void clickModifyPassword(View v) {
+        String mobile = LocalUserModelDao.queryModel().getUser_mobile();
+        if (isEmpty(mobile)) {
+            startActivity(new Intent(this, BindMobileActivity.class));
+        } else {
+            startActivity(new Intent(this, ModifyPasswordActivity.class));
+        }
+    }
+
+    /**
+     * 绑定手机
+     *
+     * @param v
+     */
+    private void clickBindMobile(View v) {
+        Intent intent = new Intent(getApplicationContext(), BindMobileActivity.class);
+        startActivity(intent);
+    }
+
+    private void clickSubmit() {
+        if (!validateParams()) {
+            return;
+        }
+
+        RequestModel model = new RequestModel();
+        model.putUser();
+        model.putCtl("uc_account");
+        model.putAct("save");
+        model.put("user_name", mStrUsername);
+        model.put("user_email", mStrEmail);
+        model.put("user_pwd", mStrPwd);
+
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<User_infoModel>() {
+
+            @Override
+            public void onStart() {
+                SDDialogManager.showProgressDialog("请稍候");
+            }
+
+            @Override
+            public void onFinish() {
+                SDDialogManager.dismissProgressDialog();
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (actModel.getStatus() == 1) {
+                    AppConfig.setUserName(actModel.getUser_name());
+                    LocalUserModel.dealLoginSuccess(actModel, false);
+                    refreshUser();
+                    initViewState();
+                    initTitle();
+                }
+            }
+        });
+    }
+
+    private boolean validateParams() {
+        mStrUsername = mEt_username.getText().toString();
+        if (isEmpty(mStrUsername)) {
+            SDToast.showToast("用户名不能为空");
+            return false;
+        }
+
+        mStrEmail = mEt_email.getText().toString();
+        if (isEmpty(mStrEmail)) {
+            SDToast.showToast("邮箱不能为空");
+            return false;
+        }
+
+        mStrPwd = mEt_pwd.getText().toString();
+        if (isEmpty(mStrPwd)) {
+            SDToast.showToast("登录密码不能为空");
+            return false;
+        }
+
+        mStrPwdConfirm = mEt_pwd_confirm.getText().toString();
+        if (isEmpty(mStrPwdConfirm)) {
+            SDToast.showToast("确认登录密码不能为空");
+            return false;
+        }
+
+        if (!mStrPwd.equals(mStrPwdConfirm)) {
+            SDToast.showToast("两次密码不一致");
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public void onEventMainThread(SDBaseEvent event) {
+        super.onEventMainThread(event);
+        switch (EnumEventTag.valueOf(event.getTagInt())) {
+            case BIND_MOBILE_SUCCESS:
+                initViewState();
+                break;
+
+            default:
+                break;
+        }
+    }
 
 }

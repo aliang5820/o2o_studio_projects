@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_item"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/alpha"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:background="#F7F6F4"
         android:gravity="center"
-        android:textColor="#8E8D8B"
-        android:textSize="20sp"
-        android:visibility="gone" />
+        tools:text="成都市"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="visible" />
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="match_parent"
+    <com.fanwe.customview.NoScrollGridView
+        android:id="@+id/districtGridView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:textColor="#ffffff"
-        android:textSize="14dp" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="25dp"
-        android:background="#E2E2E2" />
+        android:scrollbars="none"
+        android:horizontalSpacing="6dp"
+        android:numColumns="3"
+        android:verticalSpacing="6dp" />
 
 </LinearLayout>
