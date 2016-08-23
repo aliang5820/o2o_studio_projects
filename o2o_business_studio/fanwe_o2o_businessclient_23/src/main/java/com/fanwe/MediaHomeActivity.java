@@ -70,20 +70,8 @@ public class MediaHomeActivity extends TitleBaseActivity {
     @ViewInject(R.id.user_level)
     private TextView user_level;
 
-    @ViewInject(R.id.user_qr_code)
-    private ImageView qrImageView;
-
     @ViewInject(R.id.extra_name)
     private TextView extra_name;
-
-    private Handler handler = new Handler(Looper.getMainLooper()) {
-
-        @Override
-        public void handleMessage(Message message) {
-            Bitmap bitmap = BitmapFactory.decodeFile(message.obj.toString());
-            qrImageView.setImageBitmap(bitmap);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +89,6 @@ public class MediaHomeActivity extends TitleBaseActivity {
         user_name.setText(App.getApp().getmLocalUser().getAccount_name());
         showUserLevel();
         requestUserMediaInfo();
-        initQRCode();
     }
 
     private void showUserLevel() {
@@ -148,30 +135,6 @@ public class MediaHomeActivity extends TitleBaseActivity {
         Intent intent = new Intent(mActivity, MediaRewardActivity.class);
         intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Reward.HYD);
         startActivity(intent);
-    }
-
-    private void initQRCode() {
-        //判断推广二维码是否存在
-        final LocalUserModel localUserModel = App.getApp().getmLocalUser();
-        final String dir = Environment.getExternalStorageDirectory() + File.separator + Constant.FILE_DIR;
-        File file = new File(dir);
-        if(!file.exists()) {
-            file.mkdirs();
-        }
-        final String filePath = dir + localUserModel.getSupplier_id() + "_" + Constant.QR_CODE_FILE_NAME;
-        File qrFile = new File(filePath);
-        if (qrFile.exists()) {
-            Message.obtain(handler, 0, filePath).sendToTarget();
-        } else {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    QRCodeUtil.createQRImage(localUserModel.getQr_code(), 200, 200, null, filePath);
-                    //图片创建成功后，进行显示
-                    Message.obtain(handler, 0, filePath).sendToTarget();
-                }
-            }).start();
-        }
     }
 
     /**

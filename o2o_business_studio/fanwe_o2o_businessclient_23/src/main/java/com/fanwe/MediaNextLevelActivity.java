@@ -47,18 +47,6 @@ public class MediaNextLevelActivity extends TitleBaseActivity {
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
     private List<Fragment> mFragmentList = new ArrayList<>();//页卡视图集合
 
-    @ViewInject(R.id.user_qr_code)
-    private ImageView qrImageView;
-
-    private Handler handler = new Handler(Looper.getMainLooper()) {
-
-        @Override
-        public void handleMessage(Message message) {
-            Bitmap bitmap = BitmapFactory.decodeFile(message.obj.toString());
-            qrImageView.setImageBitmap(bitmap);
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +81,6 @@ public class MediaNextLevelActivity extends TitleBaseActivity {
 
     private void initView() {
         mTitle.setText("自媒体");
-        initQRCode();
         ViewPager mViewPager = (ViewPager) findViewById(R.id.vp_view);
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs);
 
@@ -141,30 +128,6 @@ public class MediaNextLevelActivity extends TitleBaseActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return mTitleList.get(position);//页卡标题
-        }
-    }
-
-    private void initQRCode() {
-        //判断推广二维码是否存在
-        final LocalUserModel localUserModel = App.getApp().getmLocalUser();
-        final String dir = Environment.getExternalStorageDirectory() + File.separator + Constant.FILE_DIR;
-        File file = new File(dir);
-        if(!file.exists()) {
-            file.mkdirs();
-        }
-        final String filePath = dir + localUserModel.getSupplier_id() + "_" + Constant.QR_CODE_FILE_NAME;
-        File qrFile = new File(filePath);
-        if (qrFile.exists()) {
-            Message.obtain(handler, 0, filePath).sendToTarget();
-        } else {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    QRCodeUtil.createQRImage(localUserModel.getQr_code(), 200, 200, null, filePath);
-                    //图片创建成功后，进行显示
-                    Message.obtain(handler, 0, filePath).sendToTarget();
-                }
-            }).start();
         }
     }
 }
