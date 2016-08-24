@@ -141,7 +141,7 @@ public class RegisterActivity extends TitleBaseActivity implements View.OnClickL
 
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_user", "send_app_sms");
-        model.put("account_mobile", mStrMobile);
+        model.put("account_mobile", mStrMobile);//手机号
 
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<Sms_send_sms_codeActModel>() {
 
@@ -175,9 +175,9 @@ public class RegisterActivity extends TitleBaseActivity implements View.OnClickL
     private void requestRegister() {
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_user", "app_register");
-        model.put("account_mobile", mStrMobile);
-        model.put("code", mStrCode);
-        model.put("account_password", mStrPwd);
+        model.put("account_mobile", mStrMobile); //手机号
+        model.put("code", mStrCode);//验证码
+        model.put("account_password", mStrPwd); //密码
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<BizUserCtlDoLoginActModel>() {
 
             @Override

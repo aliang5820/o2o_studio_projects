@@ -119,9 +119,9 @@ public class MediaNextLevelFragment extends BaseFragment {
     protected void requestNextLevelActIndex(final boolean isLoadMore) {
         final RequestModel model = new RequestModel();
         model.putCtlAct("biz_media", "get_extension_class");
-        model.put("page", mCurrentPage);
-        model.put("level", level);
-        model.put("user_id", App.getApp().getmLocalUser().getSupplier_id());
+        model.put("page", mCurrentPage);//当前页码
+        model.put("level", level);//等级1-3
+        model.put("user_id", App.getApp().getmLocalUser().getSupplier_id());//商户id
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<MediaNextLevelPageModel>() {
             private Dialog nDialog;
 

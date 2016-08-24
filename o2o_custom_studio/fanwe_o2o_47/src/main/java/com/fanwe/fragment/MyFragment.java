@@ -2,11 +2,14 @@ package com.fanwe.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fanwe.DistributionManageActivity;
@@ -24,6 +27,7 @@ import com.fanwe.MyRedEnvelopeActivity;
 import com.fanwe.MyYouhuiListActivity;
 import com.fanwe.ShopCartActivity;
 import com.fanwe.StoreOrderListActivity;
+import com.fanwe.TuanListActivity;
 import com.fanwe.UploadUserHeadActivity;
 import com.fanwe.common.ImageLoaderManager;
 import com.fanwe.constant.Constant.TitleType;
@@ -133,6 +137,7 @@ public class MyFragment extends BasePullToRefreshScrollViewFragment {
     private HttpHandler<String> mHttpHandler;
 
     private PhotoHandler mPhotoHandler;
+    private int is_extension = 0;//是否可以进入自媒体
 
     @Override
     protected View onCreateContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -268,11 +273,7 @@ public class MyFragment extends BasePullToRefreshScrollViewFragment {
         }
         SDViewBinder.setTextViewsVisibility(mTv_order_not_comment, strWaitComment);
 
-        if(actModel.getIs_extension() == 0) {
-            mLl_my_media.setVisibility(View.GONE);
-        } else {
-            mLl_my_media.setVisibility(View.VISIBLE);
-        }
+        is_extension = actModel.getIs_extension();
     }
 
     private void initTitle() {
@@ -344,7 +345,12 @@ public class MyFragment extends BasePullToRefreshScrollViewFragment {
         } else if (v == mLl_order_store_pay) {
             clickOrderStorePay();
         } else if (v == mLl_my_media) {
-            clickMyMedia();
+            if (is_extension == 0) {
+                //进入团购提示页
+                showMediaPopupWindow(v);
+            } else {
+                clickMyMedia();
+            }
         }
     }
 
@@ -511,6 +517,34 @@ public class MyFragment extends BasePullToRefreshScrollViewFragment {
      */
     private void clickCollect() {
         startActivity(new Intent(getActivity(), MyCollectionActivity.class));
+    }
+
+    //不能进入自媒体，弹出提示对话框
+    private void showMediaPopupWindow(View view) {
+        // 一个自定义的布局，作为显示的内容
+        View contentView = LayoutInflater.from(getActivity()).inflate(R.layout.pop_window_no_media, null);
+        final PopupWindow popupWindow = new PopupWindow(contentView, RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT, true);
+        contentView.findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
+        // 设置点击事件
+        contentView.findViewById(R.id.pic).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                //进入团购页面
+                startActivity(new Intent(getActivity(), TuanListActivity.class));
+                popupWindow.dismiss();
+            }
+        });
+
+
+        // 设置好参数之后再show
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
     }
 
     @Override

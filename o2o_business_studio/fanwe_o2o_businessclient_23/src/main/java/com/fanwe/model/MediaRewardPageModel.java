@@ -12,6 +12,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class MediaRewardPageModel extends BaseCtlActModel {
     private PageModel page;
-    private double totalRewardMoney;
-    private List<MediaRewardItemModel> item;
+    private double totalRewardMoney;//总奖励金额
+    private List<MediaRewardItemModel> item;//列表数据
 }

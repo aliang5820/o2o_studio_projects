@@ -282,7 +282,9 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
             }
             //显示区县数据
             City city = cityList.get(position);
-            ((DistrictAdapter)holder.districtGridView.getAdapter()).setDataList(city.getDistrict());
+            if(city.getDistrict() != null) {
+                ((DistrictAdapter)holder.districtGridView.getAdapter()).setDataList(city.getDistrict());
+            }
             String currentStr = getAlpha(city.getUname());
             String previewStr = (position - 1) >= 0 ? getAlpha(cityList.get(position - 1).getUname()) : " ";
             if (!previewStr.equals(currentStr)) {

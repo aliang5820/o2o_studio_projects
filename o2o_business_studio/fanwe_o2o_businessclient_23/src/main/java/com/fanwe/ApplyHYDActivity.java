@@ -182,6 +182,7 @@ public class ApplyHYDActivity extends TitleBaseActivity {
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_member", "get_deal_cate");
         if (!isParent) {
+            //如果是子类，带上父类的id
             model.put("deal_cate_id", typeId);
         }
 

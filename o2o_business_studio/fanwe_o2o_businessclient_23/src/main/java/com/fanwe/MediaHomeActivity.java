@@ -143,7 +143,7 @@ public class MediaHomeActivity extends TitleBaseActivity {
     private void requestUserMediaInfo() {
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_media", "personalDetails");
-        model.put("user_id", App.getApp().getmLocalUser().getSupplier_id());
+        model.put("user_id", App.getApp().getmLocalUser().getSupplier_id());//商户id
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<MediaHomeCtlActModel>() {
 
             @Override

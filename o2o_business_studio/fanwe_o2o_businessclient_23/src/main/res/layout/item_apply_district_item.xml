@@ -12,6 +12,8 @@
         android:background="@drawable/shape_district_selector"
         android:button="@null"
         android:gravity="center"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:padding="@dimen/base_padding_10"
         android:textColor="#999999"
         android:textSize="13sp"

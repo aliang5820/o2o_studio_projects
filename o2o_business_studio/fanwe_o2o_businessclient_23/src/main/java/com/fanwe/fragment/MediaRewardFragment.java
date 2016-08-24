@@ -224,19 +224,22 @@ public class MediaRewardFragment extends BaseFragment {
         final RequestModel model = new RequestModel();
         switch (type) {
             case Constant.Reward.ORDER:
+                //订单奖励
                 model.putCtlAct("biz_media", "get_order_data");
                 break;
             case Constant.Reward.HHR:
+                //合伙人奖励
                 model.putCtlAct("biz_media", "get_partner_data");
                 break;
             case Constant.Reward.HYD:
+                //会员店奖励
                 model.putCtlAct("biz_media", "get_memberStore_data");
                 break;
         }
         model.put("user_id", App.getApp().getmLocalUser().getSupplier_id());
         model.put("page", mCurrentPage);//请求页码
         if(isQuery) {
-            model.put("startTime", startTime/1000);//查询的开始时间
+            model.put("startTime", startTime/1000);//查询的开始时间-单位秒
             model.put("endTime", endTime/1000);//查询的结束时间
         }
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<MediaRewardPageModel>() {

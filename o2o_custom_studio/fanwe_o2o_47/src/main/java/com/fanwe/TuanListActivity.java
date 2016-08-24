@@ -8,32 +8,27 @@ import com.fanwe.o2o.newo2o.R;
 
 /**
  * 团购列表界面
- * 
+ *
  * @author js02
- * 
  */
-public class TuanListActivity extends BaseActivity
-{
+public class TuanListActivity extends BaseActivity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.act_tuan_list);
-		init();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.act_tuan_list);
+        init();
+    }
 
-	private void init()
-	{
-		getSDFragmentManager().replace(R.id.act_tuan_list_fl_container, TuanListFragment.class);
-	}
+    private void init() {
+        getSDFragmentManager().replace(R.id.act_tuan_list_fl_container, TuanListFragment.class);
+    }
 
-	@Override
-	protected void onNewIntent(Intent intent)
-	{
-		setIntent(intent);
-		init();
-		super.onNewIntent(intent);
-	}
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        init();
+        super.onNewIntent(intent);
+    }
 
 }

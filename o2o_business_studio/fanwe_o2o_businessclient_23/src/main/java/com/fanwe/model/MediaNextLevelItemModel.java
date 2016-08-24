@@ -7,8 +7,8 @@ import lombok.Data;
  */
 @Data
 public class MediaNextLevelItemModel {
-    private String user_name;
-    private int type;
-    private long time;
-    private String parent_name;
+    private String user_name;//昵称
+    private int type;//类型
+    private long time;//注册时间
+    private String parent_name;//推荐人
 }
