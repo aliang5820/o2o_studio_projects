@@ -210,7 +210,7 @@ public class RegisterActivity extends TitleBaseActivity implements View.OnClickL
         user.setUser_id(actModel.getAccount_info().getAccount_id());
         user.setSupplier_id(actModel.getAccount_info().getSupplier_id());
         user.setAccount_name(mStrMobile);
-        user.setAccount_password(mStrPwd);
+        //user.setAccount_password(mStrPwd);
         App.getApp().setmLocalUser(user);
 
         // 保存账号
