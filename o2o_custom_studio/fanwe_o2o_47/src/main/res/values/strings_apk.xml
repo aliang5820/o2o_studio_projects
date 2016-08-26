@@ -2,7 +2,7 @@
 <resources>
 
     <!-- 打包需要修改 start -->
-    <string name="app_name">省点网O2O</string>
+    <string name="app_name">省点网用户端</string>
     <string name="baidu_key">xbpWVDyzRDwaPlzMIhennnfc4GkwrUzb</string>
     <string name="umeng_key">5203658256240b113901cd69</string>
     <string name="umeng_message_secret">3ebf822b1b94ddd318fbd0dec10aaff2</string>
