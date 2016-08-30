@@ -3,7 +3,7 @@
     package="com.fanwe.o2o.newo2o"
     android:installLocation="auto"
     android:versionCode="2016050301"
-    android:versionName="4.7.22" >
+    android:versionName="4.7.22">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -42,11 +42,9 @@
         android:name="com.fanwe.app.App"
         android:allowBackup="true"
         android:icon="@mipmap/icon"
-        android:label="@string/app_name"
-        android:theme="@style/GlobeTheme" >
-        <activity
-            android:name="com.fanwe.InitAdvsMultiActivity"
-            android:label="@string/app_name" >
+        android:label="${app_name}"
+        android:theme="@style/GlobeTheme">
+        <activity android:name="com.fanwe.InitAdvsMultiActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -120,307 +118,265 @@
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- Map上的附近团购 -->
         <activity
             android:name="com.fanwe.NearbyMapTuanActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- Map上的附近搜索(新) -->
         <activity
             android:name="com.fanwe.MapSearchActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
 
         <!-- 注册界面 -->
         <activity
             android:name="com.fanwe.RegisterActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 附近的会员界面 -->
         <activity
             android:name="com.fanwe.NearbyVipActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 商城 -->
         <activity
             android:name="com.fanwe.GoodsListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 积分商城 -->
         <activity
             android:name="com.fanwe.ScoresListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 登录界面new -->
         <activity
             android:name="com.fanwe.LoginActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 代金卷 -->
         <activity
             android:name="com.fanwe.VoucherActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 活动 -->
         <activity
             android:name="com.fanwe.EventListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 我的活动 -->
         <activity
             android:name="com.fanwe.MyEventListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 活动详情 -->
         <activity
             android:name="com.fanwe.EventDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 商家 -->
         <activity
             android:name="com.fanwe.StoreListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 商家评论界面 -->
         <activity
             android:name="com.fanwe.YouhuiCommentListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 搜索分类界面 -->
         <activity
             android:name="com.fanwe.SearchTuanActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 分类界面 -->
         <activity
             android:name="com.fanwe.CateListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 优惠列表 -->
         <activity
             android:name="com.fanwe.YouHuiListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 优惠明细 -->
         <activity
             android:name="com.fanwe.FavorableDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 团购界面 -->
         <activity
             android:name="com.fanwe.TuanListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 团购详情界面 -->
         <activity
             android:name="com.fanwe.TuanDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="standard"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- webview详情界面 -->
         <activity
             android:name="com.fanwe.AppWebViewActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:hardwareAccelerated="false"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 评论列表 -->
         <activity
             android:name="com.fanwe.CommentListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 购物车界面 -->
         <activity
             android:name="com.fanwe.ShopCartActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 确认订单新界面 -->
         <activity
             android:name="com.fanwe.ConfirmOrderActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 订单支付界面 -->
         <activity
             android:name="com.fanwe.PayDoneActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 选择配送地址界面 -->
         <activity
             android:name="com.fanwe.DeliveryAddressSelectActivty"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 管理配送地址界面 -->
         <activity
             android:name="com.fanwe.DeliveryAddressManageActivty"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 添加配送地址界面 -->
         <activity
             android:name="com.fanwe.AddDeliveryAddressActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 修改密码界面 -->
         <activity
             android:name="com.fanwe.ModifyPasswordActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 我的订单界面 -->
         <activity
             android:name="com.fanwe.MyOrderListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 我的团购券界面 -->
         <activity
             android:name="com.fanwe.MyCouponListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 我的优惠券界面 -->
         <activity
             android:name="com.fanwe.MyYouhuiListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 订阅界面 -->
         <activity
             android:name="com.fanwe.SubscribeActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 收藏界面 -->
         <activity
             android:name="com.fanwe.MyCollectionActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 消息提醒界面 -->
         <activity
             android:name="com.fanwe.FrequentedGoActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 订单详情界面 -->
         <activity
             android:name="com.fanwe.OrderDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 他发表的界面 -->
         <activity
             android:name="com.fanwe.PersoncenterActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
 
         <!-- 我要分享界面 -->
         <activity
             android:name="com.fanwe.TakephotosActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 团购卷详情界面 -->
         <activity
             android:name="com.fanwe.MyCouponDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 更多界面 -->
         <activity
             android:name="com.fanwe.MoreFragment"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 公告列表界面 -->
         <activity
             android:name="com.fanwe.NoticeListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
 
         <!-- 城市列表界面 -->
         <activity
             android:name="com.fanwe.CityListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 隐藏键盘 -->
         <!-- 全屏 -->
         <activity
@@ -428,45 +384,39 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
-            android:windowSoftInputMode="stateAlwaysHidden" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <!-- 商家公交路线 -->
         <activity
             android:name="com.fanwe.MerchantBusRoutesActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 项目详情web界面 -->
         <activity
             android:name="com.fanwe.ProjectDetailWebviewActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 消息提醒界面 -->
         <activity
             android:name="com.fanwe.RemindActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
 
         <!-- 商家列表界面（可以自主下单的商家列表） -->
         <activity
             android:name="com.fanwe.MerchantListOrderActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
 
         <!-- 商品发表评论界面 -->
         <activity
             android:name="com.fanwe.AddCommentActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
 
         <!-- 门店详情界面 -->
         <activity
@@ -474,44 +424,38 @@
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 绑定手机号界面 -->
         <activity
             android:name="com.fanwe.BindPhoneActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 首页搜索界面 -->
         <activity
             android:name="com.fanwe.HomeSearchActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 优惠详情界面 -->
         <activity
             android:name="com.fanwe.YouHuiDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 关于我们 -->
         <activity
             android:name="com.fanwe.AboutUsActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 公告内容 -->
         <activity
             android:name="com.fanwe.NoticeDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name="com.fanwe.RouteInformationActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
@@ -523,281 +467,241 @@
             android:name="com.fanwe.AlbumActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 线路详情 -->
         <activity
             android:name="com.fanwe.RouteDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 商家地图 -->
         <activity
             android:name="com.fanwe.StoreLocationActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 相册 -->
         <activity
             android:name="com.fanwe.LocalImageActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 我的抽奖 -->
         <activity
             android:name="com.fanwe.MyLotteryActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 我的点评 -->
         <activity
             android:name="com.fanwe.MyCommentActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 商品申请退款 -->
         <activity
             android:name="com.fanwe.RefundGoodsActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 团购申请退款 -->
         <activity
             android:name="com.fanwe.RefundTuanActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 商品没收到货 -->
         <activity
             android:name="com.fanwe.RefuseDeliveryActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 我的账户 -->
         <activity
             android:name="com.fanwe.MyAccountActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 头像上传 -->
         <activity
             android:name="com.fanwe.UploadUserHeadActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 分销管理 -->
         <activity
             android:name="com.fanwe.DistributionManageActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 分销提现日志 -->
         <activity
             android:name="com.fanwe.DistributionWithdrawLogActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 查看分销推荐人 -->
         <activity
             android:name="com.fanwe.CheckDistributionRecommendActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 分销小店 -->
         <activity
             android:name="com.fanwe.DistributionStoreWapActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 分销小店 -->
         <activity
             android:name="com.fanwe.DistributionStoreActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 更多 -->
         <activity
             android:name="com.fanwe.MoreActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 发表动态 -->
         <activity
             android:name="com.fanwe.AddDynamicActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" >
-        </activity>
+            android:windowSoftInputMode="adjustResize"/>
         <!-- 朋友圈 -->
         <activity
             android:name="com.fanwe.FriendCircleActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 动态详情 -->
         <activity
             android:name="com.fanwe.DynamicDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 会员充值 -->
         <activity
             android:name="com.fanwe.ChargePayActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 会员充值-订单付款 -->
         <activity
             android:name="com.fanwe.ChargePayDoneActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 发现 -->
         <activity
             android:name="com.fanwe.DiscoveryActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 我的红包 -->
         <activity
             android:name="com.fanwe.MyRedEnvelopeActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 账户余额 -->
         <activity
             android:name="com.fanwe.AccountMoneyActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 提现 -->
         <activity
             android:name="com.fanwe.WithdrawActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 绑定银行卡 -->
         <activity
             android:name="com.fanwe.BindBankCardActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 提现明细(日志) -->
         <activity
             android:name="com.fanwe.WithdrawLogActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 提现详情 -->
         <activity
             android:name="com.fanwe.WithdrawDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 绑定手机号 -->
         <activity
             android:name="com.fanwe.BindMobileActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 手机号注册界面 -->
         <activity
             android:name="com.fanwe.RegisterMobileActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 到店付 -->
         <activity
             android:name="com.fanwe.StorePayActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 到店付订单详情页 -->
         <activity
             android:name="com.fanwe.StoreOrderDetailActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 到店付订单支付完成页 -->
         <activity
             android:name="com.fanwe.StorePayDoneActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 到店付订单列表 -->
         <activity
             android:name="com.fanwe.StoreOrderListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 到店付门店列表 -->
         <activity
             android:name="com.fanwe.StorePayListActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 我的 -->
         <activity
             android:name="com.fanwe.MyActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 邀请链接 -->
         <activity
             android:name="com.fanwe.MyInviteUrlActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
         <!-- 返佣排行榜 -->
         <activity
             android:name="com.fanwe.MyRebateRankActivity"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
-        </activity>
+            android:windowSoftInputMode="adjustPan"/>
 
         <!-- 升级服务 -->
-        <service android:name="com.fanwe.service.AppUpgradeService" >
-        </service>
+        <service android:name="com.fanwe.service.AppUpgradeService"></service>
 
         <!-- 百度地图 start -->
         <meta-data
@@ -810,7 +714,7 @@
         <activity
             android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
-            android:noHistory="true" >
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -831,13 +735,14 @@
         <!-- 友盟start -->
         <!-- 友盟AppKey， 需要替换成你自己的 -->
         <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${umeng_channel}" />
+        <meta-data
             android:name="UMENG_APPKEY"
-            android:value="@string/umeng_key" >
-        </meta-data>
+            android:value="@string/umeng_key"></meta-data>
         <meta-data
             android:name="UMENG_MESSAGE_SECRET"
-            android:value="@string/umeng_message_secret" >
-        </meta-data>
+            android:value="@string/umeng_message_secret"></meta-data>
         <!-- 友盟分享start -->
         <!-- 分享内容编辑页 -->
         <activity
@@ -846,8 +751,7 @@
             android:launchMode="singleTask"
             android:noHistory="true"
             android:theme="@style/Theme.UMDialog"
-            android:windowSoftInputMode="stateVisible|adjustResize" >
-        </activity>
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <!-- 微信回调activity -->
         <activity
