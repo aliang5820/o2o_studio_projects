@@ -26,6 +26,14 @@ android {
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+            minifyEnabled false //是否混淆
+            zipAlignEnabled true
+            shrinkResources true //去除无用资源
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
         release {
             signingConfig signingConfigs.config
             minifyEnabled false //是否混淆
@@ -37,7 +45,6 @@ android {
 
     productFlavors {
         normal {}
-        huawei {}
 
         dev {
             //设置测试环境的host地址

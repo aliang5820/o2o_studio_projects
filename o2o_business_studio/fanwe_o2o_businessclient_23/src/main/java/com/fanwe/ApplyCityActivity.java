@@ -285,14 +285,7 @@ public class ApplyCityActivity extends TitleBaseActivity implements AbsListView.
             if(city.getDistrict() != null) {
                 ((DistrictAdapter)holder.districtGridView.getAdapter()).setDataList(city.getDistrict());
             }
-            String currentStr = getAlpha(city.getUname());
-            String previewStr = (position - 1) >= 0 ? getAlpha(cityList.get(position - 1).getUname()) : " ";
-            if (!previewStr.equals(currentStr)) {
-                holder.alpha.setVisibility(View.VISIBLE);
-                holder.alpha.setText(city.getName());
-            } else {
-                holder.alpha.setVisibility(View.GONE);
-            }
+            holder.alpha.setText(city.getName());
             return convertView;
         }
 

@@ -1,21 +1,17 @@
 package com.fanwe;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -38,7 +34,6 @@ import com.fanwe.model.RequestModel;
 import com.fanwe.o2o.newo2o.R;
 import com.fanwe.utils.JsonUtil;
 import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -170,12 +165,12 @@ public class ApplyCityActivity extends BaseActivity implements AbsListView.OnScr
     //下一步
     public void onConfirm(View view) {
         //如果没有选中城市，进行提示
-        if(selectedCity == null) {
+        if (selectedCity == null) {
             SDToast.showToast("请选择申请地区");
         } else {
             int appType = getIntent().getIntExtra(Constant.ExtraConstant.EXTRA_TYPE, -1);
             Intent intent;
-            if(appType == Constant.Apply.HHR) {
+            if (appType == Constant.Apply.HHR) {
                 //选择合伙人
                 intent = new Intent(mActivity, ApplyHHRActivity.class);
                 intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HHR);
@@ -196,8 +191,8 @@ public class ApplyCityActivity extends BaseActivity implements AbsListView.OnScr
 
     @SuppressWarnings("unchecked")
     private void getResultCityList(String keyword) {
-        for(City city:allCity_lists) {
-            if(city.getUname().contains(keyword)) {
+        for (City city : allCity_lists) {
+            if (city.getUname().contains(keyword)) {
                 city_result.add(city);
             }
         }
@@ -284,15 +279,10 @@ public class ApplyCityActivity extends BaseActivity implements AbsListView.OnScr
             }
             //显示区县数据
             City city = cityList.get(position);
-            ((DistrictAdapter)holder.districtGridView.getAdapter()).setDataList(city.getDistrict());
-            String currentStr = getAlpha(city.getUname());
-            String previewStr = (position - 1) >= 0 ? getAlpha(cityList.get(position - 1).getUname()) : " ";
-            if (!previewStr.equals(currentStr)) {
-                holder.alpha.setVisibility(View.VISIBLE);
-                holder.alpha.setText(city.getName());
-            } else {
-                holder.alpha.setVisibility(View.GONE);
+            if (city.getDistrict() != null) {
+                ((DistrictAdapter) holder.districtGridView.getAdapter()).setDataList(city.getDistrict());
             }
+            holder.alpha.setText(city.getName());
             return convertView;
         }
 
@@ -340,7 +330,7 @@ public class ApplyCityActivity extends BaseActivity implements AbsListView.OnScr
 
             final City district = districtList.get(position);
             holder.districtItem.setText(district.getName());
-            if(district.isSelected) {
+            if (district.isSelected) {
                 selectedCity = district;
                 holder.districtItem.setChecked(true);
                 holder.districtItem.setTextColor(getResources().getColor(R.color.white));
@@ -353,12 +343,12 @@ public class ApplyCityActivity extends BaseActivity implements AbsListView.OnScr
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                     isScroll = false;
-                    if(isChecked) {
+                    if (isChecked) {
                         //遍历数据，记录选择的区县
-                        for(City city:allCity_lists) {
+                        for (City city : allCity_lists) {
                             List<City> temp = city.getDistrict();
-                            for(City j:temp) {
-                                if(j.getId() == district.getId()) {
+                            for (City j : temp) {
+                                if (j.getId() == district.getId()) {
                                     j.setSelected(true);
                                 } else {
                                     j.setSelected(false);
