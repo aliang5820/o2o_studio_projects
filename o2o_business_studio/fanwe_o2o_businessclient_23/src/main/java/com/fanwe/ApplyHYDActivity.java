@@ -10,65 +10,95 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.RadioGroup;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.fanwe.application.App;
 import com.fanwe.apply.City;
 import com.fanwe.businessclient.R;
-import com.fanwe.config.AppConfig;
 import com.fanwe.constant.Constant;
 import com.fanwe.event.EnumEventTag;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.listener.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
-import com.fanwe.model.AccountInfoModel;
 import com.fanwe.model.ApplyOrderCtlActModel;
+import com.fanwe.model.ApplyPictureCtlActModel;
 import com.fanwe.model.ApplyServiceTypeCtlActModel;
 import com.fanwe.model.ApplyServiceTypeModel;
-import com.fanwe.model.BizUserCtlDoLoginActModel;
-import com.fanwe.model.LocalUserModel;
 import com.fanwe.model.RequestModel;
-import com.fanwe.umeng.UmengPushManager;
 import com.fanwe.utils.SDDialogUtil;
 import com.fanwe.utils.SDInterfaceUtil;
 import com.fanwe.utils.SDToast;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.sunday.eventbus.SDEventManager;
 
+import java.io.File;
 import java.util.List;
 
 /**
  * Created by Edison on 2016/7/25.
+ * 申请会员店
  */
 public class ApplyHYDActivity extends TitleBaseActivity {
     @ViewInject(R.id.spinner1)
-    private Spinner spinner1;
+    private Spinner spinner1; //服务子类1
 
     @ViewInject(R.id.spinner2)
-    private Spinner spinner2;
+    private Spinner spinner2; //服务子类2
 
     @ViewInject(R.id.city)
     private TextView cityView;
 
     @ViewInject(R.id.storeName)
-    private TextView storeName;
+    private TextView storeName; //商户名称
 
     @ViewInject(R.id.address)
-    private TextView address;
+    private TextView address; //商户地址
 
-    @ViewInject(R.id.name)
-    private TextView name;
-
-    @ViewInject(R.id.radioGroup)
-    private RadioGroup radioGroup;
-
-    @ViewInject(R.id.phone)
-    private TextView phone;
+    @ViewInject(R.id.contactPhone)
+    private TextView contactPhone; //联系电话
 
     @ViewInject(R.id.isAgree)
-    private CheckBox isAgree;
+    private CheckBox isAgree; //是否同意合作协议
+
+    @ViewInject(R.id.shopPhone)
+    private TextView shopPhone; //商户电话
+
+    @ViewInject(R.id.shopTime)
+    private TextView shopTime; //营业时间
+
+    @ViewInject(R.id.mobile)
+    private TextView mobile; //手机号
+
+    @ViewInject(R.id.companyName)
+    private TextView companyName; //企业名称
+
+    @ViewInject(R.id.companyOwner)
+    private TextView companyOwner; //法人姓名
+
+    @ViewInject(R.id.bankAccountName)
+    private TextView bankAccountName; //开户行户名
+
+    @ViewInject(R.id.bankName)
+    private TextView bankName; //开户行名称
+
+    @ViewInject(R.id.bankAccount)
+    private TextView bankAccount; //开户行账号
+
+    @ViewInject(R.id.companyPic1)
+    private ImageView companyPic1;
+    @ViewInject(R.id.companyPic2)
+    private ImageView companyPic2;
+    @ViewInject(R.id.companyPic3)
+    private ImageView companyPic3;
+    @ViewInject(R.id.companyPic4)
+    private ImageView companyPic4;
+
+    private ApplyPictureCtlActModel pic_1;
+    private ApplyPictureCtlActModel pic_2;
+    private ApplyPictureCtlActModel pic_3;
+    private ApplyPictureCtlActModel pic_4;
 
     private MyAdapter spinnerAdapter1;
     private MyAdapter spinnerAdapter2;
@@ -82,9 +112,32 @@ public class ApplyHYDActivity extends TitleBaseActivity {
         initData();
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.companyPic1:
+                showPictureActivity(companyPic1);
+                break;
+            case R.id.companyPic2:
+                showPictureActivity(companyPic2);
+                break;
+            case R.id.companyPic3:
+                showPictureActivity(companyPic3);
+                break;
+            case R.id.companyPic4:
+                showPictureActivity(companyPic4);
+                break;
+        }
+    }
+
     private void initView() {
         mTitle.setText("申请会员店");
         findViewById(R.id.selected_city_layout).setVisibility(View.VISIBLE);
+
+        companyPic1.setOnClickListener(this);
+        companyPic2.setOnClickListener(this);
+        companyPic3.setOnClickListener(this);
+        companyPic4.setOnClickListener(this);
     }
 
     private void initData() {
@@ -234,13 +287,53 @@ public class ApplyHYDActivity extends TitleBaseActivity {
             SDToast.showToast("请选择服务分类");
             address.requestFocus();
             return;
-        } else if (TextUtils.isEmpty(phone.getText())) {
-            SDToast.showToast("请填写联系人电话");
-            phone.requestFocus();
+        } else if (TextUtils.isEmpty(shopPhone.getText())) {
+            SDToast.showToast("请填写商户电话");
+            shopPhone.requestFocus();
             return;
-        } else if (TextUtils.isEmpty(name.getText())) {
-            SDToast.showToast("请填写联系人名称");
-            name.requestFocus();
+        } else if (TextUtils.isEmpty(companyOwner.getText())) {
+            SDToast.showToast("请填写法人姓名");
+            companyOwner.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(mobile.getText())) {
+            SDToast.showToast("请填写手机号");
+            mobile.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(companyName.getText())) {
+            SDToast.showToast("请填写企业名称");
+            companyName.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(shopTime.getText())) {
+            SDToast.showToast("请填写营业时间");
+            shopTime.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(contactPhone.getText())) {
+            SDToast.showToast("请填写联系电话");
+            contactPhone.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(bankAccountName.getText())) {
+            SDToast.showToast("请填写开户行户名");
+            bankAccountName.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(bankName.getText())) {
+            SDToast.showToast("请填写开户行名称");
+            bankName.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(bankAccount.getText())) {
+            SDToast.showToast("请填写开户行账号");
+            bankAccount.requestFocus();
+            return;
+        } else if (pic_1 == null) {
+            SDToast.showToast("请选择营业执照");
+            return;
+        } else if (pic_2 == null) {
+            SDToast.showToast("请选择其他资质");
+            return;
+        } else if (pic_3 == null) {
+            SDToast.showToast("请选择商户logo");
+            return;
+        } else if (pic_4 == null) {
+            SDToast.showToast("请选择门店照片");
             return;
         } else if (!isAgree.isChecked()) {
             SDToast.showToast("请阅读城市合作协议后，勾选同意");
@@ -251,24 +344,23 @@ public class ApplyHYDActivity extends TitleBaseActivity {
         model.put("supplier_id", App.getApp().getmLocalUser().getSupplier_id());//商户的id
         model.put("area_id", city.getId());//地区的id
         model.put("supplier_name", storeName.getText().toString());//商户名称
-        model.put("supplier_add", address.getText().toString());//商户地址
-        model.put("deal_cate", ((ApplyServiceTypeModel)spinner1.getTag()).getId());//第一类
-        model.put("deal_child_cate", ((ApplyServiceTypeModel)spinner2.getTag()).getId());//第二类
-        int sex = 0;
-        switch (radioGroup.getCheckedRadioButtonId()) {
-            case R.id.radio1:
-                sex = 0;
-                break;
-            case R.id.radio2:
-                sex = 1;
-                break;
-            case R.id.radio3:
-                sex = 2;
-                break;
-        }
-        model.put("sex", sex);//性别
-        model.put("tel", phone.getText().toString());//联系电话
-        model.put("contact_name", name.getText().toString());//联系人名称
+        model.put("supplier_address", address.getText().toString());//商户地址
+        model.put("deal_cate", ((ApplyServiceTypeModel) spinner1.getTag()).getId());//第一类
+        model.put("deal_child_cate", ((ApplyServiceTypeModel) spinner2.getTag()).getId());//第二类
+        model.put("tel", shopPhone.getText().toString());//商户电话
+        model.put("contact_name", companyOwner.getText().toString());//法人姓名
+        model.put("h_bank_name", bankAccountName.getText().toString());//开户行户名
+        model.put("h_bank_user", bankName.getText().toString());//开户行名称
+        model.put("h_bank_info", bankAccount.getText().toString());//开户行账号
+        model.put("mobile", mobile.getText().toString());//手机号
+        model.put("h_name", companyName.getText().toString());//企业名称
+        model.put("open_time", shopTime.getText().toString());//营业时间
+        model.put("h_tel", contactPhone.getText().toString());//联系电话
+        /*图片*/
+        model.put("h_license", companyPic1.getTag().toString());//营业执照
+        model.put("h_other_license", contactPhone.getText().toString());//其他资质
+        model.put("h_supplier_logo", contactPhone.getText().toString());//商户logo
+        model.put("h_supplier_image", contactPhone.getText().toString());//门店图片
 
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<ApplyOrderCtlActModel>() {
 
@@ -307,14 +399,29 @@ public class ApplyHYDActivity extends TitleBaseActivity {
         });
     }
 
-    /*private void requestLoginInterface() {
-        RequestModel model = new RequestModel();
-        model.putCtlAct("biz_user", "dologin");
-        model.put("account_name", App.getApp().getmLocalUser().getAccount_name());
-        model.put("account_password", App.getApp().getmLocalUser().getAccount_password());
-        model.put("device_token", UmengPushManager.getPushAgent().getRegistrationId());
+    //进入图片选择图片
+    private void showPictureActivity(ImageView view) {
+        Intent intent = new Intent(mActivity, ApplyPictureActivity.class);
+        intent.putExtra(Constant.ExtraConstant.EXTRA_ID, view.getId());
+        startActivity(intent);
+    }
 
-        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<BizUserCtlDoLoginActModel>() {
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+
+        }
+    }
+
+    /*文件上传接口*/
+    private void requestUploadPicInterface(String filePath) {
+        RequestModel model = new RequestModel();
+        model.putCtlAct("biz_member", "user_register_upload");
+        model.putFile("file", new File(filePath));
+
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<ApplyPictureCtlActModel>() {
             private Dialog nDialog;
 
             @Override
@@ -325,15 +432,11 @@ public class ApplyHYDActivity extends TitleBaseActivity {
             }
 
             @Override
-            public void onSuccess(BizUserCtlDoLoginActModel actModel) {
+            public void onSuccess(ApplyPictureCtlActModel actModel) {
                 if (!SDInterfaceUtil.dealactModel(actModel, null)) {
                     switch (actModel.getStatus()) {
-                        case 0:
-                            break;
                         case 1:
-                            if (actModel.getAccount_info() != null) {
-                                dealLoginSuccess(actModel.getAccount_info());
-                            }
+
                             break;
                     }
                 }
@@ -342,25 +445,8 @@ public class ApplyHYDActivity extends TitleBaseActivity {
 
             @Override
             public void onStart() {
-                nDialog = SDDialogUtil.showLoading("登录中...");
+                nDialog = SDDialogUtil.showLoading("图片上传中...");
             }
         });
     }
-
-    private void dealLoginSuccess(AccountInfoModel accountInfoModel) {
-        LocalUserModel user = new LocalUserModel();
-        user.setUser_id(accountInfoModel.getAccount_id());
-        user.setSupplier_id(accountInfoModel.getSupplier_id());
-        user.setAccount_name(accountInfoModel.getAccount_name());
-        user.setAccount_password(accountInfoModel.getAccount_password());
-        user.setAccount_type(accountInfoModel.getAccount_type());
-        user.setQr_code(accountInfoModel.getQr_code());
-        App.getApp().setmLocalUser(user);
-
-        // 保存账号
-        AppConfig.setUserName(accountInfoModel.getAccount_name());
-        //登录成功进入主页之前，需要判断是否已经申请加盟
-        SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
-        startActivity(new Intent(mActivity, MainActivity.class));
-    }*/
 }

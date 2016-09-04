@@ -93,6 +93,12 @@
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
+        <!-- 4.选择图片页 -->
+        <activity
+            android:name="com.fanwe.ApplyPictureActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <!-- 4.申请支付信息-->
         <activity
             android:name="com.fanwe.ApplyPayActivity"
