@@ -16,6 +16,7 @@ import com.fanwe.businessclient.R;
 public class TitleBaseActivity extends BaseActivity {
     protected TextView mTitle;
     private LinearLayout mLlBack;
+    protected final static String TAG = TitleBaseActivity.class.getName();
 
     @Override
     public void setContentView(int layoutResID) {

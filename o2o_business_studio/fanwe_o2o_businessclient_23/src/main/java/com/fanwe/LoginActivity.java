@@ -12,11 +12,13 @@ import com.fanwe.application.App;
 import com.fanwe.application.SysConfig;
 import com.fanwe.businessclient.R;
 import com.fanwe.config.AppConfig;
+import com.fanwe.constant.Constant;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.listener.SDRequestCallBack;
 import com.fanwe.library.customview.ClearEditText;
 import com.fanwe.library.utils.SDViewBinder;
 import com.fanwe.model.AccountInfoModel;
+import com.fanwe.model.ApplyResultModel;
 import com.fanwe.model.BizUserCtlDoLoginActModel;
 import com.fanwe.model.LocalUserModel;
 import com.fanwe.model.RequestModel;
@@ -122,9 +124,15 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
                 if (!SDInterfaceUtil.dealactModel(actModel, null)) {
                     switch (actModel.getStatus()) {
                         case 0:
+                            if (actModel.getCheck_info() != null) {
+                                ApplyResultModel applyResultModel = actModel.getCheck_info();
+                                Intent intent = new Intent(mActivity, ApplyResultActivity.class);
+                                intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, applyResultModel);
+                                startActivity(intent);
+                            }
                             break;
                         case 1:
-                            if (actModel.getAccount_info() != null) {
+                            if(actModel.getAccount_info() != null) {
                                 dealLoginSuccess(actModel.getAccount_info());
                             }
                             break;
@@ -152,7 +160,7 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
 
         // 保存账号
         AppConfig.setUserName(accountInfoModel.getAccount_name());
-        if(accountInfoModel.getIs_new() == 0) {
+        if (accountInfoModel.getIs_new() == 0) {
             //登录成功进入主页之前，需要判断是否已经申请加盟
             startActivity(new Intent(mActivity, MainActivity.class));
             finish();

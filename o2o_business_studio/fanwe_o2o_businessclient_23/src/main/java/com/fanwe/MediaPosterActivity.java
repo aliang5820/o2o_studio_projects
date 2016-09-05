@@ -52,7 +52,7 @@ public class MediaPosterActivity extends TitleBaseActivity {
         //判断推广二维码是否存在
         //判断推广二维码是否存在
         final LocalUserModel localUserModel = App.getApp().getmLocalUser();
-        final String dir = Environment.getExternalStorageDirectory() + File.separator + Constant.FILE_DIR;
+        final String dir = Environment.getExternalStorageDirectory() + Constant.FILE_DIR;
         File file = new File(dir);
         if(!file.exists()) {
             file.mkdirs();

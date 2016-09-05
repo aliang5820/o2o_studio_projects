@@ -1,9 +1,16 @@
 package com.fanwe;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +34,7 @@ import com.fanwe.model.ApplyPictureCtlActModel;
 import com.fanwe.model.ApplyServiceTypeCtlActModel;
 import com.fanwe.model.ApplyServiceTypeModel;
 import com.fanwe.model.RequestModel;
+import com.fanwe.utils.ImageUriUtil;
 import com.fanwe.utils.SDDialogUtil;
 import com.fanwe.utils.SDInterfaceUtil;
 import com.fanwe.utils.SDToast;
@@ -34,13 +42,18 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.sunday.eventbus.SDEventManager;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Edison on 2016/7/25.
  * 申请会员店
  */
 public class ApplyHYDActivity extends TitleBaseActivity {
+
     @ViewInject(R.id.spinner1)
     private Spinner spinner1; //服务子类1
 
@@ -95,14 +108,19 @@ public class ApplyHYDActivity extends TitleBaseActivity {
     @ViewInject(R.id.companyPic4)
     private ImageView companyPic4;
 
+    private Uri imageUri;
+    private Uri imageCropUri;
+    private ImageView currentImageView;//当前选择的ImageView
     private ApplyPictureCtlActModel pic_1;
     private ApplyPictureCtlActModel pic_2;
     private ApplyPictureCtlActModel pic_3;
     private ApplyPictureCtlActModel pic_4;
+    private int totalPic = 4;
 
     private MyAdapter spinnerAdapter1;
     private MyAdapter spinnerAdapter2;
     private City city;
+    private Dialog nDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,18 +134,37 @@ public class ApplyHYDActivity extends TitleBaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.companyPic1:
-                showPictureActivity(companyPic1);
+                showSelectPicDialog(companyPic1);
                 break;
             case R.id.companyPic2:
-                showPictureActivity(companyPic2);
+                showSelectPicDialog(companyPic2);
                 break;
             case R.id.companyPic3:
-                showPictureActivity(companyPic3);
+                showSelectPicDialog(companyPic3);
                 break;
             case R.id.companyPic4:
-                showPictureActivity(companyPic4);
+                showSelectPicDialog(companyPic4);
                 break;
         }
+    }
+
+    private void showSelectPicDialog(final ImageView imageView) {
+        new AlertDialog.Builder(this).setTitle("选择图片")
+                .setNegativeButton("相册", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        selectGallery();
+                        currentImageView = imageView;
+                    }
+                })
+                .setPositiveButton("相机", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        imageUri = getTargetImageUri(true);
+                        takeCameraOnly(imageUri);
+                        currentImageView = imageView;
+                    }
+                }).show();
     }
 
     private void initView() {
@@ -323,22 +360,192 @@ public class ApplyHYDActivity extends TitleBaseActivity {
             SDToast.showToast("请填写开户行账号");
             bankAccount.requestFocus();
             return;
-        } else if (pic_1 == null) {
+        } else if (companyPic1.getTag() == null) {
             SDToast.showToast("请选择营业执照");
             return;
-        } else if (pic_2 == null) {
+        } else if (companyPic2.getTag() == null) {
             SDToast.showToast("请选择其他资质");
             return;
-        } else if (pic_3 == null) {
+        } else if (companyPic3.getTag() == null) {
             SDToast.showToast("请选择商户logo");
             return;
-        } else if (pic_4 == null) {
+        } else if (companyPic4.getTag() == null) {
             SDToast.showToast("请选择门店照片");
             return;
         } else if (!isAgree.isChecked()) {
             SDToast.showToast("请阅读城市合作协议后，勾选同意");
             return;
         }
+
+        //先上传图片
+        pic_1 = new ApplyPictureCtlActModel();
+        pic_1.setPath(companyPic1.getTag().toString());
+        pic_2 = new ApplyPictureCtlActModel();
+        pic_2.setPath(companyPic2.getTag().toString());
+        pic_3 = new ApplyPictureCtlActModel();
+        pic_3.setPath(companyPic3.getTag().toString());
+        pic_4 = new ApplyPictureCtlActModel();
+        pic_4.setPath(companyPic4.getTag().toString());
+
+        //开始上传图片
+        nDialog = SDDialogUtil.showLoading("图片上传中...");
+        requestUploadPicInterface(pic_1);
+        requestUploadPicInterface(pic_2);
+        requestUploadPicInterface(pic_3);
+        requestUploadPicInterface(pic_4);
+    }
+
+    //选择相册
+    private void selectGallery() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
+        intent.setType("image/*");
+        startActivityForResult(intent, Constant.RESULT_GALLERY_ONLY);
+    }
+
+    //拍照
+    private void takeCameraOnly(Uri targetUri) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//action is capture
+        intent.putExtra("return-data", false);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, targetUri);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        intent.putExtra("noFaceDetection", true);
+        startActivityForResult(intent, Constant.RESULT_CAMERA_ONLY);
+    }
+
+    //裁剪图片
+    public void cropImg(Uri sourceUri, Uri targetUri) {
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(sourceUri, "image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", 400);
+        intent.putExtra("outputY", 400);
+        intent.putExtra("return-data", false);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, targetUri);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        intent.putExtra("noFaceDetection", true);
+        startActivityForResult(intent, Constant.RESULT_CROP_PATH_RESULT);
+    }
+
+    /**
+     * 获取图片Uri
+     *
+     * @param isTemp 是否是临时图片
+     */
+    public Uri getTargetImageUri(boolean isTemp) {
+        //组装图片文件夹和裁剪后的目标文件
+        String sdStatus = Environment.getExternalStorageState();
+        if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // 检测sd是否可用
+            SDToast.showToast("SD存储卡不可用，请检查是否插入了SD存储卡");
+            return null;
+        }
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd_hh-mm-ss", Locale.CHINA);
+        String name;
+        Date tempDate = Calendar.getInstance().getTime();
+        if (isTemp) {
+            name = "/" + format.format(tempDate) + "_temp.jpg";
+        } else {
+            name = "/" + format.format(tempDate) + "_crop.jpg";
+        }
+        //检查文件夹是否存在
+        File imgFileDir = new File(Environment.getExternalStorageDirectory().getPath() + Constant.FILE_DIR);
+        if (!imgFileDir.exists()) {
+            // 创建文件夹
+            if (!imgFileDir.mkdirs()) {
+                Log.e(TAG, "创建文件夹失败：" + imgFileDir.getPath());
+            }
+        }
+        File fileName = new File(imgFileDir.getPath() + name);
+        Uri outputUri = Uri.fromFile(fileName);
+        Log.d(TAG, "outputUri:" + outputUri);
+        return outputUri;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            //图片来源
+            switch (requestCode) {
+                case Constant.RESULT_GALLERY_ONLY:
+                    //选择照片
+                    Uri uri = data.getData();
+                    String realUri = ImageUriUtil.uri2filePath(uri, mActivity);
+                    File file = new File(realUri);
+                    imageUri = Uri.fromFile(file);
+                    imageCropUri = getTargetImageUri(false);
+                    cropImg(imageUri, imageCropUri);
+                    break;
+                case Constant.RESULT_CAMERA_ONLY:
+                    //拍照
+                    imageCropUri = getTargetImageUri(false);
+                    cropImg(imageUri, imageCropUri);
+                    break;
+                case Constant.RESULT_CROP_PATH_RESULT:
+                    //获取裁剪结果
+                    currentImageView.setImageURI(imageCropUri);
+                    currentImageView.setTag(imageCropUri.getPath());
+                    Log.e(TAG, "==================>" + imageCropUri.getPath());
+                    break;
+            }
+        }
+    }
+
+    /*文件上传接口*/
+    private void requestUploadPicInterface(final ApplyPictureCtlActModel pictureCtlActModel) {
+        RequestModel model = new RequestModel();
+        model.putCtlAct("biz_member", "user_register_upload");
+        model.putFile("file", new File(pictureCtlActModel.getPath()));
+
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<ApplyPictureCtlActModel>() {
+
+
+            @Override
+            public void onFinish() {
+                totalPic--;
+                if(totalPic == 0) {
+                    if(nDialog != null) {
+                        nDialog.dismiss();
+                    }
+
+                    //图片上传请求执行结束，检查是否有失败的请求
+                    if(!TextUtils.isEmpty(pic_1.getUrl()) && !TextUtils.isEmpty(pic_2.getUrl()) && !TextUtils.isEmpty(pic_3.getUrl())
+                            && !TextUtils.isEmpty(pic_4.getUrl())) {
+                        //上传完毕，执行申请
+                        Log.e(TAG, "pic_1 url:" + pic_1.getUrl());
+                        Log.e(TAG, "pic_2 url:" + pic_2.getUrl());
+                        Log.e(TAG, "pic_3 url:" + pic_3.getUrl());
+                        Log.e(TAG, "pic_4 url:" + pic_4.getUrl());
+                        requestHYD();
+                    } else {
+                        totalPic = 4;
+                        SDToast.showToast("图片上传失败，请检查网络后重新提交");
+                    }
+                }
+            }
+
+            @Override
+            public void onSuccess(ApplyPictureCtlActModel actModel) {
+                if (!SDInterfaceUtil.dealactModel(actModel, null)) {
+                    switch (actModel.getStatus()) {
+                        case 1:
+                            pictureCtlActModel.setUrl(actModel.getUrl());
+                            break;
+                    }
+                }
+
+            }
+
+            @Override
+            public void onStart() {
+
+            }
+        });
+    }
+
+    //请求会员店
+    private void requestHYD() {
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_member", "applyMemberShop");
         model.put("supplier_id", App.getApp().getmLocalUser().getSupplier_id());//商户的id
@@ -357,10 +564,10 @@ public class ApplyHYDActivity extends TitleBaseActivity {
         model.put("open_time", shopTime.getText().toString());//营业时间
         model.put("h_tel", contactPhone.getText().toString());//联系电话
         /*图片*/
-        model.put("h_license", companyPic1.getTag().toString());//营业执照
-        model.put("h_other_license", contactPhone.getText().toString());//其他资质
-        model.put("h_supplier_logo", contactPhone.getText().toString());//商户logo
-        model.put("h_supplier_image", contactPhone.getText().toString());//门店图片
+        model.put("h_license", pic_1.getUrl());//营业执照
+        model.put("h_other_license", pic_2.getUrl());//其他资质
+        model.put("h_supplier_logo", pic_3.getUrl());//商户logo
+        model.put("h_supplier_image", pic_4.getUrl());//门店图片
 
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<ApplyOrderCtlActModel>() {
 
@@ -394,58 +601,7 @@ public class ApplyHYDActivity extends TitleBaseActivity {
 
             @Override
             public void onStart() {
-                SDDialogManager.showProgressDialog("请稍候...");
-            }
-        });
-    }
-
-    //进入图片选择图片
-    private void showPictureActivity(ImageView view) {
-        Intent intent = new Intent(mActivity, ApplyPictureActivity.class);
-        intent.putExtra(Constant.ExtraConstant.EXTRA_ID, view.getId());
-        startActivity(intent);
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-
-        }
-    }
-
-    /*文件上传接口*/
-    private void requestUploadPicInterface(String filePath) {
-        RequestModel model = new RequestModel();
-        model.putCtlAct("biz_member", "user_register_upload");
-        model.putFile("file", new File(filePath));
-
-        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<ApplyPictureCtlActModel>() {
-            private Dialog nDialog;
-
-            @Override
-            public void onFinish() {
-                if (nDialog != null) {
-                    nDialog.dismiss();
-                }
-            }
-
-            @Override
-            public void onSuccess(ApplyPictureCtlActModel actModel) {
-                if (!SDInterfaceUtil.dealactModel(actModel, null)) {
-                    switch (actModel.getStatus()) {
-                        case 1:
-
-                            break;
-                    }
-                }
-
-            }
-
-            @Override
-            public void onStart() {
-                nDialog = SDDialogUtil.showLoading("图片上传中...");
+                SDDialogManager.showProgressDialog("数据提交中，请稍候...");
             }
         });
     }

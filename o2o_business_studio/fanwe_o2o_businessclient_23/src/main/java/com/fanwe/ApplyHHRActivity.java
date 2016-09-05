@@ -84,9 +84,6 @@ public class ApplyHHRActivity extends TitleBaseActivity {
         spinner2 = (Spinner) view1.findViewById(R.id.spinner2);
         storeName = (TextView) view1.findViewById(R.id.storeName);
         address = (TextView) view1.findViewById(R.id.address);
-        name = (TextView) view1.findViewById(R.id.name);
-        phone = (TextView) view1.findViewById(R.id.phone);
-        radioGroup = (RadioGroup) view1.findViewById(R.id.radioGroup);
         isAgree = (CheckBox) view1.findViewById(R.id.isAgree);
 
         personName = (TextView) view2.findViewById(R.id.personName);
@@ -320,19 +317,6 @@ public class ApplyHHRActivity extends TitleBaseActivity {
         model.put("supplier_add", address.getText().toString());//商户地址
         model.put("deal_cate", ((ApplyServiceTypeModel) spinner1.getTag()).getId());//第一类
         model.put("deal_child_cate", ((ApplyServiceTypeModel) spinner2.getTag()).getId());//第二类
-        int sex = 0;
-        switch (radioGroup.getCheckedRadioButtonId()) {
-            case R.id.radio1:
-                sex = 0;
-                break;
-            case R.id.radio2:
-                sex = 1;
-                break;
-            case R.id.radio3:
-                sex = 2;
-                break;
-        }
-        model.put("sex", sex);//性别
         model.put("tel", phone.getText().toString());//联系电话
         model.put("contact_name", name.getText().toString());//联系人名称
 

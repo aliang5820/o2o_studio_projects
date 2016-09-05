@@ -3,11 +3,13 @@ package com.fanwe.constant;
 public class Constant {
     /*18500142331 123456*/
 
-    public static final String FILE_DIR = "o2o/biz/";
+    public static final String FILE_DIR = "/o2o/biz/";
     public static final String QR_CODE_FILE_NAME = "biz_qr_code.jpg";
 
-    public final static int CONSULT_DOC_PICTURE = 1000;
-    public final static int CONSULT_DOC_CAMERA = 1001;
+    //内部请求代码
+    public static final int RESULT_GALLERY_ONLY = 100;
+    public static final int RESULT_CAMERA_ONLY = 200;
+    public static final int RESULT_CROP_PATH_RESULT = 201;
 
     public enum TitleType {
         TITLE_NONE, TITLE

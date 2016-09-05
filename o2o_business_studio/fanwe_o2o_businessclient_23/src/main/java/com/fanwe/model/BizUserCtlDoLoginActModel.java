@@ -11,6 +11,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class BizUserCtlDoLoginActModel extends BaseCtlActModel {
-
+    private ApplyResultModel check_info;//审核结果
     private AccountInfoModel account_info;
 }
