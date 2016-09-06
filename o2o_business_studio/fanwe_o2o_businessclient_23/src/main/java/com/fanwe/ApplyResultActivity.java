@@ -85,7 +85,7 @@ public class ApplyResultActivity extends TitleBaseActivity implements View.OnCli
         switch (v.getId()) {
             case R.id.confirmBtn:
                 if (resultModel.getCheck_status() == 0) {
-                    SDToast.showToast("联系客服");
+                    SDToast.showToast("联系客服400 775 5587");
                 } else if (resultModel.getCheck_status() == -1) {
                     SDToast.showToast("前往修改");
                 }
