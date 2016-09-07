@@ -171,4 +171,31 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
         }
     }
 
+
+    /*TODO
+    * 彩蛋，删除账户
+    * */
+    public void deleteAccount(View view) {
+        RequestModel model = new RequestModel();
+        model.putCtlAct("biz_member", "delete_supplier");
+        model.put("account_name", "15982034811");
+
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<String>() {
+
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onSuccess(String actModel) {
+
+            }
+
+            @Override
+            public void onStart() {
+
+            }
+        });
+    }
 }

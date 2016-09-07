@@ -17,7 +17,6 @@ import com.fanwe.library.utils.SDResourcesUtil;
 import com.lidroid.xutils.ViewUtils;
 
 public class BaseFragment extends SDBaseFragment implements SDTitleSimpleListener {
-
     protected SDTitleSimple mTitle;
     private TitleType mTitleType = TitleType.TITLE_NONE;
 

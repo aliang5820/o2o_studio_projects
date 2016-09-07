@@ -24,6 +24,7 @@ public class Constant {
     public static final class ExtraConstant {
         public static final String EXTRA_ID = "extra_id";
         public static final String EXTRA_MODEL = "extra_model";
+        public static final String EXTRA_OTHER_MODEL = "extra_model";
         public static final String EXTRA_TYPE = "extra_type";
     }
 
@@ -34,6 +35,10 @@ public class Constant {
     public static final class Apply {
         public static final int HHR = 0;//合伙人
         public static final int HYD = 1;//会员店
+
+        public static final int EDIT_COMPANY_HHR = 10;//企业合伙人
+        public static final int EDIT_PERSON_HHR = 20;//个人合伙人
+        public static final int EDIT_HYD = 30;//会员店
     }
 
     public static final class Reward {

@@ -1,22 +1,38 @@
 package com.fanwe;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.fanwe.application.App;
 import com.fanwe.businessclient.R;
 import com.fanwe.constant.Constant;
+import com.fanwe.event.EnumEventTag;
+import com.fanwe.http.InterfaceServer;
+import com.fanwe.http.listener.SDRequestCallBack;
+import com.fanwe.library.dialog.SDDialogManager;
+import com.fanwe.model.ApplyInfoModel;
+import com.fanwe.model.ApplyOrderCtlActModel;
 import com.fanwe.model.ApplyResultModel;
+import com.fanwe.model.ApplyServiceTypeModel;
+import com.fanwe.model.RequestModel;
+import com.fanwe.utils.SDInterfaceUtil;
 import com.fanwe.utils.SDToast;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.sunday.eventbus.SDEventManager;
 
 /**
  * Created by Edison on 2016/9/4.
  * 审核结果展示
  */
 public class ApplyResultActivity extends TitleBaseActivity implements View.OnClickListener {
+
+    @ViewInject(R.id.label2Title)
+    private TextView label2Title;
 
     @ViewInject(R.id.label1)
     private TextView label1; //账号
@@ -62,6 +78,12 @@ public class ApplyResultActivity extends TitleBaseActivity implements View.OnCli
         resultModel = (ApplyResultModel) getIntent().getSerializableExtra(Constant.ExtraConstant.EXTRA_MODEL);
 
         label1.setText(resultModel.getAccount_name());
+        //0 普通 ，1 会员店 ，2 商户合伙人，3个人合伙人
+        if(resultModel.getType() == 3) {
+            label2Title.setText("姓名:");
+        } else {
+            label2Title.setText("企业名称:");
+        }
         label2.setText(resultModel.getH_name());
         label3.setText(resultModel.getType_str());
         String area = resultModel.getProvince() + resultModel.getCity() + resultModel.getArea();
@@ -85,11 +107,63 @@ public class ApplyResultActivity extends TitleBaseActivity implements View.OnCli
         switch (v.getId()) {
             case R.id.confirmBtn:
                 if (resultModel.getCheck_status() == 0) {
-                    SDToast.showToast("联系客服400 775 5587");
+                    //用intent启动拨打电话
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:4007755587"));
+                    startActivity(intent);
                 } else if (resultModel.getCheck_status() == -1) {
-                    SDToast.showToast("前往修改");
+                    requestInfo();
                 }
                 break;
         }
+    }
+
+    //再次编辑，获取数据
+    private void requestInfo() {
+        RequestModel model = new RequestModel();
+        model.putCtlAct("biz_member", "get_supplier_info");
+        model.put("supplier_id", resultModel.getSupplier_id());//商户的id
+
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<ApplyInfoModel>() {
+
+            @Override
+            public void onFinish() {
+                SDDialogManager.dismissProgressDialog();
+            }
+
+            @Override
+            public void onSuccess(ApplyInfoModel actModel) {
+                SDDialogManager.dismissProgressDialog();
+                actModel.setSupplier_id(resultModel.getSupplier_id());
+                if (!SDInterfaceUtil.dealactModel(actModel, null) && actModel.getStatus() == 1) {
+                    //0 普通 ，1 会员店 ，2 商户合伙人，3个人合伙人
+                    Intent intent;
+                    switch (resultModel.getType()) {
+                        case 1:
+                            intent = new Intent(mActivity, ApplyHYDActivity.class);
+                            intent.putExtra(Constant.ExtraConstant.EXTRA_OTHER_MODEL, actModel);
+                            intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.EDIT_HYD);
+                            startActivity(intent);
+                            break;
+                        case 2:
+                            intent = new Intent(mActivity, ApplyHHRActivity.class);
+                            intent.putExtra(Constant.ExtraConstant.EXTRA_OTHER_MODEL, actModel);
+                            intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.EDIT_COMPANY_HHR);
+                            startActivity(intent);
+                            break;
+                        case 3:
+                            intent = new Intent(mActivity, ApplyHHRActivity.class);
+                            intent.putExtra(Constant.ExtraConstant.EXTRA_OTHER_MODEL, actModel);
+                            intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.EDIT_PERSON_HHR);
+                            startActivity(intent);
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onStart() {
+                SDDialogManager.showProgressDialog("正在获取数据，请稍候...");
+            }
+        });
     }
 }

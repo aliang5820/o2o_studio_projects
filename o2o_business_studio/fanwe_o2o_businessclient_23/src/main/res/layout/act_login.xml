@@ -127,4 +127,18 @@
         android:text="登录"
         android:textColor="@color/white"
         android:textSize="@dimen/base_textsize_16" />
+
+    <Button
+        android:id="@+id/act_delete_btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/act_login_btn_login"
+        android:layout_marginTop="@dimen/base_margin_10"
+        android:background="@drawable/selector_theme_color_corner"
+        android:padding="@dimen/base_padding_10"
+        android:text="删除账号(彩蛋)"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:onClick="deleteAccount"
+        android:textSize="@dimen/base_textsize_16" />
 </RelativeLayout>

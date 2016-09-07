@@ -109,10 +109,12 @@
                     android:textSize="@dimen/text_size_content" />
 
                 <EditText
+                    android:id="@+id/personMobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_bg"
                     android:hint="请输入手机号"
+                    android:inputType="phone"
                     android:padding="@dimen/base_padding_10"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_content" />
@@ -138,26 +140,35 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:clickable="true"
-                    android:drawableRight="@drawable/selector_camera_btn"
-                    android:focusable="true"
                     android:gravity="center_vertical"
                     android:text="身份证照片"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:id="@+id/companyPic1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/selector_camera_btn" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:clickable="true"
-                    android:drawableRight="@drawable/selector_camera_btn"
-                    android:focusable="true"
                     android:gravity="center_vertical"
-                    android:text="个人照片免冠照"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:text="个人照片\n(免冠照)"
+                    android:textColor="@color/black" />
+
+                <ImageView
+                    android:id="@+id/companyPic2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/selector_camera_btn" />
             </LinearLayout>
 
             <LinearLayout
@@ -177,7 +188,7 @@
                     android:textSize="@dimen/text_size_content" />
 
                 <EditText
-                    android:id="@+id/personPhone"
+                    android:id="@+id/personContactPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_bg"
@@ -205,11 +216,11 @@
                     android:textSize="@dimen/text_size_content" />
 
                 <EditText
+                    android:id="@+id/personBankAccountName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_bg"
                     android:hint="用于货款结算，请仔细填写"
-                    android:inputType="phone"
                     android:padding="@dimen/base_padding_10"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_content" />
@@ -232,11 +243,11 @@
                     android:textSize="@dimen/text_size_content" />
 
                 <EditText
+                    android:id="@+id/personBankName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_bg"
                     android:hint="用于货款结算，请仔细填写"
-                    android:inputType="phone"
                     android:padding="@dimen/base_padding_10"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_content" />
@@ -259,6 +270,7 @@
                     android:textSize="@dimen/text_size_content" />
 
                 <EditText
+                    android:id="@+id/personBankAccount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_bg"
@@ -280,7 +292,6 @@
         android:layout_marginTop="@dimen/base_margin_10"
         android:background="@drawable/selector_main_color_corner"
         android:clickable="true"
-        android:onClick="onConfirm2"
         android:padding="@dimen/base_padding_10"
         android:text="提交"
         android:textColor="@color/white"

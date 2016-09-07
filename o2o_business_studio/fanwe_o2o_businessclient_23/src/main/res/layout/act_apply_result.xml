@@ -47,6 +47,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/label2Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="80dp"
@@ -118,8 +119,8 @@
 
                 <ImageView
                     android:id="@+id/status_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/apply_result_checking" />
 

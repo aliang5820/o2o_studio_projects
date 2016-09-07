@@ -1,5 +1,6 @@
-package com.fanwe;
+package com.fanwe.fragment;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,8 +22,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.fanwe.ApplyHHRActivity;
+import com.fanwe.LoginActivity;
 import com.fanwe.application.App;
-import com.fanwe.apply.City;
 import com.fanwe.businessclient.R;
 import com.fanwe.common.ImageLoaderManager;
 import com.fanwe.constant.ApkConstant;
@@ -44,6 +47,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.sunday.eventbus.SDEventManager;
 
 import java.io.File;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
@@ -54,19 +58,19 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
- * Created by Edison on 2016/7/25.
- * 申请会员店
+ * Created by Edison on 2016/9/7.
+ * 企业合伙人
  */
-public class ApplyHYDActivity extends TitleBaseActivity {
+public class ApplyHHR_Fragment extends BaseFragment {
+    private static final String TAG = ApplyHHR_Fragment.class.getName();
+    @ViewInject(R.id.isAgree)
+    private CheckBox isAgree; //是否同意合作协议
 
     @ViewInject(R.id.spinner1)
     private Spinner spinner1; //服务子类1
 
     @ViewInject(R.id.spinner2)
     private Spinner spinner2; //服务子类2
-
-    @ViewInject(R.id.city)
-    private TextView cityView; //所在城市
 
     @ViewInject(R.id.storeName)
     private TextView storeName; //商户名称
@@ -76,9 +80,6 @@ public class ApplyHYDActivity extends TitleBaseActivity {
 
     @ViewInject(R.id.contactPhone)
     private TextView contactPhone; //联系电话
-
-    @ViewInject(R.id.isAgree)
-    private CheckBox isAgree; //是否同意合作协议
 
     @ViewInject(R.id.shopPhone)
     private TextView shopPhone; //商户电话
@@ -122,85 +123,40 @@ public class ApplyHYDActivity extends TitleBaseActivity {
 
     private MyAdapter spinnerAdapter1;
     private MyAdapter spinnerAdapter2;
-    private City city;
     private Dialog nDialog;
-
     private ApplyInfoModel applyInfoModel;
-    private String supplier_id;
-    private int type;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_apply_hyd);
-        initView();
-        initData();
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.companyPic1:
-                showSelectPicDialog(companyPic1);
-                break;
-            case R.id.companyPic2:
-                showSelectPicDialog(companyPic2);
-                break;
-            case R.id.companyPic3:
-                showSelectPicDialog(companyPic3);
-                break;
-            case R.id.companyPic4:
-                showSelectPicDialog(companyPic4);
-                break;
-            case R.id.confirmBtn:
-                requestRole();
-                break;
+    public static ApplyHHR_Fragment getInstance(ApplyInfoModel applyInfoModel) {
+        ApplyHHR_Fragment fragment = new ApplyHHR_Fragment();
+        if (applyInfoModel != null) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Constant.ExtraConstant.EXTRA_MODEL, applyInfoModel);
+            fragment.setArguments(bundle);
         }
+        return fragment;
     }
 
-    private void showSelectPicDialog(final ImageView imageView) {
-        new AlertDialog.Builder(this).setTitle("选择图片")
-                .setNegativeButton("相册", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        selectGallery();
-                        currentImageView = imageView;
-                    }
-                })
-                .setPositiveButton("相机", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        imageUri = getTargetImageUri(true);
-                        takeCameraOnly(imageUri);
-                        currentImageView = imageView;
-                    }
-                }).show();
+    @Override
+    protected int onCreateContentView() {
+        return R.layout.act_apply_hyd;
     }
 
-    private void initView() {
-        mTitle.setText("申请会员店");
-        findViewById(R.id.selected_city_layout).setVisibility(View.VISIBLE);
+    @Override
+    protected void init() {
+        super.init();
+        //如果是编辑数据，显示已有的数据
+        Serializable serializable = getArguments().getSerializable(Constant.ExtraConstant.EXTRA_MODEL);
+        if (serializable != null) {
+            applyInfoModel = (ApplyInfoModel) serializable;
+            showData();
+        }
+
+        findViewById(R.id.selected_city_layout).setVisibility(View.GONE);
         findViewById(R.id.confirmBtn).setOnClickListener(this);
         companyPic1.setOnClickListener(this);
         companyPic2.setOnClickListener(this);
         companyPic3.setOnClickListener(this);
         companyPic4.setOnClickListener(this);
-    }
-
-    private void initData() {
-        type = getIntent().getIntExtra(Constant.ExtraConstant.EXTRA_TYPE, -1);
-        if (type == Constant.Apply.EDIT_HYD) {
-            applyInfoModel = (ApplyInfoModel) getIntent().getSerializableExtra(Constant.ExtraConstant.EXTRA_OTHER_MODEL);
-            city = new City();
-            city.setId(applyInfoModel.getArea_id());
-            city.setName(applyInfoModel.getArea());
-            supplier_id = applyInfoModel.getSupplier_id();
-            showData();
-        } else {
-            city = (City) getIntent().getSerializableExtra(Constant.ExtraConstant.EXTRA_MODEL);
-            supplier_id = App.getApp().getmLocalUser().getSupplier_id();
-        }
-        cityView.setText(city.getName());
         //获取服务分类
         requestTypeList(true, -1);
     }
@@ -239,10 +195,51 @@ public class ApplyHYDActivity extends TitleBaseActivity {
             //商户logo
             ImageLoaderManager.getImageLoader().displayImage(ApkConstant.SERVER_IMG_URL + applyInfoModel.getH_supplier_logo().substring(1), companyPic3);
             picUrlMap.put(companyPic3.getId(), applyInfoModel.getH_supplier_logo());
-            //请选择门店照片
+            //门店照片
             ImageLoaderManager.getImageLoader().displayImage(ApkConstant.SERVER_IMG_URL + applyInfoModel.getH_supplier_image().substring(1), companyPic4);
             picUrlMap.put(companyPic4.getId(), applyInfoModel.getH_supplier_image());
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.companyPic1:
+                showSelectPicDialog(companyPic1);
+                break;
+            case R.id.companyPic2:
+                showSelectPicDialog(companyPic2);
+                break;
+            case R.id.companyPic3:
+                showSelectPicDialog(companyPic3);
+                break;
+            case R.id.companyPic4:
+                showSelectPicDialog(companyPic4);
+                break;
+            case R.id.confirmBtn:
+                //申请企业合伙人
+                requestRole();
+                break;
+        }
+    }
+
+    private void showSelectPicDialog(final ImageView imageView) {
+        new AlertDialog.Builder(getContext()).setTitle("选择图片")
+                .setNegativeButton("相册", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        selectGallery();
+                        currentImageView = imageView;
+                    }
+                })
+                .setPositiveButton("相机", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        imageUri = getTargetImageUri(true);
+                        takeCameraOnly(imageUri);
+                        currentImageView = imageView;
+                    }
+                }).show();
     }
 
     private void initSpinner1(List<ApplyServiceTypeModel> list) {
@@ -265,18 +262,6 @@ public class ApplyHYDActivity extends TitleBaseActivity {
 
             }
         });
-        //需要编辑的信息，显示已选择的数据
-        /*if (type == Constant.Apply.EDIT_HYD) {
-            for (int i = 0; i < list.size(); i++) {
-                ApplyServiceTypeModel model = list.get(i);
-                if (Integer.valueOf(applyInfoModel.getDeal_cate()) == model.getId()) {
-                    spinner1.setSelection(i);
-                    spinner1.setTag(model);
-                    requestTypeList(false, model.getId());
-                    break;
-                }
-            }
-        }*/
     }
 
     private void initSpinner2(List<ApplyServiceTypeModel> list) {
@@ -326,7 +311,7 @@ public class ApplyHYDActivity extends TitleBaseActivity {
          */
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            convertView = getLayoutInflater().inflate(R.layout.item_apply_service_type, null);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_apply_service_type, null);
             if (convertView != null) {
                 TextView textView = (TextView) convertView;
                 textView.setText(mList.get(position).getName());
@@ -340,7 +325,6 @@ public class ApplyHYDActivity extends TitleBaseActivity {
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_member", "get_deal_cate");
         if (!isParent) {
-            //如果是子类，带上父类的id
             model.put("deal_cate_id", typeId);
         }
 
@@ -376,88 +360,6 @@ public class ApplyHYDActivity extends TitleBaseActivity {
                 showToast = false;
             }
         });
-    }
-
-    //申请会员店请求
-    private void requestRole() {
-        if (TextUtils.isEmpty(storeName.getText())) {
-            SDToast.showToast("请填写商户名称");
-            storeName.requestFocus();
-            return;
-        } else if (TextUtils.isEmpty(address.getText())) {
-            SDToast.showToast("请填写商户地址");
-            address.requestFocus();
-            return;
-        } else if (spinner1.getTag() == null || spinner2.getTag() == null) {
-            SDToast.showToast("请选择服务分类");
-            address.requestFocus();
-            return;
-        } else if (TextUtils.isEmpty(shopPhone.getText())) {
-            SDToast.showToast("请填写商户电话");
-            shopPhone.requestFocus();
-            return;
-        } else if (TextUtils.isEmpty(companyOwner.getText())) {
-            SDToast.showToast("请填写法人姓名");
-            companyOwner.requestFocus();
-            return;
-        } else if (TextUtils.isEmpty(mobile.getText())) {
-            SDToast.showToast("请填写手机号");
-            mobile.requestFocus();
-            return;
-        } else if (TextUtils.isEmpty(companyName.getText())) {
-            SDToast.showToast("请填写企业名称");
-            companyName.requestFocus();
-            return;
-        } else if (TextUtils.isEmpty(shopTime.getText())) {
-            SDToast.showToast("请填写营业时间");
-            shopTime.requestFocus();
-            return;
-        } else if (TextUtils.isEmpty(contactPhone.getText())) {
-            SDToast.showToast("请填写联系电话");
-            contactPhone.requestFocus();
-            return;
-        } else if (TextUtils.isEmpty(bankAccountName.getText())) {
-            SDToast.showToast("请填写开户行户名");
-            bankAccountName.requestFocus();
-            return;
-        } else if (TextUtils.isEmpty(bankName.getText())) {
-            SDToast.showToast("请填写开户行名称");
-            bankName.requestFocus();
-            return;
-        } else if (TextUtils.isEmpty(bankAccount.getText())) {
-            SDToast.showToast("请填写开户行账号");
-            bankAccount.requestFocus();
-            return;
-        } else if (!picMap.containsKey(companyPic1.getId()) && !picUrlMap.containsKey(companyPic1.getId())) {
-            SDToast.showToast("请选择营业执照");
-            return;
-        } else if (!picMap.containsKey(companyPic2.getId()) && !picUrlMap.containsKey(companyPic2.getId())) {
-            SDToast.showToast("请选择其他资质");
-            return;
-        } else if (!picMap.containsKey(companyPic3.getId()) && !picUrlMap.containsKey(companyPic3.getId())) {
-            SDToast.showToast("请选择商户logo");
-            return;
-        } else if (!picMap.containsKey(companyPic4.getId()) && !picUrlMap.containsKey(companyPic4.getId())) {
-            SDToast.showToast("请选择门店照片");
-            return;
-        } else if (!isAgree.isChecked()) {
-            SDToast.showToast("请阅读城市合作协议后，勾选同意");
-            return;
-        }
-
-        //开始上传图片
-        totalPic = picMap.keySet().size();
-        if (totalPic > 0) {
-            nDialog = SDDialogUtil.showLoading("图片上传中...");
-            Collection<Integer> collection = picMap.keySet();
-            for (Integer viewId : collection) {
-                Log.e(TAG, "准备上传的图片：" + viewId + ":" + picMap.get(viewId));
-                requestUploadPicInterface(viewId, picMap.get(viewId));
-            }
-        } else {
-            //没有修改图片，直接请求数据
-            requestHYD();
-        }
     }
 
     //选择相册
@@ -530,13 +432,13 @@ public class ApplyHYDActivity extends TitleBaseActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
+        if (resultCode == Activity.RESULT_OK) {
             //图片来源
             switch (requestCode) {
                 case Constant.RESULT_GALLERY_ONLY:
                     //选择照片
                     Uri uri = data.getData();
-                    String realUri = ImageUriUtil.uri2filePath(uri, mActivity);
+                    String realUri = ImageUriUtil.uri2filePath(uri, getContext());
                     File file = new File(realUri);
                     imageUri = Uri.fromFile(file);
                     imageCropUri = getTargetImageUri(false);
@@ -579,7 +481,7 @@ public class ApplyHYDActivity extends TitleBaseActivity {
 
                     if (picMap.values().isEmpty()) {
                         //上传完毕，执行申请
-                        requestHYD();
+                        requestHHR();
                     } else {
                         SDToast.showToast("有图片上传失败，请检查网络后重新提交");
                     }
@@ -606,12 +508,94 @@ public class ApplyHYDActivity extends TitleBaseActivity {
         });
     }
 
-    //请求会员店
-    private void requestHYD() {
+    //申请企业合伙人Step.1
+    private void requestRole() {
+        if (TextUtils.isEmpty(storeName.getText())) {
+            SDToast.showToast("请填写商户名称");
+            storeName.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(address.getText())) {
+            SDToast.showToast("请填写商户地址");
+            address.requestFocus();
+            return;
+        } else if (spinner1.getTag() == null || spinner2.getTag() == null) {
+            SDToast.showToast("请选择服务分类");
+            address.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(shopPhone.getText())) {
+            SDToast.showToast("请填写商户电话");
+            shopPhone.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(companyOwner.getText())) {
+            SDToast.showToast("请填写法人姓名");
+            companyOwner.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(mobile.getText())) {
+            SDToast.showToast("请填写手机号");
+            mobile.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(companyName.getText())) {
+            SDToast.showToast("请填写企业名称");
+            companyName.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(shopTime.getText())) {
+            SDToast.showToast("请填写营业时间");
+            shopTime.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(contactPhone.getText())) {
+            SDToast.showToast("请填写联系电话");
+            contactPhone.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(bankAccountName.getText())) {
+            SDToast.showToast("请填写开户行户名");
+            bankAccountName.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(bankName.getText())) {
+            SDToast.showToast("请填写开户行名称");
+            bankName.requestFocus();
+            return;
+        } else if (TextUtils.isEmpty(bankAccount.getText())) {
+            SDToast.showToast("请填写开户行账号");
+            bankAccount.requestFocus();
+            return;
+        } else if (!picMap.containsKey(companyPic1.getId()) && !picUrlMap.containsKey(companyPic1.getId())) {
+            SDToast.showToast("请选择营业执照");
+            return;
+        } else if (!picMap.containsKey(companyPic2.getId()) && !picUrlMap.containsKey(companyPic2.getId())) {
+            SDToast.showToast("请选择其他资质");
+            return;
+        } else if (!picMap.containsKey(companyPic3.getId()) && !picUrlMap.containsKey(companyPic3.getId())) {
+            SDToast.showToast("请选择商户logo");
+            return;
+        } else if (!picMap.containsKey(companyPic4.getId()) && !picUrlMap.containsKey(companyPic4.getId())) {
+            SDToast.showToast("请选择门店照片");
+            return;
+        } else if (!isAgree.isChecked()) {
+            SDToast.showToast("请阅读城市合作协议后，勾选同意");
+            return;
+        }
+
+        //开始上传图片
+        totalPic = picMap.keySet().size();
+        if(totalPic > 0) {
+            nDialog = SDDialogUtil.showLoading("图片上传中...");
+            Collection<Integer> collection = picMap.keySet();
+            for (Integer viewId : collection) {
+                Log.e(TAG, "准备上传的图片：" + viewId + ":" + picMap.get(viewId));
+                requestUploadPicInterface(viewId, picMap.get(viewId));
+            }
+        } else {
+            //没有修改图片，直接请求数据
+            requestHHR();
+        }
+    }
+
+    //申请企业合伙人Step.2
+    private void requestHHR() {
         RequestModel model = new RequestModel();
-        model.putCtlAct("biz_member", "applyMemberShop");
-        model.put("supplier_id", supplier_id);//商户的id
-        model.put("area_id", city.getId());//地区的id
+        model.putCtlAct("biz_member", "applyPartnerSupplierShop");
+        model.put("supplier_id", ((ApplyHHRActivity) getActivity()).supplier_id);//商户的id
+        model.put("area_id", ((ApplyHHRActivity) getActivity()).city.getId());//地区的id
         model.put("supplier_name", storeName.getText().toString());//商户名称
         model.put("supplier_address", address.getText().toString());//商户地址
         model.put("deal_cate", ((ApplyServiceTypeModel) spinner1.getTag()).getId());//第一类
@@ -656,7 +640,7 @@ public class ApplyHYDActivity extends TitleBaseActivity {
                             picMap.clear();
                             picUrlMap.clear();
                             SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
-                            startActivity(new Intent(mActivity, LoginActivity.class));
+                            startActivity(new Intent(getContext(), LoginActivity.class));
                             break;
                     }
                 }
