@@ -10,6 +10,7 @@ import lombok.Data;
 public class AccountInfoModel {
     private String account_id;
     private String supplier_id;
+    private String submit_id;
     private String account_name;
     private String account_password;
     private int account_type;

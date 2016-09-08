@@ -121,7 +121,7 @@ public class ApplyResultActivity extends TitleBaseActivity implements View.OnCli
     private void requestInfo() {
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_member", "get_supplier_info");
-        model.put("supplier_id", resultModel.getSupplier_id());//商户的id
+        model.put("supplier_id", resultModel.getSubmit_id());//商户的id
 
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<ApplyInfoModel>() {
 
@@ -133,7 +133,7 @@ public class ApplyResultActivity extends TitleBaseActivity implements View.OnCli
             @Override
             public void onSuccess(ApplyInfoModel actModel) {
                 SDDialogManager.dismissProgressDialog();
-                actModel.setSupplier_id(resultModel.getSupplier_id());
+                actModel.setSubmit_id(resultModel.getSubmit_id());
                 if (!SDInterfaceUtil.dealactModel(actModel, null) && actModel.getStatus() == 1) {
                     //0 普通 ，1 会员店 ，2 商户合伙人，3个人合伙人
                     Intent intent;

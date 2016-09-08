@@ -54,7 +54,7 @@ public abstract class SDRequestCallBack<E> extends RequestCallBack<String> {
     public void showToast() {
         if (showToast && actModel instanceof BaseCtlActModel) {
             BaseCtlActModel baseActModel = (BaseCtlActModel) actModel;
-            if (!TextUtils.isEmpty(baseActModel.getInfo().trim())) {
+            if (!TextUtils.isEmpty(baseActModel.getInfo())) {
                 SDToast.showToast(baseActModel.getInfo());
             }
         }

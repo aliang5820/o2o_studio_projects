@@ -29,7 +29,7 @@ public class ApplyInfoModel extends BaseCtlActModel implements Serializable {
      * h_bank_user : 发挥好好
      * h_bank_name : 凤凰古城V
      */
-    private String supplier_id;
+    private String submit_id;
     private String name;
     private String address;
     private String deal_cate;

@@ -29,7 +29,7 @@ public class ApplyHHRActivity extends TitleBaseActivity {
 
     @ViewInject(R.id.city)
     private TextView cityView;
-    public String supplier_id;
+    public String submit_id;
     private ApplyInfoModel applyInfoModel;
     public City city;
     private List<String> mTitleList = new ArrayList<>();//页卡标题集合
@@ -65,7 +65,7 @@ public class ApplyHHRActivity extends TitleBaseActivity {
             city = new City();
             city.setId(applyInfoModel.getArea_id());
             city.setName(applyInfoModel.getArea());
-            supplier_id = applyInfoModel.getSupplier_id();
+            submit_id = applyInfoModel.getSubmit_id();
         } else if(type == Constant.Apply.EDIT_COMPANY_HHR) {
             //编辑企业合伙人
             applyInfoModel = (ApplyInfoModel) getIntent().getSerializableExtra(Constant.ExtraConstant.EXTRA_OTHER_MODEL);
@@ -79,10 +79,10 @@ public class ApplyHHRActivity extends TitleBaseActivity {
             city = new City();
             city.setId(applyInfoModel.getArea_id());
             city.setName(applyInfoModel.getArea());
-            supplier_id = applyInfoModel.getSupplier_id();
+            submit_id = applyInfoModel.getSubmit_id();
         } else {
             city = (City) getIntent().getSerializableExtra(Constant.ExtraConstant.EXTRA_MODEL);
-            supplier_id = App.getApp().getmLocalUser().getSupplier_id();
+            submit_id = App.getApp().getmLocalUser().getSubmit_id();
             //添加页卡视图
             mFragmentList.add(ApplyHHR_Fragment.getInstance(null));
             mFragmentList.add(ApplyPersonHHR_Fragment.getInstance(null));

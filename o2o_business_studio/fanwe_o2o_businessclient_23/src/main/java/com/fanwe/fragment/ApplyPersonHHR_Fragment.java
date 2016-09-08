@@ -385,7 +385,7 @@ public class ApplyPersonHHR_Fragment extends BaseFragment {
     private void requestPersonHHR() {
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_member", "applyPartnerpersonShop");
-        model.put("supplier_id", ((ApplyHHRActivity) getActivity()).supplier_id);//商户的id
+        model.put("supplier_id", ((ApplyHHRActivity) getActivity()).submit_id);//商户的id
         model.put("area_id", ((ApplyHHRActivity) getActivity()).city.getId());//地区的id
 
         model.put("contact_name", personName.getText().toString());//姓名

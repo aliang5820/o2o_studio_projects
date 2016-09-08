@@ -151,11 +151,13 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
     private void dealLoginSuccess(AccountInfoModel accountInfoModel) {
         LocalUserModel user = new LocalUserModel();
         user.setUser_id(accountInfoModel.getAccount_id());
+        user.setSubmit_id(accountInfoModel.getSubmit_id());
         user.setSupplier_id(accountInfoModel.getSupplier_id());
         user.setAccount_name(accountInfoModel.getAccount_name());
         user.setAccount_password(accountInfoModel.getAccount_password());
         user.setAccount_type(accountInfoModel.getAccount_type());
         user.setQr_code(accountInfoModel.getQr_code());
+        user.setIs_new(accountInfoModel.getIs_new());
         App.getApp().setmLocalUser(user);
 
         // 保存账号

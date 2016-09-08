@@ -126,7 +126,7 @@ public class ApplyHYDActivity extends TitleBaseActivity {
     private Dialog nDialog;
 
     private ApplyInfoModel applyInfoModel;
-    private String supplier_id;
+    private String submit_id;
     private int type;
 
     @Override
@@ -194,11 +194,11 @@ public class ApplyHYDActivity extends TitleBaseActivity {
             city = new City();
             city.setId(applyInfoModel.getArea_id());
             city.setName(applyInfoModel.getArea());
-            supplier_id = applyInfoModel.getSupplier_id();
+            submit_id = applyInfoModel.getSubmit_id();
             showData();
         } else {
             city = (City) getIntent().getSerializableExtra(Constant.ExtraConstant.EXTRA_MODEL);
-            supplier_id = App.getApp().getmLocalUser().getSupplier_id();
+            submit_id = App.getApp().getmLocalUser().getSubmit_id();
         }
         cityView.setText(city.getName());
         //获取服务分类
@@ -610,7 +610,7 @@ public class ApplyHYDActivity extends TitleBaseActivity {
     private void requestHYD() {
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_member", "applyMemberShop");
-        model.put("supplier_id", supplier_id);//商户的id
+        model.put("supplier_id", submit_id);//商户的id
         model.put("area_id", city.getId());//地区的id
         model.put("supplier_name", storeName.getText().toString());//商户名称
         model.put("supplier_address", address.getText().toString());//商户地址

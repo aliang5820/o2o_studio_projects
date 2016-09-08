@@ -19,4 +19,5 @@ public class ApplyResultModel implements Serializable {
     private String check_failed_reason;//失败原因
     private int check_status;//状态
     private String supplier_id;
+    private String submit_id;
 }

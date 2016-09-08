@@ -209,6 +209,8 @@ public class RegisterActivity extends TitleBaseActivity implements View.OnClickL
         LocalUserModel user = new LocalUserModel();
         user.setUser_id(actModel.getAccount_info().getAccount_id());
         user.setSupplier_id(actModel.getAccount_info().getSupplier_id());
+        user.setSubmit_id(actModel.getAccount_info().getSubmit_id());
+        user.setIs_new(actModel.getAccount_info().getIs_new());
         user.setAccount_name(mStrMobile);
         //user.setAccount_password(mStrPwd);
         App.getApp().setmLocalUser(user);
