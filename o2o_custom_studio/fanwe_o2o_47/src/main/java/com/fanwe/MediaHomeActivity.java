@@ -75,6 +75,7 @@ public class MediaHomeActivity extends BaseActivity {
     private TextView user_level;
     private String qr_code;
     private LocalUserModel localUserModel;
+    private int userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,12 +93,34 @@ public class MediaHomeActivity extends BaseActivity {
     private void initData() {
         localUserModel = LocalUserModelDao.queryModel();
         user_name.setText(localUserModel.getUser_name());
-        user_level.setText("消费股东");
         requestUserMediaInfo();
     }
 
+    private void showUserLevel(int user_type) {
+        //0消费股东  1 会员店 ，2 商户合伙人，3个人合伙人
+        String type = "消费股东";
+        switch (user_type) {
+            case 0:
+                type = "消费股东";
+                break;
+            case 1:
+                type = "会员店";
+                break;
+            case 2:
+                type = "商户合伙人";
+                break;
+            case 3:
+                type = "个人合伙人";
+                break;
+        }
+        user_level.setText(type);
+        userType = user_type;
+    }
+
     public void onNextLevel(View view) {
-        startActivity(new Intent(mActivity, MediaNextLevelActivity.class));
+        Intent intent = new Intent(mActivity, MediaNextLevelActivity.class);
+        intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, userType);
+        startActivity(intent);
     }
 
     public void onPoster(View view) {
@@ -129,9 +152,9 @@ public class MediaHomeActivity extends BaseActivity {
      */
     private void requestUserMediaInfo() {
         RequestModel model = new RequestModel();
-        model.putCtl("media");
+        model.putCtl("biz_media");
         model.putAct("personalDetails");
-        model.put("user_id", localUserModel.getUser_id());
+        model.put("user_id", localUserModel.getSupplier_id());
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<MediaHomeCtlActModel>() {
 
             @Override
@@ -143,6 +166,7 @@ public class MediaHomeActivity extends BaseActivity {
             public void onSuccess(MediaHomeCtlActModel actModel) {
                 if (actModel.getStatus() == 1) {
                     SDDialogManager.dismissProgressDialog();
+                    showUserLevel(actModel.getUser_type());
                     label1.setText(getString(R.string.number, actModel.getClassPersonNum()));//总下线人数
                     label2.setText(getString(R.string.money, actModel.getTotalRewardMoney()));//总奖励金额
                     label3.setText(getString(R.string.number, actModel.getA_Class_Person()));//一级

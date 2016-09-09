@@ -60,7 +60,8 @@ public class MediaNextLevelActivity extends BaseActivity {
 
     private void initView() {
         mTitle.setMiddleTextTop("自媒体");
-        user_level.setText("消费股东");
+        int user_type = getIntent().getIntExtra(Constant.ExtraConstant.EXTRA_TYPE, 0);
+        showUserLevel(user_type);
         ViewPager mViewPager = (ViewPager) findViewById(R.id.vp_view);
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tabs);
 
@@ -90,6 +91,26 @@ public class MediaNextLevelActivity extends BaseActivity {
 
         LocalUserModel localUserModel = LocalUserModelDao.queryModel();
         user_name.setText(localUserModel.getUser_name());
+    }
+
+    private void showUserLevel(int user_type) {
+        //0消费股东  1 会员店 ，2 商户合伙人，3个人合伙人
+        String type = "消费股东";
+        switch (user_type) {
+            case 0:
+                type = "消费股东";
+                break;
+            case 1:
+                type = "会员店";
+                break;
+            case 2:
+                type = "商户合伙人";
+                break;
+            case 3:
+                type = "个人合伙人";
+                break;
+        }
+        user_level.setText(type);
     }
 
     class FragmentAdapter extends FragmentPagerAdapter {

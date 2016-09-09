@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class User_infoModel extends BaseActModel {
     private int id;
+    private int supplier_id;//用于自媒体首页
     private String user_name;
     private String user_pwd;
     private String email;

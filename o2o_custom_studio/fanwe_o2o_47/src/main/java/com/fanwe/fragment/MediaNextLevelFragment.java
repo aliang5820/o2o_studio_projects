@@ -121,11 +121,11 @@ public class MediaNextLevelFragment extends BaseFragment {
         LocalUserModel localUserModel = LocalUserModelDao.queryModel();
 
         final RequestModel model = new RequestModel();
-        model.putCtl("media");
+        model.putCtl("biz_media");
         model.putAct("get_extension_class");
         model.put("page", mCurrentPage);
         model.put("level", level);
-        model.put("user_id", localUserModel.getUser_id());
+        model.put("user_id", localUserModel.getSupplier_id());
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<MediaNextLevelPageModel>() {
             private Dialog nDialog;
 

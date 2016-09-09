@@ -227,19 +227,19 @@ public class MediaRewardFragment extends BaseFragment {
         final RequestModel model = new RequestModel();
         switch (type) {
             case Constant.Reward.ORDER:
-                model.putCtl("media");
+                model.putCtl("biz_media");
                 model.putAct("get_order_data");
                 break;
             case Constant.Reward.HHR:
-                model.putCtl("media");
+                model.putCtl("biz_media");
                 model.putAct("get_partner_data");
                 break;
             case Constant.Reward.HYD:
-                model.putCtl("media");
+                model.putCtl("biz_media");
                 model.putAct("get_memberStore_data");
                 break;
         }
-        model.put("user_id", localUserModel.getUser_id());
+        model.put("user_id", localUserModel.getSupplier_id());
         model.put("page", mCurrentPage);//请求页码
         if (isQuery) {
             model.put("startTime", startTime / 1000);//查询的开始时间

@@ -64,7 +64,7 @@ android {
             if (flavor.name != "dev") {
                 //替换正式的应用名称和渠道号
                 flavor.manifestPlaceholders = [app_name     : "${appName}",
-                                               umeng_channel: name]
+                                               umeng_channel: flavor.name]
                 //设置正式环境的host地址
                 //flavor.buildConfigField("String", "API_HOST", "\"101.200.88.185\"")
                 flavor.buildConfigField("String", "API_HOST", "\"120.24.186.128\"")

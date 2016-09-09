@@ -16,6 +16,7 @@ import lombok.Data;
 public class LocalUserModel implements Serializable {
     private int _id;
     private int user_id;
+    private int supplier_id;//用于自媒体首页
     private String user_email;
     private String user_name;
     private String user_pwd;
@@ -31,6 +32,7 @@ public class LocalUserModel implements Serializable {
             LocalUserModel localModel = new LocalUserModel();
 
             localModel.setUser_id(model.getId());
+            localModel.setSupplier_id(model.getSupplier_id());
             localModel.setUser_name(model.getUser_name());
             localModel.setUser_pwd(model.getUser_pwd());
             localModel.setUser_email(model.getEmail());

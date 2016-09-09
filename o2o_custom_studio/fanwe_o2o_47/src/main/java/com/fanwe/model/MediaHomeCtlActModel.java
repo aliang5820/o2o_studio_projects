@@ -21,4 +21,5 @@ public class MediaHomeCtlActModel extends BaseActModel {
     private String depositMoney;//未提现佣金
     private String extension_person;//推荐人
     private String qr_code;//二维码
+    private int user_type;//用户类型
 }
