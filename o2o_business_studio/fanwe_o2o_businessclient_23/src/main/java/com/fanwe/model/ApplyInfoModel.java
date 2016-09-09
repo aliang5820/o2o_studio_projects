@@ -46,7 +46,7 @@ public class ApplyInfoModel extends BaseCtlActModel implements Serializable {
     private String h_supplier_logo;
     private String h_supplier_image;
     private String h_tel; //联系电话
-    private String h_bank_info;
-    private String h_bank_user;
-    private String h_bank_name;
+    private String h_bank_info;//开户行账号
+    private String h_bank_user;//开户行户名
+    private String h_bank_name;//开户行名称
 }

@@ -181,9 +181,9 @@ public class ApplyHHR_Fragment extends BaseFragment {
             //联系电话
             contactPhone.setText(applyInfoModel.getH_tel());
             //开户行户名
-            bankAccountName.setText(applyInfoModel.getH_bank_name());
+            bankAccountName.setText(applyInfoModel.getH_bank_user());
             //开户行名称
-            bankName.setText(applyInfoModel.getH_bank_user());
+            bankName.setText(applyInfoModel.getH_bank_name());
             //开户行账号
             bankAccount.setText(applyInfoModel.getH_bank_info());
             //营业执照
@@ -602,8 +602,8 @@ public class ApplyHHR_Fragment extends BaseFragment {
         model.put("deal_child_cate", ((ApplyServiceTypeModel) spinner2.getTag()).getId());//第二类
         model.put("tel", shopPhone.getText().toString());//商户电话
         model.put("contact_name", companyOwner.getText().toString());//法人姓名
-        model.put("h_bank_name", bankAccountName.getText().toString());//开户行户名
-        model.put("h_bank_user", bankName.getText().toString());//开户行名称
+        model.put("h_bank_user", bankAccountName.getText().toString());//开户行户名
+        model.put("h_bank_name", bankName.getText().toString());//开户行名称
         model.put("h_bank_info", bankAccount.getText().toString());//开户行账号
         model.put("mobile", mobile.getText().toString());//手机号
         model.put("h_name", companyName.getText().toString());//企业名称

@@ -133,9 +133,9 @@ public class ApplyPersonHHR_Fragment extends BaseFragment {
             //联系电话
             personContactPhone.setText(applyInfoModel.getH_tel());
             //开户行户名
-            personBankAccountName.setText(applyInfoModel.getH_bank_name());
+            personBankAccountName.setText(applyInfoModel.getH_bank_user());
             //开户行名称
-            personBankName.setText(applyInfoModel.getH_bank_user());
+            personBankName.setText(applyInfoModel.getH_bank_name());
             //开户行账号
             personBankAccount.setText(applyInfoModel.getH_bank_info());
             //身份证照片
@@ -391,8 +391,8 @@ public class ApplyPersonHHR_Fragment extends BaseFragment {
         model.put("contact_name", personName.getText().toString());//姓名
         model.put("mobile", personMobile.getText().toString());//手机号
         model.put("h_tel", personContactPhone.getText().toString());//联系电话
-        model.put("h_bank_name", personBankAccountName.getText().toString());//开户行户名
-        model.put("h_bank_user", personBankName.getText().toString());//开户行名称
+        model.put("h_bank_user", personBankAccountName.getText().toString());//开户行户名
+        model.put("h_bank_name", personBankName.getText().toString());//开户行名称
         model.put("h_bank_info", personBankAccount.getText().toString());//开户行账号
         //图片
         model.put("h_license", picUrlMap.get(companyPic1.getId()));//身份证照片
