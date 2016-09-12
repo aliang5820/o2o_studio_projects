@@ -125,7 +125,7 @@ public class MediaNextLevelFragment extends BaseFragment {
         model.putAct("get_extension_class");
         model.put("page", mCurrentPage);
         model.put("level", level);
-        model.put("user_id", localUserModel.getSupplier_id());
+        model.put("user_id", localUserModel.getSupplier_id() > 0 ? localUserModel.getSupplier_id() : localUserModel.getUser_id());
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<MediaNextLevelPageModel>() {
             private Dialog nDialog;
 

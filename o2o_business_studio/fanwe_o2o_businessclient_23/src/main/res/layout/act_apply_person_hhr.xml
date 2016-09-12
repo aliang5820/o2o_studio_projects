@@ -158,8 +158,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="个人照片\n(免冠照)"
+                    android:gravity="center"
+                    android:text="手持身份证\n照片"
                     android:textColor="@color/black" />
 
                 <ImageView

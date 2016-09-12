@@ -239,7 +239,7 @@ public class MediaRewardFragment extends BaseFragment {
                 model.putAct("get_memberStore_data");
                 break;
         }
-        model.put("user_id", localUserModel.getSupplier_id());
+        model.put("user_id", localUserModel.getSupplier_id() > 0 ? localUserModel.getSupplier_id() : localUserModel.getUser_id());
         model.put("page", mCurrentPage);//请求页码
         if (isQuery) {
             model.put("startTime", startTime / 1000);//查询的开始时间

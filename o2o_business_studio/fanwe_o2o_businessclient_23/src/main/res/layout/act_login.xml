@@ -143,6 +143,6 @@
             android:text="删除账号(彩蛋)"
             android:textColor="@color/white"
             android:textSize="@dimen/base_textsize_16"
-            android:visibility="visible" />
+            android:visibility="gone" />
     </RelativeLayout>
 </ScrollView>

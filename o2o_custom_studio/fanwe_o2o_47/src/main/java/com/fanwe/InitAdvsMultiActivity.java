@@ -1,8 +1,5 @@
 package com.fanwe;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -38,280 +35,234 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.message.IUmengRegisterCallback;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 初始化Activity
- * 
  */
-public class InitAdvsMultiActivity extends BaseActivity
-{
+public class InitAdvsMultiActivity extends BaseActivity {
 
-	/** 广告图片显示时间 */
-	private static final long ADVS_DISPLAY_TIME = 2000;
+    /**
+     * 广告图片显示时间
+     */
+    private static final long ADVS_DISPLAY_TIME = 2000;
 
-	/** 正常初始化成功后显示时间 */
-	private static final long NORMAL_DISPLAY_TIME = 1000;
+    /**
+     * 正常初始化成功后显示时间
+     */
+    private static final long NORMAL_DISPLAY_TIME = 1000;
 
-	@ViewInject(R.id.btn_skip)
-	private Button mBtn_skip;
+    @ViewInject(R.id.btn_skip)
+    private Button mBtn_skip;
 
-	@ViewInject(R.id.spv_content)
-	private SDSlidingPlayView mSpvAd;
+    @ViewInject(R.id.spv_content)
+    private SDSlidingPlayView mSpvAd;
 
-	private InitAdvsPagerAdapter mAdapter;
+    private InitAdvsPagerAdapter mAdapter;
 
-	private SDTimer mTimer = new SDTimer();
+    private SDTimer mTimer = new SDTimer();
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.act_init_advs_multi);
-		init();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.act_init_advs_multi);
+        init();
+    }
 
-	private void init()
-	{
-		startLocation();
-		enableUmengPush();
-		MobclickAgent.updateOnlineConfig(this);
-		registerClick();
-		initSlidingPlayView();
-		requestInitInterface();
-	}
+    private void init() {
+        startLocation();
+        enableUmengPush();
+        MobclickAgent.updateOnlineConfig(this);
+        registerClick();
+        initSlidingPlayView();
+        requestInitInterface();
+    }
 
-	private void startLocation()
-	{
-		BaiduMapManager.getInstance().startLocation(new BDLocationListener()
-		{
-			@Override
-			public void onReceiveLocation(BDLocation arg0)
-			{
-			}
-		});
-	}
+    private void startLocation() {
+        BaiduMapManager.getInstance().startLocation(new BDLocationListener() {
+            @Override
+            public void onReceiveLocation(BDLocation arg0) {
+            }
+        });
+    }
 
-	private void enableUmengPush()
-	{
-		LogUtil.i("isenable:" + UmengPushManager.getPushAgent().isEnabled() + "registionId:" + UmengPushManager.getPushAgent().getRegistrationId());
-		UmengPushManager.getPushAgent().enable(new IUmengRegisterCallback()
-		{
+    private void enableUmengPush() {
+        LogUtil.i("isenable:" + UmengPushManager.getPushAgent().isEnabled() + "registionId:" + UmengPushManager.getPushAgent().getRegistrationId());
+        UmengPushManager.getPushAgent().enable(new IUmengRegisterCallback() {
 
-			@Override
-			public void onRegistered(String arg0)
-			{
-				LogUtil.i(arg0);
-			}
-		});
-	}
+            @Override
+            public void onRegistered(String arg0) {
+                LogUtil.i(arg0);
+            }
+        });
+    }
 
-	private void registerClick()
-	{
-		mBtn_skip.setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				startMainActivity();
-			}
-		});
-	}
+    private void registerClick() {
+        mBtn_skip.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startMainActivity();
+            }
+        });
+    }
 
-	private void initSlidingPlayView()
-	{
-		mSpvAd.mVpgContent.setmMeasureMode(EnumMeasureMode.NORMAL);
-		mSpvAd.setmImageNormalResId(R.drawable.ic_main_dot2_normal);
-		mSpvAd.setmImageSelectedResId(R.drawable.ic_main_dot2_foused);
-		mSpvAd.setmListenerOnTouch(new SDSlidingPlayViewOnTouchListener()
-		{
+    private void initSlidingPlayView() {
+        mSpvAd.mVpgContent.setmMeasureMode(EnumMeasureMode.NORMAL);
+        mSpvAd.setmImageNormalResId(R.drawable.ic_main_dot2_normal);
+        mSpvAd.setmImageSelectedResId(R.drawable.ic_main_dot2_foused);
+        mSpvAd.setmListenerOnTouch(new SDSlidingPlayViewOnTouchListener() {
 
-			@Override
-			public void onUp(View v, MotionEvent event)
-			{
+            @Override
+            public void onUp(View v, MotionEvent event) {
 
-			}
+            }
 
-			@Override
-			public void onTouch(View v, MotionEvent event)
-			{
+            @Override
+            public void onTouch(View v, MotionEvent event) {
 
-			}
+            }
 
-			@Override
-			public void onMove(View v, MotionEvent event)
-			{
-				if (mAdapter != null && mAdapter.getCount() > 1)
-				{
-					mTimer.stopWork();
-				}
-			}
+            @Override
+            public void onMove(View v, MotionEvent event) {
+                if (mAdapter != null && mAdapter.getCount() > 1) {
+                    mTimer.stopWork();
+                }
+            }
 
-			@Override
-			public void onDown(View v, MotionEvent event)
-			{
+            @Override
+            public void onDown(View v, MotionEvent event) {
 
-			}
-		});
-	}
+            }
+        });
+    }
 
-	private void requestInitInterface()
-	{
-		CommonInterface.requestInit(new SDRequestCallBack<Init_indexActModel>()
-		{
-			private boolean nSuccess = false;
+    private void requestInitInterface() {
+        CommonInterface.requestInit(new SDRequestCallBack<Init_indexActModel>() {
+            private boolean nSuccess = false;
 
-			@Override
-			public void onSuccess(ResponseInfo<String> responseInfo)
-			{
-				if (actModel.getStatus() == 1)
-				{
-					nSuccess = true;
-					dealInitSuccess(actModel);
-				}
-			}
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (actModel.getStatus() == 1) {
+                    nSuccess = true;
+                    dealInitSuccess(actModel);
+                }
+            }
 
-			@Override
-			public void onStart()
-			{
-			}
+            @Override
+            public void onStart() {
+            }
 
-			@Override
-			public void onFinish()
-			{
-				if (!nSuccess)
-				{
-					startMainActivity();
-				}
-			}
+            @Override
+            public void onFinish() {
+                if (!nSuccess) {
+                    startMainActivity();
+                }
+            }
 
-			@Override
-			public void onFailure(HttpException error, String msg)
-			{
-				nSuccess = false;
-			}
-		});
-	}
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                nSuccess = false;
+            }
+        });
+    }
 
-	protected void dealInitSuccess(Init_indexActModel model)
-	{
-		List<InitActStart_pageModel> listModel = model.getStart_page_new();
-		bindAdvsImages(listModel);
-	}
+    protected void dealInitSuccess(Init_indexActModel model) {
+        List<InitActStart_pageModel> listModel = model.getStart_page_new();
+        bindAdvsImages(listModel);
+    }
 
-	protected void bindAdvsImages(List<InitActStart_pageModel> listModel)
-	{
-		List<InitActStart_pageModel> listModelCached = findCachedModel(listModel);
-		if (!SDCollectionUtil.isEmpty(listModelCached))
-		{
-			mAdapter = new InitAdvsPagerAdapter(listModelCached, mActivity);
-			mAdapter.setmListenerOnItemClick(new SDBasePagerAdapterOnItemClickListener()
-			{
-				@Override
-				public void onItemClick(View v, int position)
-				{
-					InitActStart_pageModel model = mAdapter.getItemModel(position);
-					if (model != null)
-					{
-						int type = model.getType();
-						Intent intent = AppRuntimeWorker.createIntentByType(type, model.getData(), false);
-						if (intent != null)
-						{
-							try
-							{
-								mTimer.stopWork();
-								intent.putExtra(BaseActivity.EXTRA_IS_ADVS, true);
-								startActivity(intent);
-								finish();
-							} catch (Exception e)
-							{
-								e.printStackTrace();
-							}
-						}
-					}
-				}
-			});
-			mSpvAd.setAdapter(mAdapter);
-			startAdvsDisplayTimer();
-			SDViewUtil.show(mBtn_skip);
-		} else
-		{
-			startNormalDisplayTimer();
-		}
-	}
+    protected void bindAdvsImages(List<InitActStart_pageModel> listModel) {
+        List<InitActStart_pageModel> listModelCached = findCachedModel(listModel);
+        if (!SDCollectionUtil.isEmpty(listModelCached)) {
+            mAdapter = new InitAdvsPagerAdapter(listModelCached, mActivity);
+            mAdapter.setmListenerOnItemClick(new SDBasePagerAdapterOnItemClickListener() {
+                @Override
+                public void onItemClick(View v, int position) {
+                    InitActStart_pageModel model = mAdapter.getItemModel(position);
+                    if (model != null) {
+                        int type = model.getType();
+                        Intent intent = AppRuntimeWorker.createIntentByType(type, model.getData(), false);
+                        if (intent != null) {
+                            try {
+                                mTimer.stopWork();
+                                intent.putExtra(BaseActivity.EXTRA_IS_ADVS, true);
+                                startActivity(intent);
+                                finish();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            });
+            mSpvAd.setAdapter(mAdapter);
+            startAdvsDisplayTimer();
+            SDViewUtil.show(mBtn_skip);
+        } else {
+            startNormalDisplayTimer();
+        }
+    }
 
-	/**
-	 * 找到已经缓存过的实体
-	 * 
-	 * @param listModel
-	 * @return
-	 */
-	private List<InitActStart_pageModel> findCachedModel(List<InitActStart_pageModel> listModel)
-	{
-		List<InitActStart_pageModel> listCachedModel = new ArrayList<InitActStart_pageModel>();
-		if (!SDCollectionUtil.isEmpty(listModel))
-		{
-			for (InitActStart_pageModel model : listModel)
-			{
-				String url = model.getImg();
-				if (ImageLoaderManager.isCacheExistOnDisk(url))
-				{
-					listCachedModel.add(model);
-				} else
-				{
-					ImageLoader.getInstance().loadImage(url, null);
-				}
-			}
-		}
-		return listCachedModel;
-	}
+    /**
+     * 找到已经缓存过的实体
+     *
+     * @param listModel
+     * @return
+     */
+    private List<InitActStart_pageModel> findCachedModel(List<InitActStart_pageModel> listModel) {
+        List<InitActStart_pageModel> listCachedModel = new ArrayList<InitActStart_pageModel>();
+        if (!SDCollectionUtil.isEmpty(listModel)) {
+            for (InitActStart_pageModel model : listModel) {
+                String url = model.getImg();
+                if (ImageLoaderManager.isCacheExistOnDisk(url)) {
+                    listCachedModel.add(model);
+                } else {
+                    ImageLoader.getInstance().loadImage(url, null);
+                }
+            }
+        }
+        return listCachedModel;
+    }
 
-	private void startAdvsDisplayTimer()
-	{
-		mTimer.startWork(ADVS_DISPLAY_TIME, Long.MAX_VALUE, new SDTimerListener()
-		{
-			@Override
-			public void onWorkMain()
-			{
-				startMainActivity();
-			}
+    private void startAdvsDisplayTimer() {
+        mTimer.startWork(ADVS_DISPLAY_TIME, Long.MAX_VALUE, new SDTimerListener() {
+            @Override
+            public void onWorkMain() {
+                startMainActivity();
+            }
 
-			@Override
-			public void onWork()
-			{
+            @Override
+            public void onWork() {
 
-			}
-		});
-	}
+            }
+        });
+    }
 
-	private void startNormalDisplayTimer()
-	{
-		mTimer.startWork(NORMAL_DISPLAY_TIME, Long.MAX_VALUE, new SDTimerListener()
-		{
-			@Override
-			public void onWorkMain()
-			{
-				startMainActivity();
-			}
+    private void startNormalDisplayTimer() {
+        mTimer.startWork(NORMAL_DISPLAY_TIME, Long.MAX_VALUE, new SDTimerListener() {
+            @Override
+            public void onWorkMain() {
+                startMainActivity();
+            }
 
-			@Override
-			public void onWork()
-			{
+            @Override
+            public void onWork() {
 
-			}
-		});
-	}
+            }
+        });
+    }
 
-	private void startMainActivity()
-	{
-		Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-		startActivity(intent);
-		finish();
-	}
+    private void startMainActivity() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
-	@Override
-	protected void onDestroy()
-	{
-		mTimer.stopWork();
-		super.onDestroy();
-	}
+    @Override
+    protected void onDestroy() {
+        mTimer.stopWork();
+        super.onDestroy();
+    }
 
 }

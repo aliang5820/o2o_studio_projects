@@ -1,19 +1,11 @@
 package com.fanwe;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.fanwe.app.App;
 import com.fanwe.constant.Constant;
 import com.fanwe.dao.LocalUserModelDao;
 import com.fanwe.http.InterfaceServer;
@@ -23,11 +15,8 @@ import com.fanwe.model.LocalUserModel;
 import com.fanwe.model.MediaHomeCtlActModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.o2o.newo2o.R;
-import com.fanwe.utils.QRCodeUtil;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ViewInject;
-
-import java.io.File;
 
 /**
  * Created by Edison on 2016/7/29.
@@ -154,7 +143,8 @@ public class MediaHomeActivity extends BaseActivity {
         RequestModel model = new RequestModel();
         model.putCtl("biz_media");
         model.putAct("personalDetails");
-        model.put("user_id", localUserModel.getSupplier_id());
+        model.put("user_id", localUserModel.getSupplier_id() > 0 ? localUserModel.getSupplier_id() : localUserModel.getUser_id());
+
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<MediaHomeCtlActModel>() {
 
             @Override
@@ -177,7 +167,7 @@ public class MediaHomeActivity extends BaseActivity {
                     label8.setText(getString(R.string.money, actModel.getNowMonthMemMoney()));//本月合伙人奖励
                     label9.setText(getString(R.string.money, actModel.getWithdrawalsMoney()));//已提现佣金
                     label10.setText(getString(R.string.money, actModel.getDepositMoney()));//未提现佣金
-                    if(TextUtils.isEmpty(actModel.getExtension_person())) {
+                    if (TextUtils.isEmpty(actModel.getExtension_person())) {
                         extra_name.setText("");
                     } else {
                         extra_name.setText(getString(R.string.extension_person, actModel.getExtension_person()));//推荐人

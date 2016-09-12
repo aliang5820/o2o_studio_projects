@@ -11,8 +11,8 @@ android {
         manifestPlaceholders = [CHANNEL_VALUE: "default"]
         applicationId "com.shengdianwang.o2o.newo2o"
         minSdkVersion 14
-        versionCode 2016082612
-        versionName "2016082612"
+        versionCode 2016091301
+        versionName "2016091301"
     }
 
     signingConfigs {
@@ -64,8 +64,8 @@ android {
                 flavor.manifestPlaceholders = [app_name     : "${appName}",
                                                umeng_channel: flavor.name]
                 //设置正式环境的host地址
-                //flavor.buildConfigField("String", "API_HOST", "\"101.200.88.185\"")
-                flavor.buildConfigField("String", "API_HOST", "\"120.24.186.128\"")
+                flavor.buildConfigField("String", "API_HOST", "\"101.200.88.185\"")
+                //flavor.buildConfigField("String", "API_HOST", "\"120.24.186.128\"")
             }
     }
 
