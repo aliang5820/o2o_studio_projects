@@ -143,7 +143,8 @@ public class MediaHomeActivity extends BaseActivity {
         RequestModel model = new RequestModel();
         model.putCtl("biz_media");
         model.putAct("personalDetails");
-        model.put("user_id", localUserModel.getSupplier_id() > 0 ? localUserModel.getSupplier_id() : localUserModel.getUser_id());
+        model.put("is_user_interface", 1);
+        model.put("user_id", localUserModel.getUser_id());
 
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<MediaHomeCtlActModel>() {
 
