@@ -85,13 +85,13 @@ public class LoginActivity extends BaseActivity {
     private void initTitle() {
         mTitle.setMiddleTextTop("登录");
 
-        mTitle.initRightItem(1);
-        mTitle.getItemRight(0).setTextBot("注册");
+        //mTitle.initRightItem(1);
+        //mTitle.getItemRight(0).setTextBot("注册");
     }
 
     @Override
     public void onCLickRight_SDTitleSimple(SDTitleItem v, int index) {
-        startRegisterActivity();
+        //startRegisterActivity();
     }
 
     @Override
