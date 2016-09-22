@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-def appName = "省点网商户端"
+def appName = "省点云购商户端"
 
 android {
     compileSdkVersion 24
@@ -12,8 +12,8 @@ android {
         manifestPlaceholders = [CHANNEL_VALUE: "default"]
         applicationId "com.sdwbusiness.o2o.newo2o"
         minSdkVersion 14
-        versionCode 2016091301
-        versionName "2016091301"
+        versionCode 2016092220
+        versionName "2016092220"
     }
 
     signingConfigs {
