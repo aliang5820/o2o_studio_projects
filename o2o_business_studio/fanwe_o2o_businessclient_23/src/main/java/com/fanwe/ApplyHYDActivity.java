@@ -431,12 +431,6 @@ public class ApplyHYDActivity extends TitleBaseActivity {
         } else if (!picMap.containsKey(companyPic1.getId()) && !picUrlMap.containsKey(companyPic1.getId())) {
             SDToast.showToast("请选择营业执照");
             return;
-        } else if (!picMap.containsKey(companyPic2.getId()) && !picUrlMap.containsKey(companyPic2.getId())) {
-            SDToast.showToast("请选择其他资质");
-            return;
-        } else if (!picMap.containsKey(companyPic3.getId()) && !picUrlMap.containsKey(companyPic3.getId())) {
-            SDToast.showToast("请选择商户logo");
-            return;
         } else if (!picMap.containsKey(companyPic4.getId()) && !picUrlMap.containsKey(companyPic4.getId())) {
             SDToast.showToast("请选择门店照片");
             return;
@@ -484,8 +478,8 @@ public class ApplyHYDActivity extends TitleBaseActivity {
         intent.putExtra("crop", "true");
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", 400);
-        intent.putExtra("outputY", 400);
+        intent.putExtra("outputX", 1000);
+        intent.putExtra("outputY", 1000);
         intent.putExtra("return-data", false);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, targetUri);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
