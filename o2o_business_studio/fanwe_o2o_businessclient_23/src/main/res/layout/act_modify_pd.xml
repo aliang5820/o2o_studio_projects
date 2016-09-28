@@ -35,7 +35,6 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:hint="请输入旧密码"
-                android:maxLength="11"
                 android:paddingLeft="10dp"
                 android:inputType="textPassword"
                 android:textColor="@color/black"

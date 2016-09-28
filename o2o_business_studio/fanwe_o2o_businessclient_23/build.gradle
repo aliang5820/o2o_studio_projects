@@ -5,15 +5,14 @@ def appName = "省点云购商户端"
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.0"
-
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         manifestPlaceholders = [CHANNEL_VALUE: "default"]
         applicationId "com.sdwbusiness.o2o.newo2o"
         minSdkVersion 14
-        versionCode 2016092621
-        versionName "2016092621"
+        versionCode 2016092900
+        versionName "2016092900"
     }
 
     signingConfigs {

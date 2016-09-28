@@ -37,6 +37,7 @@ import com.fanwe.model.ApplyServiceTypeCtlActModel;
 import com.fanwe.model.ApplyServiceTypeModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.utils.ImageUriUtil;
+import com.fanwe.utils.LogUtil;
 import com.fanwe.utils.SDDialogUtil;
 import com.fanwe.utils.SDInterfaceUtil;
 import com.fanwe.utils.SDToast;
@@ -231,17 +232,25 @@ public class ApplyHYDActivity extends TitleBaseActivity {
             //开户行账号
             bankAccount.setText(applyInfoModel.getH_bank_info());
             //营业执照
-            ImageLoaderManager.getImageLoader().displayImage(ApkConstant.SERVER_IMG_URL + applyInfoModel.getH_license().substring(1), companyPic1);
-            picUrlMap.put(companyPic1.getId(), applyInfoModel.getH_license());
+            if(!TextUtils.isEmpty(applyInfoModel.getH_license())) {
+                ImageLoaderManager.getImageLoader().displayImage(ApkConstant.SERVER_IMG_URL + applyInfoModel.getH_license().substring(1), companyPic1);
+                picUrlMap.put(companyPic1.getId(), applyInfoModel.getH_license());
+            }
             //其他资质
-            ImageLoaderManager.getImageLoader().displayImage(ApkConstant.SERVER_IMG_URL + applyInfoModel.getH_other_license().substring(1), companyPic2);
-            picUrlMap.put(companyPic2.getId(), applyInfoModel.getH_other_license());
+            if(!TextUtils.isEmpty(applyInfoModel.getH_other_license())) {
+                ImageLoaderManager.getImageLoader().displayImage(ApkConstant.SERVER_IMG_URL + applyInfoModel.getH_other_license().substring(1), companyPic2);
+                picUrlMap.put(companyPic2.getId(), applyInfoModel.getH_other_license());
+            }
             //商户logo
-            ImageLoaderManager.getImageLoader().displayImage(ApkConstant.SERVER_IMG_URL + applyInfoModel.getH_supplier_logo().substring(1), companyPic3);
-            picUrlMap.put(companyPic3.getId(), applyInfoModel.getH_supplier_logo());
+            if(!TextUtils.isEmpty(applyInfoModel.getH_supplier_logo())) {
+                ImageLoaderManager.getImageLoader().displayImage(ApkConstant.SERVER_IMG_URL + applyInfoModel.getH_supplier_logo().substring(1), companyPic3);
+                picUrlMap.put(companyPic3.getId(), applyInfoModel.getH_supplier_logo());
+            }
             //请选择门店照片
-            ImageLoaderManager.getImageLoader().displayImage(ApkConstant.SERVER_IMG_URL + applyInfoModel.getH_supplier_image().substring(1), companyPic4);
-            picUrlMap.put(companyPic4.getId(), applyInfoModel.getH_supplier_image());
+            if(!TextUtils.isEmpty(applyInfoModel.getH_supplier_image())) {
+                ImageLoaderManager.getImageLoader().displayImage(ApkConstant.SERVER_IMG_URL + applyInfoModel.getH_supplier_image().substring(1), companyPic4);
+                picUrlMap.put(companyPic4.getId(), applyInfoModel.getH_supplier_image());
+            }
         }
     }
 
@@ -533,13 +542,29 @@ public class ApplyHYDActivity extends TitleBaseActivity {
                     String realUri = ImageUriUtil.uri2filePath(uri, mActivity);
                     File file = new File(realUri);
                     imageUri = Uri.fromFile(file);
-                    imageCropUri = getTargetImageUri(false);
-                    cropImg(imageUri, imageCropUri);
+                    if(currentImageView == companyPic3 || currentImageView == companyPic4) {
+                        imageCropUri = getTargetImageUri(false);
+                        cropImg(imageUri, imageCropUri);
+                    } else {
+                        ImageLoaderManager.getImageLoader().displayImage(imageUri.toString(), currentImageView);
+                        ApplyPictureCtlActModel picModel = new ApplyPictureCtlActModel();
+                        picModel.setPath(imageUri.getPath());
+                        picMap.put(currentImageView.getId(), picModel);
+                        Log.e(TAG, "==================>" + imageUri.getPath());
+                    }
                     break;
                 case Constant.RESULT_CAMERA_ONLY:
                     //拍照
-                    imageCropUri = getTargetImageUri(false);
-                    cropImg(imageUri, imageCropUri);
+                    if(currentImageView == companyPic3 || currentImageView == companyPic4) {
+                        imageCropUri = getTargetImageUri(false);
+                        cropImg(imageUri, imageCropUri);
+                    } else {
+                        ImageLoaderManager.getImageLoader().displayImage(imageUri.toString(), currentImageView);
+                        ApplyPictureCtlActModel picModel = new ApplyPictureCtlActModel();
+                        picModel.setPath(imageUri.getPath());
+                        picMap.put(currentImageView.getId(), picModel);
+                        Log.e(TAG, "==================>" + imageUri.getPath());
+                    }
                     break;
                 case Constant.RESULT_CROP_PATH_RESULT:
                     //获取裁剪结果

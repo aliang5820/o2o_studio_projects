@@ -261,21 +261,31 @@ public class ApplyPersonHHR_Fragment extends BaseFragment {
                     String realUri = ImageUriUtil.uri2filePath(uri, getContext());
                     File file = new File(realUri);
                     imageUri = Uri.fromFile(file);
-                    imageCropUri = getTargetImageUri(false);
-                    cropImg(imageUri, imageCropUri);
+                    /*imageCropUri = getTargetImageUri(false);
+                    cropImg(imageUri, imageCropUri);*/
+                    ImageLoaderManager.getImageLoader().displayImage(imageUri.toString(), currentImageView);
+                    ApplyPictureCtlActModel picModel = new ApplyPictureCtlActModel();
+                    picModel.setPath(imageUri.getPath());
+                    picMap.put(currentImageView.getId(), picModel);
+                    Log.e(TAG, "==================>" + imageUri.getPath());
                     break;
                 case Constant.RESULT_CAMERA_ONLY:
                     //拍照
-                    imageCropUri = getTargetImageUri(false);
-                    cropImg(imageUri, imageCropUri);
+                    /*imageCropUri = getTargetImageUri(false);
+                    cropImg(imageUri, imageCropUri);*/
+                    ImageLoaderManager.getImageLoader().displayImage(imageUri.toString(), currentImageView);
+                    ApplyPictureCtlActModel picModel1 = new ApplyPictureCtlActModel();
+                    picModel1.setPath(imageUri.getPath());
+                    picMap.put(currentImageView.getId(), picModel1);
+                    Log.e(TAG, "==================>" + imageUri.getPath());
                     break;
                 case Constant.RESULT_CROP_PATH_RESULT:
                     //获取裁剪结果
                     currentImageView.setImageURI(imageCropUri);
                     //存储起来，准备上传
-                    ApplyPictureCtlActModel picModel = new ApplyPictureCtlActModel();
-                    picModel.setPath(imageCropUri.getPath());
-                    picMap.put(currentImageView.getId(), picModel);
+                    ApplyPictureCtlActModel picModel2 = new ApplyPictureCtlActModel();
+                    picModel2.setPath(imageCropUri.getPath());
+                    picMap.put(currentImageView.getId(), picModel2);
                     Log.e(TAG, "==================>" + imageCropUri.getPath());
                     break;
             }
