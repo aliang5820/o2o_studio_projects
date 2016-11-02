@@ -47,6 +47,10 @@ public class Constant {
          * 银联支付
          */
         public static final String UPACPAPP = "Upacpapp";
+        /**
+         * 19支付
+         */
+        public static final String PAY19 = "Pay19";
     }
 
     public static final class LoadImageType {

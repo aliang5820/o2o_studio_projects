@@ -77,7 +77,6 @@ public abstract class AbstractPayDoneActivity extends BasePullToRefreshScrollVie
             Intent intent = new Intent(App.getApplication(), AppWebViewActivity.class);
             intent.putExtra(AppWebViewActivity.EXTRA_URL, payAction);
             startActivity(intent);
-            return;
         } else {
             if (PaymentType.MALIPAY.equals(className) || PaymentType.ALIAPP.equals(className)) // 支付宝sdk新
             {
@@ -88,6 +87,8 @@ public abstract class AbstractPayDoneActivity extends BasePullToRefreshScrollVie
             } else if (PaymentType.UPACPAPP.equals(className)) // 银联支付
             {
                 payUpacpapp(model.getUpacpapp());
+            } else if (PaymentType.PAY19.equals(className)) {//19支付
+                SDToast.showToast("19支付");
             }
         }
     }
