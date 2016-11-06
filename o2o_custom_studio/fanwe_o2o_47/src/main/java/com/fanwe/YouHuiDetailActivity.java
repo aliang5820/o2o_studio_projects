@@ -30,222 +30,196 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.sunday.eventbus.SDBaseEvent;
 
-public class YouHuiDetailActivity extends BaseActivity
-{
+public class YouHuiDetailActivity extends BaseActivity {
 
-	/** 优惠id (int) */
-	public static final String EXTRA_YOUHUI_ID = "extra_youhui_id";
+    /**
+     * 优惠id (int)
+     */
+    public static final String EXTRA_YOUHUI_ID = "extra_youhui_id";
 
-	@ViewInject(R.id.ssv_scroll)
-	private SDStickyScrollView mScrollView;
+    @ViewInject(R.id.ssv_scroll)
+    private SDStickyScrollView mScrollView;
 
-	private YouhuiDetailTopFragment mFragTop;
-	private YouhuiDetailOtherMerchantFragment mFragOtherMerchant;
-	private YouhuiDetailHtmlDetailFragment mFragHtmlDetail;
-	private YouhuiDetailNoticeFragment mFragNotice;
-	private YouhuiDetailCommentFragment mFragComment;
+    private YouhuiDetailTopFragment mFragTop;
+    private YouhuiDetailOtherMerchantFragment mFragOtherMerchant;
+    private YouhuiDetailHtmlDetailFragment mFragHtmlDetail;
+    private YouhuiDetailNoticeFragment mFragNotice;
+    private YouhuiDetailCommentFragment mFragComment;
 
-	private int mId;
+    private int mId;
 
-	private Youhui_indexActModel mActModel;
+    private Youhui_indexActModel mActModel;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setmTitleType(TitleType.TITLE);
-		setContentView(R.layout.act_youhui_detail);
-		init();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setmTitleType(TitleType.TITLE);
+        setContentView(R.layout.act_youhui_detail);
+        init();
+    }
 
-	private void init()
-	{
-		getIntentData();
-		if (mId <= 0)
-		{
-			SDToast.showToast("id为空");
-			finish();
-			return;
-		}
-		initTitle();
-		initScrollView();
-	}
+    private void init() {
+        getIntentData();
+        if (mId <= 0) {
+            SDToast.showToast("id为空");
+            finish();
+            return;
+        }
+        initTitle();
+        initScrollView();
+    }
 
-	private void initScrollView()
-	{
-		mScrollView.setMode(Mode.PULL_FROM_START);
-		mScrollView.setOnRefreshListener(new OnRefreshListener2<StickyScrollView>()
-		{
+    private void initScrollView() {
+        mScrollView.setMode(Mode.PULL_FROM_START);
+        mScrollView.setOnRefreshListener(new OnRefreshListener2<StickyScrollView>() {
 
-			@Override
-			public void onPullDownToRefresh(PullToRefreshBase<StickyScrollView> refreshView)
-			{
-				requestYouhuiDetail();
-			}
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<StickyScrollView> refreshView) {
+                requestYouhuiDetail();
+            }
 
-			@Override
-			public void onPullUpToRefresh(PullToRefreshBase<StickyScrollView> refreshView)
-			{
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<StickyScrollView> refreshView) {
 
-			}
-		});
-		mScrollView.setRefreshing();
-	}
+            }
+        });
+        mScrollView.setRefreshing();
+    }
 
-	private void initTitle()
-	{
-		mTitle.setMiddleTextTop("优惠券详情");
+    private void initTitle() {
+        mTitle.setMiddleTextTop("优惠券详情");
 
-		mTitle.initRightItem(1);
-		mTitle.getItemRight(0).setImageLeft(R.drawable.ic_tuan_detail_share);
-	}
+        mTitle.initRightItem(1);
+        mTitle.getItemRight(0).setImageLeft(R.drawable.ic_tuan_detail_share);
+    }
 
-	@Override
-	public void onCLickRight_SDTitleSimple(SDTitleItem v, int index)
-	{
-		clickShare();
-	}
+    @Override
+    public void onCLickRight_SDTitleSimple(SDTitleItem v, int index) {
+        clickShare();
+    }
 
-	/**
-	 * 分享
-	 */
-	private void clickShare()
-	{
-		if (mActModel == null)
-		{
-			SDToast.showToast("未找到可分享内容");
-			return;
-		}
+    /**
+     * 分享
+     */
+    private void clickShare() {
+        if (mActModel == null) {
+            SDToast.showToast("未找到可分享内容");
+            return;
+        }
 
-		Youhui_infoModel infoModel = mActModel.getYouhui_info();
-		if (infoModel == null)
-		{
-			SDToast.showToast("未找到可分享内容");
-			return;
-		}
+        Youhui_infoModel infoModel = mActModel.getYouhui_info();
+        if (infoModel == null) {
+            SDToast.showToast("未找到可分享内容");
+            return;
+        }
 
-		String content = infoModel.getName() + infoModel.getShare_url();
-		String imageUrl = infoModel.getIcon();
-		String clickUrl = infoModel.getShare_url();
+        String content = infoModel.getName() + infoModel.getShare_url();
+        String imageUrl = infoModel.getIcon();
+        String clickUrl = infoModel.getShare_url();
 
-		UmengSocialManager.openShare("分享", content, imageUrl, clickUrl, this, null);
-	}
+        UmengSocialManager.openShare("分享", content, imageUrl, clickUrl, this, null);
+    }
 
-	private void getIntentData()
-	{
-		Intent intent = getIntent();
-		mId = intent.getIntExtra(EXTRA_YOUHUI_ID, -1);
-	}
+    private void getIntentData() {
+        Intent intent = getIntent();
+        mId = intent.getIntExtra(EXTRA_YOUHUI_ID, -1);
+    }
 
-	@Override
-	protected void onNewIntent(Intent intent)
-	{
-		setIntent(intent);
-		init();
-		super.onNewIntent(intent);
-	}
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        init();
+        super.onNewIntent(intent);
+    }
 
-	/**
-	 * 加载优惠明细
-	 */
-	private void requestYouhuiDetail()
-	{
-		RequestModel model = new RequestModel();
-		model.putCtl("youhui");
-		model.putUser();
-		model.put("data_id", mId);
-		model.putLocation();
-		model.setIsNeedCheckLoginState(false);
-		SDRequestCallBack<Youhui_indexActModel> handler = new SDRequestCallBack<Youhui_indexActModel>()
-		{
+    /**
+     * 加载优惠明细
+     */
+    private void requestYouhuiDetail() {
+        RequestModel model = new RequestModel();
+        model.putCtl("youhui");
+        model.putUser();
+        model.put("data_id", mId);
+        model.putLocation();
+        model.setIsNeedCheckLoginState(false);
+        SDRequestCallBack<Youhui_indexActModel> handler = new SDRequestCallBack<Youhui_indexActModel>() {
 
-			@Override
-			public void onStart()
-			{
-				SDDialogManager.showProgressDialog("请稍候");
-			}
+            @Override
+            public void onStart() {
+                SDDialogManager.showProgressDialog("请稍候");
+            }
 
-			@Override
-			public void onSuccess(ResponseInfo<String> responseInfo)
-			{
-				if (actModel.getStatus() == 1)
-				{
-					mActModel = actModel;
-					addFragments(actModel);
-				}
-			}
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (actModel.getStatus() == 1) {
+                    mActModel = actModel;
+                    addFragments(actModel);
+                }
+            }
 
-			@Override
-			public void onFinish()
-			{
-				SDDialogManager.dismissProgressDialog();
-				mScrollView.onRefreshComplete();
-			}
-		};
-		InterfaceServer.getInstance().requestInterface(model, handler);
-	}
+            @Override
+            public void onFinish() {
+                SDDialogManager.dismissProgressDialog();
+                mScrollView.onRefreshComplete();
+            }
+        };
+        InterfaceServer.getInstance().requestInterface(model, handler);
+    }
 
-	/**
-	 * 添加fragment
-	 * 
-	 * @param model
-	 */
-	protected void addFragments(Youhui_indexActModel model)
-	{
-		if (model == null)
-		{
-			return;
-		}
+    /**
+     * 添加fragment
+     *
+     * @param model
+     */
+    protected void addFragments(Youhui_indexActModel model) {
+        if (model == null) {
+            return;
+        }
 
-		mFragTop = new YouhuiDetailTopFragment();
-		mFragTop.setmYouhuiModel(model);
-		mFragTop.setListener(new YouhuiDetailTopFragmentListener()
-		{
-			@Override
-			public void onRefresh()
-			{
-				requestYouhuiDetail();
-			}
-		});
-		getSDFragmentManager().replace(R.id.act_youhui_detail_fl_top, mFragTop);
+        mFragTop = new YouhuiDetailTopFragment();
+        mFragTop.setmYouhuiModel(model);
+        mFragTop.setListener(new YouhuiDetailTopFragmentListener() {
+            @Override
+            public void onRefresh() {
+                requestYouhuiDetail();
+            }
+        });
+        getSDFragmentManager().replace(R.id.act_youhui_detail_fl_top, mFragTop);
 
-		mFragOtherMerchant = new YouhuiDetailOtherMerchantFragment();
-		mFragOtherMerchant.setmYouhuiModel(model);
-		getSDFragmentManager().replace(R.id.act_youhui_detail_fl_other_merchant, mFragOtherMerchant);
+        mFragOtherMerchant = new YouhuiDetailOtherMerchantFragment();
+        mFragOtherMerchant.setmYouhuiModel(model);
+        getSDFragmentManager().replace(R.id.act_youhui_detail_fl_other_merchant, mFragOtherMerchant);
 
-		mFragHtmlDetail = new YouhuiDetailHtmlDetailFragment();
-		mFragHtmlDetail.setmYouhuiModel(model);
-		getSDFragmentManager().replace(R.id.act_youhui_detail_fl_youhui_detail, mFragHtmlDetail);
+        mFragHtmlDetail = new YouhuiDetailHtmlDetailFragment();
+        mFragHtmlDetail.setmYouhuiModel(model);
+        getSDFragmentManager().replace(R.id.act_youhui_detail_fl_youhui_detail, mFragHtmlDetail);
 
-		mFragNotice = new YouhuiDetailNoticeFragment();
-		mFragNotice.setmYouhuiModel(model);
-		getSDFragmentManager().replace(R.id.act_youhui_detail_fl_youhui_notice, mFragNotice);
+        mFragNotice = new YouhuiDetailNoticeFragment();
+        mFragNotice.setmYouhuiModel(model);
+        getSDFragmentManager().replace(R.id.act_youhui_detail_fl_youhui_notice, mFragNotice);
 
-		mFragComment = new YouhuiDetailCommentFragment();
-		mFragComment.setmYouhuiModel(model);
-		getSDFragmentManager().replace(R.id.act_youhui_detail_fl_youhui_comments, mFragComment);
-	}
+        mFragComment = new YouhuiDetailCommentFragment();
+        mFragComment.setmYouhuiModel(model);
+        getSDFragmentManager().replace(R.id.act_youhui_detail_fl_youhui_comments, mFragComment);
+    }
 
-	@Override
-	public void onEventMainThread(SDBaseEvent event)
-	{
-		super.onEventMainThread(event);
-		switch (EnumEventTag.valueOf(event.getTagInt()))
-		{
-		case COMMENT_SUCCESS:
-			setmIsNeedRefreshOnResume(true);
-			break;
+    @Override
+    public void onEventMainThread(SDBaseEvent event) {
+        super.onEventMainThread(event);
+        switch (EnumEventTag.valueOf(event.getTagInt())) {
+            case COMMENT_SUCCESS:
+                setmIsNeedRefreshOnResume(true);
+                break;
 
-		default:
-			break;
-		}
-	}
+            default:
+                break;
+        }
+    }
 
-	@Override
-	protected void onNeedRefreshOnResume()
-	{
-		requestYouhuiDetail();
-		super.onNeedRefreshOnResume();
-	}
+    @Override
+    protected void onNeedRefreshOnResume() {
+        requestYouhuiDetail();
+        super.onNeedRefreshOnResume();
+    }
 
 }

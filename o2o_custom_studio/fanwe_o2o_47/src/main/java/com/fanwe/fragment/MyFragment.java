@@ -31,6 +31,7 @@ import com.fanwe.TuanListActivity;
 import com.fanwe.UploadUserHeadActivity;
 import com.fanwe.common.ImageLoaderManager;
 import com.fanwe.constant.Constant.TitleType;
+import com.fanwe.dao.InitActModelDao;
 import com.fanwe.dao.LocalUserModelDao;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.SDRequestCallBack;
@@ -43,14 +44,19 @@ import com.fanwe.library.utils.SDToast;
 import com.fanwe.library.utils.SDTypeParseUtil;
 import com.fanwe.library.utils.SDViewBinder;
 import com.fanwe.library.utils.SDViewUtil;
+import com.fanwe.model.Init_indexActModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.model.User_center_indexActModel;
 import com.fanwe.o2o.newo2o.R;
+import com.fanwe.umeng.UmengSocialManager;
 import com.fanwe.work.AppRuntimeWorker;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.lidroid.xutils.http.HttpHandler;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.tencent.mm.sdk.modelmsg.SendAuth;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 import java.io.File;
 import java.util.Arrays;
@@ -133,6 +139,9 @@ public class MyFragment extends BasePullToRefreshScrollViewFragment {
 
     @ViewInject(R.id.ll_shopping_cart)
     private LinearLayout mLl_shopping_cart; // 购物车
+
+    @ViewInject(R.id.ll_my_wallet)
+    private LinearLayout mLl_my_wallet; // 我的钱包
 
     private HttpHandler<String> mHttpHandler;
 
@@ -307,7 +316,7 @@ public class MyFragment extends BasePullToRefreshScrollViewFragment {
         mLl_my_media.setOnClickListener(this);
 
         mLl_shopping_cart.setOnClickListener(this);
-
+        mLl_my_wallet.setOnClickListener(this);
     }
 
     @Override
@@ -351,6 +360,22 @@ public class MyFragment extends BasePullToRefreshScrollViewFragment {
             } else {
                 clickMyMedia();
             }
+        } else if (v== mLl_my_wallet) {
+            //分享
+            String content = "测试分享";
+            String imageUrl = "http://tb.himg.baidu.com/sys/portrait/item/6f70e7bc96e58fb73331303230260f";
+            String clickUrl = "http://www.baidu.com";
+            UmengSocialManager.openShare("分享", content, imageUrl, clickUrl, getActivity(), null);
+            //授权
+            //api注册
+            /*Init_indexActModel indexActModel = InitActModelDao.query();
+
+            IWXAPI api = WXAPIFactory.createWXAPI(getContext(), "APP_ID", true);
+            api.registerApp("APP_ID");
+            SendAuth.Req req = new SendAuth.Req();
+            req.scope = "snsapi_userinfo";
+            req.state = "wechat_sdk_demo_test";
+            api.sendReq(req);*/
         }
     }
 
@@ -576,5 +601,4 @@ public class MyFragment extends BasePullToRefreshScrollViewFragment {
         mPhotoHandler.deleteTakePhotoFiles();
         super.onDestroy();
     }
-
 }
