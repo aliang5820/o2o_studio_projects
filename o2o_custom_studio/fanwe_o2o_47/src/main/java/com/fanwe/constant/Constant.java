@@ -12,10 +12,18 @@ public class Constant {
     public static final String FILE_DIR = "o2o/custom/";
     public static final String EARN_SUB_CHAR = "市";
 
+    public static final String ACTION_BIND_WX_SUCCESS = "ACTION_BIND_WX_SUCCESS";
+
     public static final class ExtraConstant {
         public static final String EXTRA_ID = "extra_id";
         public static final String EXTRA_MODEL = "extra_model";
         public static final String EXTRA_TYPE = "extra_type";
+    }
+
+    public static final class DrawType {
+        public static final int WX = 1;//微信
+        public static final int ALIPAY = 0;//支付宝
+        public static final int BANK = 3;//银行卡
     }
 
     public static final class Apply {

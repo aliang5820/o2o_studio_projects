@@ -49,6 +49,7 @@ import com.fanwe.model.RequestModel;
 import com.fanwe.model.User_center_indexActModel;
 import com.fanwe.o2o.newo2o.R;
 import com.fanwe.umeng.UmengSocialManager;
+import com.fanwe.wallet.WalletHomeActivity;
 import com.fanwe.work.AppRuntimeWorker;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
 import com.lidroid.xutils.http.HttpHandler;
@@ -361,11 +362,7 @@ public class MyFragment extends BasePullToRefreshScrollViewFragment {
                 clickMyMedia();
             }
         } else if (v== mLl_my_wallet) {
-            //分享
-            String content = "测试分享";
-            String imageUrl = "http://tb.himg.baidu.com/sys/portrait/item/6f70e7bc96e58fb73331303230260f";
-            String clickUrl = "http://www.baidu.com";
-            UmengSocialManager.openShare("分享", content, imageUrl, clickUrl, getActivity(), null);
+            clickMyWallet();
             //授权
             //api注册
             /*Init_indexActModel indexActModel = InitActModelDao.query();
@@ -384,6 +381,14 @@ public class MyFragment extends BasePullToRefreshScrollViewFragment {
      */
     private void clickMyMedia() {
         Intent intent = new Intent(getActivity(), MediaHomeActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * 我的钱包
+     */
+    private void clickMyWallet() {
+        Intent intent = new Intent(getActivity(), WalletHomeActivity.class);
         startActivity(intent);
     }
 

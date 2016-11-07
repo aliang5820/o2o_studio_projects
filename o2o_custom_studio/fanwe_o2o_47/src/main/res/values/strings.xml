@@ -93,4 +93,9 @@
     <string name="click_expand">查看更多</string>
     <string name="click_close">点击收回</string>
 
+    <!--钱包-->
+    <string name="wallet_all_money">￥%.2f</string>
+    <string name="wallet_draw_money">%.2f</string>
+    <string name="wallet_extra_money">扣除提现手续费 ¥%.2f</string>
+    <string name="wallet_extra_money_empty">扣除提现手续费 ¥0.00</string>
 </resources>
