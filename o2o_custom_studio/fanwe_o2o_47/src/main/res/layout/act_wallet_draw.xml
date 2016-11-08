@@ -83,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="提现最小额度为¥10.00；手续费 2 %，不足一元按一元收取手续费"
+                    android:text="提现最小额度为¥10.00；手续费 2 %"
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>

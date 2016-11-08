@@ -1,6 +1,7 @@
 package com.fanwe.wallet;
 
-import android.content.Intent;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -194,6 +195,7 @@ public class WalletDrawActivity extends BaseActivity {
             public void onSuccess(WalletBindResultModel resultModel) {
                 SDDialogManager.dismissProgressDialog();
                 if(resultModel.getStatus() == 1) {
+                    showResultDialog(resultModel);
                     SDToast.showToast("申请成功，请等待工作人员审核");
                 }
             }
@@ -208,5 +210,20 @@ public class WalletDrawActivity extends BaseActivity {
                 SDDialogManager.dismissProgressDialog();
             }
         });
+    }
+
+    private void showResultDialog(WalletBindResultModel resultModel){
+        final AlertDialog.Builder normalDialog = new AlertDialog.Builder(mActivity);
+        normalDialog.setTitle("提示");
+        normalDialog.setMessage(resultModel.getInfo());
+        normalDialog.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+        // 显示
+        normalDialog.show();
     }
 }
