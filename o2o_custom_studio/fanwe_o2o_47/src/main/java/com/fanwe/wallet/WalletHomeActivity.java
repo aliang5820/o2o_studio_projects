@@ -35,6 +35,9 @@ public class WalletHomeActivity extends BaseActivity {
     @ViewInject(R.id.money2)
     private TextView money2;
 
+    @ViewInject(R.id.all_draw_record)
+    private View all_draw_record;
+
     private WalletModel walletModel;
 
     @Override
@@ -49,6 +52,7 @@ public class WalletHomeActivity extends BaseActivity {
     private void initTitle() {
         mTitle.setMiddleTextTop("我的钱包");
         draw_btn.setOnClickListener(this);
+        all_draw_record.setOnClickListener(this);
     }
 
     private void initData() {
@@ -74,6 +78,9 @@ public class WalletHomeActivity extends BaseActivity {
                 } else {
                     SDToast.showToast("数据出现错误");
                 }
+                break;
+            case R.id.all_draw_record:
+                startActivity(new Intent(mActivity, WalletDrawRecordActivity.class));
                 break;
         }
     }

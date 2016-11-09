@@ -41,12 +41,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="微信账号"
+                    android:visibility="gone"
                     android:textColor="#2a2a2a" />
             </LinearLayout>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:src="@drawable/arrow_right" />
         </LinearLayout>
 
@@ -128,20 +130,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:enabled="false"
                     android:paddingBottom="10dp"
                     android:paddingLeft="4dp"
                     android:paddingRight="4dp"
                     android:paddingTop="10dp"
-                    android:enabled="false"
-                    android:text="0.00"
+                    android:text="0.0000"
                     android:textColor="#2a2a2a"
                     android:textSize="16sp" />
             </LinearLayout>
 
             <TextView
+                android:id="@+id/draw_all"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:clickable="true"
                 android:gravity="center"
                 android:text="全部提现"
                 android:textColor="@color/blue_l"
@@ -183,12 +187,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_bg"
+                    android:hint="0.0000"
                     android:inputType="numberDecimal"
                     android:paddingBottom="10dp"
                     android:paddingLeft="4dp"
                     android:paddingRight="4dp"
                     android:paddingTop="10dp"
-                    android:hint="0.00"
                     android:textColor="#2a2a2a"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -234,12 +238,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:enabled="false"
                     android:paddingBottom="10dp"
                     android:paddingLeft="4dp"
                     android:paddingRight="4dp"
                     android:paddingTop="10dp"
-                    android:enabled="false"
-                    android:text="0.00"
+                    android:text="0.0000"
                     android:textColor="#2a2a2a"
                     android:textSize="16sp" />
             </LinearLayout>

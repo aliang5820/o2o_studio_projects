@@ -1,26 +1,19 @@
 package com.fanwe.fragment;
 
 import android.app.Dialog;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.fanwe.adapter.MediaNextLevelAdapter;
 import com.fanwe.adapter.WalletRecordAdapter;
-import com.fanwe.constant.Constant;
 import com.fanwe.dao.LocalUserModelDao;
-import com.fanwe.fragment.BaseFragment;
-import com.fanwe.fragment.MediaNextLevelFragment;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
 import com.fanwe.library.utils.SDCollectionUtil;
 import com.fanwe.library.utils.SDToast;
 import com.fanwe.model.LocalUserModel;
-import com.fanwe.model.MediaNextLevelItemModel;
-import com.fanwe.model.MediaNextLevelPageModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.model.WalletRecordModel;
 import com.fanwe.model.WalletRecordPageModel;
@@ -36,23 +29,13 @@ import java.util.List;
  * Created by Edison on 2016/11/8.
  * 我的钱包底部的列表
  */
-public class WalletHomeFragment extends BaseFragment {
+public class WalletRecordFragment extends BaseFragment {
     private PullToRefreshListView mList;
     private TextView mTvError;
-    private int level;
     private int mCurrentPage = 1;
     private int mTotalPage = 0;
-
     private List<WalletRecordModel> mListModel;
     private WalletRecordAdapter mAdapter;
-
-    public static MediaNextLevelFragment getInstance(int type) {
-        MediaNextLevelFragment fragment = new MediaNextLevelFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt(Constant.ExtraConstant.EXTRA_TYPE, type);
-        fragment.setArguments(bundle);
-        return fragment;
-    }
 
     @Override
     protected int onCreateContentView() {
@@ -69,7 +52,6 @@ public class WalletHomeFragment extends BaseFragment {
         register(getView());
         bindDefaultData();
         initPullView();
-        level = getArguments().getInt(Constant.ExtraConstant.EXTRA_TYPE);
     }
 
     private void bindDefaultData() {
@@ -80,7 +62,7 @@ public class WalletHomeFragment extends BaseFragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //SDToast.showToast("position:" + position);
+
             }
         });
     }
@@ -122,16 +104,14 @@ public class WalletHomeFragment extends BaseFragment {
     }
 
     //获取交易记录数据
-    //TODO
     protected void requestNextLevelActIndex(final boolean isLoadMore) {
         LocalUserModel localUserModel = LocalUserModelDao.queryModel();
 
         final RequestModel model = new RequestModel();
-        model.putCtl("biz_media");
-        model.putAct("get_extension_class");
+        model.putCtl("uc_money");
+        //钱包首页的交易记录
+        model.putAct("get_pay_log_info");
         model.put("page", mCurrentPage);
-        model.put("level", level);
-        model.put("is_user_interface", 1);
         model.put("user_id", localUserModel.getUser_id());
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<WalletRecordPageModel>() {
             private Dialog nDialog;
@@ -149,7 +129,7 @@ public class WalletHomeFragment extends BaseFragment {
             public void onSuccess(WalletRecordPageModel actModel) {
                 if (!SDInterfaceUtil.isActModelNull(actModel)) {
                     if (actModel.getStatus() == 1) {
-                        /*if (actModel.getPage() != null) {
+                        if (actModel.getPage() != null) {
                             mCurrentPage = actModel.getPage().getPage();
                             mTotalPage = actModel.getPage().getPage_total();
                         }
@@ -159,7 +139,7 @@ public class WalletHomeFragment extends BaseFragment {
                             }
                             mListModel.addAll(actModel.getItem());
                             mAdapter.updateData(mListModel);
-                        }*/
+                        }
                     }
                 }
 

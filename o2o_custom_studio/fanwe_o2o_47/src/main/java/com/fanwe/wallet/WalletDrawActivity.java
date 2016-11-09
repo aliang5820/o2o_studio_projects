@@ -46,6 +46,9 @@ public class WalletDrawActivity extends BaseActivity {
     @ViewInject(R.id.draw_money)
     private EditText draw_money;//申请金额
 
+    @ViewInject(R.id.draw_all)
+    private View draw_all;//全部提现
+
     private WalletModel walletModel;
 
     @Override
@@ -60,6 +63,7 @@ public class WalletDrawActivity extends BaseActivity {
     private void initTitle() {
         mTitle.setMiddleTextTop("余额提现");
         draw_btn.setOnClickListener(this);
+        draw_all.setOnClickListener(this);
 
         draw_money.addTextChangedListener(new TextWatcher() {
             @Override
@@ -74,19 +78,19 @@ public class WalletDrawActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if(editable.length() > 0) {
+                if (editable.length() > 0) {
                     double drawMoney = Double.valueOf(editable.toString());
-                    if(drawMoney >= 10) {
-                        double extraMoney = Math.ceil(drawMoney * 0.02);
+                    if (drawMoney >= 10) {
+                        double extraMoney = drawMoney * 0.02;
                         real_money.setText(getString(R.string.wallet_draw_money, drawMoney - extraMoney));
                         extra_money.setText(getString(R.string.wallet_extra_money, extraMoney));
-                    } else if(drawMoney < 10) {
+                    } else if (drawMoney < 10) {
                         extra_money.setText(getString(R.string.wallet_extra_money_empty));
-                        real_money.setText("0.00");
+                        real_money.setText("0.0000");
                     }
                 } else {
                     extra_money.setText(getString(R.string.wallet_extra_money_empty));
-                    real_money.setText("0.00");
+                    real_money.setText("0.0000");
                 }
             }
         });
@@ -121,19 +125,22 @@ public class WalletDrawActivity extends BaseActivity {
             case R.id.draw_btn:
                 //确认提现
                 Editable editable = draw_money.getText();
-                if(editable.length() > 0) {
+                if (editable.length() > 0) {
                     double drawMoney = Double.valueOf(editable.toString());
                     /*if(drawMoney < 10) {
                         SDToast.showToast("提现最小额度为¥10.00");
                     } else
                     */
-                    if(drawMoney > walletModel.getMoney()) {
+                    if (drawMoney > walletModel.getMoney()) {
                         SDToast.showToast("提现金额不能超过您的可用余额");
                     } else {
                         SDToast.showToast("申请提现" + drawMoney);
                         drawMoneyAction(drawMoney);
                     }
                 }
+                break;
+            case R.id.draw_all:
+                draw_money.setText(getString(R.string.wallet_draw_money, walletModel.getMoney()));
                 break;
         }
     }
@@ -196,7 +203,7 @@ public class WalletDrawActivity extends BaseActivity {
             @Override
             public void onSuccess(WalletBindResultModel resultModel) {
                 SDDialogManager.dismissProgressDialog();
-                if(resultModel.getStatus() == 1) {
+                if (resultModel.getStatus() == 1) {
                     showResultDialog(resultModel);
                     SDToast.showToast("申请成功，请等待工作人员审核");
                 }
@@ -214,7 +221,7 @@ public class WalletDrawActivity extends BaseActivity {
         });
     }
 
-    private void showResultDialog(WalletBindResultModel resultModel){
+    private void showResultDialog(WalletBindResultModel resultModel) {
         final AlertDialog.Builder normalDialog = new AlertDialog.Builder(mActivity);
         normalDialog.setTitle("提示");
         normalDialog.setMessage(resultModel.getInfo());
