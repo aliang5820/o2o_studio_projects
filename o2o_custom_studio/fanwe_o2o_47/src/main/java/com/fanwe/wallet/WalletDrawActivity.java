@@ -123,9 +123,11 @@ public class WalletDrawActivity extends BaseActivity {
                 Editable editable = draw_money.getText();
                 if(editable.length() > 0) {
                     double drawMoney = Double.valueOf(editable.toString());
-                    if(drawMoney < 10) {
+                    /*if(drawMoney < 10) {
                         SDToast.showToast("提现最小额度为¥10.00");
-                    } else if(drawMoney > walletModel.getMoney()) {
+                    } else
+                    */
+                    if(drawMoney > walletModel.getMoney()) {
                         SDToast.showToast("提现金额不能超过您的可用余额");
                     } else {
                         SDToast.showToast("申请提现" + drawMoney);

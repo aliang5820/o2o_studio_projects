@@ -167,12 +167,12 @@ public class MyAccountActivity extends BaseActivity {
         if (model == null) {
             return;
         }
-
-        if (model.getMenu_user_withdraw() == 1) {
+        //提现移动到上一个页面了
+        /*if (model.getMenu_user_withdraw() == 1) {
             SDViewUtil.show(mLl_withdraw);
         } else {
             SDViewUtil.hide(mLl_withdraw);
-        }
+        }*/
 
         if (model.getMenu_user_charge() == 1) {
             SDViewUtil.show(mLl_charge);

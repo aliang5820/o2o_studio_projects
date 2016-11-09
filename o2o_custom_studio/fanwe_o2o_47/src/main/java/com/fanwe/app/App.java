@@ -1,7 +1,10 @@
 package com.fanwe.app;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
 import com.fanwe.BaseActivity;
 import com.fanwe.MainActivity;
@@ -35,7 +38,7 @@ import org.xutils.x;
 import java.util.ArrayList;
 import java.util.List;
 
-public class App extends Application implements SDEventObserver, TANetChangeObserver {
+public class App extends MultiDexApplication implements SDEventObserver, TANetChangeObserver {
 
     private static App mApp = null;
 
@@ -47,6 +50,12 @@ public class App extends Application implements SDEventObserver, TANetChangeObse
     public void onCreate() {
         super.onCreate();
         init();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     private void init() {

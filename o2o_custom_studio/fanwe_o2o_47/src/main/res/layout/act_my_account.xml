@@ -45,6 +45,7 @@
             android:background="@drawable/layer_white_stroke_top"
             android:gravity="center_vertical"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:paddingLeft="15dp"
             android:paddingRight="15dp" >
 
