@@ -27,200 +27,166 @@ import com.sunday.eventbus.SDEventManager;
 
 /**
  * 绑定手机号
- * 
+ *
  * @author Administrator
- * 
  */
-public class BindMobileActivity extends BaseActivity
-{
+public class BindMobileActivity extends BaseActivity {
 
-	@ViewInject(R.id.et_mobile)
-	private EditText mEt_mobile;
+    @ViewInject(R.id.et_mobile)
+    private EditText mEt_mobile;
 
-	@ViewInject(R.id.et_code)
-	private EditText mEt_code;
+    @ViewInject(R.id.et_code)
+    private EditText mEt_code;
 
-	@ViewInject(R.id.btn_send_code)
-	private SDSendValidateButton mBtn_send_code;
+    @ViewInject(R.id.btn_send_code)
+    private SDSendValidateButton mBtn_send_code;
 
-	@ViewInject(R.id.tv_submit)
-	private TextView mTv_submit;
+    @ViewInject(R.id.tv_submit)
+    private TextView mTv_submit;
 
-	private String mStrMobile;
-	private String mStrCode;
+    private String mStrMobile;
+    private String mStrCode;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setmTitleType(TitleType.TITLE);
-		setContentView(R.layout.act_bind_mobile);
-		init();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setmTitleType(TitleType.TITLE);
+        setContentView(R.layout.act_bind_mobile);
+        init();
+    }
 
-	private void init()
-	{
-		initTitle();
-		initSDSendValidateButton();
-		register();
-	}
+    private void init() {
+        initTitle();
+        initSDSendValidateButton();
+        register();
+    }
 
-	private void register()
-	{
-		mTv_submit.setOnClickListener(new OnClickListener()
-		{
+    private void register() {
+        mTv_submit.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v)
-			{
-				clickSubmit();
-			}
-		});
-	}
+            @Override
+            public void onClick(View v) {
+                clickSubmit();
+            }
+        });
+    }
 
-	protected void clickSubmit()
-	{
-		if (validateParams())
-		{
-			CommonInterface.requestBindMobile(mStrMobile, mStrCode, new SDRequestCallBack<User_infoModel>()
-			{
+    protected void clickSubmit() {
+        if (validateParams()) {
+            CommonInterface.requestBindMobile(mStrMobile, mStrCode, new SDRequestCallBack<User_infoModel>() {
 
-				@Override
-				public void onSuccess(ResponseInfo<String> responseInfo)
-				{
-					if (actModel.getStatus() == 1)
-					{
-						SDEventManager.post(EnumEventTag.BIND_MOBILE_SUCCESS.ordinal());
-						finish();
-					}
-				}
+                @Override
+                public void onSuccess(ResponseInfo<String> responseInfo) {
+                    if (actModel.getStatus() == 1) {
+                        SDEventManager.post(EnumEventTag.BIND_MOBILE_SUCCESS.ordinal());
+                        finish();
+                    }
+                }
 
-				@Override
-				public void onStart()
-				{
-					SDDialogManager.showProgressDialog("请稍候...");
-				}
+                @Override
+                public void onStart() {
+                    SDDialogManager.showProgressDialog("请稍候...");
+                }
 
-				@Override
-				public void onFinish()
-				{
-					SDDialogManager.dismissProgressDialog();
-				}
+                @Override
+                public void onFinish() {
+                    SDDialogManager.dismissProgressDialog();
+                }
 
-				@Override
-				public void onFailure(HttpException error, String msg)
-				{
-				}
-			});
-		}
-	}
+                @Override
+                public void onFailure(HttpException error, String msg) {
+                }
+            });
+        }
+    }
 
-	private boolean validateParams()
-	{
-		if (TextUtils.isEmpty(mStrMobile))
-		{
-			SDToast.showToast("手机号不能为空");
-			return false;
-		}
-		mStrCode = mEt_code.getText().toString();
-		if (TextUtils.isEmpty(mStrCode))
-		{
-			SDToast.showToast("验证码不能为空");
-			return false;
-		}
+    private boolean validateParams() {
+        if (TextUtils.isEmpty(mStrMobile)) {
+            SDToast.showToast("手机号不能为空");
+            return false;
+        }
+        mStrCode = mEt_code.getText().toString();
+        if (TextUtils.isEmpty(mStrCode)) {
+            SDToast.showToast("验证码不能为空");
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
 
-	private void initSDSendValidateButton()
-	{
-		mBtn_send_code.setmListener(new SDSendValidateButtonListener()
-		{
-			@Override
-			public void onTick()
-			{
-			}
+    private void initSDSendValidateButton() {
+        mBtn_send_code.setmListener(new SDSendValidateButtonListener() {
+            @Override
+            public void onTick() {
+            }
 
-			@Override
-			public void onClickSendValidateButton()
-			{
-				requestSendCode();
-			}
-		});
+            @Override
+            public void onClickSendValidateButton() {
+                requestSendCode();
+            }
+        });
 
-	}
+    }
 
-	/**
-	 * 发送验证码
-	 */
-	protected void requestSendCode()
-	{
-		mStrMobile = mEt_mobile.getText().toString();
-		if (TextUtils.isEmpty(mStrMobile))
-		{
-			SDToast.showToast("请输入手机号码");
-			return;
-		}
+    /**
+     * 发送验证码
+     */
+    protected void requestSendCode() {
+        mStrMobile = mEt_mobile.getText().toString();
+        if (TextUtils.isEmpty(mStrMobile)) {
+            SDToast.showToast("请输入手机号码");
+            return;
+        }
 
-		CommonInterface.requestValidateCode(mStrMobile, 1, new SDRequestCallBack<Sms_send_sms_codeActModel>()
-		{
+        CommonInterface.requestValidateCode(mStrMobile, 1, new SDRequestCallBack<Sms_send_sms_codeActModel>() {
 
-			@Override
-			public void onSuccess(ResponseInfo<String> responseInfo)
-			{
-				switch (actModel.getStatus())
-				{
-				case -1:
-					break;
-				case 1:
-					mBtn_send_code.setmDisableTime(actModel.getLesstime());
-					mBtn_send_code.startTickWork();
-					break;
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                switch (actModel.getStatus()) {
+                    case -1:
+                        break;
+                    case 1:
+                        mBtn_send_code.setmDisableTime(actModel.getLesstime());
+                        mBtn_send_code.startTickWork();
+                        break;
 
-				default:
-					break;
-				}
-			}
+                    default:
+                        break;
+                }
+            }
 
-			@Override
-			public void onStart()
-			{
-				SDDialogManager.showProgressDialog("请稍候...");
-			}
+            @Override
+            public void onStart() {
+                SDDialogManager.showProgressDialog("请稍候...");
+            }
 
-			@Override
-			public void onFinish()
-			{
-				SDDialogManager.dismissProgressDialog();
-			}
+            @Override
+            public void onFinish() {
+                SDDialogManager.dismissProgressDialog();
+            }
 
-			@Override
-			public void onFailure(HttpException error, String msg)
-			{
-			}
-		});
-	}
+            @Override
+            public void onFailure(HttpException error, String msg) {
+            }
+        });
+    }
 
-	private void initTitle()
-	{
-		mTitle.setMiddleTextTop("绑定手机号");
-	}
+    private void initTitle() {
+        mTitle.setMiddleTextTop("绑定手机号");
+    }
 
-	@Override
-	public void onEventMainThread(SDBaseEvent event)
-	{
-		super.onEventMainThread(event);
-		switch (EnumEventTag.valueOf(event.getTagInt()))
-		{
-		case CONFIRM_IMAGE_CODE:
-			if (SDActivityManager.getInstance().isLastActivity(this))
-			{
-				requestSendCode();
-			}
-			break;
+    @Override
+    public void onEventMainThread(SDBaseEvent event) {
+        super.onEventMainThread(event);
+        switch (EnumEventTag.valueOf(event.getTagInt())) {
+            case CONFIRM_IMAGE_CODE:
+                if (SDActivityManager.getInstance().isLastActivity(this)) {
+                    requestSendCode();
+                }
+                break;
 
-		default:
-			break;
-		}
-	}
+            default:
+                break;
+        }
+    }
 }

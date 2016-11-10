@@ -1,6 +1,7 @@
 package com.fanwe.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,4 +21,6 @@ public class WalletModel extends BaseActModel implements Serializable {
     private String wx_account;//微信账号
     private String zf_account;//支付宝账号
     private String yh_account;//银行卡账号
+    private int is_set_pay_password;//是否已经设置支付密码
+    private List<WalletDrawInfoModel> payment_data;//提现规则
 }

@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_activity_gray"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <!-- 昵称 -->
 
@@ -20,7 +20,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
+            android:paddingRight="15dp">
 
             <ImageView
                 android:layout_width="@dimen/width_set_item_icon"
@@ -45,9 +45,9 @@
             android:background="@drawable/layer_white_stroke_top"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:visibility="gone"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
+            android:paddingRight="15dp"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="@dimen/width_set_item_icon"
@@ -73,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone" >
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
-                android:paddingRight="15dp" >
+                android:paddingRight="15dp">
 
                 <ImageView
                     android:layout_width="@dimen/width_set_item_icon"
@@ -108,7 +108,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
-                android:paddingRight="15dp" >
+                android:paddingRight="15dp">
 
                 <ImageView
                     android:layout_width="@dimen/width_set_item_icon"
@@ -138,7 +138,7 @@
             android:orientation="horizontal"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:visibility="gone" >
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="@dimen/width_set_item_icon"
@@ -172,7 +172,7 @@
             android:orientation="horizontal"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:visibility="gone" >
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="@dimen/width_set_item_icon"
@@ -200,72 +200,272 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/stroke_deep" />
-        <!-- 绑定手机号 -->
 
         <LinearLayout
-            android:id="@+id/ll_bind_mobile"
+            android:id="@+id/ll_third_bind"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/selector_white_gray_stroke_top_deep"
-            android:gravity="center_vertical"
-            android:minHeight="50dp"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
-
-            <ImageView
-                android:layout_width="@dimen/width_set_item_icon"
-                android:layout_height="@dimen/width_set_item_icon"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_my_account_bind_mobile" />
+            android:background="@drawable/layer_white_stroke_top_deep"
+            android:orientation="vertical"
+            android:paddingTop="1px"
+            android:visibility="visible">
 
             <TextView
-                android:id="@+id/tv_bind_mobile"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:text="绑定手机"
+                android:background="@drawable/selector_white_gray_stroke_bot"
+                android:minHeight="50dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="绑定账号"
+                android:gravity="center_vertical"
                 android:textColor="@color/gray"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tv_mobile"
-                android:layout_width="0dp"
+            <!-- 绑定手机号 -->
+            <LinearLayout
+                android:id="@+id/ll_bind_mobile"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_weight="1"
-                android:textColor="@color/gray"
-                android:textSize="13sp" />
+                android:background="@drawable/selector_white_gray_stroke_bot"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
 
-            <TextView
-                android:id="@+id/tv_mobile_tip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:text="更换"
-                android:textColor="@color/gray"
-                android:textSize="12sp"
-                android:visibility="gone" />
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="@dimen/width_set_item_icon"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_my_account_bind_mobile" />
 
-            <ImageView
-                android:layout_width="@dimen/width_set_item_icon"
+                <TextView
+                    android:id="@+id/tv_bind_mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:text="绑定手机"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_mobile"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_mobile_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="更换"
+                    android:textColor="@color/gray"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <!-- 微信绑定 -->
+            <LinearLayout
+                android:id="@+id/ll_bind_wx"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/arrow_right" />
+                android:background="@drawable/selector_white_gray_stroke_bot"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="@dimen/width_set_item_icon"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_my_account_qq_bind" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="微信"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_bind_wx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="未绑定"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <!-- 支付宝绑定 -->
+            <LinearLayout
+                android:id="@+id/ll_bind_alipay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_white_gray_stroke_bot"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="@dimen/width_set_item_icon"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_my_account_qq_bind" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="支付宝"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_bind_alipay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="未绑定"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <!-- 腾讯QQ绑定 -->
+            <LinearLayout
+                android:id="@+id/ll_bind_qq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_white_gray_stroke_bot"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="@dimen/width_set_item_icon"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_my_account_qq_bind" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="QQ"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_bind_qq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="未绑定"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <!-- 新浪微博绑定 -->
+            <LinearLayout
+                android:id="@+id/ll_bind_sina"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_white_gray_stroke_bot"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="@dimen/width_set_item_icon"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_my_account_sina_bind" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="新浪微博"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_bind_sina"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="未绑定"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/stroke_deep" />
         </LinearLayout>
-        <!-- 修改密码 -->
 
+        <!-- 修改登录密码 -->
         <LinearLayout
             android:id="@+id/ll_modify_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_white_gray_stroke_top"
             android:gravity="center_vertical"
+            android:layout_marginTop="10dp"
             android:minHeight="50dp"
             android:orientation="horizontal"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
+            android:paddingRight="15dp">
 
             <ImageView
                 android:layout_width="@dimen/width_set_item_icon"
@@ -279,7 +479,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_weight="1"
-                android:text="修改密码"
+                android:text="修改登录密码"
                 android:textColor="@color/gray"
                 android:textSize="16sp" />
 
@@ -289,8 +489,50 @@
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/arrow_right" />
         </LinearLayout>
-        <!-- 配送地址 -->
+        <!-- 修改支付密码 -->
+        <LinearLayout
+            android:id="@+id/ll_modify_pay_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_white_gray_stroke_top"
+            android:gravity="center_vertical"
+            android:minHeight="50dp"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
+            <ImageView
+                android:layout_width="@dimen/width_set_item_icon"
+                android:layout_height="@dimen/width_set_item_icon"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_my_account_change_password" />
+
+            <TextView
+                android:id="@+id/tv_modify_pay_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:text="修改支付密码"
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/pay_password_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="未设置"
+                android:textColor="@color/gray"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:layout_width="@dimen/width_set_item_icon"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/arrow_right" />
+        </LinearLayout>
+        <!-- 配送地址 -->
         <LinearLayout
             android:id="@+id/ll_delivery_address"
             android:layout_width="match_parent"
@@ -299,9 +541,9 @@
             android:gravity="center_vertical"
             android:minHeight="50dp"
             android:orientation="horizontal"
-            android:visibility="gone"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp" >
+            android:paddingRight="15dp"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="@dimen/width_set_item_icon"
@@ -324,9 +566,7 @@
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/arrow_right" />
         </LinearLayout>
-
         <!-- 外卖收货地址 -->
-
         <LinearLayout
             android:id="@+id/ll_delivery_address_dc"
             android:layout_width="match_parent"
@@ -337,7 +577,7 @@
             android:orientation="horizontal"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:visibility="gone" >
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="@dimen/width_set_item_icon"
@@ -365,92 +605,6 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/stroke_deep" />
-
-        <LinearLayout
-            android:id="@+id/ll_third_bind"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/layer_white_stroke_top_deep"
-            android:orientation="vertical"
-            android:paddingTop="1px"
-            android:visibility="gone" >
-
-            <!-- 腾讯QQ绑定 -->
-
-            <LinearLayout
-                android:id="@+id/ll_bind_qq"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/selector_white_gray_stroke_bot"
-                android:gravity="center_vertical"
-                android:minHeight="50dp"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp" >
-
-                <ImageView
-                    android:layout_width="@dimen/width_set_item_icon"
-                    android:layout_height="@dimen/width_set_item_icon"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_my_account_qq_bind" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:text="腾讯QQ绑定"
-                    android:textColor="@color/gray"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="@dimen/width_set_item_icon"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/arrow_right" />
-            </LinearLayout>
-            <!-- 新浪微博绑定 -->
-
-            <LinearLayout
-                android:id="@+id/ll_bind_sina"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/selector_white_gray_stroke_bot"
-                android:gravity="center_vertical"
-                android:minHeight="50dp"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp" >
-
-                <ImageView
-                    android:layout_width="@dimen/width_set_item_icon"
-                    android:layout_height="@dimen/width_set_item_icon"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_my_account_sina_bind" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:layout_weight="1"
-                    android:text="新浪微博绑定"
-                    android:textColor="@color/gray"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="@dimen/width_set_item_icon"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/arrow_right" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginTop="-1px"
-                android:background="@color/stroke_deep" />
-        </LinearLayout>
 
         <Button
             android:id="@+id/btn_logout"

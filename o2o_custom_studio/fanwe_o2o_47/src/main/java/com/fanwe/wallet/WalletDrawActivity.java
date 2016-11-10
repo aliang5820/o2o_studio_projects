@@ -5,9 +5,12 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.fanwe.BaseActivity;
@@ -20,6 +23,7 @@ import com.fanwe.library.utils.SDToast;
 import com.fanwe.model.LocalUserModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.model.WalletBindResultModel;
+import com.fanwe.model.WalletDrawInfoModel;
 import com.fanwe.model.WalletModel;
 import com.fanwe.o2o.newo2o.R;
 import com.lidroid.xutils.exception.HttpException;
@@ -43,6 +47,9 @@ public class WalletDrawActivity extends BaseActivity {
     @ViewInject(R.id.real_money)
     private TextView real_money;//实际到账金额
 
+    @ViewInject(R.id.draw_fee_info)
+    private TextView draw_fee_info;//提现费率
+
     @ViewInject(R.id.draw_money)
     private EditText draw_money;//申请金额
 
@@ -50,6 +57,7 @@ public class WalletDrawActivity extends BaseActivity {
     private View draw_all;//全部提现
 
     private WalletModel walletModel;
+    private int fee = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,40 +89,22 @@ public class WalletDrawActivity extends BaseActivity {
                 if (editable.length() > 0) {
                     double drawMoney = Double.valueOf(editable.toString());
                     if (drawMoney >= 10) {
-                        double extraMoney = drawMoney * 0.02;
+                        double extraMoney = drawMoney * 0.01 * fee;
                         real_money.setText(getString(R.string.wallet_draw_money, drawMoney - extraMoney));
                         extra_money.setText(getString(R.string.wallet_extra_money, extraMoney));
                     } else if (drawMoney < 10) {
                         extra_money.setText(getString(R.string.wallet_extra_money_empty));
-                        real_money.setText("0.0000");
+                        real_money.setText("0.00");
                     }
                 } else {
                     extra_money.setText(getString(R.string.wallet_extra_money_empty));
-                    real_money.setText("0.0000");
+                    real_money.setText("0.00");
                 }
             }
         });
     }
 
     private void initData() {
-        requestWallet();
-        int type = getIntent().getIntExtra(Constant.ExtraConstant.EXTRA_TYPE, -1);
-        switch (type) {
-            case Constant.DrawType.WX:
-                //微信提现
-                break;
-            case Constant.DrawType.ALIPAY:
-                //支付宝提现
-                break;
-            case Constant.DrawType.BANK:
-                //银行卡提现
-                break;
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         requestWallet();
     }
 
@@ -134,8 +124,7 @@ public class WalletDrawActivity extends BaseActivity {
                     if (drawMoney > walletModel.getMoney()) {
                         SDToast.showToast("提现金额不能超过您的可用余额");
                     } else {
-                        SDToast.showToast("申请提现" + drawMoney);
-                        drawMoneyAction(drawMoney);
+                        drawMoneyAction1(drawMoney);
                     }
                 }
                 break;
@@ -166,6 +155,15 @@ public class WalletDrawActivity extends BaseActivity {
                     SDDialogManager.dismissProgressDialog();
                     walletModel = actModel;
                     all_money.setText(getString(R.string.wallet_draw_money, actModel.getMoney()));
+                    int type = getIntent().getIntExtra(Constant.ExtraConstant.EXTRA_TYPE, -1);
+                    for (WalletDrawInfoModel drawInfoModel:actModel.getPayment_data()) {
+                        if(drawInfoModel.getType() == type) {
+                            //当前提现方式的费率
+                            fee = drawInfoModel.getWithdraw_fee();
+                            break;
+                        }
+                    }
+                    draw_fee_info.setText(getString(R.string.wallet_draw_fee_info, fee + "%"));
                 }
             }
 
@@ -181,10 +179,38 @@ public class WalletDrawActivity extends BaseActivity {
         });
     }
 
+    private void drawMoneyAction1(final double money) {
+        View popupView = getLayoutInflater().inflate(R.layout.pop_input_pay_password_view, null);
+        final PopupWindow mPopupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        mPopupWindow.setTouchable(true);
+        mPopupWindow.setOutsideTouchable(true);
+        final EditText payPassword = (EditText) popupView.findViewById(R.id.pay_password);
+        View cancel = popupView.findViewById(R.id.cancel);
+        View submit = popupView.findViewById(R.id.submit);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPopupWindow.dismiss();
+            }
+        });
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (payPassword.length() == 6) {
+                    drawMoneyAction2(money, payPassword.getText().toString());
+                } else {
+                    SDToast.showToast("请输入6位支付密码");
+                }
+            }
+        });
+
+        mPopupWindow.showAtLocation(mTitle, Gravity.CENTER, 0, 0);
+    }
+
     /**
      * 进行提现
      */
-    private void drawMoneyAction(double money) {
+    private void drawMoneyAction2(double money, String password) {
         LocalUserModel localUserModel = LocalUserModelDao.queryModel();
         RequestModel model = new RequestModel();
         model.putCtl("uc_money");
@@ -192,20 +218,22 @@ public class WalletDrawActivity extends BaseActivity {
         model.put("type", 1);//0 支付宝 1微信 3 银行卡
         model.put("user_id", localUserModel.getUser_id());
         model.put("money", money);
+        model.put("password", password);//支付密码
 
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<WalletBindResultModel>() {
 
             @Override
             public void onStart() {
-                SDDialogManager.showProgressDialog("正在绑定微信账号，请稍候...");
+                SDDialogManager.showProgressDialog("请稍候...");
             }
 
             @Override
             public void onSuccess(WalletBindResultModel resultModel) {
                 SDDialogManager.dismissProgressDialog();
                 if (resultModel.getStatus() == 1) {
-                    showResultDialog(resultModel);
-                    SDToast.showToast("申请成功，请等待工作人员审核");
+                    //showResultDialog(resultModel);
+                    SDToast.showToast(resultModel.getInfo());
+                    finish();
                 }
             }
 
@@ -221,7 +249,7 @@ public class WalletDrawActivity extends BaseActivity {
         });
     }
 
-    private void showResultDialog(WalletBindResultModel resultModel) {
+    /*private void showResultDialog(WalletBindResultModel resultModel) {
         final AlertDialog.Builder normalDialog = new AlertDialog.Builder(mActivity);
         normalDialog.setTitle("提示");
         normalDialog.setMessage(resultModel.getInfo());
@@ -234,5 +262,5 @@ public class WalletDrawActivity extends BaseActivity {
                 });
         // 显示
         normalDialog.show();
-    }
+    }*/
 }

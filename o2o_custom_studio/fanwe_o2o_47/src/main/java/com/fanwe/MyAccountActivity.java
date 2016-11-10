@@ -27,9 +27,12 @@ import com.fanwe.model.Init_indexActModel;
 import com.fanwe.model.LocalUserModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.model.User_infoModel;
+import com.fanwe.model.WalletModel;
 import com.fanwe.o2o.newo2o.R;
 import com.fanwe.umeng.UmengSocialManager;
+import com.fanwe.wallet.WalletPayPasswordSet1Activity;
 import com.fanwe.work.AppRuntimeWorker;
+import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.sunday.eventbus.SDBaseEvent;
@@ -78,8 +81,14 @@ public class MyAccountActivity extends BaseActivity {
     @ViewInject(R.id.tv_mobile_tip)
     private TextView mTv_mobile_tip;
 
+    @ViewInject(R.id.pay_password_status)
+    private TextView pay_password_status;
+
     @ViewInject(R.id.ll_modify_password)
-    private LinearLayout mLl_modify_password; // 修改密码
+    private LinearLayout mLl_modify_password; // 修改登录密码
+
+    @ViewInject(R.id.ll_modify_pay_password)
+    private LinearLayout mLl_modify_pay_password; // 修改支付密码
 
     @ViewInject(R.id.ll_delivery_address)
     private LinearLayout mLl_delivery_address; // 配送地址
@@ -90,11 +99,21 @@ public class MyAccountActivity extends BaseActivity {
     @ViewInject(R.id.ll_third_bind)
     private LinearLayout mLl_third_bind; // 第三方绑定
 
-    @ViewInject(R.id.ll_bind_qq)
-    private LinearLayout mLl_bind_qq; // 绑定qq
+    @ViewInject(R.id.tv_bind_wx)
+    private TextView tv_bind_wx; // 绑定微信
 
+    @ViewInject(R.id.tv_bind_alipay)
+    private TextView tv_bind_alipay; // 绑定支付宝
+
+    @ViewInject(R.id.tv_bind_qq)
+    private TextView tv_bind_qq; // 绑定QQ
+    @ViewInject(R.id.ll_bind_qq)
+    private LinearLayout mLl_bind_qq; // 绑定QQ layout
+
+    @ViewInject(R.id.tv_bind_sina)
+    private TextView tv_bind_sina; // 绑定新浪微博
     @ViewInject(R.id.ll_bind_sina)
-    private LinearLayout mLl_bind_sina; // 绑定新浪微博
+    private LinearLayout mLl_bind_sina; // 绑定新浪微博layout
 
     @ViewInject(R.id.btn_logout)
     private Button mBtn_logout; // 退出当前帐号
@@ -123,6 +142,12 @@ public class MyAccountActivity extends BaseActivity {
         initViewState();
         initTitle();
         registerClick();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        requestWallet();
     }
 
     private void refreshUser() {
@@ -180,27 +205,25 @@ public class MyAccountActivity extends BaseActivity {
             SDViewUtil.hide(mLl_charge);
         }
 
-        SDViewUtil.hide(mLl_third_bind);
         String sinaAppKey = model.getSina_app_key();
         if (TextUtils.isEmpty(sinaAppKey)) {
-            SDViewUtil.hide(mLl_bind_sina);
+            tv_bind_sina.setText("未绑定");
         } else {
-            SDViewUtil.show(mLl_bind_sina);
-            SDViewUtil.show(mLl_third_bind);
+            tv_bind_sina.setText("已绑定");
         }
 
         String qqAppKey = model.getQq_app_key();
         if (TextUtils.isEmpty(qqAppKey)) {
-            SDViewUtil.hide(mLl_bind_qq);
+            tv_bind_qq.setText("未绑定");
         } else {
-            SDViewUtil.show(mLl_bind_qq);
-            SDViewUtil.show(mLl_third_bind);
+            tv_bind_qq.setText("已绑定");
         }
     }
 
     private void registerClick() {
         mLl_bind_mobile.setOnClickListener(this);
         mLl_modify_password.setOnClickListener(this);
+        mLl_modify_pay_password.setOnClickListener(this);
         mLl_delivery_address.setOnClickListener(this);
         mLl_delivery_address_dc.setOnClickListener(this);
         mLl_bind_qq.setOnClickListener(this);
@@ -247,6 +270,18 @@ public class MyAccountActivity extends BaseActivity {
             clickWithdraw(v);
         } else if (v == mLl_charge) {
             clickCharge(v);
+        } else if(v == mLl_modify_pay_password) {
+            //支付密码
+            LocalUserModel localUserModel = LocalUserModelDao.queryModel();
+            if(TextUtils.isEmpty(localUserModel.getUser_mobile())) {
+                //用户没有绑定手机，跳转到手机绑定页面
+                SDToast.showToast("您还没有绑定手机号码，请先绑定手机号码");
+                Intent intent = new Intent(getApplicationContext(), BindMobileActivity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(getApplicationContext(), WalletPayPasswordSet1Activity.class);
+                startActivity(intent);
+            }
         }
     }
 
@@ -486,6 +521,56 @@ public class MyAccountActivity extends BaseActivity {
         }
 
         return true;
+    }
+
+    /**
+     * 用户钱包信息,是否设置有密码，是否绑定有微信，支付宝等信息
+     */
+    private void requestWallet() {
+        RequestModel model = new RequestModel();
+        model.putCtl("uc_money");
+        model.putAct("user_money_index");
+
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<WalletModel>() {
+
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(WalletModel actModel) {
+                if (actModel.getStatus() == 1) {
+                    if(actModel.getIs_set_pay_password() == 1) {
+                        pay_password_status.setText("已设置");
+                    } else {
+                        pay_password_status.setText("未设置");
+                    }
+
+                    if (actModel.getIs_bind_wx() == 0) {
+                        tv_bind_wx.setText("未绑定");
+                    } else {
+                        tv_bind_wx.setText("已绑定");
+                    }
+
+                    if (actModel.getIs_bind_zf() == 0) {
+                        tv_bind_alipay.setText("未绑定");
+                    } else {
+                        tv_bind_alipay.setText("已绑定");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                error.printStackTrace();
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
     }
 
     @Override

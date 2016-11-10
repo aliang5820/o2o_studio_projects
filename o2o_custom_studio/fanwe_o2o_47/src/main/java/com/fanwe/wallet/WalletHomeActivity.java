@@ -2,15 +2,19 @@ package com.fanwe.wallet;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.fanwe.BaseActivity;
+import com.fanwe.BindMobileActivity;
 import com.fanwe.constant.Constant;
+import com.fanwe.dao.LocalUserModelDao;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
 import com.fanwe.library.utils.SDToast;
+import com.fanwe.model.LocalUserModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.model.WalletModel;
 import com.fanwe.o2o.newo2o.R;
@@ -72,11 +76,25 @@ public class WalletHomeActivity extends BaseActivity {
             case R.id.draw_btn:
                 //申请提现
                 if(walletModel != null) {
-                    Intent intent = new Intent(mActivity, WalletBindListActivity.class);
-                    intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, walletModel);
-                    startActivity(intent);
+                    if (walletModel.getIs_set_pay_password() == 1) {
+                        Intent intent = new Intent(mActivity, WalletBindListActivity.class);
+                        intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, walletModel);
+                        startActivity(intent);
+                    } else {
+                        LocalUserModel localUserModel = LocalUserModelDao.queryModel();
+                        if (TextUtils.isEmpty(localUserModel.getUser_mobile())) {
+                            //用户没有绑定手机，跳转到手机绑定页面
+                            SDToast.showToast("您还没有绑定手机号码，请先绑定手机号码");
+                            Intent intent = new Intent(getApplicationContext(), BindMobileActivity.class);
+                            startActivity(intent);
+                        } else {
+                            SDToast.showToast("您还没有设置支付密码，请先设置支付密码");
+                            Intent intent = new Intent(getApplicationContext(), WalletPayPasswordSet1Activity.class);
+                            startActivity(intent);
+                        }
+                    }
                 } else {
-                    SDToast.showToast("数据出现错误");
+                    SDToast.showToast("出现数据错误，请重新登录");
                 }
                 break;
             case R.id.all_draw_record:
@@ -86,7 +104,7 @@ public class WalletHomeActivity extends BaseActivity {
     }
 
     /**
-     * 用户自媒体信息
+     * 用户钱包信息
      */
     private void requestWallet() {
         RequestModel model = new RequestModel();

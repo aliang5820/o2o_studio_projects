@@ -9,7 +9,6 @@ import com.fanwe.library.adapter.SDSimpleAdapter;
 import com.fanwe.library.utils.SDViewBinder;
 import com.fanwe.library.utils.ViewHolder;
 import com.fanwe.model.WalletDrawRecordModel;
-import com.fanwe.model.WalletRecordModel;
 import com.fanwe.o2o.newo2o.R;
 
 import java.text.SimpleDateFormat;

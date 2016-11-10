@@ -112,7 +112,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:background="@color/blue_l"
+        android:background="@drawable/selector_main_color_corner"
         android:text="提现申请"
         android:textColor="#ffffff"
         android:textSize="16sp" />
