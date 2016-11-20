@@ -88,13 +88,32 @@ public class WalletDrawRecordAdapter extends SDSimpleAdapter<WalletDrawRecordMod
                 SDViewBinder.setTextView(draw_status, "待审核");
                 break;
             case 1:
-                failed_layout.setVisibility(View.GONE);
-                SDViewBinder.setTextView(draw_status, "已发放");
+                switch (itemModel.getIs_pay()) {
+                    case 0:
+                        failed_layout.setVisibility(View.GONE);
+                        SDViewBinder.setTextView(draw_status, "待审核");
+                        break;
+                    case 1:
+                        failed_layout.setVisibility(View.GONE);
+                        SDViewBinder.setTextView(draw_status, "已发放");
+                        break;
+                    case 2:
+                        failed_layout.setVisibility(View.VISIBLE);
+                        SDViewBinder.setTextView(draw_status, "未成功");
+                        SDViewBinder.setTextView(info, itemModel.getPay_remark());
+                        break;
+                }
                 break;
             case 2:
                 failed_layout.setVisibility(View.VISIBLE);
                 SDViewBinder.setTextView(draw_status, "未成功");
-                SDViewBinder.setTextView(info, itemModel.getAuth_remark());
+                if(itemModel.getIs_auth() == 2) {
+                    SDViewBinder.setTextView(info, itemModel.getAuth_remark());
+                } else if(itemModel.getIs_pay() == 2){
+                    SDViewBinder.setTextView(info, itemModel.getPay_remark());
+                } else {
+                    SDViewBinder.setTextView(info, "未知原因");
+                }
                 break;
         }
 

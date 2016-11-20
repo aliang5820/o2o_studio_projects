@@ -71,7 +71,8 @@ public class WalletPayPasswordSet2Activity extends BaseActivity {
         if (TextUtils.isEmpty(mPassword1)) {
             SDToast.showToast("请确认6位数字的支付密码");
             return;
-        } else if (!TextUtils.equals(mPassword1, mPassword1)) {
+        }
+        if (!TextUtils.equals(mPassword1, mPassword2)) {
             SDToast.showToast("请确认输入的支付密码是否相同");
             return;
         }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.fanwe.common.CommonInterface;
 import com.fanwe.constant.Constant.TitleType;
+import com.fanwe.dao.LocalUserModelDao;
 import com.fanwe.event.EnumEventTag;
 import com.fanwe.http.SDRequestCallBack;
 import com.fanwe.library.common.SDActivityManager;
@@ -78,6 +79,7 @@ public class BindMobileActivity extends BaseActivity {
                 @Override
                 public void onSuccess(ResponseInfo<String> responseInfo) {
                     if (actModel.getStatus() == 1) {
+                        LocalUserModelDao.queryModel().setUser_mobile(mStrMobile);
                         SDEventManager.post(EnumEventTag.BIND_MOBILE_SUCCESS.ordinal());
                         finish();
                     }

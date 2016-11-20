@@ -8,10 +8,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.fanwe.BaseActivity;
+import com.fanwe.common.CommonInterface;
 import com.fanwe.constant.Constant;
 import com.fanwe.dao.LocalUserModelDao;
+import com.fanwe.event.EnumEventTag;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.SDRequestCallBack;
+import com.fanwe.library.common.SDActivityManager;
 import com.fanwe.library.customview.SDSendValidateButton;
 import com.fanwe.library.dialog.SDDialogManager;
 import com.fanwe.library.utils.SDToast;
@@ -22,6 +25,7 @@ import com.fanwe.o2o.newo2o.R;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.view.annotation.ViewInject;
+import com.sunday.eventbus.SDBaseEvent;
 
 /**
  * Created by Edison on 2016/11/11.
@@ -101,18 +105,18 @@ public class WalletPayPasswordSet1Activity extends BaseActivity {
             return;
         }
 
-        RequestModel model = new RequestModel();
-        model.putCtl("uc_money");
-        model.putAct("send_app_sms");
-        model.put("account_mobile", mStrMobile);
+        RequestModel requestModel = new RequestModel();
+        requestModel.putCtl("uc_money");
+        requestModel.putAct("send_app_sms");
+        requestModel.put("account_mobile", mStrMobile);
 
-        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<Sms_send_sms_codeActModel>() {
+        InterfaceServer.getInstance().requestInterface(requestModel, new SDRequestCallBack<Sms_send_sms_codeActModel>() {
 
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 if (actModel.getStatus() == 1) {
                     //发送成功
-                    mBtn_send_code.setmDisableTime(actModel.getLesstime());
+                    mBtn_send_code.setmDisableTime(60);
                     mBtn_send_code.startTickWork();
                 }
             }
@@ -174,4 +178,5 @@ public class WalletPayPasswordSet1Activity extends BaseActivity {
             }
         });
     }
+
 }

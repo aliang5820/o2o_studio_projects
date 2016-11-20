@@ -207,15 +207,19 @@ public class MyAccountActivity extends BaseActivity {
 
         String sinaAppKey = model.getSina_app_key();
         if (TextUtils.isEmpty(sinaAppKey)) {
+            SDViewUtil.hide(mLl_bind_sina);
             tv_bind_sina.setText("未绑定");
         } else {
+            SDViewUtil.show(mLl_bind_sina);
             tv_bind_sina.setText("已绑定");
         }
 
         String qqAppKey = model.getQq_app_key();
         if (TextUtils.isEmpty(qqAppKey)) {
+            SDViewUtil.hide(mLl_bind_qq);
             tv_bind_qq.setText("未绑定");
         } else {
+            SDViewUtil.show(mLl_bind_qq);
             tv_bind_qq.setText("已绑定");
         }
     }

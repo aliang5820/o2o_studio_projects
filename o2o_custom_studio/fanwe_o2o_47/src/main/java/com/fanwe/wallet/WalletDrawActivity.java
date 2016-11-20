@@ -88,11 +88,20 @@ public class WalletDrawActivity extends BaseActivity {
             public void afterTextChanged(Editable editable) {
                 if (editable.length() > 0) {
                     double drawMoney = Double.valueOf(editable.toString());
-                    if (drawMoney >= 10) {
+                    /*if (drawMoney >= 10) {
                         double extraMoney = drawMoney * 0.01 * fee;
                         real_money.setText(getString(R.string.wallet_draw_money, drawMoney - extraMoney));
                         extra_money.setText(getString(R.string.wallet_extra_money, extraMoney));
                     } else if (drawMoney < 10) {
+                        extra_money.setText(getString(R.string.wallet_extra_money_empty));
+                        real_money.setText("0.00");
+                    }*/
+                    //TODO TEST
+                    if (drawMoney >= 0) {
+                        double extraMoney = drawMoney * 0.01 * fee;
+                        real_money.setText(getString(R.string.wallet_draw_money, drawMoney - extraMoney));
+                        extra_money.setText(getString(R.string.wallet_extra_money, extraMoney));
+                    } else {
                         extra_money.setText(getString(R.string.wallet_extra_money_empty));
                         real_money.setText("0.00");
                     }
