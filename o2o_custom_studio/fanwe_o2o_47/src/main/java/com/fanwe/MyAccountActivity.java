@@ -3,10 +3,13 @@ package com.fanwe;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.fanwe.app.App;
@@ -101,6 +104,8 @@ public class MyAccountActivity extends BaseActivity {
 
     @ViewInject(R.id.tv_bind_wx)
     private TextView tv_bind_wx; // 绑定微信
+    @ViewInject(R.id.ll_bind_wx)
+    private View mLl_bind_wx; // 绑定微信
 
     @ViewInject(R.id.tv_bind_alipay)
     private TextView tv_bind_alipay; // 绑定支付宝
@@ -230,6 +235,7 @@ public class MyAccountActivity extends BaseActivity {
         mLl_modify_pay_password.setOnClickListener(this);
         mLl_delivery_address.setOnClickListener(this);
         mLl_delivery_address_dc.setOnClickListener(this);
+        mLl_bind_wx.setOnClickListener(this);
         mLl_bind_qq.setOnClickListener(this);
         mLl_bind_sina.setOnClickListener(this);
         mBtn_logout.setOnClickListener(this);
@@ -264,6 +270,8 @@ public class MyAccountActivity extends BaseActivity {
             clickDeliveryAddress(v);
         } else if (v == mLl_delivery_address_dc) {
             clickDeliveryAddressDc(v);
+        } else if (v == mLl_bind_wx) {
+            clickUnBindWx();
         } else if (v == mLl_bind_qq) {
             clickBindQQ(v);
         } else if (v == mLl_bind_sina) {
@@ -274,10 +282,10 @@ public class MyAccountActivity extends BaseActivity {
             clickWithdraw(v);
         } else if (v == mLl_charge) {
             clickCharge(v);
-        } else if(v == mLl_modify_pay_password) {
+        } else if (v == mLl_modify_pay_password) {
             //支付密码
             LocalUserModel localUserModel = LocalUserModelDao.queryModel();
-            if(TextUtils.isEmpty(localUserModel.getUser_mobile())) {
+            if (TextUtils.isEmpty(localUserModel.getUser_mobile())) {
                 //用户没有绑定手机，跳转到手机绑定页面
                 SDToast.showToast("您还没有绑定手机号码，请先绑定手机号码");
                 Intent intent = new Intent(getApplicationContext(), BindMobileActivity.class);
@@ -527,6 +535,35 @@ public class MyAccountActivity extends BaseActivity {
         return true;
     }
 
+    //解除微信绑定
+    private void clickUnBindWx() {
+        if (TextUtils.equals(tv_bind_wx.getText(), "已绑定")) {
+            View popupView = getLayoutInflater().inflate(R.layout.pop_unbind_third_account, null);
+            TextView tip = (TextView) popupView.findViewById(R.id.tip);
+            tip.setText(getString(R.string.account_unbind, "微信"));
+            final PopupWindow mPopupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+            mPopupWindow.setTouchable(true);
+            mPopupWindow.setOutsideTouchable(true);
+            View cancel = popupView.findViewById(R.id.cancel);
+            View submit = popupView.findViewById(R.id.submit);
+            cancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mPopupWindow.dismiss();
+                }
+            });
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mPopupWindow.dismiss();
+                    unbindWallet(1);
+                }
+            });
+
+            mPopupWindow.showAtLocation(mTitle, Gravity.CENTER, 0, 0);
+        }
+    }
+
     /**
      * 用户钱包信息,是否设置有密码，是否绑定有微信，支付宝等信息
      */
@@ -545,7 +582,7 @@ public class MyAccountActivity extends BaseActivity {
             @Override
             public void onSuccess(WalletModel actModel) {
                 if (actModel.getStatus() == 1) {
-                    if(actModel.getIs_set_pay_password() == 1) {
+                    if (actModel.getIs_set_pay_password() == 1) {
                         pay_password_status.setText("已设置");
                     } else {
                         pay_password_status.setText("未设置");
@@ -562,6 +599,44 @@ public class MyAccountActivity extends BaseActivity {
                     } else {
                         tv_bind_alipay.setText("已绑定");
                     }
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                error.printStackTrace();
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        });
+    }
+
+    /**
+     * 解除绑定
+     */
+    private void unbindWallet(int type) {
+        LocalUserModel localUserModel = LocalUserModelDao.queryModel();
+        RequestModel model = new RequestModel();
+        model.putCtl("uc_money");
+        model.putAct("remove_bind");
+        model.put("type", type);
+        model.put("user_id", localUserModel.getUser_id());
+
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<WalletModel>() {
+
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onSuccess(WalletModel actModel) {
+                if (actModel.getStatus() == 1) {
+                    SDToast.showToast("解除绑定成功");
+                    requestWallet();
                 }
             }
 

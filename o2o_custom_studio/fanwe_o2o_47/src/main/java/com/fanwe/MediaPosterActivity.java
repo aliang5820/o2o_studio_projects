@@ -116,10 +116,10 @@ public class MediaPosterActivity extends BaseActivity {
     }
 
     private void sharePoster() {
-        String content = "我正在使用" + getString(R.string.app_name) + ",快来加入吧";
+        //String content = "我正在使用" + getString(R.string.app_name) + ",快来加入吧";
         String imageUrl = Environment.getExternalStorageDirectory() + File.separator + Constant.FILE_DIR + Constant.POSTER_FILE_NAME;
-        String clickUrl = "http://www.shengdianyungou.com/";
-        UmengSocialManager.openShare("分享", content, imageUrl, clickUrl, this, null);
+        //String clickUrl = "http://www.shengdianyungou.com/";
+        UmengSocialManager.openShare("分享", null, imageUrl, null, this, null);
     }
 
     /*private void clickShare() {

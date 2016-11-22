@@ -75,9 +75,9 @@ public class MediaNextLevelActivity extends BaseActivity {
         mFragmentList.add(MediaNextLevelFragment.getInstance(3));
 
         //添加页卡标题
-        mTitleList.add("一级");
-        mTitleList.add("二级");
-        mTitleList.add("三级");
+        mTitleList.add("金牌");
+        mTitleList.add("银牌");
+        mTitleList.add("铜牌");
 
         mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(0)));//添加tab选项卡
         mTabLayout.addTab(mTabLayout.newTab().setText(mTitleList.get(1)));

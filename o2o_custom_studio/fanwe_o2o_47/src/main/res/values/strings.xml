@@ -101,4 +101,7 @@
     <string name="wallet_extra_money">扣除提现手续费 ¥%.2f</string>
     <string name="wallet_extra_money_empty">扣除提现手续费 ¥0.00</string>
     <string name="wallet_draw_fee_info">提现最小额度为¥10.00；手续费 %s</string>
+
+    <!--个人中心-->
+    <string name="account_unbind">确定要解除与%s的关联吗</string>
 </resources>
