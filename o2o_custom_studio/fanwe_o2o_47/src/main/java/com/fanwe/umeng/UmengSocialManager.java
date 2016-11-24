@@ -1,8 +1,5 @@
 package com.fanwe.umeng;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.text.TextUtils;
 
@@ -32,246 +29,218 @@ import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.umeng.socialize.weixin.media.CircleShareContent;
 import com.umeng.socialize.weixin.media.WeiXinShareContent;
 
-public class UmengSocialManager
-{
+import java.util.ArrayList;
+import java.util.List;
 
-	public static final String SHARE = "com.umeng.share";
-	public static final String LOGIN = "com.umeng.login";
+public class UmengSocialManager {
 
-	public static void initHandler()
-	{
-		initHandler(SDActivityManager.getInstance().getLastActivity());
-	}
+    public static final String SHARE = "com.umeng.share";
+    public static final String LOGIN = "com.umeng.login";
 
-	public static void initHandler(Activity activity)
-	{
-		if (activity == null)
-		{
-			return;
-		}
+    public static void initHandler() {
+        initHandler(SDActivityManager.getInstance().getLastActivity());
+    }
 
-		// 添加短信
-		SmsHandler smsHandler = new SmsHandler();
-		smsHandler.addToSocialSDK();
-		// 添加邮件
-		EmailHandler emailHandler = new EmailHandler();
-		emailHandler.addToSocialSDK();
+    public static void initHandler(Activity activity) {
+        if (activity == null) {
+            return;
+        }
 
-		Init_indexActModel model = InitActModelDao.query();
-		if (model == null)
-		{
-			return;
-		}
-		// /////////////////////////////////////////微信
-		String wxAppKey = model.getWx_app_key();
-		String wxAppSecret = model.getWx_app_secret();
-		if (!TextUtils.isEmpty(wxAppKey) && !TextUtils.isEmpty(wxAppSecret))
-		{
-			// 微信朋友圈
-			UMWXHandler wxCircleHandler = new UMWXHandler(activity, wxAppKey, wxAppSecret);
-			wxCircleHandler.setToCircle(true);
-			wxCircleHandler.addToSocialSDK();
-			wxCircleHandler.showCompressToast(false);
-			// 微信
-			UMWXHandler wxHandler = new UMWXHandler(activity, wxAppKey, wxAppSecret);
-			wxHandler.addToSocialSDK();
-			wxHandler.showCompressToast(false);
-		}
+        // 添加短信
+        SmsHandler smsHandler = new SmsHandler();
+        smsHandler.addToSocialSDK();
+        // 添加邮件
+        EmailHandler emailHandler = new EmailHandler();
+        emailHandler.addToSocialSDK();
 
-		// ////////////////////////////////////////QQ
-		String qqAppKey = model.getQq_app_key();
-		String qqAppSecret = model.getQq_app_secret();
-		if (!TextUtils.isEmpty(qqAppKey) && !TextUtils.isEmpty(qqAppSecret))
-		{
-			// QQ
-			UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(activity, qqAppKey, qqAppSecret);
-			qqSsoHandler.addToSocialSDK();
-			// QQ空间
-			QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(activity, qqAppKey, qqAppSecret);
-			qZoneSsoHandler.addToSocialSDK();
-		}
+        Init_indexActModel model = InitActModelDao.query();
+        if (model == null) {
+            return;
+        }
+        // /////////////////////////////////////////微信
+        String wxAppKey = model.getWx_app_key();
+        String wxAppSecret = model.getWx_app_secret();
+        if (!TextUtils.isEmpty(wxAppKey) && !TextUtils.isEmpty(wxAppSecret)) {
+            // 微信朋友圈
+            UMWXHandler wxCircleHandler = new UMWXHandler(activity, wxAppKey, wxAppSecret);
+            wxCircleHandler.setToCircle(true);
+            wxCircleHandler.addToSocialSDK();
+            wxCircleHandler.showCompressToast(false);
+            // 微信
+            UMWXHandler wxHandler = new UMWXHandler(activity, wxAppKey, wxAppSecret);
+            wxHandler.addToSocialSDK();
+            wxHandler.showCompressToast(false);
+        }
 
-		// /////////////////////////////////////新浪
-		String sinaAppKey = model.getSina_app_key();
-		String sinaAppSecret = model.getSina_app_secret();
-		if (!TextUtils.isEmpty(sinaAppKey) && !TextUtils.isEmpty(sinaAppSecret))
-		{
-			// 新浪
-			SinaSsoHandler sinaSsoHandler = new SinaSsoHandler();
-			sinaSsoHandler.addToSocialSDK();
-		}
+        // ////////////////////////////////////////QQ
+        String qqAppKey = model.getQq_app_key();
+        String qqAppSecret = model.getQq_app_secret();
+        if (!TextUtils.isEmpty(qqAppKey) && !TextUtils.isEmpty(qqAppSecret)) {
+            // QQ
+            UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(activity, qqAppKey, qqAppSecret);
+            qqSsoHandler.addToSocialSDK();
+            // QQ空间
+            QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(activity, qqAppKey, qqAppSecret);
+            qZoneSsoHandler.addToSocialSDK();
+        }
 
-	}
+        // /////////////////////////////////////新浪
+        String sinaAppKey = model.getSina_app_key();
+        String sinaAppSecret = model.getSina_app_secret();
+        if (!TextUtils.isEmpty(sinaAppKey) && !TextUtils.isEmpty(sinaAppSecret)) {
+            // 新浪
+            SinaSsoHandler sinaSsoHandler = new SinaSsoHandler();
+            sinaSsoHandler.addToSocialSDK();
+        }
 
-	/**
-	 * 初始化友盟分享可以显示的第三方平台
-	 */
-	public static void initDisplay()
-	{
-		UMSocialService service = getUMShare();
-		SocializeConfig config = service.getConfig();
-		config.closeToast();
+    }
 
-		List<SHARE_MEDIA> listPlat = new ArrayList<SHARE_MEDIA>();
-		Init_indexActModel model = InitActModelDao.query();
-		if (model != null)
-		{
+    /**
+     * 初始化友盟分享可以显示的第三方平台
+     */
+    public static void initDisplay() {
+        UMSocialService service = getUMShare();
+        SocializeConfig config = service.getConfig();
+        config.closeToast();
 
-			String wxAppKey = model.getWx_app_key();
-			String wxAppSecret = model.getWx_app_secret();
-			if (!TextUtils.isEmpty(wxAppKey) && !TextUtils.isEmpty(wxAppSecret))
-			{
-				listPlat.add(SHARE_MEDIA.WEIXIN);
-				listPlat.add(SHARE_MEDIA.WEIXIN_CIRCLE);
-			}
+        List<SHARE_MEDIA> listPlat = new ArrayList<SHARE_MEDIA>();
+        Init_indexActModel model = InitActModelDao.query();
+        if (model != null) {
 
-			String qqAppKey = model.getQq_app_key();
-			String qqAppSecret = model.getQq_app_secret();
-			if (!TextUtils.isEmpty(qqAppKey) && !TextUtils.isEmpty(qqAppSecret))
-			{
-				listPlat.add(SHARE_MEDIA.QQ);
-				listPlat.add(SHARE_MEDIA.QZONE);
-			}
+            String wxAppKey = model.getWx_app_key();
+            String wxAppSecret = model.getWx_app_secret();
+            if (!TextUtils.isEmpty(wxAppKey) && !TextUtils.isEmpty(wxAppSecret)) {
+                listPlat.add(SHARE_MEDIA.WEIXIN);
+                //listPlat.add(SHARE_MEDIA.WEIXIN_CIRCLE);
+            }
 
-			String sinaAppKey = model.getSina_app_key();
-			String sinaAppSecret = model.getSina_app_secret();
-			if (!TextUtils.isEmpty(sinaAppKey) && !TextUtils.isEmpty(sinaAppSecret))
-			{
-				listPlat.add(SHARE_MEDIA.SINA);
-			}
-		}
-		listPlat.add(SHARE_MEDIA.SMS);
-		listPlat.add(SHARE_MEDIA.EMAIL);
-		SHARE_MEDIA[] arrPlat = new SHARE_MEDIA[listPlat.size()];
-		listPlat.toArray(arrPlat);
-		config.setPlatforms(arrPlat);
-	}
+            String qqAppKey = model.getQq_app_key();
+            String qqAppSecret = model.getQq_app_secret();
+            if (!TextUtils.isEmpty(qqAppKey) && !TextUtils.isEmpty(qqAppSecret)) {
+                listPlat.add(SHARE_MEDIA.QQ);
+                listPlat.add(SHARE_MEDIA.QZONE);
+            }
 
-	public static UMSocialService getUMShare()
-	{
-		return UMServiceFactory.getUMSocialService(SHARE);
-	}
+            String sinaAppKey = model.getSina_app_key();
+            String sinaAppSecret = model.getSina_app_secret();
+            if (!TextUtils.isEmpty(sinaAppKey) && !TextUtils.isEmpty(sinaAppSecret)) {
+                listPlat.add(SHARE_MEDIA.SINA);
+            }
+        }
+        //listPlat.add(SHARE_MEDIA.SMS);
+        //listPlat.add(SHARE_MEDIA.EMAIL);
+        SHARE_MEDIA[] arrPlat = new SHARE_MEDIA[listPlat.size()];
+        listPlat.toArray(arrPlat);
+        config.setPlatforms(arrPlat);
+    }
 
-	public static UMShakeService getUMShake()
-	{
-		return UMShakeServiceFactory.getShakeService(SHARE);
-	}
+    public static UMSocialService getUMShare() {
+        return UMServiceFactory.getUMSocialService(SHARE);
+    }
 
-	public static void doOauthVerify(Activity activity, SHARE_MEDIA shareMedia, UMAuthListener listener)
-	{
-		getUMShare().doOauthVerify(activity, shareMedia, listener);
-	}
+    public static UMShakeService getUMShake() {
+        return UMShakeServiceFactory.getShakeService(SHARE);
+    }
 
-	public static void getPlatformInfo(Activity activity, SHARE_MEDIA shareMedia, UMDataListener listener)
-	{
-		getUMShare().getPlatformInfo(activity, shareMedia, listener);
-	}
+    public static void doOauthVerify(Activity activity, SHARE_MEDIA shareMedia, UMAuthListener listener) {
+        getUMShare().doOauthVerify(activity, shareMedia, listener);
+    }
 
-	public static void openShare(String title, String content, String imageUrl, String clickUrl, Activity activity, SnsPostListener listener)
-	{
-		UMImage umImage = null;
-		if (!TextUtils.isEmpty(imageUrl))
-		{
-			umImage = new UMImage(activity, imageUrl);
-		}
-		openShare(title, content, umImage, clickUrl, activity, listener);
-	}
+    public static void getPlatformInfo(Activity activity, SHARE_MEDIA shareMedia, UMDataListener listener) {
+        getUMShare().getPlatformInfo(activity, shareMedia, listener);
+    }
 
-	public static void openShare(String title, String content, UMImage umImage, String clickUrl, Activity activity, SnsPostListener listener)
-	{
-		QZoneShareContent qzoneShare = new QZoneShareContent();
-		QQShareContent qqShare = new QQShareContent();
-		WeiXinShareContent wxShare = new WeiXinShareContent();
-		CircleShareContent wxCircleShare = new CircleShareContent();
-		SinaShareContent sinaShare = new SinaShareContent();
+    public static void openShare(String title, String content, String imageUrl, String clickUrl, Activity activity, SnsPostListener listener) {
+        UMImage umImage = null;
+        if (!TextUtils.isEmpty(imageUrl)) {
+            umImage = new UMImage(activity, imageUrl);
+        }
+        openShare(title, content, umImage, clickUrl, activity, listener);
+    }
 
-		// 设置分享内容
-		if (TextUtils.isEmpty(content))
-		{
-			getUMShare().setShareContent("");
+    public static void openShare(String title, String content, UMImage umImage, String clickUrl, Activity activity, SnsPostListener listener) {
+        QZoneShareContent qzoneShare = new QZoneShareContent();
+        QQShareContent qqShare = new QQShareContent();
+        WeiXinShareContent wxShare = new WeiXinShareContent();
+        CircleShareContent wxCircleShare = new CircleShareContent();
+        SinaShareContent sinaShare = new SinaShareContent();
 
-			qzoneShare.setShareContent("");
-			qqShare.setShareContent("");
-			wxShare.setShareContent("");
-			wxCircleShare.setShareContent("");
-			sinaShare.setShareContent("");
-		} else
-		{
-			getUMShare().setShareContent(content);
+        // 设置分享内容
+        if (TextUtils.isEmpty(content)) {
+            getUMShare().setShareContent("");
 
-			qzoneShare.setShareContent(content);
-			qqShare.setShareContent(content);
-			wxShare.setShareContent(content);
-			wxCircleShare.setShareContent(content);
-			sinaShare.setShareContent(content);
-		}
+            qzoneShare.setShareContent("");
+            qqShare.setShareContent("");
+            wxShare.setShareContent("");
+            wxCircleShare.setShareContent("");
+            sinaShare.setShareContent("");
+        } else {
+            getUMShare().setShareContent(content);
 
-		// 设置分享图片
-		// UmengSocialManager.getUMShare().setShareImage(umImage);
+            qzoneShare.setShareContent(content);
+            qqShare.setShareContent(content);
+            wxShare.setShareContent(content);
+            wxCircleShare.setShareContent(content);
+            sinaShare.setShareContent(content);
+        }
 
-		qzoneShare.setShareImage(umImage);
-		qqShare.setShareImage(umImage);
-		wxShare.setShareImage(umImage);
-		wxCircleShare.setShareImage(umImage);
-		sinaShare.setShareImage(umImage);
+        // 设置分享图片
+        // UmengSocialManager.getUMShare().setShareImage(umImage);
 
-		// 设置点击跳转链接
-		if (!TextUtils.isEmpty(clickUrl))
-		{
-			qzoneShare.setTargetUrl(clickUrl);
-			qqShare.setTargetUrl(clickUrl);
-			wxShare.setTargetUrl(clickUrl);
-			wxCircleShare.setTargetUrl(clickUrl);
-			sinaShare.setTargetUrl(clickUrl);
-		} else
-		{
-			qzoneShare.setTargetUrl(null);
-			qqShare.setTargetUrl(null);
-			wxShare.setTargetUrl(null);
-			wxCircleShare.setTargetUrl(null);
-			sinaShare.setTargetUrl(null);
-		}
+        qzoneShare.setShareImage(umImage);
+        qqShare.setShareImage(umImage);
+        wxShare.setShareImage(umImage);
+        wxCircleShare.setShareImage(umImage);
+        sinaShare.setShareImage(umImage);
 
-		qzoneShare.setTitle(title);
-		qqShare.setTitle(title);
-		wxShare.setTitle(title);
-		wxCircleShare.setTitle(content);
-		sinaShare.setTitle(title);
+        // 设置点击跳转链接
+        if (!TextUtils.isEmpty(clickUrl)) {
+            qzoneShare.setTargetUrl(clickUrl);
+            qqShare.setTargetUrl(clickUrl);
+            wxShare.setTargetUrl(clickUrl);
+            wxCircleShare.setTargetUrl(clickUrl);
+            sinaShare.setTargetUrl(clickUrl);
+        } else {
+            qzoneShare.setTargetUrl(null);
+            qqShare.setTargetUrl(null);
+            wxShare.setTargetUrl(null);
+            wxCircleShare.setTargetUrl(null);
+            sinaShare.setTargetUrl(null);
+        }
 
-		getUMShare().setShareMedia(qzoneShare);
-		getUMShare().setShareMedia(qqShare);
-		getUMShare().setShareMedia(wxShare);
-		getUMShare().setShareMedia(wxCircleShare);
-		getUMShare().setShareMedia(sinaShare);
+        qzoneShare.setTitle(title);
+        qqShare.setTitle(title);
+        wxShare.setTitle(title);
+        wxCircleShare.setTitle(content);
+        sinaShare.setTitle(title);
 
-		if (listener == null)
-		{
-			listener = getDefaultSnsListener();
-		}
+        getUMShare().setShareMedia(qzoneShare);
+        getUMShare().setShareMedia(qqShare);
+        getUMShare().setShareMedia(wxShare);
+        getUMShare().setShareMedia(wxCircleShare);
+        getUMShare().setShareMedia(sinaShare);
 
-		getUMShare().openShare(activity, listener);
-	}
+        if (listener == null) {
+            listener = getDefaultSnsListener();
+        }
 
-	public static SnsPostListener getDefaultSnsListener()
-	{
-		return new SnsPostListener()
-		{
-			@Override
-			public void onStart()
-			{
-			}
+        getUMShare().openShare(activity, listener);
+    }
 
-			@Override
-			public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity)
-			{
-				if (eCode == 200)
-				{
+    public static SnsPostListener getDefaultSnsListener() {
+        return new SnsPostListener() {
+            @Override
+            public void onStart() {
+            }
 
-				} else
-				{
+            @Override
+            public void onComplete(SHARE_MEDIA platform, int eCode, SocializeEntity entity) {
+                if (eCode == 200) {
 
-				}
-			}
-		};
-	}
+                } else {
+
+                }
+            }
+        };
+    }
 }

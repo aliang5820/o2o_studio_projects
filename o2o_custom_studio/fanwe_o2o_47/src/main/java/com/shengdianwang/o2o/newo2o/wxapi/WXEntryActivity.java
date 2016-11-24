@@ -4,6 +4,7 @@ package com.shengdianwang.o2o.newo2o.wxapi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.fanwe.constant.Constant;
 import com.fanwe.dao.InitActModelDao;
@@ -52,7 +53,11 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
             String code = newResp.code;
             /*LogUtil.d(">>>>>>" + code);
             finish();*/
-            bindWX(code);
+            if(!TextUtils.isEmpty(code)) {
+                bindWX(code);
+            }
+        } else {
+            finish();
         }
     }
 

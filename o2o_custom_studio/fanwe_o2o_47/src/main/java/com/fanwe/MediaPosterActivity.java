@@ -53,6 +53,7 @@ public class MediaPosterActivity extends BaseActivity {
                     imageView.setImageBitmap(bitmap);
                     break;
                 case SAVE_VIEW:
+                    share_btn.setVisibility(View.VISIBLE);
                     sharePoster();
                     break;
             }
@@ -107,12 +108,6 @@ public class MediaPosterActivity extends BaseActivity {
                 saveBitmap(rootLayout);
                 break;
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        share_btn.setVisibility(View.VISIBLE);
     }
 
     private void sharePoster() {
