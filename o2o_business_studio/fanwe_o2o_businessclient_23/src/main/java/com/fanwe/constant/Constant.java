@@ -5,6 +5,7 @@ public class Constant {
 
     public static final String FILE_DIR = "/o2o/biz/";
     public static final String QR_CODE_FILE_NAME = "biz_qr_code.jpg";
+    public static final String ACTION_BIND_WX_SUCCESS = "ACTION_BIND_WX_SUCCESS";
 
     //内部请求代码
     public static final int RESULT_GALLERY_ONLY = 100;
@@ -13,6 +14,12 @@ public class Constant {
 
     public enum TitleType {
         TITLE_NONE, TITLE
+    }
+
+    public static final class DrawType {
+        public static final int WX = 1;//微信
+        public static final int ALIPAY = 0;//支付宝
+        public static final int BANK = 3;//银行卡
     }
 
     public static final class UserLoginState {

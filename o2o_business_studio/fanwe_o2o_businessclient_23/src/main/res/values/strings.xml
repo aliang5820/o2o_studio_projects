@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="loading">加载中</string>
+
     <string name="apply_order_id">订单号：%s</string>
     <string name="money">￥%s</string>
     <string name="number">%s</string>
     <string name="extension_person">由【%s】推荐</string>
+
+    <!--钱包-->
+    <string name="wallet_all_money">￥%.2f</string>
+    <string name="wallet_draw_money">%.2f</string>
+    <string name="wallet_record_money1">-%.2f</string>
+    <string name="wallet_record_money2">+%.2f</string>
+    <string name="wallet_extra_money">扣除提现手续费 ¥%.2f</string>
+    <string name="wallet_extra_money_empty">扣除提现手续费 ¥0.00</string>
+    <string name="wallet_draw_fee_info">提现最小额度为¥10.00；手续费 %s</string>
+
+    <!--个人中心-->
+    <string name="account_unbind">确定要解除与%s的关联吗</string>
 </resources>

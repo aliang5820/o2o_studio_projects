@@ -22,7 +22,8 @@
     <!-- Act_biz_tuan_msg -->
     <color name="act_biz_tuan_msg_bg0">#F5F5F5</color>
     <color name="separator_submenu">#ea8010</color>
-
+    <!-- activity灰色背景 -->
+    <color name="bg_activity_gray">#f4f4f4</color>
     <!-- 点击效果 -->
     <color name="red">#DF3939</color>
     <color name="red_press">#AB2531</color>

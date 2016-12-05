@@ -777,10 +777,10 @@
             android:value="${umeng_channel}" />
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="@string/umeng_key"></meta-data>
+            android:value="@string/umeng_key" />
         <meta-data
             android:name="UMENG_MESSAGE_SECRET"
-            android:value="@string/umeng_message_secret"></meta-data>
+            android:value="@string/umeng_message_secret" />
         <!-- 友盟分享start -->
         <!-- 分享内容编辑页 -->
         <activity
@@ -792,13 +792,6 @@
             android:windowSoftInputMode="stateVisible|adjustResize" />
 
         <!-- 微信回调activity -->
-        <activity
-            android:name=".wxapi.WXEntryActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <activity
             android:name="com.shengdianwang.o2o.newo2o.wxapi.WXEntryActivity"
             android:exported="true"

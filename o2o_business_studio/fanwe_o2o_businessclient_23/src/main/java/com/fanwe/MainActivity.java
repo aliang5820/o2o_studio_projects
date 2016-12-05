@@ -12,14 +12,24 @@ import com.fanwe.businessclient.R;
 import com.fanwe.common.SDViewNavigatorManager;
 import com.fanwe.common.SDViewNavigatorManager.SDViewNavigatorManagerListener;
 import com.fanwe.customview.SDBottomTabItem;
+import com.fanwe.dao.InitActModelDao;
+import com.fanwe.dao.UserModelDao;
 import com.fanwe.fragment.Tab_0_Fragment;
 import com.fanwe.fragment.Tab_1_Fragment;
 import com.fanwe.fragment.Tab_2_Fragment;
 import com.fanwe.fragment.Tab_3_Fragment;
 import com.fanwe.fragment.Tab_4_Fragment;
 import com.fanwe.fragment.Tab_Mine_Fragment;
+import com.fanwe.http.InterfaceServer;
+import com.fanwe.http.listener.SDRequestCallBack;
+import com.fanwe.library.dialog.SDDialogManager;
+import com.fanwe.model.InitActModel;
+import com.fanwe.model.LocalUserModel;
+import com.fanwe.model.RequestModel;
 import com.fanwe.service.AppUpgradeService;
+import com.fanwe.utils.LogUtil;
 import com.fanwe.utils.SDToast;
+import com.lidroid.xutils.exception.HttpException;
 
 public class MainActivity extends BaseActivity {
 
@@ -43,7 +53,7 @@ public class MainActivity extends BaseActivity {
         if (!SysConfig.getInstance().isCheckUpdate()) {
             startUpgradeService();
         }
-
+        initRequest();
     }
 
     private void startUpgradeService() {
@@ -149,4 +159,35 @@ public class MainActivity extends BaseActivity {
         mExitTime = System.currentTimeMillis();
     }
 
+    //获取微信的相关信息
+    private void initRequest() {
+        LocalUserModel userModel = UserModelDao.getModel();
+        RequestModel model = new RequestModel();
+        model.putCtlAct("biz_ucmoney", "payment");
+        model.put("user_id", userModel.getSupplier_id());
+        model.put("user_type", userModel.getAccount_type());
+
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<InitActModel>() {
+
+            @Override
+            public void onSuccess(InitActModel actModel) {
+                //保存微信key等信息
+                InitActModelDao.saveModel(actModel);
+            }
+
+            @Override
+            public void onStart() {
+                SDDialogManager.showProgressDialog("请稍候...");
+            }
+
+            @Override
+            public void onFinish() {
+                SDDialogManager.dismissProgressDialog();
+            }
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+            }
+        });
+    }
 }

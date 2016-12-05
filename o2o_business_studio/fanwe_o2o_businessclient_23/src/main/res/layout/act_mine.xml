@@ -213,6 +213,147 @@
 
             <View style="@style/H_LineStyle" />
 
+            <!-- 微信绑定 -->
+            <LinearLayout
+                android:id="@+id/ll_bind_wx"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_white_gray_stroke_bot"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="@dimen/width_set_item_icon"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_my_account_qq_bind" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="微信"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_bind_wx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="未绑定"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <!-- 支付宝绑定 -->
+            <LinearLayout
+                android:id="@+id/ll_bind_alipay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_white_gray_stroke_bot"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="@dimen/width_set_item_icon"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_my_account_qq_bind" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="支付宝"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_bind_alipay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="未绑定"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <View style="@style/H_LineStyle" />
+
+            <!-- 修改支付密码 -->
+            <LinearLayout
+                android:id="@+id/ll_modify_pay_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_white_gray_stroke_top"
+                android:gravity="center_vertical"
+                android:minHeight="50dp"
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="@dimen/width_set_item_icon"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_my_account_change_password" />
+
+                <TextView
+                    android:id="@+id/tv_modify_pay_password"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_weight="1"
+                    android:text="修改支付密码"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/pay_password_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="未设置"
+                    android:textColor="@color/gray"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/width_set_item_icon"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/arrow_right" />
+            </LinearLayout>
+
+            <View style="@style/H_LineStyle" />
+
+            <TextView
+                android:id="@+id/mine_wallet"
+                style="@style/MineMenuItemStyle"
+                android:text="我的钱包" />
+
+            <View style="@style/H_LineStyle" />
+
             <TextView
                 android:id="@+id/mine_media"
                 style="@style/MineMenuItemStyle"

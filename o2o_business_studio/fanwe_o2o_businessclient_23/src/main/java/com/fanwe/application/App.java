@@ -12,7 +12,6 @@ import com.fanwe.library.config.SDLibraryConfig;
 import com.fanwe.library.utils.SDViewUtil;
 import com.fanwe.model.LocalUserModel;
 import com.fanwe.umeng.UmengPushManager;
-import com.pingplusplus.android.PingppLog;
 import com.sunday.eventbus.SDEventManager;
 
 /**
@@ -43,7 +42,7 @@ public class App extends Application {
         initSDLibrary();
         this.mLocalUserModel = UserModelDao.getModel();
         UmengPushManager.init(this);
-        PingppLog.DEBUG = true;
+        //PingppLog.DEBUG = true;
     }
 
     public LocalUserModel getmLocalUser() {

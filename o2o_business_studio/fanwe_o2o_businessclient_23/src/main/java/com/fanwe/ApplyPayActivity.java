@@ -16,14 +16,10 @@ import com.fanwe.event.EnumEventTag;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.listener.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
-import com.fanwe.library.utils.SDToast;
 import com.fanwe.model.ApplyPayModelCtlActModel;
 import com.fanwe.model.RequestModel;
-import com.fanwe.model.Sms_send_sms_codeActModel;
 import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.view.annotation.ViewInject;
-import com.pingplusplus.android.Pingpp;
 import com.sunday.eventbus.SDEventManager;
 
 /**
@@ -59,7 +55,7 @@ public class ApplyPayActivity extends TitleBaseActivity {
     }
 
     private void initData() {
-        orderId = getIntent().getLongExtra(Constant.ExtraConstant.EXTRA_ID, -1);
+        /*orderId = getIntent().getLongExtra(Constant.ExtraConstant.EXTRA_ID, -1);
         orderIdView.setText(getString(R.string.apply_order_id, orderId));
 
         price = getIntent().getLongExtra(Constant.ExtraConstant.EXTRA_MODEL, -1);
@@ -70,30 +66,30 @@ public class ApplyPayActivity extends TitleBaseActivity {
             pay_desc.setText("省点网合伙人");
         } else {
             pay_desc.setText("省点网会员店");
-        }
+        }*/
     }
 
     /**
      * onActivityResult 获得支付结果，如果支付成功，服务器会收到ping++ 服务器发送的异步通知。
      * 最终支付成功根据异步通知为准
-     */
+     *//*
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //支付页面返回处理
         if (requestCode == Pingpp.REQUEST_CODE_PAYMENT) {
             if (resultCode == RESULT_OK) {
                 String result = data.getExtras().getString("pay_result");
-                /* 处理返回值
+                *//* 处理返回值
                  * "success" - payment succeed
                  * "fail"    - payment failed
                  * "cancel"  - user canceld
                  * "invalid" - payment plugin not installed
-                 */
+                 *//*
                 String errorMsg = data.getExtras().getString("error_msg"); // 错误信息
                 String extraMsg = data.getExtras().getString("extra_msg"); // 错误信息
                 showMsg(result, errorMsg, extraMsg);
             }
         }
-    }
+    }*/
 
     //根据选择支付类型，获取订单
     public void onPay(View view) {
@@ -138,7 +134,7 @@ public class ApplyPayActivity extends TitleBaseActivity {
 
     /**
      * 请求订单接口
-     */
+     *//*
     private void requestOrder(String payType) {
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_pay", "orderPay");
@@ -170,7 +166,7 @@ public class ApplyPayActivity extends TitleBaseActivity {
             public void onFailure(HttpException error, String msg) {
             }
         });
-    }
+    }*/
 
     class PaymentRequest {
         String channel;
