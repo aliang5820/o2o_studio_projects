@@ -73,13 +73,14 @@
                 android:background="@color/stroke"
                 android:gravity="center"
                 android:padding="@dimen/base_padding_10"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                tools:text="由【管理员】推荐" />
 
             <TextView
                 style="@style/MineMenuItemStyle"
                 android:clickable="true"
                 android:onClick="onNextLevel"
-                android:text="我的下级" />
+                android:text="我的粉丝" />
 
             <View style="@style/H_LineStyle" />
 
@@ -122,96 +123,102 @@
                     tools:text="￥3100" />
             </LinearLayout>
 
-            <View style="@style/H_LineStyle" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:visibility="gone"
+                android:orientation="vertical">
 
-                <TextView
-                    style="@style/MediaTableItemStyle"
-                    android:text="等级" />
+                <View style="@style/H_LineStyle" />
 
-                <View
-                    android:layout_width="@dimen/base_stroke_1px"
-                    android:layout_height="match_parent"
-                    android:background="@color/stroke_deep" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <TextView
-                    style="@style/MediaTableItemStyle"
-                    android:text="数量" />
+                    <TextView
+                        style="@style/MediaTableItemStyle"
+                        android:text="等级" />
 
-            </LinearLayout>
+                    <View
+                        android:layout_width="@dimen/base_stroke_1px"
+                        android:layout_height="match_parent"
+                        android:background="@color/stroke_deep" />
 
+                    <TextView
+                        style="@style/MediaTableItemStyle"
+                        android:text="数量" />
 
-            <View style="@style/H_LineStyle" />
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                <View style="@style/H_LineStyle" />
 
-                <TextView
-                    style="@style/MediaTableItemStyle"
-                    android:text="一级" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <View
-                    android:layout_width="@dimen/base_stroke_1px"
-                    android:layout_height="match_parent"
-                    android:background="@color/stroke_deep" />
+                    <TextView
+                        style="@style/MediaTableItemStyle"
+                        android:text="一级" />
 
-                <TextView
-                    android:id="@+id/label3"
-                    style="@style/MediaTableItemStyle"
-                    tools:text="1" />
+                    <View
+                        android:layout_width="@dimen/base_stroke_1px"
+                        android:layout_height="match_parent"
+                        android:background="@color/stroke_deep" />
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/label3"
+                        style="@style/MediaTableItemStyle"
+                        tools:text="1" />
 
+                </LinearLayout>
 
-            <View style="@style/H_LineStyle" />
+                <View style="@style/H_LineStyle" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <TextView
-                    style="@style/MediaTableItemStyle"
-                    android:text="二级" />
+                    <TextView
+                        style="@style/MediaTableItemStyle"
+                        android:text="二级" />
 
-                <View
-                    android:layout_width="@dimen/base_stroke_1px"
-                    android:layout_height="match_parent"
-                    android:background="@color/stroke_deep" />
+                    <View
+                        android:layout_width="@dimen/base_stroke_1px"
+                        android:layout_height="match_parent"
+                        android:background="@color/stroke_deep" />
 
-                <TextView
-                    android:id="@+id/label4"
-                    style="@style/MediaTableItemStyle"
-                    tools:text="2" />
+                    <TextView
+                        android:id="@+id/label4"
+                        style="@style/MediaTableItemStyle"
+                        tools:text="2" />
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <View style="@style/H_LineStyle" />
+                <View style="@style/H_LineStyle" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <TextView
-                    style="@style/MediaTableItemStyle"
-                    android:text="三级" />
+                    <TextView
+                        style="@style/MediaTableItemStyle"
+                        android:text="三级" />
 
-                <View
-                    android:layout_width="@dimen/base_stroke_1px"
-                    android:layout_height="match_parent"
-                    android:background="@color/stroke_deep" />
+                    <View
+                        android:layout_width="@dimen/base_stroke_1px"
+                        android:layout_height="match_parent"
+                        android:background="@color/stroke_deep" />
 
-                <TextView
-                    android:id="@+id/label5"
-                    style="@style/MediaTableItemStyle"
-                    tools:text="3" />
+                    <TextView
+                        android:id="@+id/label5"
+                        style="@style/MediaTableItemStyle"
+                        tools:text="3" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -284,8 +291,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
