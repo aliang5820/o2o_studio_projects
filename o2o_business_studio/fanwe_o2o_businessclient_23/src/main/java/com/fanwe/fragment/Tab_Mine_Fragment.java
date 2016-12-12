@@ -131,7 +131,7 @@ public class Tab_Mine_Fragment extends BaseFragment {
                 }
             });
 
-            mPopupWindow.showAtLocation(mTitle, Gravity.CENTER, 0, 0);
+            mPopupWindow.showAtLocation(tv_bind_wx, Gravity.CENTER, 0, 0);
         }
     }
 
