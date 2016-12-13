@@ -5,6 +5,7 @@ public class Constant {
 
     public static final String FILE_DIR = "/o2o/biz/";
     public static final String QR_CODE_FILE_NAME = "biz_qr_code.jpg";
+    public static final String POSTER_FILE_NAME = "o2o_poster.jpg";
     public static final String ACTION_BIND_WX_SUCCESS = "ACTION_BIND_WX_SUCCESS";
 
     //内部请求代码

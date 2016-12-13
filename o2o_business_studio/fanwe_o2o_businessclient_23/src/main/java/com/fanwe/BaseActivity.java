@@ -1,5 +1,6 @@
 package com.fanwe;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout.LayoutParams;
@@ -13,8 +14,10 @@ import com.fanwe.library.title.SDTitleSimple;
 import com.fanwe.library.title.SDTitleSimple.SDTitleSimpleListener;
 import com.fanwe.library.utils.SDResourcesUtil;
 import com.fanwe.umeng.UmengPushManager;
+import com.fanwe.umeng.UmengSocialManager;
 import com.lidroid.xutils.ViewUtils;
 import com.sunday.eventbus.SDBaseEvent;
+import com.umeng.socialize.sso.UMSsoHandler;
 
 public class BaseActivity extends SDBaseActivity implements SDTitleSimpleListener {
 
@@ -96,6 +99,21 @@ public class BaseActivity extends SDBaseActivity implements SDTitleSimpleListene
 
     @Override
     public void onCLickRight_SDTitleSimple(SDTitleItem v, int index) {
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        UMSsoHandler ssoHandler = UmengSocialManager.getUMShare().getConfig().getSsoHandler(requestCode);
+        if (ssoHandler != null) {
+            ssoHandler.authorizeCallBack(requestCode, resultCode, data);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onDestroy() {
+        UmengSocialManager.getUMShake().unregisterShakeListener(this);
+        super.onDestroy();
     }
 
 }

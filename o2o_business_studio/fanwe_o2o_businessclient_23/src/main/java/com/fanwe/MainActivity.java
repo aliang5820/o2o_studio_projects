@@ -27,6 +27,7 @@ import com.fanwe.model.InitActModel;
 import com.fanwe.model.LocalUserModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.service.AppUpgradeService;
+import com.fanwe.umeng.UmengSocialManager;
 import com.fanwe.utils.LogUtil;
 import com.fanwe.utils.SDToast;
 import com.lidroid.xutils.exception.HttpException;
@@ -173,6 +174,7 @@ public class MainActivity extends BaseActivity {
             public void onSuccess(InitActModel actModel) {
                 //保存微信key等信息
                 InitActModelDao.saveModel(actModel);
+                UmengSocialManager.initHandler();
             }
 
             @Override
@@ -182,6 +184,7 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onFinish() {
+                UmengSocialManager.initDisplay();
                 SDDialogManager.dismissProgressDialog();
             }
 
