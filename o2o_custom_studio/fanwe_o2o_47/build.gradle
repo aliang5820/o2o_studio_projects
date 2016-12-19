@@ -11,8 +11,8 @@ android {
         manifestPlaceholders = [CHANNEL_VALUE: "default"]
         applicationId "com.shengdianwang.o2o.newo2o"
         minSdkVersion 14
-        versionCode 2016112900
-        versionName "2016112900"
+        versionCode 2016122000
+        versionName "2016122000"
         //multiDexEnabled = true //分包
     }
 

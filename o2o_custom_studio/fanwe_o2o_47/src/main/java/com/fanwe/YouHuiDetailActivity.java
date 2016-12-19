@@ -89,8 +89,9 @@ public class YouHuiDetailActivity extends BaseActivity {
     private void initTitle() {
         mTitle.setMiddleTextTop("优惠券详情");
 
-        mTitle.initRightItem(1);
-        mTitle.getItemRight(0).setImageLeft(R.drawable.ic_tuan_detail_share);
+        //屏蔽分享
+        /*mTitle.initRightItem(1);
+        mTitle.getItemRight(0).setImageLeft(R.drawable.ic_tuan_detail_share);*/
     }
 
     @Override

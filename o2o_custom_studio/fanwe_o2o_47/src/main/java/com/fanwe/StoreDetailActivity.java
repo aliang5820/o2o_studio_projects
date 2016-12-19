@@ -34,228 +34,204 @@ import com.sunday.eventbus.SDBaseEvent;
 
 /**
  * 门店详情
- * 
+ *
  * @author js02
- * 
  */
-public class StoreDetailActivity extends BaseActivity
-{
+public class StoreDetailActivity extends BaseActivity {
 
-	/** 商家id (int) */
-	public static final String EXTRA_MERCHANT_ID = "extra_merchant_id";
+    /**
+     * 商家id (int)
+     */
+    public static final String EXTRA_MERCHANT_ID = "extra_merchant_id";
 
-	@ViewInject(R.id.ssv_scroll)
-	private SDStickyScrollView mScrollView;
+    @ViewInject(R.id.ssv_scroll)
+    private SDStickyScrollView mScrollView;
 
-	private StoreDetailInfoFragment mFragInfo;
-	private StoreDetailOtherStoreFragment mFragOtherSupplier;
-	private StoreDetailBriefFragment mFragBrief;
-	private StoreDetailTuanFragment mFragTuan;
-	private StoreDetailGoodsFragment mFragGoods;
-	private StoreDetailYouhuiFragment mFragYouhui;
-	private StoreDetailCommentFragment mFragComment;
+    private StoreDetailInfoFragment mFragInfo;
+    private StoreDetailOtherStoreFragment mFragOtherSupplier;
+    private StoreDetailBriefFragment mFragBrief;
+    private StoreDetailTuanFragment mFragTuan;
+    private StoreDetailGoodsFragment mFragGoods;
+    private StoreDetailYouhuiFragment mFragYouhui;
+    private StoreDetailCommentFragment mFragComment;
 
-	private StoreActModel mActModel;
+    private StoreActModel mActModel;
 
-	private int mId;
+    private int mId;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		setmTitleType(TitleType.TITLE);
-		setContentView(R.layout.act_store_detail);
-		init();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setmTitleType(TitleType.TITLE);
+        setContentView(R.layout.act_store_detail);
+        init();
+    }
 
-	private void init()
-	{
-		getIntentData();
-		if (mId <= 0)
-		{
-			SDToast.showToast("id为空");
-			finish();
-			return;
-		}
-		initTitle();
-		initScrollView();
-	}
+    private void init() {
+        getIntentData();
+        if (mId <= 0) {
+            SDToast.showToast("id为空");
+            finish();
+            return;
+        }
+        initTitle();
+        initScrollView();
+    }
 
-	private void initScrollView()
-	{
-		mScrollView.setMode(Mode.PULL_FROM_START);
-		mScrollView.setOnRefreshListener(new OnRefreshListener2<StickyScrollView>()
-		{
+    private void initScrollView() {
+        mScrollView.setMode(Mode.PULL_FROM_START);
+        mScrollView.setOnRefreshListener(new OnRefreshListener2<StickyScrollView>() {
 
-			@Override
-			public void onPullDownToRefresh(PullToRefreshBase<StickyScrollView> refreshView)
-			{
-				requestDetail();
-			}
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<StickyScrollView> refreshView) {
+                requestDetail();
+            }
 
-			@Override
-			public void onPullUpToRefresh(PullToRefreshBase<StickyScrollView> refreshView)
-			{
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<StickyScrollView> refreshView) {
 
-			}
-		});
-		mScrollView.setRefreshing();
-	}
+            }
+        });
+        mScrollView.setRefreshing();
+    }
 
-	private void initTitle()
-	{
-		mTitle.setMiddleTextTop(SDResourcesUtil.getString(R.string.store_detail));
+    private void initTitle() {
+        mTitle.setMiddleTextTop(SDResourcesUtil.getString(R.string.store_detail));
 
-		mTitle.initRightItem(1);
-		mTitle.getItemRight(0).setImageLeft(R.drawable.ic_tuan_detail_share);
-	}
+        //屏蔽分享
+        //mTitle.initRightItem(1);
+        //mTitle.getItemRight(0).setImageLeft(R.drawable.ic_tuan_detail_share);
+    }
 
-	@Override
-	public void onCLickRight_SDTitleSimple(SDTitleItem v, int index)
-	{
-		clickShare();
-	}
+    @Override
+    public void onCLickRight_SDTitleSimple(SDTitleItem v, int index) {
+        clickShare();
+    }
 
-	/**
-	 * 分享
-	 */
-	private void clickShare()
-	{
-		if (mActModel == null)
-		{
-			SDToast.showToast("未找到可分享内容");
-			return;
-		}
+    /**
+     * 分享
+     */
+    private void clickShare() {
+        if (mActModel == null) {
+            SDToast.showToast("未找到可分享内容");
+            return;
+        }
 
-		Store_infoModel infoModel = mActModel.getStore_info();
-		if (infoModel == null)
-		{
-			SDToast.showToast("未找到可分享内容");
-			return;
-		}
+        Store_infoModel infoModel = mActModel.getStore_info();
+        if (infoModel == null) {
+            SDToast.showToast("未找到可分享内容");
+            return;
+        }
 
-		String content = infoModel.getName() + infoModel.getShare_url();
-		String imageUrl = infoModel.getPreview();
-		String clickUrl = infoModel.getShare_url();
+        String content = infoModel.getName() + infoModel.getShare_url();
+        String imageUrl = infoModel.getPreview();
+        String clickUrl = infoModel.getShare_url();
 
-		UmengSocialManager.openShare("分享", content, imageUrl, clickUrl, this, null);
-	}
+        UmengSocialManager.openShare("分享", content, imageUrl, clickUrl, this, null);
+    }
 
-	private void getIntentData()
-	{
-		mId = getIntent().getIntExtra(EXTRA_MERCHANT_ID, -1);
-	}
+    private void getIntentData() {
+        mId = getIntent().getIntExtra(EXTRA_MERCHANT_ID, -1);
+    }
 
-	@Override
-	protected void onNewIntent(Intent intent)
-	{
-		setIntent(intent);
-		init();
-		super.onNewIntent(intent);
-	}
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        init();
+        super.onNewIntent(intent);
+    }
 
-	/**
-	 * 加载商家详细信息
-	 */
-	private void requestDetail()
-	{
-		RequestModel model = new RequestModel();
-		model.putCtl("store");
-		model.putUser();
-		model.put("data_id", mId);
-		SDRequestCallBack<StoreActModel> handler = new SDRequestCallBack<StoreActModel>()
-		{
+    /**
+     * 加载商家详细信息
+     */
+    private void requestDetail() {
+        RequestModel model = new RequestModel();
+        model.putCtl("store");
+        model.putUser();
+        model.put("data_id", mId);
+        SDRequestCallBack<StoreActModel> handler = new SDRequestCallBack<StoreActModel>() {
 
-			@Override
-			public void onStart()
-			{
-				SDDialogManager.showProgressDialog("请稍候...");
-			}
+            @Override
+            public void onStart() {
+                SDDialogManager.showProgressDialog("请稍候...");
+            }
 
-			@Override
-			public void onSuccess(ResponseInfo<String> responseInfo)
-			{
-				if (actModel.getStatus() == 1)
-				{
-					mActModel = actModel;
-					addFragments(actModel);
-				}
-			}
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                if (actModel.getStatus() == 1) {
+                    mActModel = actModel;
+                    addFragments(actModel);
+                }
+            }
 
-			@Override
-			public void onFinish()
-			{
-				SDDialogManager.dismissProgressDialog();
-				mScrollView.onRefreshComplete();
-			}
-		};
-		InterfaceServer.getInstance().requestInterface(model, handler);
-	}
+            @Override
+            public void onFinish() {
+                SDDialogManager.dismissProgressDialog();
+                mScrollView.onRefreshComplete();
+            }
+        };
+        InterfaceServer.getInstance().requestInterface(model, handler);
+    }
 
-	private void addFragments(StoreActModel model)
-	{
-		if (model == null)
-		{
-			return;
-		}
+    private void addFragments(StoreActModel model) {
+        if (model == null) {
+            return;
+        }
 
-		// 商家信息
-		mFragInfo = new StoreDetailInfoFragment();
-		mFragInfo.setmStoreModel(model);
-		getSDFragmentManager().replace(R.id.act_store_detail_fl_info, mFragInfo);
+        // 商家信息
+        mFragInfo = new StoreDetailInfoFragment();
+        mFragInfo.setmStoreModel(model);
+        getSDFragmentManager().replace(R.id.act_store_detail_fl_info, mFragInfo);
 
-		// 其他门店
-		mFragOtherSupplier = new StoreDetailOtherStoreFragment();
-		mFragOtherSupplier.setmStoreModel(model);
-		getSDFragmentManager().replace(R.id.act_store_detail_fl_other_merchant, mFragOtherSupplier);
+        // 其他门店
+        mFragOtherSupplier = new StoreDetailOtherStoreFragment();
+        mFragOtherSupplier.setmStoreModel(model);
+        getSDFragmentManager().replace(R.id.act_store_detail_fl_other_merchant, mFragOtherSupplier);
 
-		// 商家介绍
-		mFragBrief = new StoreDetailBriefFragment();
-		mFragBrief.setmStoreModel(model);
-		getSDFragmentManager().replace(R.id.act_store_detail_fl_brief, mFragBrief);
+        // 商家介绍
+        mFragBrief = new StoreDetailBriefFragment();
+        mFragBrief.setmStoreModel(model);
+        getSDFragmentManager().replace(R.id.act_store_detail_fl_brief, mFragBrief);
 
-		// 商家其他团购
-		mFragTuan = new StoreDetailTuanFragment();
-		mFragTuan.setmStoreModel(model);
-		getSDFragmentManager().replace(R.id.act_store_detail_fl_tuan, mFragTuan);
+        // 商家其他团购
+        mFragTuan = new StoreDetailTuanFragment();
+        mFragTuan.setmStoreModel(model);
+        getSDFragmentManager().replace(R.id.act_store_detail_fl_tuan, mFragTuan);
 
-		// 商家其他商品
-		mFragGoods = new StoreDetailGoodsFragment();
-		mFragGoods.setmStoreModel(model);
-		getSDFragmentManager().replace(R.id.act_store_detail_fl_goods, mFragGoods);
+        // 商家其他商品
+        mFragGoods = new StoreDetailGoodsFragment();
+        mFragGoods.setmStoreModel(model);
+        getSDFragmentManager().replace(R.id.act_store_detail_fl_goods, mFragGoods);
 
-		// 商家的优惠券
-		mFragYouhui = new StoreDetailYouhuiFragment();
-		mFragYouhui.setmStoreModel(model);
-		getSDFragmentManager().replace(R.id.act_store_detail_fl_youhui, mFragYouhui);
+        // 商家的优惠券
+        mFragYouhui = new StoreDetailYouhuiFragment();
+        mFragYouhui.setmStoreModel(model);
+        getSDFragmentManager().replace(R.id.act_store_detail_fl_youhui, mFragYouhui);
 
-		// 商家评价
-		mFragComment = new StoreDetailCommentFragment();
-		mFragComment.setmStoreModel(model);
-		getSDFragmentManager().replace(R.id.act_store_detail_fl_comment, mFragComment);
+        // 商家评价
+        mFragComment = new StoreDetailCommentFragment();
+        mFragComment.setmStoreModel(model);
+        getSDFragmentManager().replace(R.id.act_store_detail_fl_comment, mFragComment);
 
-	}
+    }
 
-	@Override
-	public void onEventMainThread(SDBaseEvent event)
-	{
-		super.onEventMainThread(event);
-		switch (EnumEventTag.valueOf(event.getTagInt()))
-		{
-		case COMMENT_SUCCESS:
-			setmIsNeedRefreshOnResume(true);
-			break;
+    @Override
+    public void onEventMainThread(SDBaseEvent event) {
+        super.onEventMainThread(event);
+        switch (EnumEventTag.valueOf(event.getTagInt())) {
+            case COMMENT_SUCCESS:
+                setmIsNeedRefreshOnResume(true);
+                break;
 
-		default:
-			break;
-		}
-	}
+            default:
+                break;
+        }
+    }
 
-	@Override
-	protected void onNeedRefreshOnResume()
-	{
-		requestDetail();
-		super.onNeedRefreshOnResume();
-	}
+    @Override
+    protected void onNeedRefreshOnResume() {
+        requestDetail();
+        super.onNeedRefreshOnResume();
+    }
 
 }

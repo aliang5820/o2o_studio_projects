@@ -127,100 +127,93 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="等级" />
 
-                    <TextView
-                        style="@style/MediaTableItemStyle"
-                        android:text="等级" />
+                <View
+                    android:layout_width="@dimen/base_stroke_1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stroke_deep" />
 
-                    <View
-                        android:layout_width="@dimen/base_stroke_1px"
-                        android:layout_height="match_parent"
-                        android:background="@color/stroke_deep" />
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="数量" />
 
-                    <TextView
-                        style="@style/MediaTableItemStyle"
-                        android:text="数量" />
-
-                </LinearLayout>
-
-                <View style="@style/H_LineStyle" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/MediaTableItemStyle"
-                        android:text="一级" />
-
-                    <View
-                        android:layout_width="@dimen/base_stroke_1px"
-                        android:layout_height="match_parent"
-                        android:background="@color/stroke_deep" />
-
-                    <TextView
-                        android:id="@+id/label3"
-                        style="@style/MediaTableItemStyle"
-                        tools:text="1" />
-
-                </LinearLayout>
-
-                <View style="@style/H_LineStyle" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/MediaTableItemStyle"
-                        android:text="二级" />
-
-                    <View
-                        android:layout_width="@dimen/base_stroke_1px"
-                        android:layout_height="match_parent"
-                        android:background="@color/stroke_deep" />
-
-                    <TextView
-                        android:id="@+id/label4"
-                        style="@style/MediaTableItemStyle"
-                        tools:text="2" />
-
-                </LinearLayout>
-
-                <View style="@style/H_LineStyle" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        style="@style/MediaTableItemStyle"
-                        android:text="三级" />
-
-                    <View
-                        android:layout_width="@dimen/base_stroke_1px"
-                        android:layout_height="match_parent"
-                        android:background="@color/stroke_deep" />
-
-                    <TextView
-                        android:id="@+id/label5"
-                        style="@style/MediaTableItemStyle"
-                        tools:text="3" />
-
-                </LinearLayout>
-
-                <View style="@style/H_LineStyle" />
             </LinearLayout>
+
+            <View style="@style/H_LineStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="金粉" />
+
+                <View
+                    android:layout_width="@dimen/base_stroke_1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stroke_deep" />
+
+                <TextView
+                    android:id="@+id/label3"
+                    style="@style/MediaTableItemStyle"
+                    tools:text="1" />
+
+            </LinearLayout>
+
+            <View style="@style/H_LineStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="银粉" />
+
+                <View
+                    android:layout_width="@dimen/base_stroke_1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stroke_deep" />
+
+                <TextView
+                    android:id="@+id/label4"
+                    style="@style/MediaTableItemStyle"
+                    tools:text="2" />
+
+            </LinearLayout>
+
+            <View style="@style/H_LineStyle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/MediaTableItemStyle"
+                    android:text="铜粉" />
+
+                <View
+                    android:layout_width="@dimen/base_stroke_1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/stroke_deep" />
+
+                <TextView
+                    android:id="@+id/label5"
+                    style="@style/MediaTableItemStyle"
+                    tools:text="3" />
+
+            </LinearLayout>
+
+            <View style="@style/H_LineStyle" />
 
             <LinearLayout
                 android:layout_width="match_parent"

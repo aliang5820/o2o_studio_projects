@@ -1,7 +1,5 @@
 package com.fanwe.fragment;
 
-import java.util.List;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,132 +17,114 @@ import com.fanwe.utils.SDTimerDown;
 import com.fanwe.utils.SDTimerDown.SDTimerDownListener;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
-public class TuanDetailDetailFragment extends TuanDetailBaseFragment
-{
-	@ViewInject(R.id.frag_tuan_detail_second_tv_goods_name)
-	private TextView mTvGoodsName;
+import java.util.List;
 
-	@ViewInject(R.id.frag_tuan_detail_second_tv_goods_detail)
-	private TextView mTvGoodsDetail;
+public class TuanDetailDetailFragment extends TuanDetailBaseFragment {
+    @ViewInject(R.id.frag_tuan_detail_second_tv_goods_name)
+    private TextView mTvGoodsName;
 
-	@ViewInject(R.id.frag_tuan_detail_second_tv_buy_count)
-	private TextView mTvBuyCount;
+    @ViewInject(R.id.frag_tuan_detail_second_tv_goods_detail)
+    private TextView mTvGoodsDetail;
 
-	@ViewInject(R.id.frag_tuan_detail_second_tv_time_down)
-	private TextView mTvTimeDown;
+    @ViewInject(R.id.frag_tuan_detail_second_tv_buy_count)
+    private TextView mTvBuyCount;
 
-	@ViewInject(R.id.frag_tuan_detail_second_ll_goods_support)
-	private FlowLayout mLlGoodsSupport;
+    @ViewInject(R.id.frag_tuan_detail_second_tv_time_down)
+    private TextView mTvTimeDown;
 
-	private SDTimerDown mCounter = new SDTimerDown();
+    @ViewInject(R.id.frag_tuan_detail_second_ll_goods_support)
+    private FlowLayout mLlGoodsSupport;
 
-	@Override
-	protected View onCreateContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-	{
-		return setContentView(R.layout.frag_tuan_detail_detail);
-	}
+    private SDTimerDown mCounter = new SDTimerDown();
 
-	@Override
-	protected void init()
-	{
-		bindData();
-	}
+    @Override
+    protected View onCreateContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return setContentView(R.layout.frag_tuan_detail_detail);
+    }
 
-	private void bindData()
-	{
-		if (!toggleFragmentView(mDealModel))
-		{
-			return;
-		}
-		// 商品名称
-		SDViewBinder.setTextView(mTvGoodsName, mDealModel.getSub_name());
+    @Override
+    protected void init() {
+        bindData();
+    }
 
-		// 商品描述
-		String brief = mDealModel.getBrief();
-		if (isEmpty(brief))
-		{
-			brief = mDealModel.getName();
-		}
-		SDViewBinder.setTextViewHtml(mTvGoodsDetail, brief);
-		// 商品是否支持随时退货，支持过期退货等信息
-		bindGoodsTag(mDealModel.getDeal_tags());
+    private void bindData() {
+        if (!toggleFragmentView(mDealModel)) {
+            return;
+        }
+        // 商品名称
+        SDViewBinder.setTextView(mTvGoodsName, mDealModel.getSub_name());
 
-		// 已售
-		mTvBuyCount.setText(SDResourcesUtil.getString(R.string.has_sold) + mDealModel.getBuy_count());
-		// 倒计时
-		int timeStatus = mDealModel.getTime_status();
-		if (timeStatus == 0)
-		{
-			mTvTimeDown.setText("未开始");
-		} else if (timeStatus == 2)
-		{
-			mTvTimeDown.setText("已过期");
-		} else if (timeStatus == 1) // 可以兑换或者购买
-		{
-			startCountDown(mDealModel.getLast_time());
-		}
-	}
+        // 商品描述
+        String brief = mDealModel.getBrief();
+        if (isEmpty(brief)) {
+            brief = mDealModel.getName();
+        }
+        SDViewBinder.setTextViewHtml(mTvGoodsDetail, brief);
+        // 商品是否支持随时退货，支持过期退货等信息
+        bindGoodsTag(mDealModel.getDeal_tags());
 
-	private void bindGoodsTag(List<Deal_tagsModel> listTags)
-	{
-		if (!SDCollectionUtil.isEmpty(listTags))
-		{
-			LayoutInflater inflater = getActivity().getLayoutInflater();
-			for (Deal_tagsModel model : listTags)
-			{
-				View viewTag = inflater.inflate(R.layout.item_goods_tag, null);
-				TextView tvName = (TextView) viewTag.findViewById(R.id.tv_name);
-				ImageView ivIcon = (ImageView) viewTag.findViewById(R.id.iv_icon);
+        // 已售
+        mTvBuyCount.setText(SDResourcesUtil.getString(R.string.has_sold) + mDealModel.getBuy_count());
+        // 倒计时
+        int timeStatus = mDealModel.getTime_status();
+        if (timeStatus == 0) {
+            mTvTimeDown.setText("未开始");
+        } else if (timeStatus == 2) {
+            mTvTimeDown.setText("已过期");
+        } else if (timeStatus == 1) // 可以兑换或者购买
+        {
+            startCountDown(mDealModel.getLast_time());
+        }
+    }
 
-				SDViewBinder.setTextView(tvName, model.getV());
-				ivIcon.setImageResource(model.getIcon());
+    private void bindGoodsTag(List<Deal_tagsModel> listTags) {
+        if (!SDCollectionUtil.isEmpty(listTags)) {
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            for (Deal_tagsModel model : listTags) {
+                View viewTag = inflater.inflate(R.layout.item_goods_tag, null);
+                TextView tvName = (TextView) viewTag.findViewById(R.id.tv_name);
+                ImageView ivIcon = (ImageView) viewTag.findViewById(R.id.iv_icon);
 
-				mLlGoodsSupport.addView(viewTag);
-			}
-		}
-	}
+                SDViewBinder.setTextView(tvName, model.getV());
+                ivIcon.setImageResource(model.getIcon());
 
-	private void startCountDown(long timeSecond)
-	{
-		if (timeSecond > 0)
-		{
-			mCounter.stopCount();
-			mCounter.startCount(mTvTimeDown, timeSecond, new SDTimerDownListener()
-			{
+                mLlGoodsSupport.addView(viewTag);
+            }
+        }
+    }
 
-				@Override
-				public void onTickFinish()
-				{
-				}
+    private void startCountDown(long timeSecond) {
+        if (timeSecond > 0) {
+            mCounter.stopCount();
+            mCounter.startCount(mTvTimeDown, timeSecond, new SDTimerDownListener() {
 
-				@Override
-				public void onTick()
-				{
+                @Override
+                public void onTickFinish() {
+                }
 
-				}
+                @Override
+                public void onTick() {
 
-				@Override
-				public void onStart()
-				{
+                }
 
-				}
-			});
-		}
-	}
+                @Override
+                public void onStart() {
 
-	@Override
-	public void onClick(View v)
-	{
-	}
+                }
+            });
+        }
+    }
 
-	@Override
-	public void onDestroy()
-	{
-		super.onDestroy();
-		if (mCounter != null)
-		{
-			mCounter.stopCount();
-		}
-	}
+    @Override
+    public void onClick(View v) {
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mCounter != null) {
+            mCounter.stopCount();
+        }
+    }
 
 }

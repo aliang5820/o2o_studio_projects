@@ -109,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
+                android:visibility="invisible"
                 android:text="@string/has_sold"
                 android:textSize="12sp" />
 
@@ -117,6 +118,7 @@
                 style="@style/text_item_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
