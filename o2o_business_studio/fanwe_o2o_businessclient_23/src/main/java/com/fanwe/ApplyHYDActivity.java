@@ -665,12 +665,12 @@ public class ApplyHYDActivity extends TitleBaseActivity {
                         case 0:
                             break;
                         case 1:
-                            /*Intent intent = new Intent(mActivity, ApplyPayActivity.class);
+                            Intent intent = new Intent(mActivity, ApplyPayActivity.class);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HYD);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
                             intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
                             startActivity(intent);
-                            finish();*/
+                            //finish();
                             /*requestLoginInterface();*/
                             picMap.clear();
                             picUrlMap.clear();

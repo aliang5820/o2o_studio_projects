@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.fanwe.ApplyHHRActivity;
+import com.fanwe.ApplyPayActivity;
 import com.fanwe.LoginActivity;
 import com.fanwe.application.App;
 import com.fanwe.businessclient.R;
@@ -648,12 +649,12 @@ public class ApplyHHR_Fragment extends BaseFragment {
                         case 0:
                             break;
                         case 1:
-                            /*Intent intent = new Intent(mActivity, ApplyPayActivity.class);
+                            Intent intent = new Intent(getContext(), ApplyPayActivity.class);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HYD);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
                             intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
                             startActivity(intent);
-                            finish();*/
+                            //finish();
                             /*requestLoginInterface();*/
                             picMap.clear();
                             picUrlMap.clear();

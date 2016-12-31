@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fanwe.ApplyHHRActivity;
+import com.fanwe.ApplyPayActivity;
 import com.fanwe.LoginActivity;
 import com.fanwe.businessclient.R;
 import com.fanwe.common.ImageLoaderManager;
@@ -423,12 +424,12 @@ public class ApplyPersonHHR_Fragment extends BaseFragment {
                         case 0:
                             break;
                         case 1:
-                            /*Intent intent = new Intent(getContext(), ApplyPayActivity.class);
+                            Intent intent = new Intent(getContext(), ApplyPayActivity.class);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HYD);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
                             intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
                             startActivity(intent);
-                            finish();*/
+                            //finish();
                             //requestLoginInterface();
                             picMap.clear();
                             picUrlMap.clear();

@@ -55,7 +55,7 @@ public class ApplyPayActivity extends TitleBaseActivity {
     }
 
     private void initData() {
-        /*orderId = getIntent().getLongExtra(Constant.ExtraConstant.EXTRA_ID, -1);
+        orderId = getIntent().getLongExtra(Constant.ExtraConstant.EXTRA_ID, -1);
         orderIdView.setText(getString(R.string.apply_order_id, orderId));
 
         price = getIntent().getLongExtra(Constant.ExtraConstant.EXTRA_MODEL, -1);
@@ -66,7 +66,7 @@ public class ApplyPayActivity extends TitleBaseActivity {
             pay_desc.setText("省点网合伙人");
         } else {
             pay_desc.setText("省点网会员店");
-        }*/
+        }
     }
 
     /**
@@ -93,7 +93,7 @@ public class ApplyPayActivity extends TitleBaseActivity {
 
     //根据选择支付类型，获取订单
     public void onPay(View view) {
-        /*switch (payRadioGroup.getCheckedRadioButtonId()) {
+        switch (payRadioGroup.getCheckedRadioButtonId()) {
             case R.id.wxPay:
                 //微信支付
                 requestOrder(Constant.Pay.CHANNEL_WECHAT);
@@ -102,7 +102,7 @@ public class ApplyPayActivity extends TitleBaseActivity {
                 //支付宝支付
                 requestOrder(Constant.Pay.CHANNEL_ALIPAY);
                 break;
-        }*/
+        }
         // TODO 目前默认支付成功，进入首页
         SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
         startActivity(new Intent(mActivity, MainActivity.class));
@@ -134,7 +134,7 @@ public class ApplyPayActivity extends TitleBaseActivity {
 
     /**
      * 请求订单接口
-     *//*
+     */
     private void requestOrder(String payType) {
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_pay", "orderPay");
@@ -148,7 +148,7 @@ public class ApplyPayActivity extends TitleBaseActivity {
             public void onSuccess(ApplyPayModelCtlActModel actModel) {
                 if (actModel.getStatus() > 0) {
                     //请求成功，进行 支付
-                    Pingpp.createPayment(mActivity, actModel.getCharge());
+                    //Pingpp.createPayment(mActivity, actModel.getCharge());
                 }
             }
 
@@ -166,7 +166,7 @@ public class ApplyPayActivity extends TitleBaseActivity {
             public void onFailure(HttpException error, String msg) {
             }
         });
-    }*/
+    }
 
     class PaymentRequest {
         String channel;
