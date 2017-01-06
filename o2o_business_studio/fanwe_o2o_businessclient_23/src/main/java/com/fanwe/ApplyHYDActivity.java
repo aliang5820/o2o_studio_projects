@@ -665,6 +665,9 @@ public class ApplyHYDActivity extends TitleBaseActivity {
                         case 0:
                             break;
                         case 1:
+                            picMap.clear();
+                            picUrlMap.clear();
+                            SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
                             Intent intent = new Intent(mActivity, ApplyPayActivity.class);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HYD);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
@@ -672,10 +675,6 @@ public class ApplyHYDActivity extends TitleBaseActivity {
                             startActivity(intent);
                             //finish();
                             /*requestLoginInterface();*/
-                            picMap.clear();
-                            picUrlMap.clear();
-                            SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
-                            startActivity(new Intent(mActivity, LoginActivity.class));
                             break;
                     }
                 }

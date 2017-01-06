@@ -649,6 +649,9 @@ public class ApplyHHR_Fragment extends BaseFragment {
                         case 0:
                             break;
                         case 1:
+                            picMap.clear();
+                            picUrlMap.clear();
+                            SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
                             Intent intent = new Intent(getContext(), ApplyPayActivity.class);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HYD);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
@@ -656,10 +659,6 @@ public class ApplyHHR_Fragment extends BaseFragment {
                             startActivity(intent);
                             //finish();
                             /*requestLoginInterface();*/
-                            picMap.clear();
-                            picUrlMap.clear();
-                            SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
-                            startActivity(new Intent(getContext(), LoginActivity.class));
                             break;
                     }
                 }

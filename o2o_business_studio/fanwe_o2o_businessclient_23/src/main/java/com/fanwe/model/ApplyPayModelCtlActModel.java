@@ -10,4 +10,5 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class ApplyPayModelCtlActModel extends BaseCtlActModel {
     private String charge;
+    private String wxKey;
 }

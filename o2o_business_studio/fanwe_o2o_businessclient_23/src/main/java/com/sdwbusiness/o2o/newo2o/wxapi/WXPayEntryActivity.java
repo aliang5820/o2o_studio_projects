@@ -1,4 +1,4 @@
-package com.fanwe.o2o.newo2o.wxapi;
+package com.sdwbusiness.o2o.newo2o.wxapi;
 
 import android.app.Activity;
 import android.content.Intent;

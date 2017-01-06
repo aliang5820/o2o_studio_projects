@@ -18,9 +18,11 @@ import com.fanwe.http.listener.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
 import com.fanwe.model.ApplyPayModelCtlActModel;
 import com.fanwe.model.RequestModel;
+import com.fanwe.wxapp.SDWxappPay;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.sunday.eventbus.SDEventManager;
+import com.tencent.mm.sdk.modelpay.PayReq;
 
 /**
  * Created by Edison on 2016/7/28.
@@ -91,7 +93,7 @@ public class ApplyPayActivity extends TitleBaseActivity {
         }
     }*/
 
-    //根据选择支付类型，获取订单
+    //根据选择支付类型，获取订单，暂时只支持微信支付
     public void onPay(View view) {
         switch (payRadioGroup.getCheckedRadioButtonId()) {
             case R.id.wxPay:
@@ -137,7 +139,7 @@ public class ApplyPayActivity extends TitleBaseActivity {
      */
     private void requestOrder(String payType) {
         RequestModel model = new RequestModel();
-        model.putCtlAct("biz_pay", "orderPay");
+        model.putCtlAct("biz_member", "ApplyMemberOrderPay");
         model.put("supplier_id", App.getApp().getmLocalUser().getUser_id());
         model.put("order_id", orderId);
         model.put("payType", payType);
@@ -148,7 +150,18 @@ public class ApplyPayActivity extends TitleBaseActivity {
             public void onSuccess(ApplyPayModelCtlActModel actModel) {
                 if (actModel.getStatus() > 0) {
                     //请求成功，进行 支付
-                    //Pingpp.createPayment(mActivity, actModel.getCharge());
+                    SDWxappPay sdWxappPay = new SDWxappPay(actModel.getWxKey());
+
+                    //TODO 发起微信请求
+                    PayReq req = new PayReq();
+                    /*req.appId = appId;
+                    req.partnerId = partnerId;
+                    req.prepayId = prepayId;
+                    req.nonceStr = nonceStr;
+                    req.timeStamp = timeStamp;
+                    req.packageValue = packageValue;
+                    req.sign = sign;*/
+                    sdWxappPay.pay(req);
                 }
             }
 
@@ -166,15 +179,5 @@ public class ApplyPayActivity extends TitleBaseActivity {
             public void onFailure(HttpException error, String msg) {
             }
         });
-    }
-
-    class PaymentRequest {
-        String channel;
-        int amount;
-
-        public PaymentRequest(String channel, int amount) {
-            this.channel = channel;
-            this.amount = amount;
-        }
     }
 }
