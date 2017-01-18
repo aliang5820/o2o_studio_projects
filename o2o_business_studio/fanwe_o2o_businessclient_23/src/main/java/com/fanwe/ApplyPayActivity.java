@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fanwe.application.App;
 import com.fanwe.businessclient.R;
@@ -16,6 +17,9 @@ import com.fanwe.event.EnumEventTag;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.listener.SDRequestCallBack;
 import com.fanwe.library.dialog.SDDialogManager;
+import com.fanwe.library.utils.SDToast;
+import com.fanwe.model.ApplyPayConfigModel;
+import com.fanwe.model.ApplyPayModel;
 import com.fanwe.model.ApplyPayModelCtlActModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.wxapp.SDWxappPay;
@@ -23,6 +27,8 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.sunday.eventbus.SDEventManager;
 import com.tencent.mm.sdk.modelpay.PayReq;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 /**
  * Created by Edison on 2016/7/28.
@@ -43,6 +49,7 @@ public class ApplyPayActivity extends TitleBaseActivity {
 
     private long orderId;
     private double price;
+    private String submit_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +65,10 @@ public class ApplyPayActivity extends TitleBaseActivity {
 
     private void initData() {
         orderId = getIntent().getLongExtra(Constant.ExtraConstant.EXTRA_ID, -1);
+        submit_id = getIntent().getStringExtra(Constant.ExtraConstant.EXTRA_OTHER_ID);
         orderIdView.setText(getString(R.string.apply_order_id, orderId));
 
-        price = getIntent().getLongExtra(Constant.ExtraConstant.EXTRA_MODEL, -1);
+        price = getIntent().getDoubleExtra(Constant.ExtraConstant.EXTRA_MODEL, -1);
         pay_money.setText("￥" + price);
 
         int applyType = getIntent().getIntExtra(Constant.ExtraConstant.EXTRA_TYPE, -1);
@@ -106,8 +114,8 @@ public class ApplyPayActivity extends TitleBaseActivity {
                 break;
         }
         // TODO 目前默认支付成功，进入首页
-        SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
-        startActivity(new Intent(mActivity, MainActivity.class));
+        /*SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
+        startActivity(new Intent(mActivity, MainActivity.class));*/
     }
 
     //显示支付信息
@@ -137,12 +145,12 @@ public class ApplyPayActivity extends TitleBaseActivity {
     /**
      * 请求订单接口
      */
-    private void requestOrder(String payType) {
+    private void requestOrder(int payType) {
         RequestModel model = new RequestModel();
         model.putCtlAct("biz_member", "ApplyMemberOrderPay");
-        model.put("supplier_id", App.getApp().getmLocalUser().getUser_id());
+        model.put("supplier_id", submit_id);
         model.put("order_id", orderId);
-        model.put("payType", payType);
+        model.put("type", payType);
 
         InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<ApplyPayModelCtlActModel>() {
 
@@ -150,18 +158,25 @@ public class ApplyPayActivity extends TitleBaseActivity {
             public void onSuccess(ApplyPayModelCtlActModel actModel) {
                 if (actModel.getStatus() > 0) {
                     //请求成功，进行 支付
-                    SDWxappPay sdWxappPay = new SDWxappPay(actModel.getWxKey());
-
-                    //TODO 发起微信请求
-                    PayReq req = new PayReq();
-                    /*req.appId = appId;
-                    req.partnerId = partnerId;
-                    req.prepayId = prepayId;
-                    req.nonceStr = nonceStr;
-                    req.timeStamp = timeStamp;
-                    req.packageValue = packageValue;
-                    req.sign = sign;*/
-                    sdWxappPay.pay(req);
+                    ApplyPayConfigModel payModel = actModel.getPayment_code().getConfig();
+                    SDWxappPay.mAppId = payModel.getAppid();
+                    final IWXAPI msgApi = WXAPIFactory.createWXAPI(mActivity, SDWxappPay.mAppId, true);
+                    // 将该app注册到微信
+                    boolean isRegister = msgApi.registerApp(SDWxappPay.mAppId);
+                    if(isRegister) {
+                        //发起微信请求
+                        PayReq req = new PayReq();
+                        req.appId = payModel.getAppid();
+                        req.partnerId = payModel.getPartnerid();
+                        req.prepayId = payModel.getPrepayid();
+                        req.nonceStr = payModel.getNoncestr();
+                        req.timeStamp = payModel.getTimestamp();
+                        req.packageValue = payModel.getPackagevalue();
+                        req.sign = payModel.getSign();
+                        msgApi.sendReq(req);
+                    } else {
+                        SDToast.showToast("微信支付注册失败");
+                    }
                 }
             }
 

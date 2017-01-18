@@ -11,8 +11,8 @@ android {
         manifestPlaceholders = [CHANNEL_VALUE: "default"]
         applicationId "com.sdwbusiness.o2o.newo2o"
         minSdkVersion 14
-        versionCode 2016121323
-        versionName "2016121323"
+        versionCode 2017011823
+        versionName "2017011823"
     }
 
     signingConfigs {

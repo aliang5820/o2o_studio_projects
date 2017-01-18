@@ -17,6 +17,7 @@ import com.fanwe.model.LocalUserModel;
 import com.fanwe.model.RequestModel;
 import com.fanwe.model.WalletBindResultModel;
 import com.lidroid.xutils.exception.HttpException;
+import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.modelmsg.SendAuth;
@@ -43,7 +44,9 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onResp(BaseResp resp) {
-        if (resp instanceof SendAuth.Resp) {
+        if(resp.getType()== ConstantsAPI.COMMAND_PAY_BY_WX){
+
+        } else if (resp instanceof SendAuth.Resp) {
             SendAuth.Resp newResp = (SendAuth.Resp) resp;
             //获取微信传回的code
             String code = newResp.code;

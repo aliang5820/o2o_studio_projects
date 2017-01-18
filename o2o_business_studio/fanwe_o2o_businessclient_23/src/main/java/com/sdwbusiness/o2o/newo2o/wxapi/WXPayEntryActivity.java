@@ -4,13 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.fanwe.LoginActivity;
+import com.fanwe.event.EnumEventTag;
 import com.fanwe.library.utils.SDToast;
 import com.fanwe.wxapp.SDWxappPay;
+import com.sunday.eventbus.SDEventManager;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
@@ -23,7 +27,9 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
     }
 
     private void init() {
-        mApi = SDWxappPay.getInstance().getWXAPI();
+        mApi = WXAPIFactory.createWXAPI(this, SDWxappPay.mAppId);
+        mApi.registerApp(SDWxappPay.mAppId);
+        // 将该app注册到微信
         mApi.handleIntent(getIntent(), this);
     }
 
@@ -60,6 +66,9 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
                 }
                 if (content != null) {
                     SDToast.showToast(content);
+                    SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
+                    startActivity(new Intent(WXPayEntryActivity.this, LoginActivity.class));
+                    finish();
                 }
                 break;
 

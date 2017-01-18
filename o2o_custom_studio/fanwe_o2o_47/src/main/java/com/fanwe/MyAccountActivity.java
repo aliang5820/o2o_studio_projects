@@ -102,7 +102,10 @@ public class MyAccountActivity extends BaseActivity {
     @ViewInject(R.id.ll_third_bind)
     private LinearLayout mLl_third_bind; // 第三方绑定
 
-    @ViewInject(R.id.tv_bind_wx)
+    @ViewInject(R.id.ll_update_account)
+    private LinearLayout mLl_update_account; // 账号升级
+
+   @ViewInject(R.id.tv_bind_wx)
     private TextView tv_bind_wx; // 绑定微信
     @ViewInject(R.id.ll_bind_wx)
     private View mLl_bind_wx; // 绑定微信
@@ -241,6 +244,7 @@ public class MyAccountActivity extends BaseActivity {
         mBtn_logout.setOnClickListener(this);
         mLl_withdraw.setOnClickListener(this);
         mLl_charge.setOnClickListener(this);
+        mLl_update_account.setOnClickListener(this);
     }
 
     private void initTitle() {
@@ -294,7 +298,37 @@ public class MyAccountActivity extends BaseActivity {
                 Intent intent = new Intent(getApplicationContext(), WalletPayPasswordSet1Activity.class);
                 startActivity(intent);
             }
+        } else if(v == mLl_update_account) {
+            //账号升级
+            clickUpdateAccount(v);
         }
+    }
+
+    private void clickUpdateAccount(View v) {
+        //账号升级
+        LocalUserModel localUserModel = LocalUserModelDao.queryModel();
+        RequestModel model = new RequestModel();
+        model.putCtl("uc_home");
+        model.putAct("ApplyMember");
+        model.put("user_id", localUserModel.getUser_id());
+        SDRequestCallBack<BaseActModel> handler = new SDRequestCallBack<BaseActModel>() {
+
+            @Override
+            public void onStart() {
+                SDDialogManager.showProgressDialog("请稍候...");
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                SDToast.showToast("账号升级申请成功，请登陆商户端完善资料");
+            }
+
+            @Override
+            public void onFinish() {
+                SDDialogManager.dismissProgressDialog();
+            }
+        };
+        InterfaceServer.getInstance().requestInterface(model, handler);
     }
 
     private void clickCharge(View v) {

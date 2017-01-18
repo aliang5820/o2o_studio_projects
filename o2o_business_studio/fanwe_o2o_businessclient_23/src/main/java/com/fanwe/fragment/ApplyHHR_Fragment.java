@@ -655,6 +655,7 @@ public class ApplyHHR_Fragment extends BaseFragment {
                             Intent intent = new Intent(getContext(), ApplyPayActivity.class);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HYD);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
+                            intent.putExtra(Constant.ExtraConstant.EXTRA_OTHER_ID, ((ApplyHHRActivity) getActivity()).submit_id);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
                             startActivity(intent);
                             //finish();

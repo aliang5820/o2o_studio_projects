@@ -671,6 +671,7 @@ public class ApplyHYDActivity extends TitleBaseActivity {
                             Intent intent = new Intent(mActivity, ApplyPayActivity.class);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HYD);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
+                            intent.putExtra(Constant.ExtraConstant.EXTRA_OTHER_ID, submit_id);
                             intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
                             startActivity(intent);
                             //finish();

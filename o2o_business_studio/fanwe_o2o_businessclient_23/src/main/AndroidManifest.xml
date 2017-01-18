@@ -315,6 +315,11 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.NoDisplay" />
+        <activity
+            android:name="com.sdwbusiness.o2o.newo2o.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoDisplay" />
         <!-- 友盟end -->
     </application>
 

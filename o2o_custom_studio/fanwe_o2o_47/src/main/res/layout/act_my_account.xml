@@ -37,6 +37,53 @@
                 android:hint="请输入用户名"
                 android:textSize="16sp" />
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_update_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_white_gray_stroke_bot"
+            android:gravity="center_vertical"
+            android:minHeight="50dp"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <ImageView
+                android:layout_width="@dimen/width_set_item_icon"
+                android:layout_height="@dimen/width_set_item_icon"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_password_register" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="升级成为合伙人或会员店"
+                android:textColor="@color/gray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:textColor="@color/gray"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击升级"
+                android:textColor="@color/gray"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:layout_width="@dimen/width_set_item_icon"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/arrow_right" />
+        </LinearLayout>
         <!-- email -->
 
         <LinearLayout

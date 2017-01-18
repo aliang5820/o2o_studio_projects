@@ -31,6 +31,7 @@ public class Constant {
 
     public static final class ExtraConstant {
         public static final String EXTRA_ID = "extra_id";
+        public static final String EXTRA_OTHER_ID = "extra_other_id";
         public static final String EXTRA_MODEL = "extra_model";
         public static final String EXTRA_OTHER_MODEL = "extra_model";
         public static final String EXTRA_TYPE = "extra_type";
@@ -59,10 +60,10 @@ public class Constant {
         /**
          * 微信支付渠道
          */
-        public static final String CHANNEL_WECHAT = "wx";
+        public static final int CHANNEL_WECHAT = 1;
         /**
          * 支付支付渠道
          */
-        public static final String CHANNEL_ALIPAY = "alipay";
+        public static final int CHANNEL_ALIPAY = 2;
     }
 }
