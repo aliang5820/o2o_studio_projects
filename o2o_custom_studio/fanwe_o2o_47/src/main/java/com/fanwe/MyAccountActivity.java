@@ -25,6 +25,7 @@ import com.fanwe.library.title.SDTitleItem;
 import com.fanwe.library.utils.SDOtherUtil;
 import com.fanwe.library.utils.SDToast;
 import com.fanwe.library.utils.SDViewUtil;
+import com.fanwe.model.AccountUpdateActModel;
 import com.fanwe.model.BaseActModel;
 import com.fanwe.model.Init_indexActModel;
 import com.fanwe.model.LocalUserModel;
@@ -311,7 +312,7 @@ public class MyAccountActivity extends BaseActivity {
         model.putCtl("uc_home");
         model.putAct("ApplyMember");
         model.put("user_id", localUserModel.getUser_id());
-        SDRequestCallBack<BaseActModel> handler = new SDRequestCallBack<BaseActModel>() {
+        SDRequestCallBack<AccountUpdateActModel> handler = new SDRequestCallBack<AccountUpdateActModel>() {
 
             @Override
             public void onStart() {
@@ -319,8 +320,10 @@ public class MyAccountActivity extends BaseActivity {
             }
 
             @Override
-            public void onSuccess(ResponseInfo<String> responseInfo) {
-                SDToast.showToast("账号升级申请成功，请登陆商户端完善资料");
+            public void onSuccess(AccountUpdateActModel actModel) {
+                if(actModel != null) {
+                    SDToast.showToast(actModel.getInfo());
+                }
             }
 
             @Override

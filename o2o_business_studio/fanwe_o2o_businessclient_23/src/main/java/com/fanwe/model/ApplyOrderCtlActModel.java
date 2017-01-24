@@ -11,4 +11,5 @@ import lombok.EqualsAndHashCode;
 public class ApplyOrderCtlActModel extends BaseCtlActModel {
     private long orderId;
     private double price;
+    private int pay_status;
 }

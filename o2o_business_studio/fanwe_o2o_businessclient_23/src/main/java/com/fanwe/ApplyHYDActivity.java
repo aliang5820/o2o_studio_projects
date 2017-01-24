@@ -668,12 +668,18 @@ public class ApplyHYDActivity extends TitleBaseActivity {
                             picMap.clear();
                             picUrlMap.clear();
                             SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
-                            Intent intent = new Intent(mActivity, ApplyPayActivity.class);
-                            intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HYD);
-                            intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
-                            intent.putExtra(Constant.ExtraConstant.EXTRA_OTHER_ID, submit_id);
-                            intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
-                            startActivity(intent);
+                            if(actModel.getPay_status() == 0) {
+                                Intent intent = new Intent(mActivity, ApplyPayActivity.class);
+                                intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HYD);
+                                intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
+                                intent.putExtra(Constant.ExtraConstant.EXTRA_OTHER_ID, submit_id);
+                                intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
+                                startActivity(intent);
+                            } else {
+                                SDToast.showToast("已重新提交审核，请耐心等待");
+                                Intent intent = new Intent(mActivity, LoginActivity.class);
+                                startActivity(intent);
+                            }
                             //finish();
                             /*requestLoginInterface();*/
                             break;

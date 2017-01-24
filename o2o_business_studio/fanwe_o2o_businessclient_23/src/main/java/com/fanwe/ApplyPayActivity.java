@@ -73,9 +73,9 @@ public class ApplyPayActivity extends TitleBaseActivity {
 
         int applyType = getIntent().getIntExtra(Constant.ExtraConstant.EXTRA_TYPE, -1);
         if (applyType == Constant.Apply.HHR) {
-            pay_desc.setText("省点网合伙人");
+            pay_desc.setText("省点云购合伙人");
         } else {
-            pay_desc.setText("省点网会员店");
+            pay_desc.setText("省点云购会员店");
         }
     }
 
