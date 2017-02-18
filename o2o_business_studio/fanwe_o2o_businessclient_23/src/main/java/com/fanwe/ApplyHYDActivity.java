@@ -668,10 +668,11 @@ public class ApplyHYDActivity extends TitleBaseActivity {
                             picMap.clear();
                             picUrlMap.clear();
                             SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
-                            if(actModel.getPay_status() == 0) {
+                            if(actModel.getIs_pay() == 0) {
                                 Intent intent = new Intent(mActivity, ApplyPayActivity.class);
                                 intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HYD);
                                 intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
+                                intent.putExtra(Constant.ExtraConstant.EXTRA_MORE, actModel.getOrder_sn());
                                 intent.putExtra(Constant.ExtraConstant.EXTRA_OTHER_ID, submit_id);
                                 intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
                                 startActivity(intent);

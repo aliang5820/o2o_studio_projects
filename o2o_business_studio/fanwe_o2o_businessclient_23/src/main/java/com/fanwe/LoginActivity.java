@@ -16,8 +16,10 @@ import com.fanwe.constant.Constant;
 import com.fanwe.http.InterfaceServer;
 import com.fanwe.http.listener.SDRequestCallBack;
 import com.fanwe.library.customview.ClearEditText;
+import com.fanwe.library.dialog.SDDialogManager;
 import com.fanwe.library.utils.SDViewBinder;
 import com.fanwe.model.AccountInfoModel;
+import com.fanwe.model.ApplyInfoModel;
 import com.fanwe.model.ApplyResultModel;
 import com.fanwe.model.BizUserCtlDoLoginActModel;
 import com.fanwe.model.LocalUserModel;
@@ -126,9 +128,14 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
                         case 0:
                             if (actModel.getCheck_info() != null) {
                                 ApplyResultModel applyResultModel = actModel.getCheck_info();
-                                Intent intent = new Intent(mActivity, ApplyResultActivity.class);
-                                intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, applyResultModel);
-                                startActivity(intent);
+                                if(applyResultModel.getIs_pay() == 0) {
+                                    //未支付入住费用,再次编辑
+                                    requestInfo(applyResultModel);
+                                } else {
+                                    Intent intent = new Intent(mActivity, ApplyResultActivity.class);
+                                    intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, applyResultModel);
+                                    startActivity(intent);
+                                }
                             }
                             break;
                         case 1:
@@ -173,6 +180,55 @@ public class LoginActivity extends TitleBaseActivity implements OnClickListener 
         }
     }
 
+    //没有支付的账户，需要再次编辑，获取数据
+    private void requestInfo(final ApplyResultModel resultModel) {
+        RequestModel model = new RequestModel();
+        model.putCtlAct("biz_member", "get_supplier_info");
+        model.put("supplier_id", resultModel.getSubmit_id());//商户的id
+
+        InterfaceServer.getInstance().requestInterface(model, new SDRequestCallBack<ApplyInfoModel>() {
+
+            @Override
+            public void onFinish() {
+                SDDialogManager.dismissProgressDialog();
+            }
+
+            @Override
+            public void onSuccess(ApplyInfoModel actModel) {
+                SDDialogManager.dismissProgressDialog();
+                actModel.setSubmit_id(resultModel.getSubmit_id());
+                if (!SDInterfaceUtil.dealactModel(actModel, null) && actModel.getStatus() == 1) {
+                    //0 普通 ，1 会员店 ，2 商户合伙人，3个人合伙人
+                    Intent intent;
+                    switch (resultModel.getType()) {
+                        case 1:
+                            intent = new Intent(mActivity, ApplyHYDActivity.class);
+                            intent.putExtra(Constant.ExtraConstant.EXTRA_OTHER_MODEL, actModel);
+                            intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.EDIT_HYD);
+                            startActivity(intent);
+                            break;
+                        case 2:
+                            intent = new Intent(mActivity, ApplyHHRActivity.class);
+                            intent.putExtra(Constant.ExtraConstant.EXTRA_OTHER_MODEL, actModel);
+                            intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.EDIT_COMPANY_HHR);
+                            startActivity(intent);
+                            break;
+                        case 3:
+                            intent = new Intent(mActivity, ApplyHHRActivity.class);
+                            intent.putExtra(Constant.ExtraConstant.EXTRA_OTHER_MODEL, actModel);
+                            intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.EDIT_PERSON_HHR);
+                            startActivity(intent);
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onStart() {
+                SDDialogManager.showProgressDialog("正在获取数据，请稍候...");
+            }
+        });
+    }
 
     /*TODO
     * 彩蛋，删除账户

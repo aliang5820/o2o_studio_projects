@@ -30,6 +30,7 @@ public class Constant {
     }
 
     public static final class ExtraConstant {
+        public static final String EXTRA_MORE = "extra_more";
         public static final String EXTRA_ID = "extra_id";
         public static final String EXTRA_OTHER_ID = "extra_other_id";
         public static final String EXTRA_MODEL = "extra_model";
@@ -42,7 +43,10 @@ public class Constant {
     }
 
     public static final class Apply {
-        public static final int HHR = 0;//合伙人
+        public static final int HHR_GR = -1;//个人合伙人
+        public static final int HHR_QY = -2;//个人合伙人
+
+        public static final int HHR = 0;//企业合伙人
         public static final int HYD = 1;//会员店
 
         public static final int EDIT_COMPANY_HHR = 10;//企业合伙人

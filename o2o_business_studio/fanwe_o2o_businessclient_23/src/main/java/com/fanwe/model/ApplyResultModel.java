@@ -20,4 +20,5 @@ public class ApplyResultModel implements Serializable {
     private int check_status;//状态
     private String supplier_id;
     private String submit_id;
+    private int is_pay;//是否已经支付申请费用
 }

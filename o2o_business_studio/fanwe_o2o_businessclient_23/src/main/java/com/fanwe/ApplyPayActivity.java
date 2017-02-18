@@ -65,16 +65,19 @@ public class ApplyPayActivity extends TitleBaseActivity {
 
     private void initData() {
         orderId = getIntent().getLongExtra(Constant.ExtraConstant.EXTRA_ID, -1);
+        String orderSn = getIntent().getStringExtra(Constant.ExtraConstant.EXTRA_MORE);
         submit_id = getIntent().getStringExtra(Constant.ExtraConstant.EXTRA_OTHER_ID);
-        orderIdView.setText(getString(R.string.apply_order_id, orderId));
+        orderIdView.setText(getString(R.string.apply_order_id, orderSn));
 
         price = getIntent().getDoubleExtra(Constant.ExtraConstant.EXTRA_MODEL, -1);
         pay_money.setText("￥" + price);
 
         int applyType = getIntent().getIntExtra(Constant.ExtraConstant.EXTRA_TYPE, -1);
-        if (applyType == Constant.Apply.HHR) {
-            pay_desc.setText("省点云购合伙人");
-        } else {
+        if (applyType == Constant.Apply.HHR_QY) {
+            pay_desc.setText("省点云购企业合伙人");
+        } else if(applyType == Constant.Apply.HHR_GR) {
+            pay_desc.setText("省点云购个人合伙人");
+        }else {
             pay_desc.setText("省点云购会员店");
         }
     }

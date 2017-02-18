@@ -3,6 +3,7 @@ package com.fanwe;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.fanwe.app.App;
 import com.fanwe.constant.Constant.TitleType;
 import com.fanwe.customview.SDStickyScrollView;
 import com.fanwe.event.EnumEventTag;
@@ -21,6 +22,7 @@ import com.fanwe.library.title.SDTitleItem;
 import com.fanwe.library.utils.SDResourcesUtil;
 import com.fanwe.library.utils.SDToast;
 import com.fanwe.model.RequestModel;
+import com.fanwe.model.RoundPhotoActModel;
 import com.fanwe.model.StoreActModel;
 import com.fanwe.model.Store_infoModel;
 import com.fanwe.o2o.newo2o.R;
@@ -99,13 +101,19 @@ public class StoreDetailActivity extends BaseActivity {
         mTitle.setMiddleTextTop(SDResourcesUtil.getString(R.string.store_detail));
 
         //屏蔽分享
-        //mTitle.initRightItem(1);
+        mTitle.initRightItem(1);
+        mTitle.getItemRight(0).setTextBot("全景照片");
         //mTitle.getItemRight(0).setImageLeft(R.drawable.ic_tuan_detail_share);
     }
 
     @Override
     public void onCLickRight_SDTitleSimple(SDTitleItem v, int index) {
-        clickShare();
+        //clickShare();
+        clickRoundPhoto();
+    }
+
+    private void clickRoundPhoto() {
+        requestRoundPhotoUrl();
     }
 
     /**
@@ -139,6 +147,43 @@ public class StoreDetailActivity extends BaseActivity {
         setIntent(intent);
         init();
         super.onNewIntent(intent);
+    }
+
+    /**
+     * 获取全景照片地址
+     */
+    private void requestRoundPhotoUrl() {
+        if(mActModel == null) {
+            SDToast.showToast("没有门店信息，无法获取全景照片");
+            return;
+        }
+        RequestModel model = new RequestModel();
+        model.putCtl("biz_member");
+        model.putAct("get_supplier_map");
+        model.put("location_id", mActModel.getStore_info().getId());
+        SDRequestCallBack<RoundPhotoActModel> handler = new SDRequestCallBack<RoundPhotoActModel>() {
+
+            @Override
+            public void onStart() {
+                SDDialogManager.showProgressDialog("请稍候...");
+            }
+
+            @Override
+            public void onSuccess(RoundPhotoActModel responseInfo) {
+                if (actModel.getStatus() == 1) {
+                    SDDialogManager.dismissProgressDialog();
+                    Intent intent = new Intent(App.getApplication(), AppWebViewActivity.class);
+                    intent.putExtra(AppWebViewActivity.EXTRA_URL, responseInfo.getLocation_address());
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+        InterfaceServer.getInstance().requestInterface(model, handler);
     }
 
     /**

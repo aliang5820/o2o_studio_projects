@@ -427,10 +427,11 @@ public class ApplyPersonHHR_Fragment extends BaseFragment {
                             picMap.clear();
                             picUrlMap.clear();
                             SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
-                            if(actModel.getPay_status() == 0) {
+                            if(actModel.getIs_pay() == 0) {
                                 Intent intent = new Intent(getContext(), ApplyPayActivity.class);
-                                intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HHR);
+                                intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HHR_GR);
                                 intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
+                                intent.putExtra(Constant.ExtraConstant.EXTRA_MORE, actModel.getOrder_sn());
                                 intent.putExtra(Constant.ExtraConstant.EXTRA_OTHER_ID, ((ApplyHHRActivity) getActivity()).submit_id);
                                 intent.putExtra(Constant.ExtraConstant.EXTRA_MODEL, actModel.getPrice());
                                 startActivity(intent);
