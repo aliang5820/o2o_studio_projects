@@ -2,6 +2,7 @@ package com.fanwe;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import com.fanwe.app.App;
 import com.fanwe.constant.Constant.TitleType;
@@ -60,6 +61,7 @@ public class StoreDetailActivity extends BaseActivity {
     private StoreActModel mActModel;
 
     private int mId;
+    private String location_address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,19 +103,17 @@ public class StoreDetailActivity extends BaseActivity {
         mTitle.setMiddleTextTop(SDResourcesUtil.getString(R.string.store_detail));
 
         //屏蔽分享
-        mTitle.initRightItem(1);
-        mTitle.getItemRight(0).setTextBot("全景照片");
+        //mTitle.initRightItem(1);
+        //mTitle.getItemRight(0).setTextBot("全景照片");
         //mTitle.getItemRight(0).setImageLeft(R.drawable.ic_tuan_detail_share);
     }
 
     @Override
     public void onCLickRight_SDTitleSimple(SDTitleItem v, int index) {
         //clickShare();
-        clickRoundPhoto();
-    }
-
-    private void clickRoundPhoto() {
-        requestRoundPhotoUrl();
+        Intent intent = new Intent(App.getApplication(), AppWebViewActivity.class);
+        intent.putExtra(AppWebViewActivity.EXTRA_URL, location_address);
+        startActivity(intent);
     }
 
     /**
@@ -153,10 +153,6 @@ public class StoreDetailActivity extends BaseActivity {
      * 获取全景照片地址
      */
     private void requestRoundPhotoUrl() {
-        if(mActModel == null) {
-            SDToast.showToast("没有门店信息，无法获取全景照片");
-            return;
-        }
         RequestModel model = new RequestModel();
         model.putCtl("biz_member");
         model.putAct("get_supplier_map");
@@ -172,9 +168,14 @@ public class StoreDetailActivity extends BaseActivity {
             public void onSuccess(RoundPhotoActModel responseInfo) {
                 if (actModel.getStatus() == 1) {
                     SDDialogManager.dismissProgressDialog();
-                    Intent intent = new Intent(App.getApplication(), AppWebViewActivity.class);
-                    intent.putExtra(AppWebViewActivity.EXTRA_URL, responseInfo.getLocation_address());
-                    startActivity(intent);
+                    if(!TextUtils.isEmpty(responseInfo.getLocation_address())) {
+                        //屏蔽分享
+                        mTitle.initRightItem(1);
+                        //mTitle.getItemRight(0).setTextBot("全景照片");
+                        mTitle.getItemRight(0).setImageLeft(R.drawable.ic_more_load_image_in_mobile_net);
+                        //mTitle.getItemRight(0).setImageLeft(android.R.drawable.ic_menu_gallery);
+                        location_address = responseInfo.getLocation_address();
+                    }
                 }
             }
 
@@ -206,6 +207,8 @@ public class StoreDetailActivity extends BaseActivity {
                 if (actModel.getStatus() == 1) {
                     mActModel = actModel;
                     addFragments(actModel);
+                    //获取是否有全景照片
+                    requestRoundPhotoUrl();
                 }
             }
 
