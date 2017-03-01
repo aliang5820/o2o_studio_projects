@@ -668,7 +668,7 @@ public class ApplyHYDActivity extends TitleBaseActivity {
                             picMap.clear();
                             picUrlMap.clear();
                             SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
-                            if(actModel.getIs_pay() == 0) {
+                            /*if(actModel.getIs_pay() == 0) {
                                 Intent intent = new Intent(mActivity, ApplyPayActivity.class);
                                 intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HYD);
                                 intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
@@ -680,9 +680,12 @@ public class ApplyHYDActivity extends TitleBaseActivity {
                                 SDToast.showToast("已重新提交审核，请耐心等待");
                                 Intent intent = new Intent(mActivity, LoginActivity.class);
                                 startActivity(intent);
-                            }
+                            }*/
                             //finish();
                             /*requestLoginInterface();*/
+                            SDToast.showToast("已提交审核，请耐心等待");
+                            Intent intent = new Intent(mActivity, LoginActivity.class);
+                            startActivity(intent);
                             break;
                     }
                 }

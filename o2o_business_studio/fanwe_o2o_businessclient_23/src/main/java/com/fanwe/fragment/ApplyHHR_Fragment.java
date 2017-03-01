@@ -652,7 +652,7 @@ public class ApplyHHR_Fragment extends BaseFragment {
                             picMap.clear();
                             picUrlMap.clear();
                             SDEventManager.post(EnumEventTag.EXIT_APP.ordinal());
-                            if(actModel.getIs_pay() == 0) {
+                            /*if(actModel.getIs_pay() == 0) {
                                 Intent intent = new Intent(getContext(), ApplyPayActivity.class);
                                 intent.putExtra(Constant.ExtraConstant.EXTRA_TYPE, Constant.Apply.HHR_QY);
                                 intent.putExtra(Constant.ExtraConstant.EXTRA_ID, actModel.getOrderId());
@@ -664,9 +664,12 @@ public class ApplyHHR_Fragment extends BaseFragment {
                                 SDToast.showToast("已重新提交审核，请耐心等待");
                                 Intent intent = new Intent(getContext(), LoginActivity.class);
                                 startActivity(intent);
-                            }
+                            }*/
                             //finish();
                             /*requestLoginInterface();*/
+                            SDToast.showToast("已提交审核，请耐心等待");
+                            Intent intent = new Intent(getContext(), LoginActivity.class);
+                            startActivity(intent);
                             break;
                     }
                 }

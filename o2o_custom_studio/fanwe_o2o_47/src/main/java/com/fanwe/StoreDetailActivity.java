@@ -172,7 +172,7 @@ public class StoreDetailActivity extends BaseActivity {
                         //屏蔽分享
                         mTitle.initRightItem(1);
                         //mTitle.getItemRight(0).setTextBot("全景照片");
-                        mTitle.getItemRight(0).setImageLeft(R.drawable.ic_more_load_image_in_mobile_net);
+                        mTitle.getItemRight(0).setImageLeft(R.drawable.photo_3d);
                         //mTitle.getItemRight(0).setImageLeft(android.R.drawable.ic_menu_gallery);
                         location_address = responseInfo.getLocation_address();
                     }

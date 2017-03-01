@@ -94,7 +94,6 @@ public class SDTitleItem extends LinearLayout
 		{
 			mIvLeft.setVisibility(View.VISIBLE);
 			mIvLeft.setImageResource(resId);
-			mIvLeft.setColorFilter(getResources().getColor(android.R.color.white));
 		}
 		dealClickListener();
 		return this;
