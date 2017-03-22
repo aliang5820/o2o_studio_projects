@@ -1,6 +1,7 @@
 package com.fanwe;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 
@@ -110,9 +111,13 @@ public class StoreDetailActivity extends BaseActivity {
 
     @Override
     public void onCLickRight_SDTitleSimple(SDTitleItem v, int index) {
-        //clickShare();
-        Intent intent = new Intent(App.getApplication(), AppWebViewActivity.class);
+        /*Intent intent = new Intent(App.getApplication(), AppWebViewActivity.class);
         intent.putExtra(AppWebViewActivity.EXTRA_URL, location_address);
+        startActivity(intent);*/
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        Uri content_url = Uri.parse(location_address);
+        intent.setData(content_url);
         startActivity(intent);
     }
 
