@@ -546,12 +546,6 @@ public class MyAccountActivity extends BaseActivity {
             return false;
         }
 
-        mStrEmail = mEt_email.getText().toString();
-        if (isEmpty(mStrEmail)) {
-            SDToast.showToast("邮箱不能为空");
-            return false;
-        }
-
         mStrPwd = mEt_pwd.getText().toString();
         if (isEmpty(mStrPwd)) {
             SDToast.showToast("登录密码不能为空");
